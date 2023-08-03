@@ -7,7 +7,6 @@ import { useState } from 'react';
 import TodayRate from "./TodayRate/todayRate"
 import CurrencyAlert from "./CurrencyAlert/currencyAlert"
 import CustomRequest from "./CustomRequest/customRequest"
-import { useNavigate } from "react-router-dom"
 
 
 
@@ -15,7 +14,6 @@ const Herosectiontable = () => {
     const [showTodayRate, setShowTodayRate] = useState(true)
     const [showCurrencyAlert, setShowCurrencyAlert] = useState(false)
     const [showCustomRequest, setShowCustomRequest] = useState(false)
-    const navigate = useNavigate()
 
     const gotoTodayRate = () => {
         setShowTodayRate(true)
@@ -32,9 +30,7 @@ const Herosectiontable = () => {
         setShowCurrencyAlert(false)
         setShowTodayRate(false)
     }
-    const seeAllTodayRate = () => {
-        navigate("/see-all")
-    }
+   
 
     return (
         <div className={styles.parent}>

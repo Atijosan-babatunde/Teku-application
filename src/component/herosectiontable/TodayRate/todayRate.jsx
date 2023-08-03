@@ -4,10 +4,10 @@ import southafrica from "../../../assets/svg/southafrica.svg"
 import ghana from "../../../assets/svg/ghana.svg"
 import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg"
 import { BsFillSendFill } from 'react-icons/bs';
-import { useState, useEffect } from "react"
-import { useDispatch } from 'react-redux';
-import { GetCurrencyPair } from "../../../shared/redux/slices/landing.slices"
-import { ToastContainer, toast } from 'react-toastify';
+import { useState } from "react"
+// import { useDispatch } from 'react-redux';
+// import { GetCurrencyPair } from "../../../shared/redux/slices/landing.slices"
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom"
 import { MdKeyboardArrowRight } from 'react-icons/md'
@@ -16,29 +16,29 @@ import { MdKeyboardArrowRight } from 'react-icons/md'
 
 const TodayRate = () => {
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch();
+    // const [loading, setLoading] = useState(false);
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        getCurrencyPair();
-    }, []);
+    // useEffect(() => {
+    //     getCurrencyPair();
+    // }, []);
 
-    const getCurrencyPair = () => {
-        console.log("brother")
-        setLoading(true);
-        dispatch(GetCurrencyPair())
-            .unwrap()
-            .then(() => {
-                console.log("sister")
-                setLoading(false);
-            })
-            .catch((err) => {
-                toast.error(err, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-                setLoading(false);
-            });
-    };
+    // const getCurrencyPair = () => {
+    //     console.log("brother")
+    //     setLoading(true);
+    //     dispatch(GetCurrencyPair())
+    //         .unwrap()
+    //         .then(() => {
+    //             console.log("sister")
+    //             setLoading(false);
+    //         })
+    //         .catch((err) => {
+    //             toast.error(err, {
+    //                 position: toast.POSITION.TOP_RIGHT,
+    //             });
+    //             setLoading(false);
+    //         });
+    // };
 
     const seeAllTodayRate = () => {
         navigate("/see-all")
