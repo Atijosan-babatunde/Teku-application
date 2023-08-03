@@ -1,0 +1,162 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+@font-face {
+  font-family: Intro;
+  src: url(../../../../shared/utils/fonts/Intro-Regular.otf)
+}
+  
+
+
+.questionsection {
+  width: 60%;
+  margin:auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 7em;
+}
+
+.desc {
+    height:400px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background: var(--white-purple, #F7F5FA);
+  }
+
+ 
+  .herotitle {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 700;
+    line-height: 80px;
+    color: var(--black, #00040F);
+    width:80%;
+    margin:0 auto;
+    font-size: 60px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .heroparagraph {
+    font-family: "Gilroy";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    color: var(--black, #00040F);
+    text-align: center;
+    width:100%;
+    padding-top: 2em;
+    margin:0 auto;
+  }
+
+  .innerquestion{
+    background: linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(180deg, rgba(0, 107, 255, 0.10) 0%, rgba(121, 81, 175, 0.10) 76.04%) border-box;
+    box-shadow: 0px 2px 20px -2px rgba(251, 221, 101, 0.05);
+    border-radius: 16px;
+    border: 20px solid transparent;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    width: fit-content;
+    padding: 60px 180px;
+  }
+
+  .innerh1{
+    color: var(--black, #00040F);
+    text-align: center;
+    font-family: "Gilroy";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 70px;
+  }
+ .innerp {
+  color: var(--black, #00040F);
+text-align: center;
+font-family: Gilroy;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 32px;
+ }
+
+ .rowname {
+    color: var(--grey-text, #999);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.035px;
+    align-items: left;
+    justify-content: left;
+    display:flex;
+    margin-top:1em;
+}
+
+.calculatorinput {
+    width : 100%;
+    height: 50px;
+    margin-top: 7px;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    padding: 1em;
+}
+.calculatorinputtextarea {
+    margin-top: 7px;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    padding: 1em;
+    width: 100%;
+}
+
+.contactus {
+    margin-top: 1.5000em;
+}
+.topBTn {
+  height: 70px;
+  width: 70px;
+  border-radius: 70px;
+  background: linear-gradient(180deg, rgba(3, 84, 196, 0.936) 0%, rgba(67, 4, 150, 0.553) 76.04%)
+    border-box;
+  border: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arrowup {
+  color: white;
+  font-size: 2em;
+}
+
+@media screen and (max-width:1250px) {
+  .content{
+    width: 100%;
+  }  
+}
+@media screen and (max-width:1100px) {
+    .content{
+      width: 100%;
+    }
+    .innerquestion{
+      padding:30px 35px;
+   }
+}
+@media screen and (max-width:960px) {
+  .innerquestion{
+     padding:30px 35px;
+  }
+}

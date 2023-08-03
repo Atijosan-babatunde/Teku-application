@@ -1,0 +1,145 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../shared/utils/fonts/Gilroy-Regular.ttf);
+  } 
+  .LowerfooterParent{
+    background:  #F9F9F9;
+    padding: 4em 5em;
+  }
+  .parentRow{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .rowOne{
+    width: 40%;
+  }
+  .rowTwo{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5em;
+  }
+  .logoParent{
+    display: flex;
+    align-items: center; 
+    cursor: pointer;
+  }
+  .logoText{
+    padding: 0em 2em 0em 1em;
+  }
+  .ultainfinity{
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.25em;
+    line-height: 28px;
+    color: #FFFFFF;  
+  }
+  .global{
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.8em;
+    line-height: 28px;
+    color: #4d476b;  
+  }
+  .footerdescfirst {
+    color:  #373737;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    width:70%;
+  }
+
+  .footerdesc{
+    color:  #011B6D;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+  }
+  .contentTitle{
+    color:  #373737;
+    font-family: Gilroy;   
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    cursor: pointer;
+  }
+  a:link { text-decoration: none; }
+  .section{
+    width:10%
+  }
+  .sectionTwo{
+    width: 36%;
+  }
+  .sectionThree{
+    width:22%
+  }
+  .top{
+    padding-top: 1.5em;
+  }
+  .borderLine{
+    border: 0.86px solid white;
+    width: 100%;
+    margin-top: 2em;
+  }
+  .iconsDiv{
+    height: 37px;
+    width: 37px;
+    border: 2px solid white;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0em 0.5em;
+  }
+  @media screen and (max-width:1250px) {
+    .content{
+      width: 80%;
+    }  
+  }
+  @media screen and (max-width:1100px) {
+      .content{
+        width: 90%;
+      }
+  }
+  @media screen and (max-width:870px) {
+    .rowOne{
+      width: 100%;
+    }
+    .parentRow{
+      display: grid; 
+      justify-content: inherit;
+    }
+    .rowTwo{
+      width: 100%;
+      padding-left: 0em;
+    }
+    .desc{
+      padding: 0em 5em;
+    }
+  }
+  @media screen and (max-width:650px) {
+    .upperfooterParent{
+      padding: 2em 3em;
+    }
+    .LowerfooterParent{
+      padding: 2em 3em;
+    }
+    .desc{
+      padding: 0em 3em;
+    }
+    .iconsDiv{
+      height: 30px;
+      width: 30px;
+    }
+    .icons{
+      font-size: 1em;
+    }
+   
+  }

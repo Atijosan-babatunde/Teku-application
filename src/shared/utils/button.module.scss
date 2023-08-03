@@ -1,0 +1,90 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../shared/utils/fonts/Gilroy-Regular.ttf);
+} 
+.btn{
+  font-weight:bold;
+    border: none;   
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.9em;
+    line-height: 28px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    width: 180px;
+    height: 49px;
+    background: #011B6D;
+    border-radius: 10px;
+}
+
+.logbtn {
+  font-weight:bold;
+    border: none;   
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.9em;
+    line-height: 28px;
+    text-align: center;
+    color: #011B6D;
+    cursor: pointer;
+    width: 100px;
+    height: 49px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    margin:0.5000em;
+}
+
+.btnconvert {
+  gap: 10px;
+  border: none;  
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.9em;
+  line-height: 28px;
+  text-align: center;
+  color: #00040F;
+  cursor: pointer;
+  width: 170px;
+  height: 49px;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+
+.btnrequest {
+  gap: 10px;
+    border: none;
+    height: 44px;   
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.9em;
+    line-height: 28px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    width: 350px;
+    background: #011B6D;
+    border-radius: 10px;
+}
+
+@media screen and (max-width:1230px) {
+  .btn{
+    width: 150px;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+    display:flex;
+    margin-top:1em;
+  }
+}
+
+@media screen and (max-width:414px) {
+  .btnrequest {
+    width:250px;
+  }
+}

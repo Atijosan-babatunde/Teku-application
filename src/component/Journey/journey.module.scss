@@ -1,0 +1,238 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../shared/utils/fonts/Gilroy-Regular.ttf);
+  }
+
+.parent {
+    padding: 2.1rem;
+    margin-block: 11rem;
+}
+
+.content {
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin:auto;
+    margin-top:3em;
+    margin-bottom: 3em;
+}
+.contentholder {
+    display: flex;
+}
+
+.desc {
+    width:60%;
+}
+.desc2 {
+    width:40%;
+}
+.cardtop {
+    h1{
+        color: #000;
+        font-family: "Gilroy";
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 70px;
+    }
+    p {
+        color: #000;
+        font-family: Gilroy;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+    }
+    .topcontent {
+        display:flex;
+
+        img {
+            margin:2em;
+            height:90px;
+            width:150px;
+        }
+    }
+}
+
+.cardone{
+    border-radius: 16px;
+    background: rgba(1, 27, 109, 0.10);
+    padding: 2em 2em;
+    gap: 8px;
+    margin:1em;
+    img {
+        padding-right:8px;
+        width:40px;
+    }
+    h1{
+        color: #000;
+        font-family: Gilroy;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 14px;
+    }
+    h2{
+        color:  #011B6D;
+        font-family: Gilroy;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 40px;
+    }
+    p {
+        color: #000;
+        font-family: Gilroy;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 32px; 
+    }
+}
+.cardonetwo {
+    border-radius: 16px;
+    background: rgba(121, 81, 175, 0.10);
+    padding: 2em 2em;
+    gap: 8px;
+    margin:1em;
+    img {
+        padding-right:10px;
+        width:40px;
+    }
+    h1{
+        color: #000;
+        font-family: Gilroy;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 14px;
+    }
+    h2{
+        color:  var(--purple-primary, #7951AF);
+        font-family: Gilroy;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 40px;
+    }
+    p {
+        color: #000;
+        font-family: Gilroy;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 32px; 
+    }
+}
+
+.cardonethree {
+    border-radius: 16px;
+    background: rgba(2, 63, 253, 0.10);
+    padding: 2em 2em;
+    gap: 8px;
+    margin:1em;
+    img {
+        padding-right:8px;
+        width:40px;
+    }
+    h1{
+        color: #000;
+        font-family: Gilroy;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 14px;
+    }
+    h2{
+        color:  var(--blue-50, #023FFD);
+        font-family: Gilroy;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 40px;
+    }
+    p {
+        color: #000;
+        font-family: Gilroy;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 32px; 
+    }
+}
+.holder {
+    display: flex;
+}
+
+.round {
+    background-color: #fff;
+    height: 60px;
+    width:65px;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rounded{
+    background-color: #fff;
+    height: 60px;
+    width:100px;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentinside {
+    padding-left: 1em;
+}
+
+.journeybtn {
+    margin:1em;
+    margin-top: 1em;
+}
+
+@media screen and (max-width:1250px) {
+    .content{
+      width: 80%;
+    }  
+  }
+  @media screen and (max-width:1100px) {
+      .content{
+        width: 90%;
+      }
+  }
+  @media screen and (max-width:1100px) {
+    .desc2 {
+        display:none;
+    }
+    .desc {
+        width:100%;
+    }
+    .cardone {
+        width:100%;
+        margin:1em 0em;
+        p {
+            padding-right:3em;
+        }
+    }
+    .holder {
+        display: -webkit-inline-box;
+    }
+  }
+
+  @media  screen and (max-width:450px) {
+    .topcontent {
+
+        img {
+            display: none;
+        }
+    }
+    .holder {
+        display: table-row-group;
+    }
+    .round{
+        margin-bottom:1em;
+    }
+  }
+  

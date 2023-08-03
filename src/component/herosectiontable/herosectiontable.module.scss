@@ -1,0 +1,182 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../shared/utils/fonts/Gilroy-Regular.ttf);
+  }
+
+.parent {
+    justify-content: center;
+    align-items: center;
+    // display:flex;
+    position:sticky;
+    // bottom:293px;
+    margin-top: -20em;
+    z-index: 30;
+}
+
+.content {
+    width: 60%;
+    margin:auto;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 20px 80px 0px rgba(214, 33, 33, 0.1);
+}
+
+.buttonrow {
+  border-radius: 16px 16px 0px 0px;
+    display : flex;
+    justify-content: space-between;
+    overflow: auto;
+    // height:75px;
+}
+.buttonhead {
+    width: 27%;
+    height:85px;
+    background: var(--white-blue, #F0F3FF);
+    color:  #999;
+    text-align: center;
+    align-items: center;
+    display : flex;
+    font-family: "Gilroy";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    min-width: 250px;
+    cursor:pointer;
+    padding-left:2em;
+    img{ 
+        padding:5px;
+    }
+}
+
+
+
+.tablerow {
+    height:55px;
+}
+.tablehead {
+    font-family: Gilroy;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 26px;
+    color: #00040f;
+}
+.tabledata {
+    font-family: Gilroy;
+    font-size: 0.9em;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 26px;
+    color: #00040f; 
+    min-width: 200px;
+}
+.tableparagraph {
+    font-family: Gilroy;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+    color:#999999;
+}
+
+.flagstyle {
+    padding: 7px;
+}
+.flagnamestyle {
+    padding: 7px;
+}
+.btn {
+    gap: 10px;
+    border: none;
+    height: 40px;   
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.9em;
+    line-height: 28px;
+    color: #FFFFFF;
+    width: 130px;
+    background: #011B6D;
+    border-radius: 10px;
+}
+
+//search Box
+.search {
+    position: relative;
+    width: 23%;
+    padding-top: 1em;
+    padding-left: 80px;
+    padding: 0.5000em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white-blue, #F0F3FF);
+
+    input {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 7px;
+      height: 40px;
+      width: 80%;
+      max-width: 783px;
+      padding: 20px;
+    //   padding-left: 80px;
+      font-size: 24px;
+    //   color: #000;
+
+      &:hover {
+        border: 2px solid 0f1f;
+      }
+
+      &:hover {
+        border: 2px solid 0f1f;
+      }
+    }
+
+    span {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+    }
+  }
+
+// RESPONSIVENESS PART 
+@media screen and (max-width:1250px) {
+    .content{
+      width: 80%;
+    } 
+  }
+@media screen and (max-width:1100px) {
+      .content{
+        width: 90%;
+      }
+  }
+// @media screen and (max-width: 990px) {
+//     .parent {
+//         .content{
+//             width: 80%;
+//             border-radius: 16px;
+//             box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
+//         }
+//     }
+// }
+// @media screen and (max-width: 650px) {
+//     .parent {
+//         .content{
+//             width: 80%;
+//             border-radius: 16px;
+//             box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
+//         }
+//     }
+// }
+// @media screen and (max-width: 375px) {
+//     .parent {
+//         .content{
+//             width: 80%;
+//             border-radius: 16px;
+//             box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
+//         }
+//     }
+// }

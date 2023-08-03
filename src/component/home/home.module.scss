@@ -1,0 +1,33 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../shared/utils/fonts/Gilroy-Regular.ttf);
+  }
+.parentinside {
+    // background-color:#fff;
+    height:11em;
+}
+
+.body {
+  background-color: #fff;
+}
+
+.topBTn {
+  height: 70px;
+  width: 70px;
+  border-radius: 70px;
+  background: linear-gradient(180deg, rgba(3, 84, 196, 0.936) 0%, rgba(67, 4, 150, 0.553) 76.04%)
+    border-box;
+  border: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arrowup {
+  color: white;
+  font-size: 2em;
+}

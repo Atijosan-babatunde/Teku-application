@@ -1,0 +1,169 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+@font-face {
+  font-family: Gilroy;
+  src: url(../../shared/utils/fonts/Gilroy-Bold.ttf);
+}
+  
+  .herocontent {
+    position:absolute;
+    z-index:2000;
+    height:500px;
+    margin:0 auto;
+    inset: 0;
+    text-align: center;
+    margin-top: 90px;
+  }
+ 
+  .title {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 700;
+    line-height: 80px;
+    color: #0C1825;
+    width:50%;
+    margin:0 auto;
+    margin-top: 1em;
+    font-size: 60px;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      color:#011B6D;
+    }
+  }
+
+  .paragraph {
+    font-family: "Gilroy";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    color: #353535;
+    text-align: center;
+    width:45%;
+    padding-top: 2em;
+    margin:0 auto;
+  }
+  
+  .btnholder {
+    margin-top: 2em;
+  }
+  .herobtn {
+    margin: 1em;
+  }
+
+
+  // RESPONSIVENESS CODE
+@media screen and (max-width: 1360px) {
+    .title {
+      line-height: 65px;
+    }
+}
+@media screen and (max-width:1250px) {
+    .content{
+      width: 80%;
+    } 
+  }
+@media screen and (max-width:1100px) {
+      .content{
+        width: 90%;
+      }
+  }
+
+@media screen and (max-width: 1207px) {
+  .title {
+    font-size: 3.3em;
+  }
+}
+@media screen and (max-width: 1158px) {
+  .title {
+    font-size: 3.1em;
+  }
+}
+@media screen and (max-width: 1108px) {
+  .title {
+    font-size: 3em;
+  }
+}
+@media screen and (max-width: 1084px) {
+  .title {
+    font-size: 2.9em;
+    line-height: 67px;
+  }
+}
+@media screen and (max-width: 1048px) {
+  .title {
+    font-size: 2.7em;
+  }
+}
+
+@media screen and (max-width: 1007px) {
+  .title {
+    font-size: 2em;
+    line-height: 40px;
+  }
+}
+@media screen and (max-width: 960px) {
+  .title {
+    line-height: 40px;
+  }
+}
+@media screen and (max-width: 933px) {
+  .content {
+    width: 100%;
+  }
+  .title {
+    line-height: 40px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .content {
+    width: 100%;
+  }
+  .title {
+    font-size: 2.4em;
+    line-height: 60px;
+  }
+}
+
+@media screen and (max-width: 658px) {
+  .content {
+    width: 100%;
+  }
+  .title {
+    font-size: 2.4em;
+    line-height: 60px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .title {
+    font-size: 2em;
+  }
+  .paragraph {
+    font-size: 1em;
+    width:80%;
+  }
+  .btnholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 380px) {
+  .content {
+    height: 500px;
+  }
+  .title {
+    font-size: 1.2em;
+    line-height: 50px;
+  }
+}
+
+  

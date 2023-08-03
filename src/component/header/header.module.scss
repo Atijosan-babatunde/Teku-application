@@ -1,0 +1,180 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../shared/utils/fonts/Gilroy-Regular.ttf);
+  }
+ 
+
+.header{
+    height: 90px;
+    background-color: #fff;
+    z-index: 2000;
+    box-shadow: 0px 4px 25px rgba(240, 238, 238, 0.15);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow:hidden;
+    position:fixed;
+    top: 0;
+    width: 100%;
+}
+.logoParent{
+    display: flex;
+    align-items: center; 
+    cursor: pointer;
+}
+  .buyModalCon {
+    background-color: #161322;
+    color: #ffffff;
+  
+    & h3 {
+      font-weight: 700;
+      font-size: 36px;
+    }
+  }
+  .content {
+    width:65%;
+    // padding-top: 20px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .titlelog {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.9em;
+    line-height: 28px;
+    text-align: center;
+    color: #00040F;
+    cursor: pointer;
+    width: 80px;
+    height: 49px;
+    background: #fff;
+    border-radius: 10px;
+  }
+  
+  .title {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.9em;
+    line-height: 28px;
+    text-align: center;
+    color: #00040F;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .title:hover {
+    color: #9475d5;
+  }
+.btnDiv{
+    padding-left: 2em;
+} 
+.menuDiv{
+    cursor: pointer;
+}
+.menu{
+    color:#000;
+    font-size: 2em;
+    display: none;
+}             
+.modalParent{
+    background-color: #ffffff;
+}
+.modalMenu{
+    display: grid;
+}
+.modalClose{
+   display: flex;
+   justify-content: flex-end;
+}
+.modalMenufirst{
+    display: grid;
+}
+  
+@media screen and (max-width:1250px) {
+  .content{
+    width: 80%;
+  }
+    .logoText{
+        display: none;
+    }
+    .btnDiv{
+        padding-left: 0em;
+    }  
+}
+@media screen and (max-width:1100px) {
+    .content{
+      width: 90%;
+    }
+}
+@media screen and (max-width:990px) {
+    .title{
+       display: none;
+    }
+    .titleModal{
+        font-family: 'Gilroy';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.7em;
+        line-height: 48px;
+        text-align: center;
+        color: #ffffff;  
+        cursor: pointer;
+        text-decoration:none;  
+    }
+    
+    .titleModal:hover {
+        color: #9475d5; 
+      }
+    .menu{
+        display: inline;
+        cursor: pointer;
+    }
+    .header {
+      justify-content: space-between;
+      align-items: center;
+      width:100%;
+      padding:0em 2em;
+      display:flex;
+      margin:auto;
+    }
+    .btnDiv {
+      display: none;
+    }  
+    .content {
+      width:100%;
+    }
+    .logoParent {
+      img{
+        width:130px;
+      }
+    } 
+}
+@media screen and (max-width:650px) {
+  .header {
+    padding: 0em 0em;
+  }
+  .btnDiv {
+    display: none;
+  }  
+  .logoParent {
+    img{
+      width:130px;
+    }
+  } 
+}
+@media screen and (max-width:375px) {
+    .header{
+        padding: 0em 0em;
+    }    
+    .logoParent {
+      img{
+        width:130px;
+      }
+    } 
+}
+  

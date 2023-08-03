@@ -1,0 +1,134 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
+  }
+
+.parent {
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.content {
+    width: 60%;
+    border-radius: 5px;
+    box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
+    background-color: #fff;
+    padding:2em;
+}
+
+.desc {
+    display:flex;
+    align-items: center;
+}
+.descone {
+    width:45%;
+    border-radius: 8px;
+    background: var(--white-grey, #F9F9F9);
+    align-items: center;
+    padding:2em;
+
+    img{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        margin:auto;
+        padding:1.5000em;
+    }
+}
+
+.desctwo {
+    width:45%;
+    padding:2em; 
+}
+
+.headone {
+    color: var(--grey-primary, #373737);
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    margin-bottom:1em;
+}
+
+.rowname {
+    color: var(--grey-text, #999);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.035px;
+}
+.dropDownrow{
+    display: flex;
+    align-items: center;
+}
+.dropdownToggle{
+    display:flex;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    justify-content:space-between;
+    padding-left:10px;
+    padding-right:0px;
+    height: 50px;
+    align-items:center;
+    width: 100%;
+    margin-top: 1em;
+}
+.dropBox{
+    margin-top:1em;
+    color:#FCFCFD;
+    height:100px;
+    overflow:auto;
+    background:#23262F
+}
+
+.dropDownValue {
+    color:#000;
+    text-decoration: none !important;
+}
+
+a {
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
+.calculatorinput {
+    width : 100%;
+    height: 50px;
+    margin-top: 1em;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+}
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top:1.5em;
+}
+
+@media screen and (max-width:1250px) {
+    .content{
+      width: 80%;
+    }  
+  }
+  @media screen and (max-width:1100px) {
+      .content{
+        width: 90%;
+      }
+  }
+  @media screen and (max-width:960px) {
+    .desc{
+        display:grid;
+    }
+    .descone {
+        width:100%;
+    }
+    .desctwo{
+        width:100%;
+    }
+  }
