@@ -3,6 +3,8 @@ import Frame from '../../../assets/svg/Frame.svg'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { MdArrowDropDown } from "react-icons/md";
 import { useState } from "react"
+import { RequestButton } from '../../../shared/utils/button';
+import { Link } from "react-router-dom";
 
 const SeeAllCustomerRequest = () => {
     const [dropDownValue, setDropDownValue] = useState('Select')
@@ -59,12 +61,12 @@ const SeeAllCustomerRequest = () => {
     const [amountFour] = useState([
         { id: 1, amount: 'Cash pickup' },
         { id: 2, amount: 'Mailing' },
-        { id: 3, amount: 'Wallet transfer'},
+        { id: 3, amount: 'Wallet transfer' },
     ])
 
 
 
-    return ( 
+    return (
         <div className={styles.parent}>
             <div className={styles.content}>
                 <div className={styles.desc}>
@@ -119,7 +121,7 @@ const SeeAllCustomerRequest = () => {
                                 )}
                             </DropdownMenu>
                         </Dropdown>
-                        
+
                         <h2 className={styles.rowname}>Enter amount</h2>
                         <input className={styles.calculatorinput} type="number" />
 
@@ -137,11 +139,16 @@ const SeeAllCustomerRequest = () => {
                                 )}
                             </DropdownMenu>
                         </Dropdown>
+                        <div className={styles.requestbut}>
+                            <Link to="/" >
+                                <RequestButton buttonText="Send request"></RequestButton>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default SeeAllCustomerRequest;

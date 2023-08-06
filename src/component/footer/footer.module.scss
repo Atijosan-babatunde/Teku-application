@@ -8,16 +8,21 @@
   }
   .parentRow{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    // padding: 10px;
+    flex-wrap: wrap;
+    gap: 40px;
   }
-  .rowOne{
-    width: 40%;
-  }
+  // .rowOne{
+  //   width: 40%;
+  // }
   .rowTwo{
-    width: 60%;
+    // width: 60%;
     display: flex;
     justify-content: space-between;
-    padding-left: 5em;
+    // padding-left: 5em;
+    gap: 40px;
+    flex-wrap: wrap;
   }
   .logoParent{
     display: flex;
@@ -28,7 +33,7 @@
     padding: 0em 2em 0em 1em;
   }
   .ultainfinity{
-    font-family: 'Kanit';
+    font-family: 'Gilrow';
     font-style: normal;
     font-weight: 500;
     font-size: 1.25em;
@@ -36,7 +41,7 @@
     color: #FFFFFF;  
   }
   .global{
-    font-family: 'Kanit';
+    font-family: 'Gilrow';
     font-style: normal;
     font-weight: 500;
     font-size: 0.8em;
@@ -50,7 +55,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 32px;
-    width:70%;
+    // width:70%;
   }
 
   .footerdesc{
@@ -72,7 +77,7 @@
   }
   a:link { text-decoration: none; }
   .section{
-    width:10%
+    width:22%
   }
   .sectionTwo{
     width: 36%;
@@ -98,16 +103,16 @@
     justify-content: center;
     margin: 0em 0.5em;
   }
-  @media screen and (max-width:1250px) {
-    .content{
-      width: 80%;
-    }  
-  }
-  @media screen and (max-width:1100px) {
-      .content{
-        width: 90%;
-      }
-  }
+  // @media screen and (max-width:1250px) {
+  //   .content{
+  //     width: 80%;
+  //   }  
+  // }
+  // @media screen and (max-width:1100px) {
+  //     .content{
+  //       width: 90%;
+  //     }
+  // }
   @media screen and (max-width:870px) {
     .rowOne{
       width: 100%;
@@ -133,13 +138,5 @@
     }
     .desc{
       padding: 0em 3em;
-    }
-    .iconsDiv{
-      height: 30px;
-      width: 30px;
-    }
-    .icons{
-      font-size: 1em;
-    }
-   
+    } 
   }

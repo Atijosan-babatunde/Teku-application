@@ -18,6 +18,7 @@ const Home = () => {
       <div id="todayrate">
         <Herosectiontable />
       </div>
+
       <RateCalculator />
       <WhyChooseUs />
       <div id="howitworks">

@@ -14,7 +14,7 @@
 }
 
 .content {
-    width: 60%;
+    width: 80%;
     margin:auto;
     justify-content: center;
     align-items: center;
@@ -105,7 +105,7 @@
 .search {
     position: relative;
     width: 23%;
-    padding-top: 1em;
+    padding-top: 0.5000em;
     padding-left: 80px;
     padding: 0.5000em;
     display: flex;
@@ -120,18 +120,31 @@
       height: 40px;
       width: 80%;
       max-width: 783px;
-      padding: 20px;
+      padding: 7px;
+      align-items: center;
+      justify-content: center;
     //   padding-left: 80px;
       font-size: 24px;
     //   color: #000;
 
-      &:hover {
+      :hover {
         border: 2px solid 0f1f;
       }
 
-      &:hover {
+      :hover {
         border: 2px solid 0f1f;
       }
+      
+    }
+    ::placeholder {
+      color: #696974;
+      font-family: Gilroy;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0.035px;
+      margin: 0.5000em;
     }
 
     span {

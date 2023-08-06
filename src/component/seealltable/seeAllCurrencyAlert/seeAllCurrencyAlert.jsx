@@ -16,24 +16,24 @@ const SeeAllCurrencyAlert = () => {
                     <table className="table table-striped table-borderless">
                         <thead className={styles.tablerow}>
                             <tr>
-                                <th className={styles.tablehead} scope="col">Currency Pair</th>
-                                <th className={styles.tablehead} scope="col">Rate</th>
-                                <th className={styles.tablehead} scope="col">Available Amount</th>
-                                <th className={styles.tablehead} scope="col">Sending Method</th>
-                                <th className={styles.tablehead} scope="col">Action</th>
+                                <th className={styles.tablehead} scope="col" style={{paddingLeft: "2em", paddingBottom:"1.5000em"}}>Currency Pair</th>
+                                <th className={styles.tablehead} scope="col" style={{paddingLeft: "2em", paddingBottom:"1.5000em"}}>Rate</th>
+                                <th className={styles.tablehead} scope="col" style={{paddingBottom:"1.5000em"}}>Available Amount</th>
+                                <th className={styles.tablehead} scope="col" style={{paddingBottom:"1.5000em"}}>Sending Method</th>
+                                <th className={styles.tablehead} scope="col" style={{paddingBottom:"1.5000em"}}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {product.map((prod, index) =>
                                 <tr style={{ backgroundColor: prod.id % 2 === 1 ? '#232332' : '' }} key={index}>
-                                    <td className={styles.tabledata}>
+                                    <td className={styles.tabledata} style={{paddingLeft: "2em"}}>
                                         <span className={styles.flagstyle}>{prod.flagone}</span>
                                         <span className={styles.flagnamestyle}>{prod.flagnameone}</span>
 
                                         <span className={styles.flagstyle}>{prod.flagtwo}</span>
                                         <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
                                     </td>
-                                    <td className={styles.tabledata}>{prod.rate}</td>
+                                    <td className={styles.tabledata} style={{paddingLeft: "2em"}}>{prod.rate}</td>
                                     <td className={styles.tabledata}>{prod.available}</td>
                                     <td className={styles.tabledata}>
                                         {prod.method}

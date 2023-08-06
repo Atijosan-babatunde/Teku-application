@@ -29,8 +29,26 @@ export const GetCurrencyPair = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const data = await LandingServices.GetCurrencyPair();
-      console.log("data",data)
-      return { landing: data?.data };
+      return { landing: data.data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const GetCurrencyCode = createAsyncThunk(
+  "landing/getCurrencyCode",
+  async (thunkAPI) => {
+    try {
+      const data = await LandingServices.GetCurrencyCode();
+      return { landing: data.data };
     } catch (error) {
       const message =
         (error.response &&
@@ -47,6 +65,7 @@ export const GetCurrencyPair = createAsyncThunk(
 const initialState = {
   addAllCurrencyData:null,
   getAllCurrencyData:null,
+  getAllCurrencyCode:null,
 };
 
 export const landingSlice = createSlice({
@@ -57,15 +76,22 @@ export const landingSlice = createSlice({
     builder.addCase(CreateCurrencyPair.fulfilled, (state, action) => {
       state.addAllCurrencyData = action.payload.landing;
     })
-    builder.addCase(CreateCurrencyPair.rejected, (state, action) => {
+    builder.addCase(CreateCurrencyPair.rejected, (state) => {
       state.addAllCurrencyData = null;
     })
 
     builder.addCase(GetCurrencyPair.fulfilled, (state, action) => {
       state.getAllCurrencyData = action.payload.landing;
     })
-    builder.addCase(GetCurrencyPair.rejected, (state, action) => {
+    builder.addCase(GetCurrencyPair.rejected, (state) => {
       state.getAllCurrencyData = null;
+    })
+
+    builder.addCase(GetCurrencyCode.fulfilled, (state, action) => {
+      state.getAllCurrencyCode = action.payload.landing;
+    })
+    builder.addCase(GetCurrencyCode.rejected, (state) => {
+      state.getAllCurrencyCode = null;
     })
   },
 });

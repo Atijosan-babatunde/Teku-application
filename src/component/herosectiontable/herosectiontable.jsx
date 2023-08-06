@@ -36,16 +36,16 @@ const Herosectiontable = () => {
         <div className={styles.parent}>
             <div className={styles.content}>
                 <div className={styles.buttonrow}>
-                    <div className={styles.buttonhead} onClick={gotoTodayRate} style={{ backgroundColor: showTodayRate ? "#fff" : "" }}><img src={hot} alt="hot" />Today's Rate</div>
-                    <div className={styles.buttonhead} onClick={gotoCurrency} style={{ backgroundColor: showCurrencyAlert ? "#fff" : "" }}><img src={ringing} alt="ringing" />Currency Alert</div>
-                    <div className={styles.buttonhead} onClick={gotoRequest} style={{ backgroundColor: showCustomRequest ? "#fff" : "" }}><img src={request} alt="request" />Make a custom request</div>
+                    <div className={styles.buttonhead} onClick={gotoTodayRate} style={{ backgroundColor: showTodayRate ? "#fff" : "", color: showTodayRate ? "#000" : ""}}><img src={hot} alt="hot" />Today's Rate</div>
+                    <div className={styles.buttonhead} onClick={gotoCurrency} style={{ backgroundColor: showCurrencyAlert ? "#fff" : "", color: showCurrencyAlert ? "#000" : ""}}><img src={ringing} alt="ringing" />Currency Alert</div>
+                    <div className={styles.buttonhead} onClick={gotoRequest} style={{ backgroundColor: showCustomRequest ? "#fff" : "", color: showCustomRequest ? "#000" : "" }}><img src={request} alt="request" />Make a custom request</div>
                     <div className={styles.search}>
-                        <input type="text" />
+                        <input type="text" placeholder="Search" />
                         <span><FiSearch /></span>
                     </div>
                 </div>
             </div>
-            <div style={{ display: showTodayRate ? '' : 'none' }}>
+            <div style={{ display: showTodayRate ? '' : 'none'}}>
                 <TodayRate />
             </div>
             <div style={{ display: showCurrencyAlert ? '' : 'none' }}>

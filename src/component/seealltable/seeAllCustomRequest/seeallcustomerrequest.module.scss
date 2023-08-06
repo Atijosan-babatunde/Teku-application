@@ -10,7 +10,7 @@
 }
 
 .content {
-    width: 60%;
+    width: 80%;
     border-radius: 5px;
     box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
     background-color: #fff;
@@ -103,6 +103,12 @@ a {
     border-radius: 8px;
     border: 1px solid var(--grey-50, #CCC);
     background: var(--white-full, #FFF);
+}
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top:1.5em;
 }
 @media screen and (max-width:1250px) {
     .content{
