@@ -8,26 +8,30 @@ import { RequestButton } from "../../shared/utils/button";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../shared/redux/reduxHooks";
-import { GetCurrencyCode } from "../../shared/redux/slices/landing.slices";
+import { GetCurrencyCode, GetCurrencyRate } from "../../shared/redux/slices/landing.slices";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
 const RateCalculator = () => {
-    const [dropDownValue, setDropDownValue] = useState('USD')
-    const [dropDownValueTwo, setDropDownValueTwo] = useState('ZAR')
+    const [dropDownValue, setDropDownValue] = useState('Select')
+    const [dropDownValueTwo, setDropDownValueTwo] = useState('Select')
     const [menu, setMenu] = useState(false)
     const [menuTwo, setMenuTwo] = useState(false)
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const currencyCode = useAppSelector((state) => state.landing.getAllCurrencyCode)
+    const currencyRate = useAppSelector((state) => state.landing.getAllCurrencyRate)
+    console.log(currencyRate,"currencyRate")
     const [data] = useState(currencyCode)
+    const [recipiantGet, setYouRecipiant] = useState('')
 
 
     useEffect(() => {
         getCurrencyCode();
-    },[data]);
+    }, [data]);
+
 
     const getCurrencyCode = () => {
         setLoading(true);
@@ -44,12 +48,42 @@ const RateCalculator = () => {
             });
     };
 
+
+    const getCurrencyRate = () => {
+        setLoading(true);
+        dispatch(GetCurrencyRate())
+            .unwrap()
+            .then(() => {
+                setLoading(false);
+            })
+            .catch((err) => {
+                toast.error(err, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setLoading(false);
+            });
+    };
+
+    const handleRecipiantGet = (e) => {
+        console.log(e.target.value)
+        setYouRecipiant(e.target.value)
+        if (e.target.value && dropDownValue !== "Select" && dropDownValueTwo !== "Select") {
+            getCurrencyRate()
+        }
+    }
+
     const changeValue = async (e) => {
         setDropDownValue(e.code)
+        if (recipiantGet && e.code && dropDownValueTwo !== "Select") {
+            getCurrencyRate()
+        }
     }
 
     const changeValueTwo = async (e) => {
         setDropDownValueTwo(e.code)
+        if (recipiantGet && e.code && dropDownValue !== "Select") {
+            getCurrencyRate()
+        }
     }
 
     // const [amount] = useState([
@@ -99,7 +133,7 @@ const RateCalculator = () => {
                                     )}
                                 </DropdownMenu>
                             </Dropdown>
-                            <input className={styles.calculatorinput} type="number" />
+                            <input className={styles.calculatorinput} type="number" onChange={handleRecipiantGet} />
                         </div>
                         <div className={styles.rowmiddle}>
                             <img src={middlesvg} alt="middleimage" />
@@ -119,7 +153,7 @@ const RateCalculator = () => {
                                     )}
                                 </DropdownMenu>
                             </Dropdown>
-                            <input className={styles.calculatorinput} type="number" />
+                            <input className={styles.calculatorinput} type="number" value={currencyRate?.rate}/>
                         </div>
                     </div>
                     <div className={styles.exchange}>

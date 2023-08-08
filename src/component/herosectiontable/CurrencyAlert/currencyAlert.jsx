@@ -1,7 +1,7 @@
 import styles from "../CurrencyAlert/currencyalert.module.scss"
 import international from "../../../assets/svg/international.svg"
-import Nigeria from "../../../assets/svg/nigeria.svg"
-import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg"
+// import Nigeria from "../../../assets/svg/nigeria.svg"
+// import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg"
 import { BsFillSendFill } from 'react-icons/bs';
 import { useState, useEffect } from "react"
 import { useAppSelector } from '../../../shared/redux/reduxHooks';
@@ -36,9 +36,9 @@ const CurrencyAlert = () => {
             });
     };
 
-    const [product] = useState([
-        { id: 1, flagone: <img src={Nigeria} className={styles.flagicon} alt="flag" />, flagnameone: 'NGN', flagtwo: <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />, flagnametwo: 'GBP', rate: '1,000.00', available: '$4,000,000.00', method: 'Cash Pickup', process: 'Processing Time: Within 24hrs', action: '' },
-    ])
+    // const [product] = useState([
+    //     { id: 1, flagone: <img src={Nigeria} className={styles.flagicon} alt="flag" />, flagnameone: 'NGN', flagtwo: <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />, flagnametwo: 'GBP', rate: '1,000.00', available: '$4,000,000.00', method: 'Cash Pickup', process: 'Processing Time: Within 24hrs', action: '' },
+    // ])
     if (data) {
     return (
         <div className={styles.parent}>
@@ -56,24 +56,24 @@ const CurrencyAlert = () => {
                         </thead>
                         <tbody>
                             {data.map((prod, index) =>
-                                <tr style={{ backgroundColor: prod.id % 2 === 1 ? '#232332' : '' }} key={index}>
-                                    <td className={styles.tabledata} style={{ paddingLeft: "2em" }}>
-                                        {/* <span className={styles.flagstyle}>{prod.flagone}</span> */}
-                                        <span className={styles.flagnamestyle}>{prod.currencyPair}</span>
-
-                                        {/* <span className={styles.flagstyle}>{prod.flagtwo}</span> */}
-                                        {/* <span className={styles.flagnamestyle}>{prod.flagnametwo}</span> */}
-                                    </td>
-                                    <td className={styles.tabledata} style={{ paddingLeft: "2em" }}>{prod.rate}</td>
-                                    <td className={styles.tabledata}>{prod.availableAmount}</td>
-                                    <td className={styles.tabledata}>
-                                        {prod.method}
-                                        <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                    </td>
-                                    <td className={styles.tabledata}>
-                                        <button className={styles.btn}>Request <BsFillSendFill /></button>
-                                    </td>
-                                </tr>
+                                <tr style={{}} key={index}>
+                                <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>
+                                    {/* <span className={styles.flagstyle}>{prod.flagone}</span> */}
+                                    <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
+                                      -
+                                    {/* <span className={styles.flagstyle}>{prod.flagtwo}</span> */}
+                                    <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
+                                </td>
+                                <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.rate}</td>
+                                <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>{prod.availableAmount}</td>
+                                <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                    {prod.method}
+                                    <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
+                                </td>
+                                <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
+                                    <button className={styles.btn}>Request <BsFillSendFill /></button>
+                                </td>
+                            </tr>
                             )}
                         </tbody>
                     </table>

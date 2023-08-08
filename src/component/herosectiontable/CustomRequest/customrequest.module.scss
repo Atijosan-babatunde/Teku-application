@@ -60,6 +60,7 @@
     font-weight: 700;
     line-height: 20px; /* 142.857% */
     letter-spacing: 0.035px;
+    margin-top:1em;
 }
 .dropDownrow{
     display: flex;
@@ -82,6 +83,7 @@
     margin-top:1em;
     color:#FCFCFD;
     height:100px;
+    width:100%;
     overflow:auto;
     background:#23262F
 }
@@ -103,6 +105,7 @@ a {
     border-radius: 8px;
     border: 1px solid var(--grey-50, #CCC);
     background: var(--white-full, #FFF);
+    padding:0.7000em;
 }
 .requestbut {
     justify-content: center;
@@ -110,6 +113,23 @@ a {
     display: flex;
     margin-top:1.5em;
 }
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width: 100%;
+      background: #011B6D;
+      border-radius: 10px;
+  }
 
 @media screen and (max-width:1250px) {
     .content{

@@ -10,7 +10,7 @@ export const CreateCurrencyPair = createAsyncThunk(
       const data = await LandingServices.AddGetAllCurrencyPair(
          body
       );
-      return { landing: data?.data };
+      return { landing: data};
     } catch (error) {
       const message =
         (error.response &&
@@ -62,10 +62,30 @@ export const GetCurrencyCode = createAsyncThunk(
   }
 );
 
+export const GetCurrencyRate = createAsyncThunk(
+  "landing/getCurrencyRate",
+  async (thunkAPI) => {
+    try {
+      const data = await LandingServices.GetCurrencyRate();
+      return { landing: data.data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const initialState = {
   addAllCurrencyData:null,
   getAllCurrencyData:null,
   getAllCurrencyCode:null,
+  getAllCurrencyRate:null,
 };
 
 export const landingSlice = createSlice({
@@ -92,6 +112,13 @@ export const landingSlice = createSlice({
     })
     builder.addCase(GetCurrencyCode.rejected, (state) => {
       state.getAllCurrencyCode = null;
+    })
+
+    builder.addCase(GetCurrencyRate.fulfilled, (state, action) => {
+      state.getAllCurrencyRate = action.payload.landing;
+    })
+    builder.addCase(GetCurrencyRate.rejected, (state) => {
+      state.getAllCurrencyRate = null;
     })
   },
 });

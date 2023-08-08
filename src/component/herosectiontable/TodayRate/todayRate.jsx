@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom"
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { useAppSelector } from '../../../shared/redux/reduxHooks';
-import ReactLoading from "react-loading";
+// import ReactLoading from "react-loading";
 
 
 
@@ -77,20 +77,22 @@ const TodayRate = () => {
                             <tbody>
                                 {data.map((prod, index) =>
                                     <tr style={{}} key={index}>
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em" }}>
-                                            {/* <span className={styles.flagstyle}>{prod.flagone}</span> */}
-                                            <span className={styles.flagnamestyle}>{prod.currencyPair}</span>
-
-                                            {/* <span className={styles.flagstyle}>{prod.flagtwo}</span> */}
-                                            {/* <span className={styles.flagnamestyle}>{prod.flagnametwo}</span> */}
+                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>
+                                            {/* <span className={styles.flagstyle}></span> */}
+                                            {/* <img src={prod.baseCurrency.icon} alt="" style={{width: "20"}} /> */}
+                                            <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
+                                              -
+                                            {/* <span className={styles.flagstyle}></span> */}
+                                            {/* <img src={prod.pairCurrency.icon} alt="" style={{width: "20"}} /> */}
+                                            <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
                                         </td>
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em" }}>{prod.rate}</td>
-                                        <td className={styles.tabledata}>{prod.availableAmount}</td>
-                                        <td className={styles.tabledata}>
+                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.rate}</td>
+                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>{prod.availableAmount}</td>
+                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
                                             {prod.method}
                                             <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
                                         </td>
-                                        <td className={styles.tabledata}>
+                                        <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
                                             <button className={styles.btn}>Request <BsFillSendFill /></button>
                                         </td>
                                     </tr>
