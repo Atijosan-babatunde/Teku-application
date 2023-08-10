@@ -13,6 +13,8 @@ import { useAppSelector } from "../../../shared/redux/reduxHooks";
 const CustomRequest = () => {
     const [dropDownValue, setDropDownValue] = useState('Select')
     const [dropDownValueTwo, setDropDownValueTwo] = useState('Select')
+    const [dropDownValueImage, setDropDownValueImage] = useState('')
+    const [dropDownValueTwoImage, setDropDownValueTwoImage] = useState('')
     const [dropDownValueThree, setDropDownValueThree] = useState('Select')
     const [dropDownValueFour, setDropDownValueFour] = useState('Select')
     const [menu, setMenu] = useState(false)
@@ -52,7 +54,7 @@ const CustomRequest = () => {
                     setLoading(false);
                     toast.success("Succesfully Created");
                     setAmount()
-                    console.log(amount,"amount")
+                    console.log(amount, "amount")
                 }
             })
             .catch((err) => {
@@ -94,10 +96,12 @@ const CustomRequest = () => {
 
     const changeValue = async (e) => {
         setDropDownValue(e.code)
+        setDropDownValueImage(e.icon)
     }
 
     const changeValueTwo = async (e) => {
         setDropDownValueTwo(e.code)
+        setDropDownValueTwoImage(e.icon)
     }
 
     const changeValueThree = async (e) => {
@@ -106,24 +110,6 @@ const CustomRequest = () => {
     const changeValueFour = async (e) => {
         setDropDownValueFour(e.paymentType)
     }
-
-    // const [amount] = useState([
-    //     { id: 1, amount: 'NGN' },
-    //     { id: 2, amount: 'GBP' },
-    //     { id: 3, amount: 'USD' },
-    //     { id: 4, amount: 'ZAR' },
-    //     { id: 4, amount: 'GHA' },
-    //     { id: 4, amount: 'CAN' },
-    // ])
-
-    // const [amountTwo] = useState([
-    //     { id: 1, amount: 'NGN' },
-    //     { id: 2, amount: 'GBP' },
-    //     { id: 3, amount: 'USD' },
-    //     { id: 4, amount: 'ZAR' },
-    //     { id: 4, amount: 'GHA' },
-    //     { id: 4, amount: 'CAN' },
-    // ])
 
     const [amountThree] = useState([
         { id: 1, amount: 'TUTION FEE' },
@@ -152,31 +138,43 @@ const CustomRequest = () => {
                             <h2 className={styles.rowname}>Recipient get</h2>
                             <Dropdown isOpen={menu} toggle={() => setMenu(!menu)} style={{ cursor: 'pointer' }} >
                                 <DropdownToggle tag="a" className={styles.dropdownToggle} >
-                                    <div className={styles.dropDownValue}>{dropDownValue}</div>
+                                    <div className={styles.flagcontent}>
+                                        <img src={dropDownValueImage} alt="" className={styles.flagstyle} style={{ display: dropDownValue === "Select" ? "none" : "" }} />
+                                        <div className={styles.dropDownValue}>{dropDownValue}</div>
+                                    </div>
                                     <div className={styles.dropDownrow}>
                                         <div style={{ color: '#011B6D', }}><MdArrowDropDown style={{ fontSize: '2em' }} /></div>
                                     </div>
                                 </DropdownToggle>
                                 <DropdownMenu className={styles.dropBox}>
                                     {data.map((amount, index) =>
-                                        <DropdownItem className={styles.value} key={index} onClick={() => changeValue(amount)}>{amount.code} </DropdownItem>
+                                        <DropdownItem className={styles.value} key={index} onClick={() => changeValue(amount)}>
+                                            <img src={amount.icon} alt="" className={styles.flagstyle} style={{ paddingBottom: "3px" }} />
+                                            {amount.code}
+                                        </DropdownItem>
                                     )}
                                 </DropdownMenu>
                             </Dropdown>
 
-                            <img src={Frame} alt="middle" />
+                            <img src={Frame} alt="middle" className={styles.mid} />
 
                             <h2 className={styles.rowname}>You pay</h2>
                             <Dropdown isOpen={menuTwo} toggle={() => setMenuTwo(!menuTwo)} style={{ cursor: 'pointer' }} >
                                 <DropdownToggle tag="a" className={styles.dropdownToggle} >
-                                    <div className={styles.dropDownValue}>{dropDownValueTwo}</div>
+                                    <div className={styles.flagcontent}>
+                                        <img src={dropDownValueTwoImage} alt="" className={styles.flagstyle} style={{ display: dropDownValueTwo === "Select" ? "none" : "" }} />
+                                        <div className={styles.dropDownValue}>{dropDownValueTwo}</div>
+                                    </div>
                                     <div className={styles.dropDownrow}>
                                         <div style={{ color: '#011B6D', }}><MdArrowDropDown style={{ fontSize: '2em' }} /></div>
                                     </div>
                                 </DropdownToggle>
                                 <DropdownMenu className={styles.dropBox}>
                                     {data.map((amount, index) =>
-                                        <DropdownItem className={styles.value} key={index} onClick={() => changeValueTwo(amount)}>{amount.code} </DropdownItem>
+                                        <DropdownItem className={styles.value} key={index} onClick={() => changeValueTwo(amount)}>
+                                            <img src={amount.icon} alt="" className={styles.flagstyle} style={{ paddingBottom: "3px" }} />
+                                            {amount.code}
+                                        </DropdownItem>
                                     )}
                                 </DropdownMenu>
                             </Dropdown>

@@ -1,4 +1,47 @@
 @font-face {
     font-family: Gilroy;
     src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
-  }
+}
+
+.parent {
+    
+}
+.content {
+    display: flex;
+    height: 100vh;
+}
+.discone {
+    background: linear-gradient(180deg, rgba(0, 107, 255, 0.10) 0%, rgba(121, 81, 175, 0.10) 76.04%);
+    width: 45%;
+    align-items: center;
+    justify-content: center;
+    padding:2em 5em;
+}
+.headone {
+    color: var(--black, #00040F);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 40px;
+    padding-top: 2.7000em;
+}
+.logoimg {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+.middlepic {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3em;
+
+    img{
+        width:600px;
+        height:500px;
+    }
+}
