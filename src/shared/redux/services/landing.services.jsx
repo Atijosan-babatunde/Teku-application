@@ -3,7 +3,7 @@ import authHeader from "./headers";
 const recipiantCurrency = sessionStorage.getItem("recipiantCurrency")
 const recipiantConversion = sessionStorage.getItem("recipiantConversion")
 const conversionAmount = sessionStorage.getItem("conversionAmount")
-console.log("recipiantCurrency",recipiantCurrency)
+
 const API_URL_ADD_CURRENCY_PAIR=process.env.REACT_APP_API_URL + "/request";
 const API_URL_GET_CURRENCY_PAIR=process.env.REACT_APP_API_URL + "/pair";
 const API_URL_GET_CURRENCY=process.env.REACT_APP_API_URL + "/currency";

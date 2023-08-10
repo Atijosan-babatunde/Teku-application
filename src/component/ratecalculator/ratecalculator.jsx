@@ -1,5 +1,6 @@
 import styles from "../ratecalculator/ratecalculator.module.scss"
 import middlesvg from "../../assets/svg/middlesvg.svg"
+import ReactLoading from "react-loading";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { MdArrowDropDown } from "react-icons/md";
 import { FiRefreshCcw } from "react-icons/fi";
@@ -26,17 +27,11 @@ const RateCalculator = () => {
     const dispatch = useDispatch();
     const currencyCode = useAppSelector((state) => state.landing.getAllCurrencyCode)
     const currencyRate = useAppSelector((state) => state.landing.getAllCurrencyRate)
-    console.log(currencyRate, "currencyRate")
     const [data] = useState(currencyCode)
     const [recipiantGet, setYouRecipiant] = useState('')
     const [baseCurrency, setBaseCurrency] = useState('')
     const [pairCurrency, setPairCurrency] = useState('')
-    const sessionbaseCurrency = sessionStorage.getItem("baseCurrency")
-    const sessionpairCurrency = sessionStorage.getItem("pairCurrency")
-    const conversionAmount = sessionStorage.getItem("conversionAmount")
-
-
-    
+    const [convertedCurrency,setConvertedCurrency]=useState('')
 
 
     const getCurrencyCode = () => {
@@ -71,17 +66,14 @@ const RateCalculator = () => {
             });
     };
 
-    const approvedTransfer = async (data) => {
-        console.log("data", data)
+    const makeCurrencyConversion = async (amount) => {
         setLoading(true);
-        const endpoint = `pair/rate?baseCurrencyId=${baseCurrency}&pairCurrencyId=${baseCurrency}&baseAmount=${conversionAmount}`;
-
+        const endpoint = `/pair/rate?baseCurrencyId=${baseCurrency}&pairCurrencyId=${pairCurrency}&baseAmount=${amount}`;
         try {
             const response = await GET_CURRENCY_CALCULATOR(endpoint);
-            console.log('approved', response);
             setLoading(false);
-            if (response.data.code === '00') {
-
+            if (response.data.status === 200){
+                setConvertedCurrency(response.data.data.totalRate)
             }
             else {
 
@@ -93,9 +85,8 @@ const RateCalculator = () => {
 
     const handleRecipiantGet = (e) => {
         setYouRecipiant(e.target.value)
-        sessionStorage.setItem("conversionAmount", e.target.value)
         if (e.target.value && dropDownValue !== "Select" && dropDownValueTwo !== "Select") {
-            approvedTransfer(e.target.value)
+            makeCurrencyConversion(e.target.value)
         }
     }
 
@@ -103,9 +94,8 @@ const RateCalculator = () => {
         setDropDownValue(e.code)
         setDropDownValueImage(e.icon)
         setBaseCurrency(e.id)
-        sessionStorage.setItem("baseCurrency", e.id)
         if (recipiantGet && e.code && dropDownValueTwo !== "Select") {
-            approvedTransfer()
+            makeCurrencyConversion()
         }
     }
 
@@ -113,9 +103,8 @@ const RateCalculator = () => {
         setDropDownValueTwo(e.code)
         setDropDownValueTwoImage(e.icon)
         setPairCurrency(e.id)
-        sessionStorage.setItem("pairCurrency", e.id)
         if (recipiantGet && e.code && dropDownValue !== "Select") {
-            approvedTransfer()
+            makeCurrencyConversion()
         }
     }
 
@@ -155,7 +144,7 @@ const RateCalculator = () => {
                                     )}
                                 </DropdownMenu>
                             </Dropdown>
-                            <input className={styles.calculatorinput} type="number" onChange={handleRecipiantGet} />
+                            <input className={styles.calculatorinput} type="number" onChange={handleRecipiantGet} onKeyDown={(e) =>["e", "E", "+", "-","."].includes(e.key) && e.preventDefault()}/>
                         </div>
                         <div className={styles.rowmiddle}>
                             <img src={middlesvg} alt="middleimage" />
@@ -181,9 +170,10 @@ const RateCalculator = () => {
                                     )}
                                 </DropdownMenu>
                             </Dropdown>
-                            <input className={styles.calculatorinput} type="number" value={currencyRate?.rate} />
+                            <input className={styles.calculatorinput} type="number" placeholder={convertedCurrency} value={convertedCurrency ? convertedCurrency : null } readOnly />
                         </div>
                     </div>
+                    <div className={styles.exchange}>{loading && <ReactLoading color="blue" width={25} height={25} type="spin" />}</div>
                     <div className={styles.exchange}>
                         <div className={styles.exchangeFont}>
                             Exchange rate 1 GBP = {dropDownValue} 890
