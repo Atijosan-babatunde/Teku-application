@@ -1,4 +1,6 @@
 import { PrimaryButton } from "../../../../shared/utils/button";
+import Footer from "../../../footer/footer";
+import Header from "../../../header/header";
 import Subscribe from "../../../subscribe/subscribe";
 import styles from "../ContactUs/contactus.module.scss"
 import { BsArrowUp } from "react-icons/bs";
@@ -6,6 +8,7 @@ import { BsArrowUp } from "react-icons/bs";
 const ContactUs = () => {
     return ( 
         <div className={styles.parent}>
+            <Header />
             <div className={styles.content}>
                 <div className={styles.desc}>
                     <div className={styles.herosection}>
@@ -46,6 +49,7 @@ const ContactUs = () => {
             <a href="#top" className={styles.topBTn}>
                 <BsArrowUp className={styles.arrowup} />
             </a>
+            <Footer />
         </div>
      );
 }

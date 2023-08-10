@@ -56,24 +56,24 @@ const SeeAllCurrencyAlert = () => {
                             </thead>
                             <tbody>
                                 {data.map((prod, index) =>
-                                    <tr style={{}} key={index}>
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>
-                                            {/* <span className={styles.flagstyle}>{prod.flagone}</span> */}
-                                            <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
-                                            -
-                                            {/* <span className={styles.flagstyle}>{prod.flagtwo}</span> */}
-                                            <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
-                                        </td>
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.rate}</td>
-                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>{prod.availableAmount}</td>
-                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                            {prod.method}
-                                            <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                        </td>
-                                        <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.btn}>Request <BsFillSendFill /></button>
-                                        </td>
-                                    </tr>
+                                     <tr style={{}} key={index}>
+                                     <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>
+                                         <img src={prod.baseCurrency.icon} alt="" className={styles.flagstyle} />
+                                         <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
+                                         <span className={styles.dash}>-</span> 
+                                         <img src={prod.pairCurrency.icon} alt="" className={styles.flagstyle} />
+                                         <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
+                                     </td>
+                                     <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.rate}</td>
+                                     <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>{prod.availableAmount}</td>
+                                     <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                         {prod.method}
+                                         <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
+                                     </td>
+                                     <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
+                                         <button className={styles.btn}>Request <BsFillSendFill /></button>
+                                     </td>
+                                 </tr>
                                 )}
                             </tbody>
                         </table>

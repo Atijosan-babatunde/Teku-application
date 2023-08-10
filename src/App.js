@@ -6,20 +6,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SeeAllPage from './component/herosectiontable/SeeAllPage/seeAllPage';
 import SeeAllFaqPage from './component/faq/SeeAllFaqPage/seeAllFaqPage';
 import ContactUs from './component/faq/SeeAllFaqPage/ContactUs/contactUs';
+import SignUpDashboard from './component/SignUPDashboard/signup';
+import LogIn from './component/SignUPDashboard/login';
 
 
 function App() {
   return (
     <div style={{ overflow: "hidden" }}>
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/see-all" element={<SeeAllPage/>}/>
           <Route path="/see-all-faq" element={<SeeAllFaqPage/>}/>
           <Route path="/contactus" element={<ContactUs/>}/>
+          <Route path="/signup" element={<SignUpDashboard />}/>
+          <Route path="/login" element={<LogIn />}/>
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
   );

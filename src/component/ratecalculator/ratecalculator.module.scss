@@ -84,10 +84,8 @@
 .dropBox{
     margin-top:1em;
     color:#FCFCFD;
-    height:100px;
     width:100%;
     overflow:auto;
-    background:#23262F
 }
 
 .dropDownValue {
@@ -123,6 +121,17 @@ a {
     align-items: center;
     display: flex;
     margin-top:1.5em;
+}
+.flagstyle {
+    height:20px;
+    width:20px;
+    // padding-bottom: 3px;
+    padding-right:4px;
+}
+
+.flagcontent {
+    display:flex;
+    align-items: center;
 }
 
 @media screen and (max-width:1250px) {

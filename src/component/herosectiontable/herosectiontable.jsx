@@ -38,7 +38,7 @@ const Herosectiontable = () => {
                 <div className={styles.buttonrow}>
                     <div className={styles.buttonhead} onClick={gotoTodayRate} style={{ backgroundColor: showTodayRate ? "#fff" : "", color: showTodayRate ? "#000" : ""}}><img src={hot} alt="hot" />Today's Rate</div>
                     <div className={styles.buttonhead} onClick={gotoCurrency} style={{ backgroundColor: showCurrencyAlert ? "#fff" : "", color: showCurrencyAlert ? "#000" : ""}}><img src={ringing} alt="ringing" />Currency Alert</div>
-                    <div className={styles.buttonhead} onClick={gotoRequest} style={{ backgroundColor: showCustomRequest ? "#fff" : "", color: showCustomRequest ? "#000" : "" }}><img src={request} alt="request" />Make a custom request</div>
+                    <div className={styles.buttonhead} onClick={gotoRequest} style={{ backgroundColor: showCustomRequest ? "#fff" : "", color: showCustomRequest ? "#000" : "", paddingRight: "3em"}}><img src={request} alt="request" />Make a custom request</div>
                     <div className={styles.search}>
                         <input type="text" placeholder="Search" />
                         <span><FiSearch /></span>

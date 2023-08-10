@@ -1,8 +1,4 @@
 import styles from "../TodayRate/todayrate.module.scss"
-// import Nigeria from "../../../assets/svg/nigeria.svg"
-// import southafrica from "../../../assets/svg/southafrica.svg"
-// import ghana from "../../../assets/svg/ghana.svg"
-// import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg"
 import { BsFillSendFill } from 'react-icons/bs';
 import { useState, useEffect } from "react"
 import { useDispatch } from 'react-redux';
@@ -48,12 +44,6 @@ const TodayRate = () => {
         navigate("/see-all")
     }
 
-    // const [product] = useState([
-    //     { id: 1, flagone: <img src={Nigeria} className={styles.flagicon} alt="flag" />, flagnameone: 'NGN', flagtwo: <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />, flagnametwo: 'GBP', rate: '1,000.00', available: '$4,000,000.00', method: 'Cash Pickup', process: 'Processing Time: Within 24hrs', action: '' },
-    //     { id: 2, flagone: <img src={southafrica} className={styles.flagicon} alt="flag" />, flagnameone: 'NGN', flagtwo: <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />, flagnametwo: 'GBP', rate: '420.00', available: '$2,000,000.00', method: 'Bank Transfer', process: 'Processing Time: Within 24hrs', action: '' },
-    //     { id: 3, flagone: <img src={ghana} className={styles.flagicon} alt="flag" />, flagnameone: 'NGN', flagtwo: <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />, flagnametwo: 'GBP', rate: '690.00', available: '$5,000,000.00', method: 'Cash Pickup', process: 'Processing Time: Within 24hrs', action: '' },
-    //     { id: 4, flagone: <img src={Nigeria} className={styles.flagicon} alt="flag" />, flagnameone: 'NGN', flagtwo: <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />, flagnametwo: 'GBP', rate: '950.00', available: '$4,000,000.00', method: 'Bank Transfer', process: 'Processing Time: Within 24hrs', action: '' },
-    // ])
     if (data) {
         return (
             <div className={styles.parent}>
@@ -78,12 +68,10 @@ const TodayRate = () => {
                                 {data.map((prod, index) =>
                                     <tr style={{}} key={index}>
                                         <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>
-                                            {/* <span className={styles.flagstyle}></span> */}
-                                            {/* <img src={prod.baseCurrency.icon} alt="" style={{width: "20"}} /> */}
+                                            <img src={prod.baseCurrency.icon} alt="" className={styles.flagstyle} />
                                             <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
-                                              -
-                                            {/* <span className={styles.flagstyle}></span> */}
-                                            {/* <img src={prod.pairCurrency.icon} alt="" style={{width: "20"}} /> */}
+                                            <span className={styles.dash}>-</span> 
+                                            <img src={prod.pairCurrency.icon} alt="" className={styles.flagstyle} />
                                             <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
                                         </td>
                                         <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.rate}</td>

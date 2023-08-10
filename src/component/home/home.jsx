@@ -8,11 +8,14 @@ import WhyChooseUs from "../whyChooseUs/whyChooseUs";
 import Journey from "../Journey/journey";
 import SignUp from "../SignUp/SignUp";
 import { BsArrowUp } from "react-icons/bs";
+import Header from "../header/header";
+import Footer from "../footer/footer";
 
 
 const Home = () => {
   return (
     <div className={styles.body}>
+      <Header />
       <HeroSection />
       <div className={styles.parentinside}></div>
       <div id="todayrate">
@@ -32,6 +35,7 @@ const Home = () => {
       <a href="#top" className={styles.topBTn}>
         <BsArrowUp className={styles.arrowup} />
       </a>
+      <Footer/>
     </div>
   );
 }

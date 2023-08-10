@@ -50,10 +50,10 @@ const Header = () => {
                         transition={{ delay: 0.2, type: 'spring', stiffness: 10, duration: 4 }}
                     >
                         
-                        <Link to="/">
+                        <Link to="/login">
                             <LoginButton buttonText="Login"></LoginButton>
                         </Link>
-                        <Link to="/">
+                        <Link to="/signup">
                             <PrimaryButton buttonText="Create an account"></PrimaryButton>
                         </Link>
                     </motion.div>

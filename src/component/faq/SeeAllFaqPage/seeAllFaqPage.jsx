@@ -3,6 +3,8 @@ import styles from '../SeeAllFaqPage/seeallfaqpage.module.scss'
 import FaqAccordion from './FaqAccordion/faqAccordion';
 import { PrimaryButton } from "../../../shared/utils/button";
 import { useNavigate } from "react-router-dom";
+import Header from '../../header/header';
+import Footer from '../../footer/footer';
 
 
 const SeeAllFaqPage = () => {
@@ -15,6 +17,7 @@ const SeeAllFaqPage = () => {
 
     return (
         <div className={styles.parent}>
+            <Header/>
             <div className={styles.content}>
                 <div className={styles.desc}>
                     <div className={styles.herosection}>
@@ -42,6 +45,7 @@ const SeeAllFaqPage = () => {
                 </div>
                 <Subscribe />
             </div>
+            <Footer/>
         </div>
     );
 }

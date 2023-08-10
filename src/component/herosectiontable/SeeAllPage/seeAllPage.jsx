@@ -1,4 +1,6 @@
 import Journey from "../../Journey/journey";
+import Footer from "../../footer/footer";
+import Header from "../../header/header";
 import RateCalculator from "../../ratecalculator/ratecalculator";
 import SeeAllSectionTable from "../../seealltable/seeallsectiontable";
 import Subscribe from "../../subscribe/subscribe";
@@ -9,6 +11,7 @@ import { BsArrowUp } from "react-icons/bs";
 const SeeAllPage = () => {
     return (
         <div className={styles.parent}>
+        <Header />
             <div className={styles.content}>
                 <div className={styles.herosection}>
                     <h1 className={styles.herotitle}>
@@ -26,6 +29,7 @@ const SeeAllPage = () => {
             <a href="#top" className={styles.topBTn}>
                 <BsArrowUp className={styles.arrowup} />
             </a>
+        <Footer />
         </div>
     );
 }
