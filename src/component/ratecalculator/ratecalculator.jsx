@@ -4,7 +4,7 @@ import ReactLoading from "react-loading";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { MdArrowDropDown } from "react-icons/md";
 import { FiRefreshCcw } from "react-icons/fi";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { RequestButton } from "../../shared/utils/button";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";

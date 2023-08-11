@@ -1,13 +1,13 @@
 import axios from "axios";
 import authHeader from "./headers";
-const recipiantCurrency = sessionStorage.getItem("recipiantCurrency")
-const recipiantConversion = sessionStorage.getItem("recipiantConversion")
-const conversionAmount = sessionStorage.getItem("conversionAmount")
+// const recipiantCurrency = sessionStorage.getItem("recipiantCurrency")
+// const recipiantConversion = sessionStorage.getItem("recipiantConversion")
+// const conversionAmount = sessionStorage.getItem("conversionAmount")
 
 const API_URL_ADD_CURRENCY_PAIR=process.env.REACT_APP_API_URL + "/request";
 const API_URL_GET_CURRENCY_PAIR=process.env.REACT_APP_API_URL + "/pair";
 const API_URL_GET_CURRENCY=process.env.REACT_APP_API_URL + "/currency";
-const API_URL_GET_CURRENCY_RATE=process.env.REACT_APP_API_URL + `pair/rate?baseCurrencyId=${recipiantConversion}&pairCurrencyId=${recipiantCurrency}&baseAmount=${conversionAmount}`;
+// const API_URL_GET_CURRENCY_RATE=process.env.REACT_APP_API_URL + `pair/rate?baseCurrencyId=${recipiantConversion}&pairCurrencyId=${recipiantCurrency}&baseAmount=${conversionAmount}`;
 
 
 const AddGetAllCurrencyPair = async (body) => {

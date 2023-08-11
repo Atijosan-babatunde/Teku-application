@@ -45,3 +45,105 @@
         height:500px;
     }
 }
+
+.disctwo {
+    width:55%;
+    align-items: center;
+    justify-content: center;
+    padding:6em 5em;
+    background: var(--white-grey, #F9F9F9);
+}
+
+.insideDisc{
+    border-radius: 16px;
+    background: #FFF;
+    padding: 16px;
+    gap: 8px;
+}
+
+.inputted {
+    width:70%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.headwelcome {
+    color: var(--black, #050505);
+    font-family: "Gilroy";
+    font-size: 29px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 60px;
+    margin: auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrowstyle {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+
+        img{
+            width: 76px;
+            height: 50px;
+        }
+}
+.rowname {
+    color: var(--grey-text, #999);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    // line-height: 20px;
+    letter-spacing: 0.035px;
+    margin-top:1.7000em;
+}
+
+.calculatorinput {
+    width : 100%;
+    height: 50px;
+    margin-top: 0.7000em;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+}
+.forget {
+    color: var(--blue-primary, #011B6D);
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px; 
+    justify-content: end;
+    align-items: end;
+    float: right;
+}
+
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    // display: flex;
+    margin-top:1.5em;
+    padding: 30px;
+}
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width: 100%;
+      background: #011B6D;
+      border-radius: 10px;
+  }
