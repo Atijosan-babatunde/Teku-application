@@ -94,7 +94,7 @@ const Header = () => {
                                     <Link
                                         onClick={toggle}
                                         className={styles.titleModal}
-                                        to="/"
+                                        to="/login"
                                     >
                                         Login
                                     </Link>
@@ -105,7 +105,7 @@ const Header = () => {
                                     animate={{ y: 0 }}
                                     transition={{ delay: 0.2, type: 'spring', duration: 7 }}
                                 >
-                                    <Link to="/">
+                                    <Link to="/signup">
                                         <PrimaryButton buttonText="Create an account"></PrimaryButton>
                                     </Link>
                                 </motion.div>

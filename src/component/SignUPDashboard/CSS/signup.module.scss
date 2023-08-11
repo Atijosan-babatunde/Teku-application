@@ -1,0 +1,34 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+.parent {
+    height: 100vh;
+}
+
+.content {
+    display: flex;
+}
+.discone{
+  width: 20%;
+  height:100vh;
+  background-image: url(../../../assets/png/leftimage.png);
+}
+.headleftimg {
+    color: var(--white-full, #FFF);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5000px;
+    margin-top: 20em;
+
+    img {
+        margin-top: 1em;
+    }
+}
