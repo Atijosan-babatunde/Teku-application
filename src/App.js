@@ -8,6 +8,7 @@ import SeeAllFaqPage from './component/faq/SeeAllFaqPage/seeAllFaqPage';
 import ContactUs from './component/faq/SeeAllFaqPage/ContactUs/contactUs';
 import SignUpDashboard from './component/SignUPDashboard/signup';
 import LogIn from './component/SignUPDashboard/login';
+import SideBarRoute from './component/layout/sidebarRoutes';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/contactus" element={<ContactUs/>}/>
           <Route path="/signup" element={<SignUpDashboard />}/>
           <Route path="/login" element={<LogIn />}/>
+          <Route  path='/*' element={<SideBarRoute/>}/>  
         </Routes>
         {/* <Footer /> */}
       </Router>
