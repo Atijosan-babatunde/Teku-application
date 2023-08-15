@@ -1,0 +1,251 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+// .parent {
+//     height: 100vh;
+// }
+
+.content {
+    display: flex;
+}
+.discone{
+  width: 20%;
+  background-image: url(../../../../assets/png/leftimage.png);
+}
+.headleftimg {
+    color: var(--white-full, #FFF);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5000px;
+    padding-top: 20em;
+    
+    img {
+        margin-top: 1em;
+    }
+}
+
+.disctwo {
+    overflow-y: scroll;
+    width:80%;
+    align-items: center;
+    justify-content: center;
+    padding:4em 2em;
+    background: var(--white-grey, #F9F9F9);
+}
+
+.insidedisc{
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 16px;
+    background: #FFF;
+    padding:2em 2em;
+    gap: 8px;
+}
+.logoimg {
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    display: flex;
+
+    img{
+        width: 130px;
+    }
+}
+
+.headcontent {
+    color: var(--black, #050505);
+    font-family: Gilroy;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    // line-height: 60px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 1.4000em;
+}
+
+.arrowstyle {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+    img{
+        width: 76px;
+        height: 50px;
+    }
+}
+
+.headinner{
+    color: #000;
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    margin-top: 7px;
+}
+
+
+
+.perhead {
+    color: var(--grey-primary, #373737);
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    padding-top: 0.4000em;
+}
+
+
+.decidebutton {
+    padding-top: 0.7000em;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    // display: flex;
+    margin-top:1.5em;
+}
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width: 100%;
+      background: #011B6D;
+      border-radius: 10px;
+  }
+
+  .donthave {
+    color: var(--grey-primary, #373737);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    margin-top: 1em;
+
+    span{
+        color: var(--blue-primary, #011B6D);
+        font-family: Gilroy;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22px;
+    }
+}
+
+// FORM STYLE
+
+.formholder {
+    display: flex;
+    width: 100%;
+    
+}
+
+.formholderone {
+    width: 50%;
+    margin: 1em;
+}
+
+.formholdertwo {
+    width:50%;
+    margin: 1em;
+}
+
+::placeholder{
+    color: var(--grey-primary, #373737);
+    font-family: Gilroy;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+}
+
+.rowname {
+    color: var(--grey-text, #999);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    // line-height: 20px;
+    letter-spacing: 0.035px;
+    margin-top:1.7000em;
+}
+
+.calculatorinput {
+    width : 100%;
+    height: 50px;
+    margin-top: 0.4000em;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    padding:0.5000em;
+}
+
+.continuebutton {
+    width:45%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.clickhere {
+    color: var(--grey-primary, #373737);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+
+    input{
+        margin-right: 5px;
+        width: 14px;
+        height: 14px;
+        color: #cccccc;
+    }
+
+    span {
+        color: var(--blue-primary, #011B6D);
+    }
+}
+
+.input-group {
+    position: relative;
+}
+
+.visibility {
+    position: absolute;
+    left: 23em;
+    top: 16px;
+    border: none;
+    background-color: transparent;
+}

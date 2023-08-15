@@ -1,0 +1,119 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+.parent {
+    height:100vh;
+    width:100vw;
+    background: linear-gradient(180deg, rgba(0, 107, 255, 0.10) 0%, rgba(121, 81, 175, 0.10) 76.04%);
+    padding:2em 5em;
+}
+
+.content{
+    width:55%;
+    background-color: white;
+    border-radius: 16px;
+    padding:7em;
+    padding-top:2em;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageholder {
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px 16px 0px 0px;
+    background: rgba(255, 255, 255, 0.30);
+    display: flex;
+
+    img {
+        margin: auto;
+        justify-content: center;
+        align-items: center; 
+        width: 100px;
+        margin-bottom: 1.7000em;
+    }
+}
+
+.innerhead {
+    color: var(--black, #00040F);
+    font-family: Gilroy;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    display: flex;
+}
+
+.innerp{
+    color: var(--grey-text, #000);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    margin-bottom: 2em;
+}
+
+.image{
+       width:120px;
+        justify-content: center;
+        margin: auto;
+        align-items: center;
+        display: flex;
+        margin-bottom: 1em;
+}
+
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    // display: flex;
+    margin-top:1.5em;
+}
+
+.btnrequest {
+      gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width: 100%;
+      background: #011B6D;
+      border-radius: 10px;
+  }
+
+
+  .skip {
+    color: var(--blue-primary, #011B6D);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    display: flex;
+    padding-top: 2em;
+  }
+
+  .icon {
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    // padding-top: 1em;
+    display: flex;
+  }

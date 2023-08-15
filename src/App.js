@@ -8,6 +8,9 @@ import SeeAllFaqPage from './component/faq/SeeAllFaqPage/seeAllFaqPage';
 import ContactUs from './component/faq/SeeAllFaqPage/ContactUs/contactUs';
 import SignUpDashboard from './component/SignUPDashboard/signup';
 import LogIn from './component/SignUPDashboard/login';
+import BusinessRegistration from './component/SignUPDashboard/personal_business_registration/business/businessReg';
+import PersonalRegistration from './component/SignUPDashboard/personal_business_registration/personal/personalReg';
+import WelcomeToTeku from './component/SignUPDashboard/welcomeToTeku';
 
 
 function App() {
@@ -22,6 +25,9 @@ function App() {
           <Route path="/contactus" element={<ContactUs/>}/>
           <Route path="/signup" element={<SignUpDashboard />}/>
           <Route path="/login" element={<LogIn />}/>
+          <Route path="/personal-registration" element={<PersonalRegistration/>}/>
+          <Route path="/business-registration" element={<BusinessRegistration/>}/>
+          <Route path="/welcome" element={<WelcomeToTeku/>}/>
         </Routes>
         {/* <Footer /> */}
       </Router>
