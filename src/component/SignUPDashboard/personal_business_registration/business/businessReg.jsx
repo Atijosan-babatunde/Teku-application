@@ -8,7 +8,7 @@ import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from 'react-icons/md'
 import { Link } from "react-router-dom"
-import EmailOtpModal from "../../emailOtpModal";
+import SignUpEmailOtpModal from "../../signUpEmailOtpModal";
 
 const BusinessRegistration = () => {
     const options = useMemo(() => countryList().getData(), [])
@@ -164,7 +164,7 @@ const BusinessRegistration = () => {
                                     Create account
                                 </button>
                             </div>
-                            {showModal && <EmailOtpModal {...{ handleModalShow }} />}
+                            {showModal && <SignUpEmailOtpModal {...{ handleModalShow }} />}
                             <p className={styles.donthave}>
                                 Already have an account? <span><Link to="/login">Sign in here </Link></span>
                             </p>

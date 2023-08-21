@@ -1,11 +1,13 @@
-import styles from '../SignUPDashboard/CSS/emailotpmodal.module.scss'
+import styles from '../SignUPDashboard/CSS/signupemailotpmodal.module.scss'
 import React, { useRef, useState } from "react"
 import useOnClickOutside from "../../shared/Hooks/useOnClickOutside"
 import cancel from '../../assets/png/cancel.png'
 import flyimg from '../../assets/svg/flymodal.svg'
 import { useNavigate } from "react-router-dom"
 
-const EmailOtpModal = ({ handleModalShow }) => {
+
+
+const SignUpEmailOtpModal = ({handleModalShow}) => {
     const [firstSpace, setFirstSpace] = useState('')
     const [secondSpace, setSecondSpace] = useState('')
     const [thirdSpace, setThirdSpace] = useState('')
@@ -18,7 +20,7 @@ const EmailOtpModal = ({ handleModalShow }) => {
     useOnClickOutside(modalref, handleModalShow)
 
     const goToWelcome = () => {
-        navigate("/welcome-personal-data")
+        navigate("/signup-welcome-business-data")
     }
 
     const validate = () => {
@@ -63,5 +65,5 @@ const EmailOtpModal = ({ handleModalShow }) => {
         </div >
     );
 }
-
-export default EmailOtpModal;
+ 
+export default SignUpEmailOtpModal;

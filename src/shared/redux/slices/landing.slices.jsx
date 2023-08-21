@@ -5,12 +5,12 @@ import LandingServices from "../services/landing.services";
 
 export const CreateCurrencyPair = createAsyncThunk(
   "landing/createCurrency",
-  async (body,thunkAPI) => {
+  async (body, thunkAPI) => {
     try {
       const data = await LandingServices.AddGetAllCurrencyPair(
-         body
+        body
       );
-      return { landing: data};
+      return { landing: data };
     } catch (error) {
       const message =
         (error.response &&
@@ -81,11 +81,19 @@ export const GetCurrencyRate = createAsyncThunk(
   }
 );
 
+// export const stepTwoPersonal = createAsyncThunk(
+//   "landing/getStepTwo",
+//   (selected) => {
+//     return { landing: selected };
+//   }
+// );
+
 const initialState = {
-  addAllCurrencyData:null,
-  getAllCurrencyData:null,
-  getAllCurrencyCode:null,
-  getAllCurrencyRate:null,
+  addAllCurrencyData: null,
+  getAllCurrencyData: null,
+  getAllCurrencyCode: null,
+  getAllCurrencyRate: null,
+  // getAllStepTwo: null,
 };
 
 export const landingSlice = createSlice({
@@ -120,7 +128,15 @@ export const landingSlice = createSlice({
     builder.addCase(GetCurrencyRate.rejected, (state) => {
       state.getAllCurrencyRate = null;
     })
-  },
+
+    
+    // builder.addCase(stepTwoPersonal.fulfilled, (state, action) => {
+    //   state.getAllStepTwo = action.payload.landing;
+    // })
+    // builder.addCase(stepTwoPersonal.rejected, (state) => {
+    //   state.getAllStepTwo = null;
+    // })
+  }
 });
 
 const { reducer } = landingSlice;

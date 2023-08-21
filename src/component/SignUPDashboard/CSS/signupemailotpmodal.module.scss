@@ -1,0 +1,148 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+.parent {
+    height:100vh;
+    width:100vw;
+    background-color: rgba(6, 6, 6, 0.7);
+    display:grid;
+    place-items: center;
+    overflow-y: auto;
+    z-index: 60;
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+.content{
+    width:55%;
+    /* height:90%; */
+    background-color: white;
+    border-radius: 16px;
+    position: relative;
+    padding:35px;
+    padding-top:2em;
+}
+.contentholder {
+    width:55%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+    img{
+        width:100px;
+        justify-content: center;
+        margin: auto;
+        align-items: center;
+        display: flex;
+        margin-bottom: 1em;
+    }
+}
+
+.closemodal {
+    position: absolute;
+    top: 1rem;
+    right:4rem;
+    width:7px;
+    cursor: pointer;
+}
+
+.modalhead {
+    color: var(--black, #00040F);
+    font-family: Gilroy;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    display: flex;
+}
+
+.modalpara {
+    color: var(--grey-text, #999);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+}
+
+
+
+.calculatorinput {
+    width : 100%;
+    height: 50px;
+    margin-top: 0.4000em;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    padding:0.5000em;
+}
+
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    // display: flex;
+    margin-top:1.5em;
+}
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width: 100%;
+      background: #011B6D;
+      border-radius: 10px;
+  }
+
+  .donthave {
+    color: var(--grey-primary, #373737);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    margin-top: 1em;
+
+    span{
+        color: var(--blue-primary, #011B6D);
+        font-family: Gilroy;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22px;
+    }
+}
+.otp {
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.inputotp {
+    margin: auto;
+    margin: 3px;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-grey, #F9F9F9);
+    backdrop-filter: blur(12px);
+}

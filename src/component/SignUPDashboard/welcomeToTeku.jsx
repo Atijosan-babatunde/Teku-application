@@ -2,10 +2,20 @@ import styles from '../SignUPDashboard/CSS/welcometoteku.module.scss'
 import logo from '../../assets/svg/logo.svg'
 import middleimg from '../../assets/svg/middlearrow.svg'
 import { BsArrowRight } from 'react-icons/bs'
+import { useState } from 'react'
+import KycPersonalUser from './personal_business_registration/personal/KYC/kycPersonalUser'
 
 
 
 const WelcomeToTeku = () => {
+    // MODAL STATE
+
+    const [showModal, setShowModal] = useState(false)
+
+    function handleModalShow() {
+        setShowModal(!showModal)
+    }
+    
     return (
         <div className={styles.parent}>
             <div className={styles.content}>
@@ -23,13 +33,14 @@ const WelcomeToTeku = () => {
                 <div className={styles.requestbut}>
                     <button
                         className={styles.btnrequest}
-                    // onClick={goToWelcome}
+                        onClick={handleModalShow}
                     >
                         Continue to KYC
                     </button>
                 </div>
+                {showModal && <KycPersonalUser {...{handleModalShow}}/>}
                 <div className={styles.skipholder}>
-                    <p className={styles.skip}>
+                    <p className={styles.skip} >
                         Skip to dashboard
                     </p>
                     <BsArrowRight  className={styles.icon}/>
