@@ -1,9 +1,5 @@
 import styles from '../SignUPDashboard/CSS/signup.module.scss'
 import star from '../../assets/png/star.png'
-
-
-import styles from '../SignUPDashboard/CSS/signup.module.scss'
-import star from '../../assets/png/star.png'
 import logo from "../../assets/svg/logo.svg"
 import { useNavigate } from "react-router-dom";
 import arrow from "../../assets/png/arrowright.png"

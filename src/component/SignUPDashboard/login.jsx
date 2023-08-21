@@ -3,8 +3,6 @@ import logo from "../../assets/svg/logo.svg"
 import loginpic from "../../assets/svg/loginpic.svg"
 import arrow from "../../assets/png/arrowright.png"
 import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from 'react-icons/md'
 import React, { useState } from 'react'
