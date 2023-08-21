@@ -2,17 +2,11 @@ import styles from './css/dashboardHeader.module.scss'
 import  Logo from ".././../assets/svg/logo.svg";
 import  Passport from "../../assets/png/passport.jpg";
 import { MdArrowDropDown } from "react-icons/md";
-// import  Sun from "../../assets/sun.svg";
-// import {  FormGroup, Input } from 'reactstrap';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const DashboardHeader = () => {
-    const [state, setState] = useState(true);
     let navigate=useNavigate()
-    const gotoMessages=()=>{
-      navigate('/messages')
-    }
+   
     return ( 
         <div className={styles.parent}>
            <div className={styles.logoDiv}>

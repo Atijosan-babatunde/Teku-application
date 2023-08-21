@@ -4,13 +4,14 @@ import { MdArrowDropDown } from "react-icons/md";
 import steponeimg from '../../../../../assets/png/steponeimg.png'
 import { useState } from 'react'
 
-const StepOneBusiness = ({setStep}) => {
+const StepOneBusiness = ({setStep, setSelectId}) => {
     const [rcNumber, setRcNumber] = useState('')
     const [businessNumber, setBusinessNumber] = useState('')
     const [dropDownValue, setDropDownValue] = useState('Select')
     const [dropDownLocalGov, setDropdownLocalGov] = useState('Select')
     const [menu, setMenu] = useState(false)
     const [menuTwo, setMenuTwo] = useState(false)
+    
 
     const [document] = useState([
         { id: 1, document: 'Sole proprietor' },
@@ -24,8 +25,16 @@ const StepOneBusiness = ({setStep}) => {
     ])
 
     const changeBusinessType = async (e) => {
-        setDropDownValue(e.document)
+        setDropDownValue(e.document);
+        if(e.id === 1){
+            setSelectId(true)
+        } 
+        else{
+            setSelectId(false)
+        }
+        console.log(e.document)
     }
+    
 
     const changeLocalGovType = async (e) => {
         setDropdownLocalGov(e.Localgov)

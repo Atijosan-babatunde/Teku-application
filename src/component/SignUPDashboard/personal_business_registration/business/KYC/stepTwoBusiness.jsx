@@ -6,7 +6,7 @@ import { useState } from 'react'
 import documentKYCIcon from '../../../../../assets/svg/documentKYC.svg'
 import { BsArrowLeft } from 'react-icons/bs'
 
-const StepTwoBusiness = ({ setStep }) => {
+const StepTwoBusiness = ({ setStep, selectId }) => {
     const [bvnNumber, setBvnNumber] = useState('')
     const [directorName, setDirectorName] = useState('')
     const [dropDownValue, setDropDownValue] = useState('Select')
@@ -61,13 +61,13 @@ const StepTwoBusiness = ({ setStep }) => {
         setStep(3)
     }
 
-    const goToStepOne =()=>{
+    const goToStepOne = () => {
         setStep(1)
     }
 
     return (
         <div className={styles.parent}>
-            <h1 className={styles.stepnumber}><BsArrowLeft onClick={goToStepOne} className={styles.arrow}/>Step 2</h1>
+            <h1 className={styles.stepnumber}><BsArrowLeft onClick={goToStepOne} className={styles.arrow} />Step 2</h1>
             <div className={styles.disctwocontent}>
                 <div className={styles.writeup}>
                     <h2 className={styles.headtwo}>Director’s Details</h2>
@@ -108,6 +108,7 @@ const StepTwoBusiness = ({ setStep }) => {
                 </DropdownMenu>
             </Dropdown>
 
+
             <div className={styles.split}>
                 <div className={styles.driverdoc}>
                     <input
@@ -141,6 +142,82 @@ const StepTwoBusiness = ({ setStep }) => {
                 </div>
 
             </div>
+
+
+            {selectId && (
+                <>
+                    <div className={styles.split}>
+                        <div className={styles.driverdoc}>
+                            <input
+                                type="file"
+                                accept=".png,.jpeg,.jpg,.doc,.docx,.pdf"
+                                ref={document}
+                                onChange={(e) => handleChange(e)}
+                                style={{ display: "none" }}
+                            />
+
+                            {documentUrl ? (
+                                <img src={documentUrl} alt="" className={styles.insideimg} />
+                            ) : (
+                                <>
+                                    <img src={documentKYCIcon} alt="" />
+                                    <p onClick={handleClick}>
+                                        Tap to upload document <br />
+                                        <span> Maximum file size: 5mb</span>
+                                    </p>
+                                </>
+                            )}
+                        </div>
+                        <div className={styles.instruction}>
+                            {instruction.map((instruction, index) =>
+                                <div className={styles.innerinstruction} key={index}>
+                                    <div className={styles.greenround}></div>
+                                    <p className={styles.innerp}>{instruction.instruction}</p>
+
+                                </div>
+                            )}
+                        </div>
+
+                    </div>
+
+                    <div className={styles.split}>
+                        <div className={styles.driverdoc}>
+                            <input
+                                type="file"
+                                accept=".png,.jpeg,.jpg,.doc,.docx,.pdf"
+                                ref={document}
+                                onChange={(e) => handleChange(e)}
+                                style={{ display: "none" }}
+                            />
+
+                            {documentUrl ? (
+                                <img src={documentUrl} alt="" className={styles.insideimg} />
+                            ) : (
+                                <>
+                                    <img src={documentKYCIcon} alt="" />
+                                    <p onClick={handleClick}>
+                                        Tap to upload document <br />
+                                        <span> Maximum file size: 5mb</span>
+                                    </p>
+                                </>
+                            )}
+                        </div>
+                        <div className={styles.instruction}>
+                            {instruction.map((instruction, index) =>
+                                <div className={styles.innerinstruction} key={index}>
+                                    <div className={styles.greenround}></div>
+                                    <p className={styles.innerp}>{instruction.instruction}</p>
+
+                                </div>
+                            )}
+                        </div>
+
+                    </div>
+
+                    
+                </>
+            )}
+
 
             <div className={styles.requestbut}>
                 <button

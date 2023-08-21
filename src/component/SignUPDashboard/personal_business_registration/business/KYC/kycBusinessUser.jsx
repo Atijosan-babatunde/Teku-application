@@ -10,9 +10,12 @@ import StepFiveBusiness from './stepFiveBusiness'
 import StepSixBusiness from './stepSixBusiness'
 
 const KycBusinessUser = ({handleModalShow}) => {
+    const [selectId, setSelectId] = useState(false)
     const [step, setStep] = useState(1)
     const modalref = useRef()
     useOnClickOutside(modalref, handleModalShow)
+
+
 
 
     return ( 
@@ -72,10 +75,10 @@ const KycBusinessUser = ({handleModalShow}) => {
                 </div>
                 <div className={styles.disctwo}>
                     <div style={{ display: step === 1 ? '' : 'none' }}>
-                        <StepOneBusiness  setStep={setStep}/>
+                        <StepOneBusiness  setStep={setStep} setSelectId={setSelectId} />
                     </div>
                     <div style={{ display: step === 2 ? '' : 'none' }}>
-                        <StepTwoBusiness  setStep={setStep}/>
+                        <StepTwoBusiness  setStep={setStep} selectId={selectId}/>
                     </div>
                     <div style={{ display: step === 3 ? '' : 'none' }}>
                         <StepThreeBusiness  setStep={setStep}/>
