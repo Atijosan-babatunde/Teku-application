@@ -1,0 +1,214 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../shared/utils/fonts/Gilroy-Black.ttf);
+}
+.parent{
+    height: 100vh;
+    width:17%;   
+    overflow-x: scroll;
+    box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.12);
+}
+
+.link{
+    text-decoration:none;  
+    align-items: center; 
+}
+.link:hover {
+    text-decoration: none;
+  }
+  .iconpagename{
+    display: flex;
+    height: 60px;
+    align-items: center;
+    padding: 2em;
+  }
+  .pageName{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.9em;
+    line-height: 24px;   
+    padding: 0px 9px;
+    line-height: 16px;
+}
+.maintext{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.9em;
+    line-height: 15px;   
+    color: #647787;    
+}
+.icon{
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    font-size: 2em;
+}
+.iconArrow{
+   height: 18px;
+   width: 18px;
+   padding-left: 1em;
+   padding-top: 0.5em;
+}
+.switchDiv{
+    display: flex;
+    padding-top: 2em;
+    align-items: center;
+    padding-left: 2em;
+}
+.btnDiv{
+    display: flex;
+    padding-top: 1em;
+    align-items: center;
+    padding-left: 2em;
+}
+.switch{
+    font-size:1.1em;
+    padding-left: 1em; 
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+    color: #213F7D;
+}
+.signout{
+    padding: 3em 2em;
+    cursor: pointer;
+}
+.main{
+    width: 83%;
+    overflow-x: scroll;
+    background: #F6F9FC;
+    height: 100vh;
+}
+*::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-corner { 
+    // background: rgba(175, 151, 12, 0.5); 
+}
+.modalParent{
+    max-width: 600px;
+    width: 50% !important;
+    border-radius: 24px !important;
+    padding-bottom: 2em;
+}
+.modalContent{
+    background: #181821;  
+    padding: 0em 5em 3em;
+}
+.cancelDiv{
+    background: #181821;  
+    padding: 1em; 
+}
+.modalTitle{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.4em;
+    line-height: 38px;
+    text-align: center;
+    color: #FFFFFF;   
+   
+}
+.modalDesc{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    color: #E6E8EC; 
+    padding-top: 1em;
+}
+.btnDiv{
+    margin-top: 2em;
+}
+
+@media screen and (max-width: 1115px) {
+    .main{
+      width:100%
+    }
+    .pageName{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 0.8em;
+        line-height: 15px;   
+        color: #647787;   
+        
+    }
+    .title{
+        padding-left: 1em; 
+    }
+    .link{
+        padding: 1em 1em;
+    } 
+    .btnDiv{
+        display: flex;
+        padding-top: 1em;
+        align-items: center;
+        padding-left: 1em;
+    }
+    .btn{
+        background: #27AE60;
+        border-radius: 30px;
+        color: white;
+        border: none;
+        padding: 0.7em 1.9em;
+        font-size: 0.7em;
+        letter-spacing: 0.2px;
+        font-family: 'Roboto';
+    }
+}
+
+@media screen and (max-width: 997px) {
+    .pageName{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 15px;   
+        color: #647787;   
+       
+    }
+    .link{
+        padding: 1em 1em;
+    } 
+}
+@media screen and (max-width: 1000px) {
+    .parent{
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .main{
+        width: 90%;
+        overflow-x: scroll;
+        background: #F6F9FC;
+        height: 100vh;
+    }
+    .pageName{
+        display: none;
+    }
+    .title{
+        display: none;
+    }  
+    .btnDiv{
+        display: none;
+    }
+}
+@media screen and (max-width: 450px) {
+    .parent{
+        display: none;
+    }
+    .main{
+        width: 100%;
+    }
+}

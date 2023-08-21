@@ -12,6 +12,7 @@ import WelcomeToTeku from './component/SignUPDashboard/welcomeToTeku';
 import "react-html5-camera-photo/build/css/index.css";
 import SignUpWelcomeToTeku from "./component/SignUPDashboard/signUpWelcomeToTeku";
 
+import SideBarRoute from './component/layout/sidebarRoutes';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/business-registration" element={<BusinessRegistration/>}/>
           <Route path="/welcome-personal-data" element={<WelcomeToTeku/>}/>
           <Route path="/signup-welcome-business-data" element={<SignUpWelcomeToTeku/>}/>
+          <Route  path='/*' element={<SideBarRoute/>}/>  
         </Routes>
       </Router>
     </div>
