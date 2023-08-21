@@ -17,7 +17,7 @@ import SideBarRoute from './component/layout/sidebarRoutes';
 
 function App() {
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

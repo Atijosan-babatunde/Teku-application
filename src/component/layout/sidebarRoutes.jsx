@@ -26,7 +26,7 @@ import Dashboard from "../dashboard/dashboard/dashboard";
       window.scrollTo(0,0)
     },[])
     return (
-      <div>
+      <div >
         <SideMenu>
         <Routes>   
           <Route> 
