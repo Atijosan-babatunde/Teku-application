@@ -7,9 +7,7 @@ import { FiRefreshCcw } from "react-icons/fi";
 import { useState } from "react";
 import { RequestButton } from "../../shared/utils/button";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../shared/redux/reduxHooks";
-import { GetCurrencyCode, GetCurrencyRate } from "../../shared/redux/slices/landing.slices";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GET_CURRENCY_CALCULATOR } from "../../shared/redux/services/landing.services";
@@ -24,9 +22,7 @@ const RateCalculator = () => {
     const [menu, setMenu] = useState(false)
     const [menuTwo, setMenuTwo] = useState(false)
     const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch();
     const currencyCode = useAppSelector((state) => state.landing.getAllCurrencyCode)
-    const currencyRate = useAppSelector((state) => state.landing.getAllCurrencyRate)
     const [data] = useState(currencyCode)
     const [recipiantGet, setYouRecipiant] = useState('')
     const [baseCurrency, setBaseCurrency] = useState('')
@@ -44,10 +40,10 @@ const RateCalculator = () => {
                 setConvertedCurrency(response.data.data.totalRate)
             }
             else {
-
+                toast.error(response.data.message);
             }
         } catch (e) {
-
+                toast.error(`Network error, Kindly check internet connections`);
         }
     };
 

@@ -1,7 +1,10 @@
+import styles from "../dashboard/css/dashboard.module.scss"
 const Dashboard = () => {
     return ( 
         <div>
-            <div>Dashboard</div>
+            <div className={styles.header}>
+                
+            </div>
         </div>
      );
 }

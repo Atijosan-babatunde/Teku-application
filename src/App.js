@@ -1,5 +1,3 @@
-import Footer from './component/footer/footer';
-import Header from './component/header/header';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './component/home/home';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,9 +11,8 @@ import SideBarRoute from './component/layout/sidebarRoutes';
 
 function App() {
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div>
       <Router>
-        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/see-all" element={<SeeAllPage/>}/>
@@ -25,7 +22,6 @@ function App() {
           <Route path="/login" element={<LogIn />}/>
           <Route  path='/*' element={<SideBarRoute/>}/>  
         </Routes>
-        {/* <Footer /> */}
       </Router>
     </div>
   );

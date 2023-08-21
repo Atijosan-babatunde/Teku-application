@@ -70,7 +70,7 @@ const SideMenu = ({children}) => {
       <div>
         <DashboardHeader/>
         <div style={{display:'flex'}}>
-          <div className={styles.parent} style={{marginTop:'2em'}} >    
+          <div className={styles.parent}>    
             <div>
               <NavLink to='/dashboard' className={styles.link}>  
                  <div className={styles.iconpagename} style={{background:location==='/dashboard' ? "linear-gradient(#e1e9f5, #F6F6F6)" : ''}}>
