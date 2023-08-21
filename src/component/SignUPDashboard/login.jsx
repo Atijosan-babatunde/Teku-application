@@ -4,9 +4,37 @@ import loginpic from "../../assets/svg/loginpic.svg"
 import arrow from "../../assets/png/arrowright.png"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { MdOutlineVisibilityOff, MdOutlineVisibility } from 'react-icons/md'
+import React, { useState } from 'react'
+import ForgetPasswordModal from "./forgetPasswordModal"
 
 
 const LogIn = () => {
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [passwordType, setPasswordType] = useState("password")
+
+    const validate = () => {
+        return !email || !password
+    }
+
+    const togglePassword = () => {
+        if (passwordType === "password") {
+            setPasswordType("text")
+            return;
+        }
+        setPasswordType("password")
+    }
+
+    // MODAL STATE
+
+    const [showModal, setShowModal] = useState(false)
+
+    function handleModalShow() {
+        setShowModal(!showModal)
+    }
 
     let navigate = useNavigate();
     const gotoHome = () => {
@@ -36,19 +64,36 @@ const LogIn = () => {
                         </div>
                         <div className={styles.inputted}>
                             <h2 className={styles.rowname}>Email address</h2>
-                            <input className={styles.calculatorinput} type="email" placeholder="Enter your email address" />
+                            <input className={styles.calculatorinput} type="email" placeholder="Enter your email address" onChange={e => setEmail(e.target.value)} />
 
                             <h2 className={styles.rowname}>Password</h2>
-                            <input className={styles.calculatorinput} type="password" placeholder="Enter password" />
-                            <p className={styles.forget}>Forgot Password?</p>
+                            <div className="input-group">
+                                <input className={styles.calculatorinput}
+                                    type={passwordType}
+                                    placeholder="Enter password"
+                                    onChange={e => setPassword(e.target.value)}
+                                    value={password}
+                                    name="password"
+                                />
+                                <div className="input-group-btn">
+                                    <button className={styles.visibility} onClick={togglePassword}>
+                                        {passwordType === "password" ? <MdOutlineVisibilityOff /> : < MdOutlineVisibility />}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <p className={styles.forget} onClick={handleModalShow}>Forgot Password?</p>
                             <div className={styles.requestbut}>
                                 <button
                                     className={styles.btnrequest}
+                                    disabled={validate()}
+                                    style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
                                 >
                                     Sign In
                                 </button>
                             </div>
                         </div>
+                        {showModal && <ForgetPasswordModal {...{handleModalShow}}/>}
                         <p className={styles.donthave}>
                             Don’t have an account? <span><Link to="/signup">Register here</Link></span>
                         </p>

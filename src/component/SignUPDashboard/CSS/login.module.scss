@@ -19,6 +19,7 @@
     text-align: center;
     font-family: Gilroy;
     font-size: 21px;
+    font-size: 21px;
     font-style: normal;
     font-weight: 600;
     line-height: 40px;
@@ -120,13 +121,14 @@
     justify-content: end;
     align-items: end;
     float: right;
+    cursor: pointer;
 }
 
 .requestbut {
     justify-content: center;
     align-items: center;
     // display: flex;
-    margin-top:1.5em;
+    margin-top:2.7000em;
 }
 
 .btnrequest {
@@ -154,6 +156,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 26px;
+    margin-top: 1em;
 
     span{
         color: var(--blue-primary, #011B6D);
@@ -163,4 +166,17 @@
         font-weight: 700;
         line-height: 22px;
     }
+}
+
+.input-group {
+    position: relative;
+    border-radius: 16px;
+}
+
+.visibility {
+    position: absolute;
+    left: 22em;
+    top: 16px;
+    border: none;
+    background-color: transparent;
 }

@@ -40,6 +40,29 @@ a{
   text-decoration: none !important;
 }
 
+/* //////// react-html5-camera-photo //////////// */
+
+.react-html5-camera-photo>img, .react-html5-camera-photo>video {
+    width:368px !important;
+    height: 300px !important;
+}
+
+#container-circles {
+  position: absolute;
+  left: 95% !important;
+  bottom: 60% !important;
+}
+#outer-circle {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+#inner-circle {
+  height: 30px !important;
+  width: 30px !important;
+  margin: -27px 0 0 -15px !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
