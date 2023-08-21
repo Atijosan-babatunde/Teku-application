@@ -34,38 +34,6 @@ const RateCalculator = () => {
     const [convertedCurrency,setConvertedCurrency]=useState('')
 
 
-    const getCurrencyCode = () => {
-        setLoading(true);
-        dispatch(GetCurrencyCode())
-            .unwrap()
-            .then(() => {
-                setLoading(false);
-            })
-            .catch((err) => {
-                toast.error(err, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-                setLoading(false);
-            });
-    };
-
-
-    const getCurrencyRate = () => {
-
-        setLoading(true);
-        dispatch(GetCurrencyRate())
-            .unwrap()
-            .then(() => {
-                setLoading(false);
-            })
-            .catch((err) => {
-                toast.error(err, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-                setLoading(false);
-            });
-    };
-
     const makeCurrencyConversion = async (amount) => {
         setLoading(true);
         const endpoint = `/pair/rate?baseCurrencyId=${baseCurrency}&pairCurrencyId=${pairCurrency}&baseAmount=${amount}`;
