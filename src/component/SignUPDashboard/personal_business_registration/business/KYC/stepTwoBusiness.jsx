@@ -9,9 +9,17 @@ import { BsArrowLeft } from 'react-icons/bs'
 const StepTwoBusiness = ({ setStep, selectId }) => {
     const [bvnNumber, setBvnNumber] = useState('')
     const [directorName, setDirectorName] = useState('')
+    const [directorNameTwo, setDirectorNameTwo] = useState('')
+    const [directorNameThree, setDirectorNameThree] = useState('')
     const [dropDownValue, setDropDownValue] = useState('Select')
+    const [dropDownValueTwo, setDropDownValueTwo] = useState('Select')
+    const [dropDownValueThree, setDropDownValueThree] = useState('Select')
     const [menu, setMenu] = useState(false)
+    const [menuTwo, setMenuTwo] = useState(false)
+    const [menuThree, setMenuThree] = useState(false)
     const [documentUrl, setdocumentUrl] = useState("")
+    const [documentUrlTwo, setdocumentUrlTwo] = useState("")
+    const [documentUrlThree, setdocumentUrlThree] = useState("")
 
     const [document] = useState([
         { id: 1, document: 'International passport' },
@@ -23,8 +31,16 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
         setDropDownValue(e.document)
     }
 
+    const chooseIdentificationDocTwo = async (e) => {
+        setDropDownValueTwo(e.document)
+    }
+
+    const chooseIdentificationDocThree = async (e) => {
+        setDropDownValueThree(e.document)
+    }
+
     const validate = () => {
-        return !bvnNumber || !directorName || dropDownValue === "Select"
+        return !bvnNumber || !directorName || !directorNameTwo || !directorNameThree || dropDownValue === "Select" || dropDownValueTwo === "Select" || dropDownValueThree === "Select"
     }
 
     const getBase64 = (file, cb) => {
@@ -46,7 +62,31 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
         });
     };
 
+    const handleChangeTwo = async (event) => {
+        const fileUploaded = event.target.files[0];
+
+        getBase64(fileUploaded, async (result) => {
+            setdocumentUrlTwo(result);
+        });
+    };
+
+    const handleChangeThree = async (event) => {
+        const fileUploaded = event.target.files[0];
+
+        getBase64(fileUploaded, async (result) => {
+            setdocumentUrlThree(result);
+        });
+    };
+
     const handleClick = () => {
+        document.current.click();
+    };
+
+    const handleClickTwo = () => {
+        document.current.click();
+    };
+
+    const handleClickThree = () => {
         document.current.click();
     };
 
@@ -76,6 +116,7 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
 
                 <img src={steponeimg} alt="" />
             </div>
+
 
             <h2 className={styles.rowname}>Name of director</h2>
             <input className={styles.calculatorinput}
@@ -146,22 +187,44 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
 
             {selectId && (
                 <>
+                    <h2 className={styles.rowname}>Name of director 2</h2>
+                    <input className={styles.calculatorinput}
+                        type="text"
+                        placeholder='Enter your registration number'
+                        onChange={e => setDirectorNameTwo(e.target.value)}
+                    />
+
+                    <h2 className={styles.rowname}>Choose identification document</h2>
+
+                    <Dropdown isOpen={menuTwo} toggle={() => setMenuTwo(!menuTwo)} style={{ cursor: 'pointer' }} >
+                        <DropdownToggle tag="a" className={styles.dropdownToggle} >
+                            <div>{dropDownValueTwo}</div>
+                            <div className={styles.dropDownrow}>
+                                <div style={{ color: '#777E90', }}><MdArrowDropDown style={{ fontSize: '2em' }} /></div>
+                            </div>
+                        </DropdownToggle>
+                        <DropdownMenu className={styles.dropBox}>
+                            {document.map((document, index) =>
+                                <DropdownItem className={styles.value} key={index} onClick={() => chooseIdentificationDocTwo(document)}>{document.document} </DropdownItem>
+                            )}
+                        </DropdownMenu>
+                    </Dropdown>
                     <div className={styles.split}>
                         <div className={styles.driverdoc}>
                             <input
                                 type="file"
                                 accept=".png,.jpeg,.jpg,.doc,.docx,.pdf"
                                 ref={document}
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChangeTwo(e)}
                                 style={{ display: "none" }}
                             />
 
-                            {documentUrl ? (
-                                <img src={documentUrl} alt="" className={styles.insideimg} />
+                            {documentUrlTwo ? (
+                                <img src={documentUrlTwo} alt="" className={styles.insideimg} />
                             ) : (
                                 <>
                                     <img src={documentKYCIcon} alt="" />
-                                    <p onClick={handleClick}>
+                                    <p onClick={handleClickTwo}>
                                         Tap to upload document <br />
                                         <span> Maximum file size: 5mb</span>
                                     </p>
@@ -180,22 +243,45 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
 
                     </div>
 
+
+                    <h2 className={styles.rowname}>Name of director 3</h2>
+                    <input className={styles.calculatorinput}
+                        type="text"
+                        placeholder='Enter your registration number'
+                        onChange={e => setDirectorNameThree(e.target.value)}
+                    />
+
+                    <h2 className={styles.rowname}>Choose identification document</h2>
+
+                    <Dropdown isOpen={menuThree} toggle={() => setMenuThree(!menuThree)} style={{ cursor: 'pointer' }} >
+                        <DropdownToggle tag="a" className={styles.dropdownToggle} >
+                            <div>{dropDownValueThree}</div>
+                            <div className={styles.dropDownrow}>
+                                <div style={{ color: '#777E90', }}><MdArrowDropDown style={{ fontSize: '2em' }} /></div>
+                            </div>
+                        </DropdownToggle>
+                        <DropdownMenu className={styles.dropBox}>
+                            {document.map((document, index) =>
+                                <DropdownItem className={styles.value} key={index} onClick={() => chooseIdentificationDocThree(document)}>{document.document} </DropdownItem>
+                            )}
+                        </DropdownMenu>
+                    </Dropdown>
                     <div className={styles.split}>
                         <div className={styles.driverdoc}>
                             <input
                                 type="file"
                                 accept=".png,.jpeg,.jpg,.doc,.docx,.pdf"
                                 ref={document}
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChangeThree(e)}
                                 style={{ display: "none" }}
                             />
 
-                            {documentUrl ? (
-                                <img src={documentUrl} alt="" className={styles.insideimg} />
+                            {documentUrlThree ? (
+                                <img src={documentUrlThree} alt="" className={styles.insideimg} />
                             ) : (
                                 <>
                                     <img src={documentKYCIcon} alt="" />
-                                    <p onClick={handleClick}>
+                                    <p onClick={handleClickThree}>
                                         Tap to upload document <br />
                                         <span> Maximum file size: 5mb</span>
                                     </p>
@@ -214,7 +300,7 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
 
                     </div>
 
-                    
+
                 </>
             )}
 

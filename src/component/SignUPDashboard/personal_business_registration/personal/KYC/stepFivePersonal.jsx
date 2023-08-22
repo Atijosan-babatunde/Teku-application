@@ -1,6 +1,7 @@
 import styles from '../KYC/CSS/stepfivepersonal.module.scss'
 import envelop from '../../../../../assets/png/envelop.png'
 import { BsArrowLeft } from 'react-icons/bs'
+import { useNavigate } from "react-router-dom"
 
 
 const StepFivePersonal = ({setStep}) => {
@@ -8,6 +9,12 @@ const StepFivePersonal = ({setStep}) => {
     const goToStepFour =()=> {
         setStep(4)
     }
+
+    let navigate = useNavigate();
+    const goToDashboard = () => {
+        navigate("/*");
+    };
+
     return (
         <div className={styles.parent}>
             <h1 className={styles.stepnumber}><BsArrowLeft onClick={goToStepFour} className={styles.arrow}/>Step 5</h1>
@@ -25,7 +32,7 @@ const StepFivePersonal = ({setStep}) => {
             <div className={styles.requestbut}>
                 <button
                     className={styles.btnrequest}
-                    // onClick={}
+                    onClick={goToDashboard}
                 >
                     Continue to dashboard
                 </button>

@@ -11,7 +11,6 @@ import PersonalRegistration from './component/SignUPDashboard/personal_business_
 import WelcomeToTeku from './component/SignUPDashboard/welcomeToTeku';
 import "react-html5-camera-photo/build/css/index.css";
 import SignUpWelcomeToTeku from "./component/SignUPDashboard/signUpWelcomeToTeku";
-
 import SideBarRoute from './component/layout/sidebarRoutes';
 
 

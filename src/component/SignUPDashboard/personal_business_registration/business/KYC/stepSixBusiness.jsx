@@ -1,6 +1,7 @@
 import styles from '../KYC/CSS/stepsixbusiness.module.scss'
 import envelop from '../../../../../assets/png/envelop.png'
 import { BsArrowLeft } from 'react-icons/bs'
+import { useNavigate } from "react-router-dom"
 
 
 const StepSixBusiness = ({setStep}) => {
@@ -8,6 +9,11 @@ const StepSixBusiness = ({setStep}) => {
     const goToStepFour =()=> {
         setStep(5)
     }
+
+    let navigate = useNavigate();
+    const goToDashboard = () => {
+        navigate("/*");
+    };
 
     return ( 
         <div className={styles.parent}>
@@ -26,7 +32,7 @@ const StepSixBusiness = ({setStep}) => {
             <div className={styles.requestbut}>
                 <button
                     className={styles.btnrequest}
-                    // onClick={}
+                    onClick={goToDashboard}
                 >
                     Continue to dashboard
                 </button>
