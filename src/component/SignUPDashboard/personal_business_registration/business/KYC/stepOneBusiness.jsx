@@ -14,9 +14,8 @@ const StepOneBusiness = ({setStep, setSelectId}) => {
     
 
     const [document] = useState([
-        { id: 1, document: 'Sole proprietor' },
-        { id: 2, document: 'Police officer' },
-        { id: 3, document: 'Drivers' },
+        { id: 1, document: 'partnership' },
+        { id: 2, document: 'Sole proprietor' },
     ])
 
     const [Localgov] = useState([

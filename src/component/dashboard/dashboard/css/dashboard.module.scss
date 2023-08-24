@@ -131,19 +131,66 @@
       border-radius: 10px;
 }
 
-// Table // 
+// KYC REGISTRATION //
 
-.contenttable {
-    // width: 80%;
-    border-radius: 5px;
-    box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
-    background-color: #fff;
+.kycreg {
+    border-radius: 16px;
+    background: rgba(255, 15, 15, 0.05);
     padding:1em 1em;
     margin: 2em;
 }
 
+.kych1{
+    color: var(--red, #FF0F0F);
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; 
+}
+
+.kycflex{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p{
+        color: var(--blue-primary, #011B6D);
+        font-family: Gilroy;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 26px;
+        width:60%; 
+    }
+
+    h3{
+        color: var(--blue-primary, #011B6D);
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22px; 
+    }
+}
+
+.arrow {
+    margin-left: 2em;
+}
+
+
+
+// Table // 
+
+.contenttable {
+    border-radius: 16px 16px 0px 0px;
+    box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
+    background-color: #fff;
+    margin: 2em;
+}
+
 .inner {
-    //  padding:1em;
     img {
         align-items: center;
         justify-content: center;
@@ -165,13 +212,12 @@
     height:55px;
 }
 .tablehead {
+    color:  #999 !important;
     font-family: Gilroy;
     font-size: 1em;
     font-style: normal;
-    font-weight: 300;
-    line-height: 26px;
-    color: #00040f;
-    padding:1em;
+    font-weight: 700;
+    line-height: 22px;
 }
 .tabledata {
     font-family: Gilroy;
@@ -215,4 +261,43 @@
     width: 130px;
     border-radius: 8px;
     background: rgba(127, 232, 129, 0.10);
+}
+
+.insidebtn {
+        color: var(--blue-primary, #011B6D);
+        font-family: Gilroy;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 22px;
+        margin-left: 1.5000em;
+}
+
+.tableheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .headerh1{
+        color: var(--grey-primary, #373737) !important;
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        padding-left: 2em; 
+        padding-top: 2em;
+    }
+
+    p{
+        color: #011B6D ;
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 600;
+        padding-right: 2em; 
+        padding-top: 2em; 
+        // line-height: 40px; 
+    }
 }

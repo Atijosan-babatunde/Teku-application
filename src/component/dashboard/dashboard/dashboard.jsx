@@ -7,7 +7,9 @@ import holder from "../../../assets/svg/holder.svg"
 import Nigeria from "../../../assets/svg/nigeria.svg"
 import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg"
 import { BsFillSendFill } from 'react-icons/bs';
+import { IoIosArrowForward } from 'react-icons/io'
 import { useState } from 'react'
+
 
 const Dashboard = () => {
 
@@ -73,7 +75,27 @@ const Dashboard = () => {
                 </div>
             </div>
 
+            <div className={styles.kycreg}>
+                <div className={styles.kyccontent}>
+                    <h1 className={styles.kych1}>KYC Verification</h1>
+                    <div className={styles.kycflex}>
+                        <p>
+                            You have not done your KYC Verification. Therefore some
+                            features are being restricted. Kindly start your KYC Verification
+                            process to continue using this application.
+                        </p>
+
+                        <h3>Start KYC Verification <IoIosArrowForward className={styles.arrow} /></h3>
+                    </div>
+                </div>
+            </div>
+
+
             <div className={styles.contenttable}>
+                <div className={styles.tableheader}>
+                    <h1 className={styles.headerh1}>Recent transactions</h1>
+                    <p>See all <IoIosArrowForward  /></p>
+                </div>
                 <div className="table-responsive">
                     <table className="table table-striped table-borderless">
                         <thead className={styles.tablerow}>
@@ -88,10 +110,15 @@ const Dashboard = () => {
                         <tbody>
                             {product.map((prod, index) =>
                                 <tr style={{}} key={index}>
-                                    <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}</td>
-                                    
-                                    <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}</td>
-                                    <td className={styles.tabledata} style={{  paddingTop: "1.5000em" }}>
+                                    <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
+                                        <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Cash pickup</span>
+                                    </td>
+
+                                    <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
+                                        <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>In review</span>
+                                    </td>
+
+                                    <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
                                         <img src={prod.flagone} alt="" className={styles.flagstyle} />
                                         <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
                                         <span className={styles.dash}>-</span>
@@ -103,7 +130,7 @@ const Dashboard = () => {
                                         <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
                                     </td>
                                     <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
-                                        <button className={styles.btn}>Completed <BsFillSendFill /></button>
+                                        <button className={styles.btn}>Completed</button>
                                     </td>
                                 </tr>
                             )}
