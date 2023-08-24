@@ -1,5 +1,4 @@
 import styles from "../dashboard/css/dashboard.module.scss"
-import styles from '../dashboard/css/dashboard.module.scss'
 import boxoneimg from '../../../assets/png/boxoneimg.png'
 import put from '../../../assets/svg/put.svg'
 import blank from '../../../assets/svg/blank.svg'

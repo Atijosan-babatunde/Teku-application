@@ -1,3 +1,5 @@
+import styles from '../currency-rate/css/currencyRate.module.scss'
+import Currencysectiontable from './currencysectiontable';
 const CurrencyRate = () => {
     return (
         <div>
