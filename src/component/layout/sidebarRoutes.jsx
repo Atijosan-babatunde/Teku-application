@@ -17,7 +17,7 @@ import CurrencyRate from "../dashboard/currency-rate/currency-rate";
       window.scrollTo(0,0)
     },[])
     return (
-      <div>
+      <div >
         <SideMenu>
         <Routes>   
           <Route> 

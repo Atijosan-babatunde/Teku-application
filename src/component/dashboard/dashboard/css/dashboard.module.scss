@@ -1,4 +1,11 @@
-@font-face {
+.parent{
+
+}
+.header{
+    height: 80px;
+    width: 100%;
+    background: red;
+}@font-face {
     font-family: Gilroy;
     src: url(../../../../shared/utils/fonts/Gilroy-Regular.ttf);
 }
