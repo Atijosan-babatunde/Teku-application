@@ -10,6 +10,7 @@ import step2 from './assets/file.png';
 import step3 from './assets/paper.png';
 import woman from './assets/woman.png';
 import Union from '../../assets/png/Union.png'
+import { Link } from "react-router-dom";
 
 const Journey = () => {
    return (
@@ -72,7 +73,9 @@ const Journey = () => {
                </div>
             </div>
             <div className={styles.journeybtn}>
-               <PrimaryButton buttonText="Create an account"></PrimaryButton>
+               <Link to="/signup" className={styles.herobtn}>
+                  <PrimaryButton buttonText="Create an account"></PrimaryButton>
+               </Link>
             </div>
          </div>
       </div>

@@ -212,3 +212,25 @@
         line-height: 22px;
     }
 }
+
+@media screen and (max-width:960px) {
+    .holder {
+        width: 100% !important;
+    }
+    .btnrequest {
+        width: 100%;
+    }
+    .disctwocontent {
+        img{
+            display: none;
+        }
+    }
+    .writeup{
+        width: 100%;
+    }
+    .inputotp {
+        width: 35px;
+        height: 40px;
+    }
+}
+

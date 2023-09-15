@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { GetCurrencyPair } from "../../../shared/redux/slices/landing.slices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RequestModal from "./RequestModal/requestModal";
 
 
 
@@ -35,6 +36,14 @@ const CurrencyAlert = () => {
                 setLoading(false);
             });
     };
+
+    // MODAL STATE
+
+    const [showModal, setShowModal] = useState(false)
+
+    function handleModalShowRequest() {
+        setShowModal(!showModal)
+    }
 
     if (data) {
         return (
@@ -68,8 +77,9 @@ const CurrencyAlert = () => {
                                             <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
                                         </td>
                                         <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.btn}>Request <BsFillSendFill /></button>
+                                            <button className={styles.btn} onClick={handleModalShowRequest}>Request <BsFillSendFill /></button>
                                         </td>
+                                        {showModal && <RequestModal {...{ handleModalShowRequest }} />}
                                     </tr>
                                 )}
                             </tbody>

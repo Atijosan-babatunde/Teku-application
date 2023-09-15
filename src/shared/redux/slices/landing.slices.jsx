@@ -81,19 +81,34 @@ export const GetCurrencyRate = createAsyncThunk(
   }
 );
 
-// export const stepTwoPersonal = createAsyncThunk(
-//   "landing/getStepTwo",
-//   (selected) => {
-//     return { landing: selected };
-//   }
-// );
+export const LoginUser = createAsyncThunk(
+  "landing/loginUser",
+  async (body, thunkAPI) => {
+    try {
+      const data = await LandingServices.LoginUser(
+        body
+      );
+      return { landing: data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 
 const initialState = {
   addAllCurrencyData: null,
   getAllCurrencyData: null,
   getAllCurrencyCode: null,
   getAllCurrencyRate: null,
-  // getAllStepTwo: null,
+  getloginUser: null,
 };
 
 export const landingSlice = createSlice({
@@ -129,13 +144,12 @@ export const landingSlice = createSlice({
       state.getAllCurrencyRate = null;
     })
 
-    
-    // builder.addCase(stepTwoPersonal.fulfilled, (state, action) => {
-    //   state.getAllStepTwo = action.payload.landing;
-    // })
-    // builder.addCase(stepTwoPersonal.rejected, (state) => {
-    //   state.getAllStepTwo = null;
-    // })
+    builder.addCase(LoginUser.fulfilled, (state, action) => {
+      state.getloginUser = action.payload.landing;
+    })
+    builder.addCase(LoginUser.rejected, (state) => {
+      state.getloginUser = null;
+    })
   }
 });
 

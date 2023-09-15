@@ -1,6 +1,6 @@
 @font-face {
     font-family: Gilroy;
-    src: url(../../../shared/utils/fonts/Gilroy-Light.ttf);
+    src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
 }
 .parent{
     height: 80px;
@@ -26,11 +26,15 @@
 .name{
      font-family: 'Gilroy';
      font-style: normal;
-     font-weight: 600;
+     font-weight: 700;
      font-size: 0.8em;
      line-height: 17px;
      letter-spacing: 0.05em;
      color:#00040F;
+
+     span{
+      margin-left: 2em;
+     }
 }
 .instant{
      font-family: 'Gilroy';
@@ -73,3 +77,76 @@
     width: 30px;
     border-radius: 30px;
 }
+
+
+// DROPDOWN 
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 2em;
+  }
+  
+  .dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    line-height: 20px;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    position: fixed;
+    margin-top: 0.1em;
+    
+  
+    @media screen and (max-width: 600px) {
+      min-width: 200px;
+      width: 300px;
+    }
+    @media screen and (max-width: 350px) {
+      min-width: 200px;
+      width: 270px;
+    }
+  }
+  .dropDownRow {
+    display: flex;
+    align-items: center;
+    margin: 1.1000em 0.9em;
+  }
+  .dropdownContent a {
+    color: #fff !important;
+    padding: 12px 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropIcon {
+    width: 20px;
+  }
+  
+  .logoTitleDiv {
+    // background: #fafaff;
+    // border-radius: 0px 16px 16px 0px;
+    margin-left: 0em;
+    // height: 60px;
+    // width: 90%;
+    display: flex;
+    align-items: center;
+    padding: 0em 0.5000em;
+    cursor: pointer;
+  }
+  .dropDowntitle {
+    color: var(--Grey-Primary, #373737);
+    font-family: Gilroy;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 166.667% */
+  }
+  .dropDowntitle:hover {
+    color: #9475d5;
+  }
+  
+  .dropdown:hover .dropdownContent {
+    display: block;
+  }

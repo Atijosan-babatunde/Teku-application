@@ -7,12 +7,50 @@ import { useNavigate } from "react-router-dom"
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from 'react-icons/md'
 import React, { useState } from 'react'
 import ForgetPasswordModal from "./forgetPasswordModal"
+// import { useDispatch } from 'react-redux';
+// import { LoginUser } from "../../shared/redux/slices/landing.slices"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import { useAppSelector } from '../../shared/redux/reduxHooks';
 
 
 const LogIn = () => {
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const [passwordType, setPasswordType] = useState("password")
+    const [showModal, setShowModal] = useState(false)
+    // const [loading, setLoading] = useState(false);
+    // const dispatch = useDispatch();
+    // const loginUser = useAppSelector((state) => state.landing.getloginUser)
+    // const [data] = useState(loginUser)
+
+
+    // useEffect(() => {
+    //     loginUserData();
+    // }, [data]);
+
+
+    // const loginUserData = () => {
+    //     setLoading(true);
+    //     let body = {
+    //         "email": email,
+    //         "password": password,
+    //     }
+
+    //     console.log('body', body)
+    //     dispatch(LoginUser(body))
+    //         .unwrap()
+    //         .then(() => {
+    //             setLoading(false);
+    //         })
+    //         .catch((err) => {
+    //             toast.error(err, {
+    //                 position: toast.POSITION.TOP_RIGHT,
+    //             });
+    //             setLoading(false);
+    //         });
+    // };
+
 
     const validate = () => {
         return !email || !password
@@ -26,9 +64,7 @@ const LogIn = () => {
         setPasswordType("password")
     }
 
-    // MODAL STATE
-
-    const [showModal, setShowModal] = useState(false)
+    // OPEN MODAL STATE
 
     function handleModalShow() {
         setShowModal(!showModal)
@@ -62,11 +98,16 @@ const LogIn = () => {
                         </div>
                         <div className={styles.inputted}>
                             <h2 className={styles.rowname}>Email address</h2>
-                            <input className={styles.calculatorinput} type="email" placeholder="Enter your email address" onChange={e => setEmail(e.target.value)} />
+                            <input className={styles.calculatorinput} 
+                            type="email" 
+                            placeholder="Enter your email address" 
+                            onChange={e => setEmail(e.target.value)} 
+                            value={email}
+                            />
 
                             <h2 className={styles.rowname}>Password</h2>
-                            <div className="input-group">
-                                <input className={styles.calculatorinput}
+                            <div className={styles.group}>
+                                <input className={styles.calculatorinputgroup}
                                     type={passwordType}
                                     placeholder="Enter password"
                                     onChange={e => setPassword(e.target.value)}
@@ -86,12 +127,13 @@ const LogIn = () => {
                                     className={styles.btnrequest}
                                     disabled={validate()}
                                     style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
+                                    // onClick={loginUserData}
                                 >
                                     Sign In
                                 </button>
                             </div>
                         </div>
-                        {showModal && <ForgetPasswordModal {...{handleModalShow}}/>}
+                        {showModal && <ForgetPasswordModal {...{ handleModalShow }} />}
                         <p className={styles.donthave}>
                             Don’t have an account? <span><Link to="/signup">Register here</Link></span>
                         </p>
@@ -101,6 +143,7 @@ const LogIn = () => {
                     </p>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

@@ -1,6 +1,16 @@
+import { useState } from 'react';
 import styles from '../currency-rate/css/currencyRate.module.scss'
 import Currencysectiontable from './currencysectiontable';
+import TransferModal from './TransferMoneyModal/transferModal';
+
 const CurrencyRate = () => {
+     // MODAL STATE
+
+     const [showModal, setShowModal] = useState(false)
+
+     function handleModalShowTransfer() {
+         setShowModal(!showModal)
+     }
     return (
         <div>
             <div className={styles.parent}>
@@ -12,10 +22,12 @@ const CurrencyRate = () => {
                     <div className={styles.requestbut}>
                         <button
                             className={styles.btnrequest}
+                            onClick={handleModalShowTransfer}
                         >
                             Transfer money
                         </button>
                     </div>
+                    {showModal && <TransferModal {...{handleModalShowTransfer}}/>}
                 </div>
 
                 <div className={styles.herosection}>

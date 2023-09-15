@@ -222,3 +222,21 @@
         margin-top: 1em;
     }
 }
+
+@media screen and (max-width:960px) {
+    .discone {
+        display: none;
+    }
+    .disctwo {
+        width: 100%;
+        padding: 7em 0em;
+    }
+    .decidebutton {
+        width:100%;
+    }
+    .headcontent {
+        justify-content: center;
+        text-align: center;
+        line-height: 40px;
+    }
+}

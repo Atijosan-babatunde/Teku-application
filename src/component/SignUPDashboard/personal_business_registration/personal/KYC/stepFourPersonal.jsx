@@ -3,25 +3,36 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap
 import { MdArrowDropDown } from "react-icons/md";
 import proof from '../../../../../assets/png/proof.png'
 import documentKYCIcon from '../../../../../assets/svg/documentKYC.svg'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { BsArrowLeft } from 'react-icons/bs'
 
 
 
-const StepFourPersonal = ({setStep}) => {
-    const [documentUrl, setdocumentUrl] = useState("")
+const StepFourPersonal = ({ setStep }) => {
     const [dropDownValue, setDropDownValue] = useState('Select')
     const [menu, setMenu] = useState(false)
     const [bvn, setBvn] = useState('')
+    const [filesName, setFilesName] = useState("");
+    const [formData, setFormData] = useState({});
 
     const validate = () => {
-        return !bvn || dropDownValue === "Select" || !documentUrl
+        return !bvn || dropDownValue === "Select" || !filesName
     }
 
     const changeValue = async (e) => {
-        setDropDownValue(e.document)
+        setDropDownValue(e.documentdoc)
     }
 
+
+    const handleChange = async (event, name) => {
+        const fileUploaded = event.target.files[0];
+        setFilesName(fileUploaded.name);
+        getBase64(fileUploaded, async (result) => {
+            setFormData((curr) => {
+                return { ...curr, [name]: result };
+            });
+        });
+    };
 
     const getBase64 = (file, cb) => {
         let reader = new FileReader();
@@ -34,22 +45,17 @@ const StepFourPersonal = ({setStep}) => {
         };
     };
 
-    const handleChange = async (event) => {
-        const fileUploaded = event.target.files[0];
 
-        getBase64(fileUploaded, async (result) => {
-            setdocumentUrl(result);
-        });
-    };
+    const document = useRef(null);
 
     const handleClick = () => {
         document.current.click();
     };
 
-    const [document] = useState([
-        { id: 1, document: 'Ikeja' },
-        { id: 2, document: 'Epe' },
-        { id: 3, document: 'Ojota' },
+    const [documentdoc] = useState([
+        { id: 1, documentdoc: 'Ikeja' },
+        { id: 2, documentdoc: 'Epe' },
+        { id: 3, documentdoc: 'Ojota' },
     ])
 
     const [instruction] = useState([
@@ -70,7 +76,7 @@ const StepFourPersonal = ({setStep}) => {
 
     return (
         <div className={styles.parent}>
-            <h1 className={styles.stepnumber}><BsArrowLeft onClick={goToStepThree} className={styles.arrow}/>Step 4</h1>
+            <h1 className={styles.stepnumber}><BsArrowLeft onClick={goToStepThree} className={styles.arrow} />Step 4</h1>
             <div className={styles.disctwocontent}>
                 <div className={styles.writeup}>
                     <h2 className={styles.headtwo}>Proof of address</h2>
@@ -97,8 +103,8 @@ const StepFourPersonal = ({setStep}) => {
                     </div>
                 </DropdownToggle>
                 <DropdownMenu className={styles.dropBox}>
-                    {document.map((document, index) =>
-                        <DropdownItem className={styles.value} key={index} onClick={() => changeValue(document)}>{document.document} </DropdownItem>
+                    {documentdoc.map((documentdoc, index) =>
+                        <DropdownItem className={styles.value} key={index} onClick={() => changeValue(documentdoc)}>{documentdoc.documentdoc} </DropdownItem>
                     )}
                 </DropdownMenu>
             </Dropdown>
@@ -112,18 +118,13 @@ const StepFourPersonal = ({setStep}) => {
                         onChange={(e) => handleChange(e)}
                         style={{ display: "none" }}
                     />
-
-                    {documentUrl ? (
-                        <img src={documentUrl} alt=""  className={styles.insideimg}/>
-                    ) : (
-                        <>
-                            <img src={documentKYCIcon} alt="" />
-                            <p onClick={handleClick}>
-                                Tap to upload document <br />
-                                <span> Maximum file size: 5mb</span>
-                            </p>
-                        </>
-                    )}
+                    <img src={documentKYCIcon} alt="" />
+                    {filesName ? (<p onClick={handleClick}>
+                        {filesName}
+                    </p>) : (<p onClick={handleClick}>
+                        Tap to upload document <br />
+                        <span> Maximum file size: 5mb</span>
+                    </p>)}
                 </div>
                 <div className={styles.instruction}>
                     {instruction.map((instruction, index) =>
@@ -148,7 +149,7 @@ const StepFourPersonal = ({setStep}) => {
                 </button>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default StepFourPersonal;

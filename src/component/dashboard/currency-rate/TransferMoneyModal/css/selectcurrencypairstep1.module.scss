@@ -1,0 +1,120 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+.content {
+    width: 60%;
+}
+
+.header{
+    color: var(--grey-primary, #373737);
+    font-family: Gilroy;
+    font-size: 20px !important;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.descone {
+    // width:45%;
+    border-radius: 8px;
+    // background: var(--white-grey, #F9F9F9);
+    align-items: center;
+    padding:2em;
+
+    .mid{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        margin:auto;
+        padding:1.5000em;
+    }
+}
+
+.rowname {
+    color: var(--grey-text, #999);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.035px;
+    margin-top:1em;
+}
+.dropDownrow{
+    display: flex;
+    align-items: center;
+}
+.dropdownToggle{
+    display:flex;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    justify-content:space-between;
+    padding-left:10px;
+    padding-right:0px;
+    height: 50px;
+    align-items:center;
+    width: 100%;
+    margin-top: 1em;
+}
+.dropBox{
+    margin-top:1em;
+    color:#FCFCFD;
+    width:100%;
+    overflow:auto;
+}
+
+.dropDownValue {
+    color:#000;
+    text-decoration: none !important;
+}
+
+a {
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
+.calculatorinput {
+    width : 100%;
+    height: 50px;
+    margin-top: 1em;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    padding:0.7000em;
+}
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top:1.5em;
+}
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width: 100%;
+      background: #011B6D;
+      border-radius: 10px;
+  }
+
+  .flagstyle{
+    width: 20px;
+    height:20px;
+    padding-right:4px;
+ }
+.flagcontent{
+    display: flex;
+    align-items: center;
+}

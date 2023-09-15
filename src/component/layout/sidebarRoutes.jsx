@@ -9,6 +9,10 @@ import { useEffect } from "react";
 import ProtectedRoutes from "./protectedRoutes";
 import Dashboard from "../dashboard/dashboard/dashboard";
 import CurrencyRate from "../dashboard/currency-rate/currency-rate";
+import PaymentCart from "../dashboard/payment-cart/payment-card";
+import Notification from "../dashboard/notification/notification";
+import Recipients from "../dashboard/recipients/recipients";
+import Support from "../dashboard/support/support";
 
 
   
@@ -23,7 +27,11 @@ import CurrencyRate from "../dashboard/currency-rate/currency-rate";
           <Route> 
             <Route  path='/dashboard' element={<Dashboard/>}/>  
             <Route  path='/currency-rate' element={<CurrencyRate/>}/> 
-            <Route  path='/*' element={<Dashboard/>}/>     
+            <Route  path='/payment-cart' element={<PaymentCart />}/> 
+            <Route  path='/notification' element={<Notification />}/>
+            <Route  path='/recipient' element={<Recipients />}/>
+            <Route  path='/support' element={<Support />}/>
+            <Route  path='/*' element={<Dashboard/>}/>    
           </Route> 
           </Routes>  
         </SideMenu>

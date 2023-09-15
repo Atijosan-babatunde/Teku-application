@@ -22,7 +22,7 @@ const CurrencyTodayRate = () => {
 
     const [showModal, setShowModal] = useState(false)
 
-    function handleModalShow() {
+    function handleModalShowRequest() {
         setShowModal(!showModal)
     }
 
@@ -83,9 +83,9 @@ const CurrencyTodayRate = () => {
                                             <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
                                         </td>
                                         <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.btn} onClick={handleModalShow}>Request <BsFillSendFill /></button>
+                                            <button className={styles.btn} onClick={handleModalShowRequest}>Request <BsFillSendFill /></button>
                                         </td>
-                                        {showModal && <RequestModal {...{handleModalShow}}/>}
+                                        {showModal && <RequestModal {...{handleModalShowRequest}}/>}
                                     </tr>
                                 )}
 

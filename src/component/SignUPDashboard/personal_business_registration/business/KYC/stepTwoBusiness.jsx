@@ -5,6 +5,7 @@ import steponeimg from '../../../../../assets/png/steponeimg.png'
 import { useState } from 'react'
 import documentKYCIcon from '../../../../../assets/svg/documentKYC.svg'
 import { BsArrowLeft } from 'react-icons/bs'
+import { useRef } from 'react';
 
 const StepTwoBusiness = ({ setStep, selectId }) => {
     const [bvnNumber, setBvnNumber] = useState('')
@@ -17,31 +18,58 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
     const [menu, setMenu] = useState(false)
     const [menuTwo, setMenuTwo] = useState(false)
     const [menuThree, setMenuThree] = useState(false)
-    const [documentUrl, setdocumentUrl] = useState("")
-    const [documentUrlTwo, setdocumentUrlTwo] = useState("")
-    const [documentUrlThree, setdocumentUrlThree] = useState("")
+    const [filesName, setFilesName] = useState("");
+    const [filesNameTwo, setFilesNameTwo] = useState("");
+    const [filesNameThree, setFilesNameThree] = useState("");
+    const [formData, setFormData] = useState({});
 
-    const [document] = useState([
-        { id: 1, document: 'International passport' },
-        { id: 2, document: 'National ID' },
-        { id: 3, document: 'Government ID' },
+    const [documentdoc] = useState([
+        { id: 1, documentdoc: 'International passport' },
+        { id: 2, documentdoc: 'National ID' },
+        { id: 3, documentdoc: 'Government ID' },
+    ])
+
+    const [documenttwo] = useState([
+        { id: 1, documenttwo: 'International passport' },
+        { id: 2, documenttwo: 'National ID' },
+        { id: 3, documenttwo: 'Government ID' },
+    ])
+
+    const [documentthree] = useState([
+        { id: 1, documentthree: 'International passport' },
+        { id: 2, documentthree: 'National ID' },
+        { id: 3, documentthree: 'Government ID' },
     ])
 
     const chooseIdentificationDoc = async (e) => {
-        setDropDownValue(e.document)
+        setDropDownValue(e.documentdoc)
     }
 
     const chooseIdentificationDocTwo = async (e) => {
-        setDropDownValueTwo(e.document)
+        setDropDownValueTwo(e.documenttwo)
     }
 
     const chooseIdentificationDocThree = async (e) => {
-        setDropDownValueThree(e.document)
+        setDropDownValueThree(e.documentthree)
     }
 
     const validate = () => {
-        return !bvnNumber || !directorName || !directorNameTwo || !directorNameThree || dropDownValue === "Select" || dropDownValueTwo === "Select" || dropDownValueThree === "Select"
+        return !bvnNumber 
     }
+     
+    // || !directorName || !directorNameTwo || !directorNameThree || dropDownValue === "Select" || dropDownValueTwo === "Select" || dropDownValueThree === "Select"
+
+
+    // UPLOAD DOCUMENT ONE
+    const handleChange = async (event, name) => {
+        const fileUploaded = event.target.files[0];
+        setFilesName(fileUploaded.name);
+        getBase64(fileUploaded, async (result) => {
+            setFormData((curr) => {
+                return { ...curr, [name]: result };
+            });
+        });
+    };
 
     const getBase64 = (file, cb) => {
         let reader = new FileReader();
@@ -54,40 +82,48 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
         };
     };
 
-    const handleChange = async (event) => {
-        const fileUploaded = event.target.files[0];
 
+    const document = useRef(null);
+
+
+    //UPLOAD DOCUMENT TWO 
+    const handleChangeTwo = async (event, name) => {
+        const fileUploaded = event.target.files[0];
+        setFilesNameTwo(fileUploaded.name);
         getBase64(fileUploaded, async (result) => {
-            setdocumentUrl(result);
+            setFormData((curr) => {
+                return { ...curr, [name]: result };
+            });
         });
     };
 
-    const handleChangeTwo = async (event) => {
-        const fileUploaded = event.target.files[0];
+    const documentsecond = useRef(null);
 
+    //UPLOAD DOCUMENT THREE 
+    const handleChangeThree = async (event, name) => {
+        const fileUploaded = event.target.files[0];
+        setFilesNameThree(fileUploaded.name);
         getBase64(fileUploaded, async (result) => {
-            setdocumentUrlTwo(result);
+            setFormData((curr) => {
+                return { ...curr, [name]: result };
+            });
         });
     };
 
-    const handleChangeThree = async (event) => {
-        const fileUploaded = event.target.files[0];
+    const documentthird = useRef(null);
+    
 
-        getBase64(fileUploaded, async (result) => {
-            setdocumentUrlThree(result);
-        });
-    };
-
+    //HANDLE FUNCTIONS 
     const handleClick = () => {
         document.current.click();
     };
 
     const handleClickTwo = () => {
-        document.current.click();
+        documentsecond.current.click();
     };
 
     const handleClickThree = () => {
-        document.current.click();
+        documentthird.current.click();
     };
 
     const [instruction] = useState([
@@ -143,8 +179,8 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
                     </div>
                 </DropdownToggle>
                 <DropdownMenu className={styles.dropBox}>
-                    {document.map((document, index) =>
-                        <DropdownItem className={styles.value} key={index} onClick={() => chooseIdentificationDoc(document)}>{document.document} </DropdownItem>
+                    {documentdoc.map((documentdoc, index) =>
+                        <DropdownItem className={styles.value} key={index} onClick={() => chooseIdentificationDoc(documentdoc)}>{documentdoc.documentdoc} </DropdownItem>
                     )}
                 </DropdownMenu>
             </Dropdown>
@@ -159,18 +195,13 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
                         onChange={(e) => handleChange(e)}
                         style={{ display: "none" }}
                     />
-
-                    {documentUrl ? (
-                        <img src={documentUrl} alt="" className={styles.insideimg} />
-                    ) : (
-                        <>
-                            <img src={documentKYCIcon} alt="" />
-                            <p onClick={handleClick}>
-                                Tap to upload document <br />
-                                <span> Maximum file size: 5mb</span>
-                            </p>
-                        </>
-                    )}
+                    <img src={documentKYCIcon} alt="" />
+                    {filesName ? (<p onClick={handleClick}>
+                        {filesName}
+                    </p>) : (<p onClick={handleClick}>
+                        Tap to upload document <br />
+                        <span> Maximum file size: 5mb</span>
+                    </p>)}
                 </div>
                 <div className={styles.instruction}>
                     {instruction.map((instruction, index) =>
@@ -181,7 +212,6 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
                         </div>
                     )}
                 </div>
-
             </div>
 
 
@@ -204,8 +234,8 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
                             </div>
                         </DropdownToggle>
                         <DropdownMenu className={styles.dropBox}>
-                            {document.map((document, index) =>
-                                <DropdownItem className={styles.value} key={index} onClick={() => chooseIdentificationDocTwo(document)}>{document.document} </DropdownItem>
+                            {documenttwo.map((documenttwo, index) =>
+                                <DropdownItem className={styles.value} key={index} onClick={() => chooseIdentificationDocTwo(documenttwo)}>{documenttwo.documenttwo} </DropdownItem>
                             )}
                         </DropdownMenu>
                     </Dropdown>
@@ -214,22 +244,17 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
                             <input
                                 type="file"
                                 accept=".png,.jpeg,.jpg,.doc,.docx,.pdf"
-                                ref={document}
+                                ref={documentsecond}
                                 onChange={(e) => handleChangeTwo(e)}
                                 style={{ display: "none" }}
                             />
-
-                            {documentUrlTwo ? (
-                                <img src={documentUrlTwo} alt="" className={styles.insideimg} />
-                            ) : (
-                                <>
-                                    <img src={documentKYCIcon} alt="" />
-                                    <p onClick={handleClickTwo}>
-                                        Tap to upload document <br />
-                                        <span> Maximum file size: 5mb</span>
-                                    </p>
-                                </>
-                            )}
+                            <img src={documentKYCIcon} alt="" />
+                            {filesNameTwo ? (<p onClick={handleClickTwo}>
+                                {filesNameTwo}
+                            </p>) : (<p onClick={handleClickTwo}>
+                                Tap to upload document <br />
+                                <span> Maximum file size: 5mb</span>
+                            </p>)}
                         </div>
                         <div className={styles.instruction}>
                             {instruction.map((instruction, index) =>
@@ -261,8 +286,8 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
                             </div>
                         </DropdownToggle>
                         <DropdownMenu className={styles.dropBox}>
-                            {document.map((document, index) =>
-                                <DropdownItem className={styles.value} key={index} onClick={() => chooseIdentificationDocThree(document)}>{document.document} </DropdownItem>
+                            {documentthree.map((documentthree, index) =>
+                                <DropdownItem className={styles.value} key={index} onClick={() => chooseIdentificationDocThree(documentthree)}>{documentthree.documentthree} </DropdownItem>
                             )}
                         </DropdownMenu>
                     </Dropdown>
@@ -271,22 +296,17 @@ const StepTwoBusiness = ({ setStep, selectId }) => {
                             <input
                                 type="file"
                                 accept=".png,.jpeg,.jpg,.doc,.docx,.pdf"
-                                ref={document}
+                                ref={documentthird}
                                 onChange={(e) => handleChangeThree(e)}
                                 style={{ display: "none" }}
                             />
-
-                            {documentUrlThree ? (
-                                <img src={documentUrlThree} alt="" className={styles.insideimg} />
-                            ) : (
-                                <>
-                                    <img src={documentKYCIcon} alt="" />
-                                    <p onClick={handleClickThree}>
-                                        Tap to upload document <br />
-                                        <span> Maximum file size: 5mb</span>
-                                    </p>
-                                </>
-                            )}
+                            <img src={documentKYCIcon} alt="" />
+                            {filesNameThree ? (<p onClick={handleClickThree}>
+                                {filesNameThree}
+                            </p>) : (<p onClick={handleClickThree}>
+                                Tap to upload document <br />
+                                <span> Maximum file size: 5mb</span>
+                            </p>)}
                         </div>
                         <div className={styles.instruction}>
                             {instruction.map((instruction, index) =>

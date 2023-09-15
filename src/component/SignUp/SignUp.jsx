@@ -4,6 +4,7 @@
  *
  */
 import styles from '../SignUp/signup.module.scss'
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 // import woman from './assets/lady_laptop.png';
 
@@ -20,7 +21,9 @@ const SignUp = () => {
           <br /> Join millions of users
         </h1>
         <p>We will be there for you 24/7 to help you with your transactions</p>
+        <Link to="/signup">
           <button>Create an account</button>
+        </Link>
       </div>
     </div>
   );

@@ -113,8 +113,8 @@ const PersonalRegistration = () => {
                                     <input className={styles.calculatorinput} type="email" placeholder="Enter your email address" onChange={e => setEmail(e.target.value)} />
 
                                     <h2 className={styles.rowname}>Password</h2>
-                                    <div className="input-group">
-                                        <input className={styles.calculatorinput}
+                                    <div className={styles.group}>
+                                        <input className={styles.calculatorinputgroup}
                                             type={passwordType}
                                             placeholder="Enter password"
                                             onChange={handleChange2}
@@ -151,8 +151,8 @@ const PersonalRegistration = () => {
                                     />
 
                                     <h2 className={styles.rowname}>Confirm password</h2>
-                                    <div className="input-group">
-                                        <input className={styles.calculatorinput}
+                                    <div className={styles.group}>
+                                        <input className={styles.calculatorinputgroup}
                                             type={confirmPasswordType}
                                             placeholder="Enter password"
                                             value={confirmPassword}

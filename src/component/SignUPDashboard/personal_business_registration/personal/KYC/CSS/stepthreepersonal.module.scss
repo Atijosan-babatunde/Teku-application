@@ -100,7 +100,9 @@
     font-size: 12px !important;
     padding-top: 2px;
 }
-
+.holder {
+    width: 55% !important;
+}
 
 .phone-number-input-wrap {
     height: 50px;
@@ -210,5 +212,27 @@
         font-style: normal;
         font-weight: 700;
         line-height: 22px;
+    }
+}
+
+
+@media screen and (max-width:960px) {
+    .holder {
+        width: 100% !important;
+    }
+    .btnrequest {
+        width: 100%;
+    }
+    .disctwocontent {
+        img{
+            display: none;
+        }
+    }
+    .writeup{
+        width: 100%;
+    }
+    .inputotp {
+        width: 35px;
+        height: 40px;
     }
 }

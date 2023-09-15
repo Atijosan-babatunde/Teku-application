@@ -111,6 +111,10 @@
     background: var(--white-full, #FFF);
     padding:0.5000em;
 }
+
+.calculatorinputgroup {
+    border: none ;
+}
 .forget {
     color: var(--blue-primary, #011B6D);
     font-family: Gilroy;
@@ -168,15 +172,32 @@
     }
 }
 
-.input-group {
-    position: relative;
-    border-radius: 16px;
-}
-
 .visibility {
-    position: absolute;
-    left: 22em;
-    top: 16px;
     border: none;
     background-color: transparent;
+    padding-right:0.8000em !important;
+}
+
+.group {
+    height: 50px !important;
+    width: 100% !important;
+    margin-top: 0.4000em !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--grey-50, #CCC) !important;
+    background: var(--white-full, #FFF) !important;
+    padding:0.5000em !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media screen and (max-width:960px) {
+    .discone {
+        display: none;
+    }
+    .disctwo {
+        width: 100%;
+        padding:6em 0em;
+    }
+
 }
