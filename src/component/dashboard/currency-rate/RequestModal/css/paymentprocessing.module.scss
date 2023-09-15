@@ -1,0 +1,111 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+.parent {
+    height:100vh;
+    width:100vw;
+    background-color: rgba(6, 6, 6, 0.7);
+    display:grid;
+    place-items: center;
+    overflow-y: auto;
+    z-index: 60;
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+.content{
+    width:60%;
+    /* height:90%; */
+    background-color: white;
+    border-radius: 16px;
+    position: relative;
+    padding:35px;
+    padding-top:2em;
+}
+.contentholder {
+    width:80%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 5em;
+    margin-bottom: 2em;
+
+    img{
+        width:100px;
+        justify-content: center;
+        margin: auto;
+        align-items: center;
+        display: flex;
+    }
+    h1{
+        color: var(--grey-primary, #373737);
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 40px; 
+    }
+    span{
+        color: var(--grey-primary, #373737);
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+        letter-spacing: 0.035px;
+    }
+}
+
+.closemodal {
+    position: absolute;
+    top: 1rem;
+    right:4rem;
+    width:7px;
+    cursor: pointer;
+}
+
+.contentdata{
+    color: var(--grey-text, #999);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+}
+
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    margin-top:2em;
+    display: flex;
+}
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width:80%;
+      background: #011B6D;
+      border-radius: 10px;
+  }
+
+  @media screen and (max-width:960px) {
+    .content{
+        padding: 0;
+        width:80%;
+    }
+  }

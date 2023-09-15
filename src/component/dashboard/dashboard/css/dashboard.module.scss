@@ -228,6 +228,26 @@
     color: #00040f; 
     min-width: 200px;
 }
+
+.tabledatas {
+    font-family: Gilroy;
+    font-size: 0.9em;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 26px;
+    color: #00040f; 
+    // min-width: 100px;
+}
+
+.tabledataa {
+    font-family: Gilroy;
+    font-size: 0.9em;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 26px;
+    color: #00040f; 
+    min-width: 150px;
+}
 .tableparagraph {
     font-family: Gilroy;
     font-size: 12px;
@@ -299,5 +319,46 @@
         padding-right: 2em; 
         padding-top: 2em; 
         // line-height: 40px; 
+    }
+}
+
+.dropdowndetails {
+    display: flex;
+}
+
+.icon {
+    padding-right: 1em;
+}
+
+@media screen and (max-width:960px) {
+    .content{
+        img{
+            display: none;
+        }
+    }
+
+    .contentinside {
+        display: grid;
+    }
+    .boxone {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 0.8000em;
+    }
+    .kycflex{
+        display: grid;
+
+        p{
+            width: 100%;
+        }
+        h3{
+            text-align: left;
+        }
+    }
+    .kycreg {
+        margin: 1em;
+    }
+    .contenttable {
+        margin: 1em;
     }
 }

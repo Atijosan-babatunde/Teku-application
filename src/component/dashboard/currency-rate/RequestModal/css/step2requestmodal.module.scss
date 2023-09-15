@@ -1,0 +1,370 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+}
+
+.contenth1 {
+    color: var(--grey-primary, #373737);
+    font-family: Gilroy;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.contentp {
+    color: var(--grey-text, #999);
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    width: 50%;
+}
+
+.discone {
+    width:55%;
+}
+
+.rowname {
+    color: var(--grey-text, #999);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.035px;
+    margin-top:1.7000em;
+}
+
+.dropDownrow{
+    display: flex;
+    align-items: center;
+}
+.dropdownToggle{
+    display:flex;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    justify-content:space-between;
+    padding-left:10px;
+    padding-right:0px;
+    height: 50px;
+    align-items:center;
+    width: 100%;
+    margin-top: 1em;
+}
+.dropBox{
+    margin-top:1em;
+    color:#FCFCFD;
+    width:100%;
+    overflow:auto;
+}
+
+.dropDownValue {
+    color:#000;
+    text-decoration: none !important;
+}
+
+a {
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
+.driverdoc{
+    height: 170px;
+    border-radius: 8px;
+    border: 1px dashed var(--grey-50, #CCC);
+    background: var(--white-blue, #F0F3FF);
+    margin-bottom: 17px;
+    margin-top:1em;
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p{
+        margin-top: 16px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #666dff;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    span {
+        color: var(--grey-text, #999);
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+    }
+}
+
+
+.insideimg {
+height: 190px !important;
+width:100% !important;
+}
+
+.calculatorinputtextarea {
+    margin-top: 7px;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    padding: 0.5000em;
+    width: 100%;
+}
+
+.green {
+    color: var(--green, #7FE881);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 20px; 
+    letter-spacing: 0.035px;
+}
+
+.clickhere {
+    color: var(--blue-primary, #011B6D);
+    // text-align: center;
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+
+    input{
+        margin-right: 5px;
+        width: 14px;
+        height: 14px;
+        color: #cccccc;
+    }
+}
+
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    margin-top:1.5em;
+}
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width:100%;
+      background: #011B6D;
+      border-radius: 10px;
+  }
+
+  .firsttext {
+    color: var(--grey-primary, #373737);
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    cursor: pointer;
+  }
+
+  .arrow {
+    margin-right: 0.7000em;
+    cursor: pointer;
+  }
+
+  .disctwo {
+    width: 45%;
+    border-radius: 8px;
+    background: var(--white-grey, #F9F9F9);
+    padding: 1em 1em;
+    margin:1em;
+  }
+
+  .recipiantplus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5000em;
+
+    h1{
+        color: var(--blue-primary, #011B6D);
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22px; 
+    }
+}
+
+.search {
+    position: relative;
+    // width: 23%;
+    padding-top: 0.5000em;
+    padding-left: 80px;
+    padding: 0.1000em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background: var(--white-blue, #F0F3FF);
+
+    input {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 7px;
+      height: 40px;
+      width: 100%;
+      max-width: 783px;
+    //   padding: 7px;
+      align-items: center;
+      justify-content: center;
+    //   padding-left: 80px;
+      font-size: 24px;
+    //   color: #000;
+
+      :hover {
+        border: 2px solid 0f1f;
+      }
+
+      :hover {
+        border: 2px solid 0f1f;
+      }
+      
+    }
+    ::placeholder {
+      color: #696974;
+      font-family: Gilroy;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0.035px;
+      margin: 0.5000em;
+    }
+
+    span {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+    }
+}
+
+
+.recipiantdata {
+    margin-top: 2em;
+    // display: flex;
+}
+.paraone {
+    background-color: rgba(1, 27, 109, 0.10);
+    border-radius: 50px;
+    color: #011B6D;
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    padding:0.3000em 0.8000em;
+}
+
+.recipiantflex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.headone {
+    color: var(--blue-primary, #011B6D);
+font-family: Gilroy;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.035px;
+}
+
+.paratwo {
+    border-radius: 100px;
+    background: var(--blue-primary, #011B6D);
+    color: var(--white-full, #FFF);
+    font-family: Gilroy;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+    padding:0.4000em 1.2000em;
+}
+
+.recipiantotherdata {
+    color: var(--grey-primary, #373737);
+font-family: Gilroy;
+font-size: 13px;
+font-style: normal;
+font-weight: 500;
+}
+
+.recipiantdataflex {
+    display: flex;
+    align-items: center !important;
+    justify-content: space-between;
+
+    h2{
+        color: var(--grey-primary, #373737);
+        font-family: Gilroy;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 22px; 
+    }
+
+    p{
+        border-radius: 100px;
+        background: var(--white-full, #FFF);
+        color: var(--blue-primary, #011B6D);
+        font-family: Gilroy;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+        padding:0.4000em 1.9000em;
+    }
+}
+
+
+@media screen and (max-width:960px) {
+    .parent{
+        margin-top: 2em;
+    }
+
+    .contentp{
+        width: 100%;
+    }
+    .discone {
+        width:100%;
+    }
+    .content{
+        display: grid;
+    }
+    .disctwo {
+        width: 100%;
+        padding: 1em 1em;
+        margin:0em;
+        margin-top: 2em;
+      }
+}

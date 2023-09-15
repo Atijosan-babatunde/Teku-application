@@ -193,4 +193,37 @@
       width:55%;
       background: #011B6D;
       border-radius: 10px;
-  }
+}
+
+@media screen and (max-width:960px) {
+    .disctwocontent {
+        img{
+            display: none;
+        }
+    }
+    .paratwo {
+        width:100%;
+    }
+    .calculatorinput {
+        width: 100%;
+    }
+    .dropdownToggle{
+        width: 100%;
+    }
+    .split{
+        display: grid;
+    }
+    .instruction {
+        width: 100%;
+        margin:0;
+    }
+    .driverdoc {
+        width: 100%;
+    }
+    .btnrequest{
+        width: 100%;
+    }
+    .dropBox{
+        width: 100%;
+    }
+}

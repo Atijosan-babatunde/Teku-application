@@ -13,9 +13,9 @@ const StepOneBusiness = ({setStep, setSelectId}) => {
     const [menuTwo, setMenuTwo] = useState(false)
     
 
-    const [document] = useState([
-        { id: 1, document: 'partnership' },
-        { id: 2, document: 'Sole proprietor' },
+    const [documentuser] = useState([
+        { id: 1, documentuser: 'partnership' },
+        { id: 2, documentuser: 'Sole proprietor' },
     ])
 
     const [Localgov] = useState([
@@ -24,14 +24,13 @@ const StepOneBusiness = ({setStep, setSelectId}) => {
     ])
 
     const changeBusinessType = async (e) => {
-        setDropDownValue(e.document);
+        setDropDownValue(e.documentuser);
         if(e.id === 1){
             setSelectId(true)
         } 
         else{
             setSelectId(false)
         }
-        console.log(e.document)
     }
     
 
@@ -77,8 +76,8 @@ const StepOneBusiness = ({setStep, setSelectId}) => {
                     </div>
                 </DropdownToggle>
                 <DropdownMenu className={styles.dropBox}>
-                    {document.map((document, index) =>
-                        <DropdownItem className={styles.value} key={index} onClick={() => changeBusinessType(document)}>{document.document} </DropdownItem>
+                    {documentuser.map((documentuser, index) =>
+                        <DropdownItem className={styles.value} key={index} onClick={() => changeBusinessType(documentuser)}>{documentuser.documentuser} </DropdownItem>
                     )}
                 </DropdownMenu>
             </Dropdown>

@@ -1,0 +1,145 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../../shared/utils/fonts/Gilroy-Regular.ttf);
+  }
+
+.parent {
+    justify-content: center;
+    align-items: center;
+    position:sticky;
+    margin-top: -20em;
+    z-index: 30;
+}
+
+.content {
+    width: 95%;
+    margin:auto;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 20px 80px 0px rgba(214, 33, 33, 0.1);
+    
+}
+
+.buttonrow {
+  border-radius: 16px 16px 0px 0px;
+  background: var(--white-blue, #F0F3FF);
+    display : flex;
+    justify-content: space-between;
+    overflow: auto;
+    // height:75px;
+}
+.textholder {
+    display: flex;
+}
+.buttonhead {
+    // width: 27%;
+    height:85px;
+    
+    color:  #999;
+    text-align: center;
+    align-items: center;
+    display : flex;
+    font-family: "Gilroy";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    min-width: 170px;
+    cursor:pointer;
+    padding-left:2em;
+}
+
+
+//search Box
+.search {
+    position: relative;
+    width: 100%;
+    padding-top: 0.5000em;
+    padding-left: 80px;
+    padding: 0.5000em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background: var(--white-blue, #F0F3FF);
+    margin-top: 1em;
+
+    input {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 7px;
+      height: 40px;
+      width: 80%;
+      max-width: 783px;
+      padding: 7px;
+      align-items: center;
+      justify-content: center;
+    //   padding-left: 80px;
+      font-size: 24px;
+    //   color: #000;
+
+      :hover {
+        border: 2px solid 0f1f;
+      }
+
+      :hover {
+        border: 2px solid 0f1f;
+      }
+      
+    }
+    ::placeholder {
+      color: #696974;
+      font-family: Gilroy;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0.035px;
+      margin: 0.5000em;
+    }
+
+    span {
+      position: absolute;
+      top: 50%;
+      right: 50px;
+      transform: translateY(-50%);
+    }
+  }
+
+// RESPONSIVENESS PART 
+@media screen and (max-width:1250px) {
+    .content{
+      width: 80%;
+    } 
+  }
+@media screen and (max-width:1100px) {
+      .content{
+        width: 95%;
+      }
+  }
+// @media screen and (max-width: 990px) {
+//     .parent {
+//         .content{
+//             width: 80%;
+//             border-radius: 16px;
+//             box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
+//         }
+//     }
+// }
+// @media screen and (max-width: 650px) {
+//     .parent {
+//         .content{
+//             width: 80%;
+//             border-radius: 16px;
+//             box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
+//         }
+//     }
+// }
+// @media screen and (max-width: 375px) {
+//     .parent {
+//         .content{
+//             width: 80%;
+//             border-radius: 16px;
+//             box-shadow: 0px 20px 80px 0px rgba(0, 0, 0, 0.10);
+//         }
+//     }
+// }

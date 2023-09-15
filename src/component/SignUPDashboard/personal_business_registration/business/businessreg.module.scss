@@ -242,15 +242,56 @@
         color: var(--blue-primary, #011B6D);
     }
 }
-
-.input-group {
-    position: relative;
+.calculatorinputgroup {
+    border: none ;
 }
 
 .visibility {
-    position: absolute;
-    left: 23em;
-    top: 16px;
     border: none;
     background-color: transparent;
+    padding-right:0.8000em !important;
+}
+
+.group {
+    height: 50px !important;
+    width: 100% !important;
+    margin-top: 0.4000em !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--grey-50, #CCC) !important;
+    background: var(--white-full, #FFF) !important;
+    padding:0.5000em !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media screen and (max-width:960px) {
+    .discone {
+        display: none;
+    }
+    .disctwo {
+        width: 100%;
+        padding: 0em 0em;
+    }
+    .formholder {
+        display: grid;
+        width: 100%;
+    }
+    .formholderone {
+        width: 100%;
+        margin: 0;
+    }
+    .formholdertwo {
+        width:100%;
+        margin: 0;
+    }
+    .continuebutton {
+        width: 100%;
+    }
+    .clickhere {
+        margin-top: 1em;
+    }
+    .businessName {
+        margin: 0;
+    }
 }

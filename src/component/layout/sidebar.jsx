@@ -104,7 +104,7 @@ const SideMenu = ({children}) => {
                    {location === '/payment-cart' ? 
                     <img src={ActiveTransactions} className={styles.icon} alt="horse"/> : <img src={InActivePayment} className={styles.icon} alt="horse"/>
                    }
-                   <div style={{color:location==='/payment-cart' ? '#011B6D' : '#888888'}} className={styles.pageName}>Payment Card</div>
+                   <div style={{color:location==='/payment-cart' ? '#011B6D' : '#888888'}} className={styles.pageName}>Payment Cart</div>
                 </div>
               </NavLink>
 

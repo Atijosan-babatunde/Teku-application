@@ -65,10 +65,10 @@ const CurrencyCustomRequest = () => {
             });
     };
 
-    const clear = () => {
-        setAmount("")
-        setDropDownValue(dropDownValue)
-    }
+    // const clear = () => {
+    //     setAmount("")
+    //     setDropDownValue(dropDownValue)
+    // }
 
     const validate = () => {
         return !amount

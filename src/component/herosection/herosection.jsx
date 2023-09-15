@@ -41,7 +41,7 @@ export default function HeroSection() {
             into your local currency offering a very competitive exchange rate.
           </div>
           <div className={styles.btnholder}>
-            <Link to="/" className={styles.herobtn}>
+            <Link to="/signup" className={styles.herobtn}>
               <PrimaryButton buttonText="Create an account"></PrimaryButton>
             </Link>
             <Link to="/" className={styles.herobtn}>

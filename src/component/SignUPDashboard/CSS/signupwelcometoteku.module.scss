@@ -120,3 +120,13 @@
     // padding-top: 1em;
     display: flex;
   }
+
+  @media screen and (max-width:960px) {
+    .parent{
+        padding: 6em 0em;
+    }
+    .content {
+        padding: 2em;
+        width:90%;
+    }
+}
