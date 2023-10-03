@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom"
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { useAppSelector } from '../../../shared/redux/reduxHooks';
+import international from "../../../assets/svg/international.svg"
 // import ReactLoading from "react-loading";
 
 
@@ -22,7 +23,7 @@ const TodayRate = () => {
 
     useEffect(() => {
         getCurrencyPair();
-    },[data]);
+    }, [data]);
 
 
     const getCurrencyPair = () => {
@@ -70,7 +71,7 @@ const TodayRate = () => {
                                         <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>
                                             <img src={prod.baseCurrency.icon} alt="" className={styles.flagstyle} />
                                             <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
-                                            <span className={styles.dash}>-</span> 
+                                            <span className={styles.dash}>-</span>
                                             <img src={prod.pairCurrency.icon} alt="" className={styles.flagstyle} />
                                             <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
                                         </td>
@@ -90,6 +91,17 @@ const TodayRate = () => {
                         </table>
                         <div className={styles.dimbutton} onClick={seeAllTodayRate}>
                             <button className={styles.seeallbut}>See all<MdKeyboardArrowRight /></button>
+                        </div>
+
+                        <div className={styles.inner}>
+                            {data.length < 1 && (
+                                <div>
+                                    <img src={international} alt="middleimage" />
+                                    <div className={styles.nocurrency}>
+                                        No rate today
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

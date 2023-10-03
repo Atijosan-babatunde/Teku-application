@@ -125,6 +125,27 @@
     margin-left: 1em;
 }
 
+.secondhalfp{
+    color: var(--Black, #00040F);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 157.143% */
+    letter-spacing: 0.035px;
+}
+
+.secondhalfpara{
+    color: var(--Black, #00040F);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 157.143% */
+    letter-spacing: 0.035px;
+    margin-top: 1.2em;
+}
+
 .middleimg{
     justify-content: center;
     margin-top: 0.7000em;
@@ -139,16 +160,17 @@
     background: var(--white-blue, #F0F3FF);
     padding-left: 1em;
     // margin-top: 1em;
-    
+}
 
-    img{
-        width: 20px;
-        margin-right: 7px;
-    }
+.flagimg{
+    width: 20px;
+    margin-right: 7px;
+}
 
-    p{
-        padding-top: 1em;
-    }
+.flagimgg{
+    width: 20px;
+    margin-right: 7px;
+    margin-top: 2px;
 }
 
 .requestbut {

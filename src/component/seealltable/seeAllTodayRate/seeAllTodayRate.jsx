@@ -6,6 +6,7 @@ import { GetCurrencyPair } from "../../../shared/redux/slices/landing.slices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from '../../../shared/redux/reduxHooks';
+import international from "../../../assets/svg/international.svg"
 
 const SeeAllTodayRate = () => {
     const [loading, setLoading] = useState(false);
@@ -52,26 +53,36 @@ const SeeAllTodayRate = () => {
                             <tbody>
                                 {data.map((prod, index) =>
                                     <tr style={{}} key={index}>
-                                    <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>
-                                        <img src={prod.baseCurrency.icon} alt="" className={styles.flagstyle} />
-                                        <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
-                                        <span className={styles.dash}>-</span> 
-                                        <img src={prod.pairCurrency.icon} alt="" className={styles.flagstyle} />
-                                        <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
-                                    </td>
-                                    <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.rate}</td>
-                                    <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>{prod.availableAmount}</td>
-                                    <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                        {prod.method}
-                                        <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                    </td>
-                                    <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
-                                        <button className={styles.btn}>Request <BsFillSendFill /></button>
-                                    </td>
-                                </tr>
+                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>
+                                            <img src={prod.baseCurrency.icon} alt="" className={styles.flagstyle} />
+                                            <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
+                                            <span className={styles.dash}>-</span>
+                                            <img src={prod.pairCurrency.icon} alt="" className={styles.flagstyle} />
+                                            <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
+                                        </td>
+                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.rate}</td>
+                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>{prod.availableAmount}</td>
+                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                            {prod.method}
+                                            <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
+                                        </td>
+                                        <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
+                                            <button className={styles.btn}>Request <BsFillSendFill /></button>
+                                        </td>
+                                    </tr>
                                 )}
                             </tbody>
                         </table>
+                        <div className={styles.inner}>
+                            {data.length < 1 && (
+                                <div>
+                                    <img src={international} alt="middleimage" />
+                                    <div className={styles.nocurrency}>
+                                        No rate today
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <ToastContainer />

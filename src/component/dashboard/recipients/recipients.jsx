@@ -17,8 +17,8 @@ const Recipients = () => {
         <div className={styles.parent}>
             <div className={styles.content}>
                 <div className={styles.contenthead}>
-                    <h1>Recipients</h1>
-                    <p>See all your saved recipient details.</p>
+                    <h1 className={styles.tophead}>Recipients</h1>
+                    <p className={styles.toppara}>See all your saved recipient details.</p>
                 </div>
                 <div className={styles.searchholder}>
                     <div className={styles.search}>

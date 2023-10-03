@@ -1,0 +1,182 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+.parent {
+    height:100vh;
+    width:100vw;
+    background-color: rgba(6, 6, 6, 0.7);
+    display:grid;
+    place-items: center;
+    overflow-y: auto;
+    z-index: 60;
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+.content{
+    width:40%;
+    /* height:90%; */
+    background-color: white;
+    border-radius: 16px;
+    position: relative;
+    // padding:35px;
+    margin-bottom:7em;
+    margin-top:3em;
+}
+.closemodal {
+    position: absolute;
+    top: 1rem;
+    right:4rem;
+    width:7px;
+    cursor: pointer;
+}
+
+.contentholder {
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px 15px 0px 0px;
+    background: rgba(251, 181, 0, 0.10);
+    padding: 1em 1em;
+    padding-top: 5em;
+    
+    img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 120px;
+    }
+}
+
+.hmodal{
+    color: var(--yellow, #FBB500);
+    font-family: Gilroy;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: center;
+}
+
+.pmodal{
+    text-align: center;
+    color: var(--Grey-text, #999);
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px; /* 162.5% */
+}
+
+.downcontent {
+    padding: 2em 2em;
+}
+
+.addrefund{
+    color: var(--Blue-Primary, #011B6D);
+    font-family: Gilroy;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px; /* 166.667% */
+    text-align: center;
+}
+
+.rowname {
+    color: var(--grey-text, #999);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.035px;
+    margin-top:1.7000em;
+}
+.calculatorinputtextarea {
+    margin-top: 7px;
+    border-radius: 8px;
+    border: 1px solid var(--grey-50, #CCC);
+    background: var(--white-full, #FFF);
+    padding: 0.5000em;
+    width: 100%;
+}
+
+.green {
+    color: var(--green, #7FE881);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 20px; 
+    letter-spacing: 0.035px;
+}
+
+.or{
+    color: var(--Grey-text, #999);
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.035px;
+    text-align: center;
+}
+
+.driverdoc{
+    height: 170px;
+    border-radius: 8px;
+    border: 1px dashed var(--grey-50, #CCC);
+    background: var(--white-blue, #F0F3FF);
+    margin-bottom: 17px;
+    margin-top:1em;
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p{
+        margin-top: 16px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #666dff;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    span {
+        color: var(--grey-text, #999);
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+    }
+}
+
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    margin-top:1.5em;
+}
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 44px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      width:100%;
+      background: #011B6D;
+      border-radius: 10px;
+}
