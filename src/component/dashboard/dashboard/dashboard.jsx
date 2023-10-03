@@ -61,7 +61,7 @@ const Dashboard = () => {
         { id: 4, imgs: <img src={download} className={styles.icon} alt="img"/>, text: 'Proof of payment' },
     ])
 
-    // MODAL STATE
+    // MODAL STATE 
 
     const [showModalPreview, setShowModalPreview] = useState(false)
     const [payModal, setPayModal] = useState(false)
@@ -80,12 +80,12 @@ const Dashboard = () => {
     }
 
 
-    // MODAL STATE 
+    // MODAL STATE MONEY TRANSFER
     function handleModalShowTransfer() {
         setShowModal(!showModal)
     }
 
-    // MODAL STATE 
+    // MODAL STATE FOR REQUEST
     function handleModalShowRequest() {
         setShowModalRequest(!showModalRequest)
     }

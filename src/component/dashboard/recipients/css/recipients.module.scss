@@ -19,31 +19,26 @@
     display: flex;
     justify-content: space-between;
 
-   
-
     img{
         padding-bottom:1.4000em;
     }
-    
+}
+.tophead{
+  color: var(--blue-primary, #011B6D);
+  font-family: Gilroy;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
 
-    h1{
-        color: var(--blue-primary, #011B6D);
-        font-family: Gilroy;
-        font-size: 32px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 40px;
-    }
-
-    p{
-        color: var(--grey-primary, #373737);
-        font-family: Gilroy;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 32px;
-        text-align: center;
-    }
+.toppara{
+  color: var(--grey-primary, #373737);
+  font-family: Gilroy;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
 }
 
 .herosection {

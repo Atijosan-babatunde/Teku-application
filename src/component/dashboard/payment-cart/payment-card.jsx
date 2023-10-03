@@ -24,8 +24,8 @@ const PaymentCart = () => {
         <div className={styles.parent}>
             <div className={styles.content}>
                 <div className={styles.contenthead}>
-                    <h1>Payment cart</h1>
-                    <p>You can view your saved incomplete payments.</p>
+                    <h1 className={styles.tophead}>Payment cart</h1>
+                    <p className={styles.toppara}>You can view your saved incomplete payments.</p>
                 </div>
                 <div className={styles.requestbut}>
 

@@ -16,8 +16,8 @@ const CurrencyRate = () => {
             <div className={styles.parent}>
                 <div className={styles.content}>
                     <div className={styles.contenthead}>
-                        <h1>Currency rates</h1>
-                        <p>Check out our available currencies across the world</p>
+                        <h1 className={styles.tophead}>Currency rates</h1>
+                        <p className={styles.toppara}>Check out our available currencies across the world</p>
                     </div>
                     <div className={styles.requestbut}>
                         <button

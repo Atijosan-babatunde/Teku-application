@@ -26,9 +26,9 @@ const PaymentSection = () => {
     ])
 
     const [subtitle] = useState([
-        { id: 1, imgs: <img src={eye} className={styles.icon} />, text: 'Preview' },
-        { id: 2, imgs: <img src={flyarrow} className={styles.icon} />, text: 'Pay now' },
-        { id: 3, imgs: <img src={deleteimg} className={styles.icon} />, text: 'Delete' },
+        { id: 1, imgs: <img src={eye} className={styles.icon} alt=''/>, text: 'Preview' },
+        { id: 2, imgs: <img src={flyarrow} className={styles.icon} alt='' />, text: 'Pay now' },
+        { id: 3, imgs: <img src={deleteimg} className={styles.icon} alt=''/>, text: 'Delete' },
     ])
 
     const [anchorEl, setAnchorEl] = useState(null);

@@ -24,13 +24,13 @@ const StepOneRequestModal = ({ setStep }) => {
                 <div className={styles.firstdiv}>
                     <div className={styles.flagholder}>
                         <div className={styles.flagcountry}>
-                            <img src={nigeria} alt="" />
-                            <p>NGN</p>
+                            <img src={nigeria} alt="" className={styles.flagimg} />
+                            <p className={styles.secondhalfp}>NGN</p>
                         </div>
                         <p className={styles.dash}>-</p>
                         <div className={styles.flagcountry}>
-                            <img src={usa} alt="" />
-                            <p>USA</p>
+                            <img src={usa} alt="" className={styles.flagimg}/>
+                            <p className={styles.secondhalfp}>USA</p>
                         </div>
                     </div>
                     <div className={styles.firstdivflex}>
@@ -71,14 +71,14 @@ const StepOneRequestModal = ({ setStep }) => {
 
                     <div className={styles.secondhalf}>
                         <div className={styles.flagcountryf} style={{ marginTop: "1.7000em" }}>
-                            <img src={nigeria} alt="" />
-                            <p>NGN</p>
+                            <img src={nigeria} alt="" className={styles.flagimgg}  />
+                            <p className={styles.secondhalfpara}>NGN</p>
                         </div>
 
                         <img src={switchimg} alt="" className={styles.middleimg} />
                         <div className={styles.flagcountryf} style={{ marginBottom: "1em" }}>
-                            <img src={nigeria} alt="" />
-                            <p>NGN</p>
+                            <img src={nigeria} alt="" className={styles.flagimgg}  />
+                            <p className={styles.secondhalfpara}>NGN</p>
                         </div>
                     </div>
                 </div>
