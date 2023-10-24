@@ -113,7 +113,7 @@ a {
 }
 
 .btnrequest {
-    gap: 10px;
+      gap: 10px;
       border: none;
       height: 44px;   
       font-family: 'Gilroy';
@@ -128,6 +128,11 @@ a {
       background: #011B6D;
       border-radius: 10px;
   }
+
+.btnrequest:hover{
+    background: #0e30a1;
+    color: #ffffff;
+}
  .flagstyle{
     width: 20px;
     height:20px;

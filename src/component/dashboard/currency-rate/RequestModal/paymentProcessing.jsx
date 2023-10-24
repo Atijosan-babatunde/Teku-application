@@ -11,7 +11,7 @@ const PaymentProccessing = ({ handleModalShow }) => {
 
     let navigate = useNavigate();
     const goToDashboard = () => {
-        navigate("/*");
+        navigate("/dashboard");
     };
 
     return (

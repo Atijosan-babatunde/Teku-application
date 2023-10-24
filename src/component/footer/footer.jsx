@@ -2,6 +2,8 @@ import styles from '../footer/footer.module.scss'
 import logo from "../../assets/svg/logo.svg"
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
       <div className={styles.parent}>
@@ -17,6 +19,14 @@ const Footer = () => {
               <div className={styles.footerdescfirst}>
                 Send money to other parts of the countries
               </div>
+              <div className={styles.mediaflex}>
+                <a href="goggle.com">Instagram</a>
+                <a href="goggle.com">Facebook</a>
+                <a href="goggle.com">LinkedIn</a>
+                <a href="goggle.com">Twitter</a>
+              </div>
+
+              <div className={styles.copyright}>© {currentYear} Teku. All rights reserved.</div>
             </div>
 
 

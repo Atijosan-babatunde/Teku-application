@@ -18,6 +18,7 @@
 
 .inner {
     //  padding:1em;
+    margin-bottom: 1em;
     img {
         align-items: center;
         justify-content: center;
@@ -102,6 +103,11 @@
     height: 49px;
     border-radius: 10px;
 }
+
+.seeallbut:hover{
+    box-shadow: 1px 1px 2px rgb(125, 125, 125), 0 0 20px rgb(246, 230, 230), 0 0 5px darkgray;
+}
+
 .btn {
     gap: 10px;
     border: none;

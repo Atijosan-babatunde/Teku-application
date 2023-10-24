@@ -112,18 +112,18 @@ const SeeAllCustomerRequest = () => {
     }
 
     const [amountThree] = useState([
-        { id: 1, amount: 'TUTION FEE' },
-        { id: 2, amount: 'MEDICAL' },
-        { id: 3, amount: 'FOOD BILLS' },
-        { id: 4, amount: 'TRAVELING' },
-        { id: 4, amount: 'HOUSE FEE' },
-        { id: 4, amount: 'TRANSPORT' },
+        { id: 1, amount: 'Tuition Fee' },
+        { id: 2, amount: 'Medical' },
+        { id: 3, amount: 'Food Bills' },
+        { id: 4, amount: 'Traveling' },
+        { id: 4, amount: 'House Fee' },
+        { id: 4, amount: 'Transport' },
     ])
 
     const [amountFour] = useState([
-        { id: 1, paymentType: 'CASH_PICKUP' },
-        { id: 2, paymentType: 'ONLINE_TRANSFER' },
-        { id: 3, paymentType: 'BANK_TRANSFER' },
+        { id: 1, paymentType: 'Cash Pickup' },
+        { id: 2, paymentType: 'Online Transfer' },
+        { id: 3, paymentType: 'Bank Transfer' },
     ])
 
     if (data) {

@@ -103,6 +103,32 @@
     justify-content: center;
     margin: 0em 0.5em;
   }
+
+  .mediaflex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2em;
+
+    a{
+      color: var(--Blue-Primary, #011B6D);
+      font-family: Gilroy;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 22px; /* 137.5% */
+    }
+  }
+
+  .copyright{
+    color: var(--Blue-Primary, #011B6D);
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px; /* 162.5% */
+    margin-top: 2em;
+  }
   // @media screen and (max-width:1250px) {
   //   .content{
   //     width: 80%;
@@ -134,7 +160,8 @@
       padding: 2em 3em;
     }
     .LowerfooterParent{
-      padding: 2em 3em;
+      padding: 1em 1em;
+      width: 100%;
     }
     .desc{
       padding: 0em 3em;

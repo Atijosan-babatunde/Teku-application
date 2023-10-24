@@ -14,12 +14,13 @@ const SignUpDashboard = () => {
 
     const selectSignupType = async (e) => {
         setSelectedSignup(e.id)
+        sessionStorage.setItem("accountType",e.direct)
     }
 
 
     const [signupType] = useState([
-        { id: 1, icon: <img src={personal} className={styles.payicon} alt="img" />, name: 'Personal use' },
-        { id: 2, icon: <img src={group} className={styles.payicon} alt="groupimg" />, name: 'Business use' },
+        { id: 1, icon: <img src={personal} className={styles.payicon} alt="img" />, name: 'Personal use', direct: 'PERSONAL' },
+        { id: 2, icon: <img src={group} className={styles.payicon} alt="groupimg" />, name: 'Business use', direct: 'BUSINESS'},
     ])
 
 

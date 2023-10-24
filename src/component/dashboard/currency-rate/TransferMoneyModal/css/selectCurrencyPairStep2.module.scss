@@ -17,6 +17,21 @@
     }
 }
 
+.firsttext {
+    color: var(--grey-primary, #373737);
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    cursor: pointer;
+  }
+
+  .arrow {
+    margin-right: 0.7000em;
+    cursor: pointer;
+  }
+
 .firstdiv {
     border-radius: 16px;
     background: var(--white-grey, #F9F9F9);

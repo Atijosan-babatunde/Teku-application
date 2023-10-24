@@ -47,7 +47,7 @@ const Header = () => {
 
                     <motion.div className={styles.btnDiv}
                         whileHover={{ scale: 1.1, textShadow: '0px 0px 8px(255,255,255)', boxShadow: '0px 0px 8px(255,255,255)' }}
-                        transition={{ delay: 0.2, type: 'spring', stiffness: 10, duration: 4 }}
+                        transition={{ delay: 0.2, type: 'spring', stiffness: 13, duration: 5 }}
                     >
                         
                         <Link to="/login">

@@ -11,6 +11,7 @@ import step3 from './assets/paper.png';
 import woman from './assets/woman.png';
 import Union from '../../assets/png/Union.png'
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion'
 
 const Journey = () => {
    return (
@@ -26,46 +27,61 @@ const Journey = () => {
                         </div>
                         <img src={Union} alt="arrow" />
                      </div>
-                     <div className={styles.cardone}>
-                        <div className={styles.holder}>
-                           <div className={styles.rounded}>
-                              <img src={step1} alt="firstcardobey" />
-                           </div>
-                           <div className={styles.contentinside}>
-                              <h1>Step 1</h1>
-                              <h2>Create an account</h2>
-                              <p>Register now to gain access to world-class foreign exchange
-                                 solutions. You only need your email address
-                              </p>
-                           </div>
-                        </div>
-                     </div>
-                     <div className={styles.cardonetwo}>
-                        <div className={styles.holder}>
-                           <div className={styles.round}>
-                              <img src={step2} alt="firstcard" />
-                           </div>
-                           <div className={styles.contentinside}>
-                              <h1>Step 2</h1>
-                              <h2>Enter recipient details</h2>
-                              <p>Add the receiver bank account number and payment information details
-                              </p>
+                     <motion.div whileHover={{ scale: 1.1, textShadow: '0px 0px 8px(255,255,255)', boxShadow: '0px 0px 8px(255,255,255)' }}
+                        transition={{ delay: 0.2, type: 'spring', stiffness: 13, duration: 5 }}
+                     >
+                        <div className={styles.cardone}>
+                           <div className={styles.holder}>
+                              <div className={styles.rounded}>
+                                 <img src={step1} alt="firstcardobey" />
+                              </div>
+                              <div className={styles.contentinside}>
+                                 <h1>Step 1</h1>
+                                 <h2>Create an account</h2>
+                                 <p>Register now to gain access to world-class foreign exchange
+                                    solutions. You only need your email address
+                                 </p>
+                              </div>
                            </div>
                         </div>
-                     </div>
-                     <div className={styles.cardonethree}>
-                        <div className={styles.holder}>
-                           <div className={styles.round}>
-                              <img src={step3} alt="firstcard" />
-                           </div>
-                           <div className={styles.contentinside}>
-                              <h1>Step 3</h1>
-                              <h2>Confirm transaction and send</h2>
-                              <p>Check the selected currencies and rates are correct, send your money.
-                              </p>
+                     </motion.div>
+
+                     <motion.div whileHover={{ scale: 1.1, textShadow: '0px 0px 8px(255,255,255)', boxShadow: '0px 0px 8px(255,255,255)' }}
+                        transition={{ delay: 0.2, type: 'spring', stiffness: 13, duration: 5 }}
+                     >
+                        <div className={styles.cardonetwo}>
+                           <div className={styles.holder}>
+                              <div className={styles.round}>
+                                 <img src={step2} alt="firstcard" />
+                              </div>
+                              <div className={styles.contentinside}>
+                                 <h1>Step 2</h1>
+                                 <h2>Enter recipient details</h2>
+                                 <p>Add the receiver bank account number and payment information details
+                                 </p>
+                              </div>
                            </div>
                         </div>
-                     </div>
+                     </motion.div>
+
+
+                     <motion.div whileHover={{ scale: 1.1, textShadow: '0px 0px 8px(255,255,255)', boxShadow: '0px 0px 8px(255,255,255)' }}
+                        transition={{ delay: 0.2, type: 'spring', stiffness: 13, duration: 5 }}
+                     >
+                        <div className={styles.cardonethree}>
+                           <div className={styles.holder}>
+                              <div className={styles.round}>
+                                 <img src={step3} alt="firstcard" />
+                              </div>
+                              <div className={styles.contentinside}>
+                                 <h1>Step 3</h1>
+                                 <h2>Confirm transaction and send</h2>
+                                 <p>Check the selected currencies and rates are correct, send your money.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                     </motion.div>
                   </div>
                </div>
                <div className={styles.desc2}>
