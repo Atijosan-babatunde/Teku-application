@@ -2,11 +2,10 @@
     font-family: Gilroy;
     src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
 }
-@font-face {
-  font-family: Intro;
-  src: url(../../../shared/utils/fonts/Intro-Regular.otf)
-}
-  
+
+// .content{
+//   margin-top: 3em;
+// }
 
 
 .questionsection {
@@ -15,16 +14,13 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  margin-top: 7em;
 }
 
 .desc {
-    height:400px;
     text-align: center;
-    align-items: center;
-    justify-content: center;
-    display: flex;
     background: var(--white-purple, #F7F5FA);
+    padding: 3em 3em;
+    margin-top: 7em !important;
   }
 
  
@@ -34,8 +30,6 @@
     font-weight: 700;
     line-height: 80px;
     color: var(--black, #00040F);
-    width:80%;
-    margin:0 auto;
     font-size: 60px;
     justify-content: center;
     align-items: center;
@@ -48,11 +42,10 @@
     font-weight: 500;
     line-height: 32px;
     color: var(--black, #00040F);
-    text-align: center;
-    width:70%;
+    text-align: center !important;
     padding-top: 2em;
-    margin:0 auto;
   }
+
   .innerquestion{
   background: linear-gradient(#fff, #fff) padding-box,
     linear-gradient(180deg, rgba(0, 107, 255, 0.10) 0%, rgba(121, 81, 175, 0.10) 76.04%) border-box;
@@ -99,4 +92,7 @@ line-height: 32px;
    .questionsection{
      width:90%;
   }
+  .innerquestion{
+    padding:30px 35px;
+ }
 }

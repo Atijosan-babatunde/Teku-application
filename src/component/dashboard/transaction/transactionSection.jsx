@@ -1,5 +1,5 @@
 import styles from '../transaction/css/transactionsection.module.scss'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import holder from "../../../assets/svg/holder.svg"
 import Nigeria from "../../../assets/svg/nigeria.svg"
 import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg"
@@ -21,6 +21,11 @@ import MakeAnAppeal from './makeAnAppeal';
 import TransactionPreview from './transactionPreviewModal';
 import AskForRefund from './askForRefund';
 import CancelledPreviewModal from './cancelledPreviewModal';
+import { useAppSelector } from '../../../shared/redux/reduxHooks';
+import { useDispatch } from 'react-redux';
+import { GetUsersTransaction } from "../../../shared/redux/slices/transaction.slices"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const TransactionSection = () => {
@@ -33,6 +38,30 @@ const TransactionSection = () => {
     const openCompleted = Boolean(anchorCompletedEl);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const transactionData = useAppSelector((state) => state.transaction.getTransactionUsers)
+    const [data] = useState(transactionData)
+
+
+    useEffect(() => {
+        getTransactionUser();
+    }, [data]);
+
+    const getTransactionUser = () => {
+        setLoading(true);
+        dispatch(GetUsersTransaction())
+            .unwrap()
+            .then(() => {
+                setLoading(false);
+            })
+            .catch((err) => {
+                toast.error(err, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setLoading(false);
+            });
+    };
 
     const [product] = useState([
         { id: 1, flagone: <img src={Nigeria} className={styles.flagicon} alt="flag" />, flagnameone: 'NGN', flagtwo: <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />, flagnametwo: 'GBP', amount: '1,000.00', purpose: 'Tuition fees', datetime: '21-12-2021, 10:38am', process: 'Processing Time: Within 24hrs', action: '' },
@@ -46,7 +75,7 @@ const TransactionSection = () => {
         { id: 3, imgs: <img src={downloadreceiptimg} className={styles.icon} alt='downloadreceipt' />, text: 'Download Receipt' },
     ])
 
-    
+
     const handleBtn = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -69,23 +98,23 @@ const TransactionSection = () => {
         }
     }
 
-      // MODAL STATE FOR PREVIEW
+    // MODAL STATE FOR PREVIEW
 
-      const [showModalPreview, setShowModalPreview] = useState(false)
-      const [askForRefundModal, setAskForRefundModal] = useState(false)
-      const [deleteModal, setDeleteModal] = useState(false)
-  
-      function handleAskForRefund() {
-          setShowModalPreview(!showModalPreview)
-          setDeleteModal(!deleteModal)
-          setAskForRefundModal(!askForRefundModal)
-      }
-  
-      function handleModalShowTransactionPreview() {
-          setShowModalPreview(!showModalPreview)
-          setDeleteModal(!deleteModal)
-          setAskForRefundModal(!askForRefundModal)
-      }
+    const [showModalPreview, setShowModalPreview] = useState(false)
+    const [askForRefundModal, setAskForRefundModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
+
+    function handleAskForRefund() {
+        setShowModalPreview(!showModalPreview)
+        setDeleteModal(!deleteModal)
+        setAskForRefundModal(!askForRefundModal)
+    }
+
+    function handleModalShowTransactionPreview() {
+        setShowModalPreview(!showModalPreview)
+        setDeleteModal(!deleteModal)
+        setAskForRefundModal(!askForRefundModal)
+    }
 
     // BUTTON END 
 
@@ -121,22 +150,22 @@ const TransactionSection = () => {
         { id: 4, imgs: <img src={download} className={styles.icon} alt="img" />, text: 'Proof of payment' },
     ])
 
-     // MODAL STATE COMPLETED
+    // MODAL STATE COMPLETED
 
-     const [showModalCompleted, setShowModalCompleted] = useState(false)
-     const [makeAppealModal, setMakeAppealModal] = useState(false)
+    const [showModalCompleted, setShowModalCompleted] = useState(false)
+    const [makeAppealModal, setMakeAppealModal] = useState(false)
     //  const [deleteModal, setDeleteModal] = useState(false)
- 
-     function handleMakeAnAppeal() {
+
+    function handleMakeAnAppeal() {
         setMakeAppealModal(!makeAppealModal)
         setShowModalCompleted(!showModalCompleted)
-     }
- 
-     function handleModalShowCompleted() {
+    }
+
+    function handleModalShowCompleted() {
         setShowModalCompleted(!showModalCompleted)
         //  setDeleteModal(!deleteModal)
         setMakeAppealModal(!makeAppealModal)
-     }
+    }
     //BUTTON END 
 
 
@@ -169,333 +198,339 @@ const TransactionSection = () => {
         { id: 3, imgs: <img src={download} className={styles.icon} alt="img" />, text: 'Download Receipt' },
     ])
 
-     // MODAL STATE CANCELLED
+    // MODAL STATE CANCELLED
 
-     const [showModalCancelled, setShowModalCancelled] = useState(false)
+    const [showModalCancelled, setShowModalCancelled] = useState(false)
     //  const [makeAppealModal, setMakeAppealModal] = useState(false)
     //  const [deleteModal, setDeleteModal] = useState(false)
- 
-     function handleCancelledPreview() {
+
+    function handleCancelledPreview() {
         setMakeAppealModal(!makeAppealModal)
         setShowModalCancelled(!showModalCancelled)
-     }
- 
+    }
+
     //  function handleModalShowCompleted() {
     //     setShowModalCompleted(!showModalCompleted)
     //     setMakeAppealModal(!makeAppealModal)
     //  }
     //BUTTON END 
 
-  
 
-    return (
-        <>   
-             {showModalCancelled && saveItemModalCancelled === 'Preview' && <CancelledPreviewModal {...{ handleCancelledPreview }} />}
-             {/* {makeAppealModal && saveItemModalCompleted === 'Make an appeal' && <MakeAnAppeal {...{ handleMakeAnAppeal }} />} */}
+    if (data) {
+        return (
+            <>
+                {showModalCancelled && saveItemModalCancelled === 'Preview' && <CancelledPreviewModal {...{ handleCancelledPreview }} />}
+                {/* {makeAppealModal && saveItemModalCompleted === 'Make an appeal' && <MakeAnAppeal {...{ handleMakeAnAppeal }} />} */}
 
-            {showModalCompleted && saveItemModalCompleted === 'Preview' && <CompletePreviewModal {...{ handleModalShowCompleted }} />}
-             {makeAppealModal && saveItemModalCompleted === 'Make an appeal' && <MakeAnAppeal {...{ handleMakeAnAppeal }} />}
-            {/* {deleteModal && saveItemModal === 'Delete' && <DeletePaymentModal {...{ handleModalShow }} />} */}
-            
-            {showModalPreview && saveItemModal === 'Preview' && <TransactionPreview {...{ handleModalShowTransactionPreview }} />}
-            {askForRefundModal && saveItemModal === 'Ask for refund' && <AskForRefund {...{ handleAskForRefund }} />}
-            {/* {deleteModal && saveItemModal === 'Delete' && <DeletePaymentModal {...{ handleModalShow }} />} */}
+                {showModalCompleted && saveItemModalCompleted === 'Preview' && <CompletePreviewModal {...{ handleModalShowCompleted }} />}
+                {makeAppealModal && saveItemModalCompleted === 'Make an appeal' && <MakeAnAppeal {...{ handleMakeAnAppeal }} />}
+                {/* {deleteModal && saveItemModal === 'Delete' && <DeletePaymentModal {...{ handleModalShow }} />} */}
 
-            <div className={styles.parent}>
-                <div className={styles.content}>
-                    <div className={styles.topholder}>
-                        <div className={styles.contentinner}>
-                            <h1>Recent transactions</h1>
-                            <div className={styles.search}>
-                                <input type="text" placeholder="Search" />
-                                <span><FiSearch /></span>
+                {showModalPreview && saveItemModal === 'Preview' && <TransactionPreview {...{ handleModalShowTransactionPreview }} />}
+                {askForRefundModal && saveItemModal === 'Ask for refund' && <AskForRefund {...{ handleAskForRefund }} />}
+                {/* {deleteModal && saveItemModal === 'Delete' && <DeletePaymentModal {...{ handleModalShow }} />} */}
+
+                <div className={styles.parent}>
+                    <div className={styles.content}>
+                        <div className={styles.topholder}>
+                            <div className={styles.contentinner}>
+                                <h1>Recent transactions</h1>
+                                <div className={styles.search}>
+                                    <input type="text" placeholder="Search" />
+                                    <span><FiSearch /></span>
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles.rightholder}>
-                            <h3>Download <span><img src={arrow} alt="" /></span></h3>
-                            <div className={styles.dropdown}>
-                                <div className={styles.lastdays}>Last 7 days <span><IoMdArrowDropdown /></span></div>
-                                <div className={styles.dropdownContent}>
-                                    <div className={styles.dropDownRow}>
-                                        <div className={styles.logoDrodownDiv}>
-                                        </div>
-                                        <div className={styles.logoTitleDiv}>
-                                            <div className={styles.dropDowntitle}>
-                                                Past 24 hours
+                            <div className={styles.rightholder}>
+                                <h3>Download <span><img src={arrow} alt="" /></span></h3>
+                                <div className={styles.dropdown}>
+                                    <div className={styles.lastdays}>Last 7 days <span><IoMdArrowDropdown /></span></div>
+                                    <div className={styles.dropdownContent}>
+                                        <div className={styles.dropDownRow}>
+                                            <div className={styles.logoDrodownDiv}>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div className={styles.dropDownRow}>
-
-                                        <div className={styles.logoDrodownDiv}>
-                                        </div>
-                                        <div className={styles.logoTitleDiv}>
-                                            <div className={styles.dropDowntitle}>
-                                                Past week
+                                            <div className={styles.logoTitleDiv}>
+                                                <div className={styles.dropDowntitle}>
+                                                    Past 24 hours
+                                                </div>
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div className={styles.dropDownRow}>
+                                        <div className={styles.dropDownRow}>
 
-                                        <div className={styles.logoDrodownDiv}>
+                                            <div className={styles.logoDrodownDiv}>
+                                            </div>
+                                            <div className={styles.logoTitleDiv}>
+                                                <div className={styles.dropDowntitle}>
+                                                    Past week
+                                                </div>
+                                            </div>
+
                                         </div>
-                                        <div className={styles.logoTitleDiv}>
-                                            <div className={styles.dropDowntitle}>
-                                                Past week
+                                        <div className={styles.dropDownRow}>
+
+                                            <div className={styles.logoDrodownDiv}>
+                                            </div>
+                                            <div className={styles.logoTitleDiv}>
+                                                <div className={styles.dropDowntitle}>
+                                                    Past week
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className={styles.dropDownRow}>
+                                        <div className={styles.dropDownRow}>
 
-                                        <div className={styles.logoDrodownDiv}>
-                                        </div>
-                                        <div className={styles.logoTitleDiv}>
-                                            <div className={styles.dropDowntitle}>
-                                                Past month
+                                            <div className={styles.logoDrodownDiv}>
+                                            </div>
+                                            <div className={styles.logoTitleDiv}>
+                                                <div className={styles.dropDowntitle}>
+                                                    Past month
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div className={styles.dropDownRow}>
+                                        <div className={styles.dropDownRow}>
 
-                                        <div className={styles.logoDrodownDiv}>
+                                            <div className={styles.logoDrodownDiv}>
 
-                                        </div>
-                                        <div className={styles.logoTitleDiv}>
-                                            <div className={styles.dropDowntitle}>
-                                                Custom date
+                                            </div>
+                                            <div className={styles.logoTitleDiv}>
+                                                <div className={styles.dropDowntitle}>
+                                                    Custom date
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="table-responsive">
-                        <table className="table table-striped table-borderless">
-                            <thead className={styles.tablerow}>
-                                <tr>
-                                    <th className={styles.tablehead} scope="col" style={{ paddingLeft: "2em", paddingBottom: "1.5000em" }}> Purpose of payment</th>
-                                    <th className={styles.tablehead} scope="col" style={{ paddingLeft: "2em", paddingBottom: "1.5000em" }}>Amount</th>
-                                    <th className={styles.tablehead} scope="col" style={{ paddingBottom: "1.5000em" }}>Currency pair</th>
-                                    <th className={styles.tablehead} scope="col" style={{ paddingBottom: "1.5000em" }}>Date & time</th>
-                                    <th className={styles.tablehead} scope="col" style={{ paddingBottom: "1.5000em" }}>Status</th>
-                                    <th className={styles.tablehead} scope="col" style={{ paddingBottom: "1.5000em" }}></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {product.map((prod, index) =>
-                                    <tr style={{}} key={index}>
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
-                                            <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Cash pickup</span>
-                                        </td>
-
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
-                                            <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Paid</span>
-                                        </td>
-
-                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                            <img src={prod.flagone} alt="" className={styles.flagstyle} />
-                                            <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
-                                            <span className={styles.dash}>-</span>
-                                            <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
-                                            <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
-                                        </td>
-                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                            {prod.datetime}
-                                            <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                        </td>
-                                        <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.btn}>In progress</button>
-                                        </td>
-                                        <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
-                                            <Button
-                                                id="demo-customized-button"
-                                                aria-controls={open ? "demo-customized-menu" : undefined}
-                                                aria-haspopup="true"
-                                                aria-expanded={open ? "true" : undefined}
-                                                variant="contained"
-                                                disableElevation
-                                                onClick={handleBtn}
-                                                className="btntable"
-                                                style={{ backgroundColor: "transparent" }}
-                                            >
-                                                <img src={ellip} alt="" />
-                                            </Button>
-                                            <StyledMenu
-                                                id="demo-customized-menu"
-                                                MenuListProps={{
-                                                    "aria-labelledby": "demo-customized-button",
-                                                }}
-                                                anchorEl={anchorEl}
-                                                open={open}
-                                                onClose={handleClose}
-                                            >
-                                                {subtitle.map((item) => (
-                                                    <MenuItem
-                                                        key={item}
-                                                        className="dropdowndetails"
-                                                        onClick={() => handleClose(item.text)}
-                                                        disableRipple
-                                                    >
-                                                        {item.imgs}
-                                                        {item.text}
-                                                    </MenuItem>
-                                                ))}
-                                            </StyledMenu>
-                                        </td>
+                        <div className="table-responsive">
+                            <table className="table table-striped table-borderless">
+                                <thead className={styles.tablerow}>
+                                    <tr>
+                                        <th className={styles.tablehead} scope="col" style={{ paddingLeft: "2em", paddingBottom: "1.5000em" }}> Purpose of payment</th>
+                                        <th className={styles.tablehead} scope="col" style={{ paddingLeft: "2em", paddingBottom: "1.5000em" }}>Amount</th>
+                                        <th className={styles.tablehead} scope="col" style={{ paddingBottom: "1.5000em" }}>Currency pair</th>
+                                        <th className={styles.tablehead} scope="col" style={{ paddingBottom: "1.5000em" }}>Date & time</th>
+                                        <th className={styles.tablehead} scope="col" style={{ paddingBottom: "1.5000em" }}>Status</th>
+                                        <th className={styles.tablehead} scope="col" style={{ paddingBottom: "1.5000em" }}></th>
                                     </tr>
-                                )}
-                            
+                                </thead>
+                                <tbody>
+                                    {data.map((prod, first) =>
+                                        <tr style={{}} key={first}>
+                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
+                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>{prod.paymentMethod}</span>
+                                            </td>
 
-                            
-                                {product.map((prod, index) =>
-                                    <tr style={{}} key={index}>
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
-                                            <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Cash pickup</span>
-                                        </td>
+                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
+                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Paid</span>
+                                            </td>
 
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
-                                            <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>In review</span>
-                                        </td>
-
-                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                            <img src={prod.flagone} alt="" className={styles.flagstyle} />
-                                            <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
-                                            <span className={styles.dash}>-</span>
-                                            <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
-                                            <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
-                                        </td>
-                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                            {prod.datetime}
-                                            <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                        </td>
-                                        <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.completedbtn}>Completed</button>
-                                        </td>
-                                        <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
-                                            <Button
-                                                id="demo-customized-button"
-                                                aria-controls={openCompleted ? "demo-customized-menu" : undefined}
-                                                aria-haspopup="true"
-                                                aria-expanded={openCompleted ? "true" : undefined}
-                                                variant="contained"
-                                                disableElevation
-                                                onClick={handleBtnCompleted}
-                                                className="btntable"
-                                                style={{ backgroundColor: "transparent" }}
-                                            >
-                                                <img src={ellip} alt="" />
-                                            </Button>
-                                            <StyledMenu
-                                                id="demo-customized-menu"
-                                                MenuListProps={{
-                                                    "aria-labelledby": "demo-customized-button",
-                                                }}
-                                                anchorCompletedEl={anchorCompletedEl}
-                                                open={openCompleted}
-                                                onClose={handleCloseCompleted}
-                                            >
-                                                {subtitlecompleted.map((itemcompleted) => (
-                                                    <MenuItem
-                                                        key={itemcompleted}
-                                                        className="dropdowndetails"
-                                                        onClick={() => handleCloseCompleted(itemcompleted.text)}
-                                                        disableRipple
-                                                    >
-                                                        {itemcompleted.imgs}
-                                                        {itemcompleted.text}
-                                                    </MenuItem>
-                                                ))}
-                                            </StyledMenu>
-                                        </td>
-                                    </tr>
-                                )}
-                            
+                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                                <img src={prod.baseCurrency.icon} alt="" className={styles.flagstyle} />
+                                                <span className={styles.flagnamestyle} >{prod.baseCurrency.code}</span>
+                                                <span className={styles.dash}>-</span>
+                                                <img src={prod.pairCurrency.icon} alt="" className={styles.flagstyle} />
+                                                <span className={styles.flagnamestyle}>{prod.pairCurrency.code}</span>
+                                            </td>
+                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                                {prod.createdAt}
+                                                {/* <div className={styles.tableparagraph}>{prod.sendingMethod}</div> */}
+                                            </td>
+                                            <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
+                                                <button
+                                                    className={styles.btn}
+                                                    // style={{ backgroundColor:  ? "#fff" : "", color:  ? "#000" : ""}}
+                                                >
+                                                    {prod.status}
+                                                </button>
+                                            </td>
+                                            <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
+                                                <Button
+                                                    id="demo-customized-button"
+                                                    aria-controls={open ? "demo-customized-menu" : undefined}
+                                                    aria-haspopup="true"
+                                                    aria-expanded={open ? "true" : undefined}
+                                                    variant="contained"
+                                                    disableElevation
+                                                    onClick={handleBtn}
+                                                    className="btntable"
+                                                    style={{ backgroundColor: "transparent" }}
+                                                >
+                                                    <img src={ellip} alt="" />
+                                                </Button>
+                                                <StyledMenu
+                                                    id="demo-customized-menu"
+                                                    MenuListProps={{
+                                                        "aria-labelledby": "demo-customized-button",
+                                                    }}
+                                                    anchorEl={anchorEl}
+                                                    open={open}
+                                                    onClose={handleClose}
+                                                >
+                                                    {subtitle.map((item) => (
+                                                        <MenuItem
+                                                            key={item}
+                                                            className="dropdowndetails"
+                                                            onClick={() => handleClose(item.text)}
+                                                            disableRipple
+                                                        >
+                                                            {item.imgs}
+                                                            {item.text}
+                                                        </MenuItem>
+                                                    ))}
+                                                </StyledMenu>
+                                            </td>
+                                        </tr>
+                                    )}
 
 
-                           
-                                {product.map((prod, index) =>
-                                    <tr style={{}} key={index}>
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
-                                            <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Cash pickup</span>
-                                        </td>
 
-                                        <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
-                                            {/* <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>In review</span> */}
-                                        </td>
+                                    {/* {data.map((prod, second) =>
+                                        <tr style={{}} key={second}>
+                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
+                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>{prod.paymentMethod}</span>
+                                            </td>
 
-                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                            <img src={prod.flagone} alt="" className={styles.flagstyle} />
-                                            <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
-                                            <span className={styles.dash}>-</span>
-                                            <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
-                                            <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
-                                        </td>
-                                        <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                            {prod.datetime}
-                                            <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                        </td>
-                                        <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.cancelledbtn}>Cancelled</button>
-                                        </td>
-                                        <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
-                                            <Button
-                                                id="demo-customized-button"
-                                                aria-controls={openCancelled ? "demo-customized-menu" : undefined}
-                                                aria-haspopup="true"
-                                                aria-expanded={openCancelled ? "true" : undefined}
-                                                variant="contained"
-                                                disableElevation
-                                                onClick={handleBtnCancelled}
-                                                className="btntable"
-                                                style={{ backgroundColor: "transparent" }}
-                                            >
-                                                <img src={ellip} alt="" />
-                                            </Button>
-                                            <StyledMenu
-                                                id="demo-customized-menu"
-                                                MenuListProps={{
-                                                    "aria-labelledby": "demo-customized-button",
-                                                }}
-                                                anchorCancelledEl={anchorCancelledEl}
-                                                open={openCancelled}
-                                                onClose={handleCloseCancelled}
-                                            >
-                                                {subtitlecancelled.map((itemcancelled) => (
-                                                    <MenuItem
-                                                        key={itemcancelled}
-                                                        className="dropdowndetails"
-                                                        onClick={() => handleCloseCancelled(itemcancelled.text)}
-                                                        disableRipple
-                                                    >
-                                                        {itemcancelled.imgs}
-                                                        {itemcancelled.text}
-                                                    </MenuItem>
-                                                ))}
-                                            </StyledMenu>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className={styles.inner}>
-                        {product.length < 1 && (
-                            <div>
-                                <img src={holder} alt="middleimage" />
-                                <div className={styles.nocurrency}>
-                                    No currency
+                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
+                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>In review</span>
+                                            </td>
+
+                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                                <img src={prod.flagone} alt="" className={styles.flagstyle} />
+                                                <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
+                                                <span className={styles.dash}>-</span>
+                                                <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
+                                                <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
+                                            </td>
+                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                                {prod.datetime}
+                                                <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
+                                            </td>
+                                            <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
+                                                <button className={styles.completedbtn}>Completed</button>
+                                            </td>
+                                            <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
+                                                <Button
+                                                    id="demo-customized-button"
+                                                    aria-controls={openCompleted ? "demo-customized-menu" : undefined}
+                                                    aria-haspopup="true"
+                                                    aria-expanded={openCompleted ? "true" : undefined}
+                                                    variant="contained"
+                                                    disableElevation
+                                                    onClick={handleBtnCompleted}
+                                                    className="btntable"
+                                                    style={{ backgroundColor: "transparent" }}
+                                                >
+                                                    <img src={ellip} alt="" />
+                                                </Button>
+                                                <StyledMenu
+                                                    id="demo-customized-menu"
+                                                    MenuListProps={{
+                                                        "aria-labelledby": "demo-customized-button",
+                                                    }}
+                                                    anchorCompletedEl={anchorCompletedEl}
+                                                    open={openCompleted}
+                                                    onClose={handleCloseCompleted}
+                                                >
+                                                    {subtitlecompleted.map((itemcompleted) => (
+                                                        <MenuItem
+                                                            key={itemcompleted}
+                                                            className="dropdowndetails"
+                                                            onClick={() => handleCloseCompleted(itemcompleted.text)}
+                                                            disableRipple
+                                                        >
+                                                            {itemcompleted.imgs}
+                                                            {itemcompleted.text}
+                                                        </MenuItem>
+                                                    ))}
+                                                </StyledMenu>
+                                            </td>
+                                        </tr>
+                                    )} */}
+
+
+
+
+                                    {/* {data.map((prod, third) =>
+                                        <tr style={{}} key={third}>
+                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
+                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Cash pickup</span>
+                                            </td>
+
+                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
+                                            </td>
+
+                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                                <img src={prod.flagone} alt="" className={styles.flagstyle} />
+                                                <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
+                                                <span className={styles.dash}>-</span>
+                                                <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
+                                                <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
+                                            </td>
+                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
+                                                {prod.datetime}
+                                                <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
+                                            </td>
+                                            <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
+                                                <button className={styles.cancelledbtn}>Cancelled</button>
+                                            </td>
+                                            <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
+                                                <Button
+                                                    id="demo-customized-button"
+                                                    aria-controls={openCancelled ? "demo-customized-menu" : undefined}
+                                                    aria-haspopup="true"
+                                                    aria-expanded={openCancelled ? "true" : undefined}
+                                                    variant="contained"
+                                                    disableElevation
+                                                    onClick={handleBtnCancelled}
+                                                    className="btntable"
+                                                    style={{ backgroundColor: "transparent" }}
+                                                >
+                                                    <img src={ellip} alt="" />
+                                                </Button>
+                                                <StyledMenu
+                                                    id="demo-customized-menu"
+                                                    MenuListProps={{
+                                                        "aria-labelledby": "demo-customized-button",
+                                                    }}
+                                                    anchorCancelledEl={anchorCancelledEl}
+                                                    open={openCancelled}
+                                                    onClose={handleCloseCancelled}
+                                                >
+                                                    {subtitlecancelled.map((itemcancelled) => (
+                                                        <MenuItem
+                                                            key={itemcancelled}
+                                                            className="dropdowndetails"
+                                                            onClick={() => handleCloseCancelled(itemcancelled.text)}
+                                                            disableRipple
+                                                        >
+                                                            {itemcancelled.imgs}
+                                                            {itemcancelled.text}
+                                                        </MenuItem>
+                                                    ))}
+                                                </StyledMenu>
+                                            </td>
+                                        </tr>
+                                    )} */}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className={styles.inner}>
+                            {product.length < 1 && (
+                                <div>
+                                    <img src={holder} alt="middleimage" />
+                                    <div className={styles.nocurrency}>
+                                        No currency
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
+                    <ToastContainer />
                 </div>
-            </div>
-        </>
-    );
+            </>
+        );
+    }
 }
 
 export default TransactionSection;

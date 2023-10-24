@@ -22,7 +22,7 @@ const SignUp = () => {
         </h1>
         <p>We will be there for you 24/7 to help you with your transactions</p>
         <Link to="/signup">
-          <button>Create an account</button>
+          <button className={styles.whitebtn}>Create an account</button>
         </Link>
       </div>
     </div>

@@ -114,6 +114,11 @@
       border-radius: 10px;
 }
 
+.btnrequest:hover {
+    background: #0e30a1;
+    color: #ffffff;
+}
+
 .btnrequestcustomise {
     gap: 10px;
       border: none;
@@ -129,6 +134,10 @@
       width:59%;
       background: #011B6D;
       border-radius: 10px;
+}
+.btnrequestcustomise:hover {
+    background: #0e30a1;
+    color: #ffffff;
 }
 
 // KYC REGISTRATION //

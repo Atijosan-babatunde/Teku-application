@@ -29,6 +29,7 @@ export const GetCurrencyPair = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const data = await LandingServices.GetCurrencyPair();
+      console.log("dataas",data)
       return { landing: data.data };
     } catch (error) {
       const message =
@@ -102,6 +103,27 @@ export const LoginUser = createAsyncThunk(
   }
 );
 
+export const RegisterUser = createAsyncThunk(
+  "landing/registerUser",
+  async (body, thunkAPI) => {
+    try {
+      const data = await LandingServices.RegisterUser(
+        body
+      );
+      return { landing: data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 
 const initialState = {
   addAllCurrencyData: null,
@@ -109,6 +131,7 @@ const initialState = {
   getAllCurrencyCode: null,
   getAllCurrencyRate: null,
   getloginUser: null,
+  getUserRegistered: null,
 };
 
 export const landingSlice = createSlice({
@@ -149,6 +172,13 @@ export const landingSlice = createSlice({
     })
     builder.addCase(LoginUser.rejected, (state) => {
       state.getloginUser = null;
+    })
+
+    builder.addCase(RegisterUser.fulfilled, (state, action) => {
+      state.getUserRegistered = action.payload.landing;
+    })
+    builder.addCase(RegisterUser.rejected, (state) => {
+      state.getUserRegistered = null;
     })
   }
 });

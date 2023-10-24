@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom"
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from 'react-icons/md'
 import React, { useState } from 'react'
 import ForgetPasswordModal from "./forgetPasswordModal"
-// import { useDispatch } from 'react-redux';
-// import { LoginUser } from "../../shared/redux/slices/landing.slices"
+import { useDispatch } from 'react-redux';
+import { LoginUser } from "../../shared/redux/slices/landing.slices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { useAppSelector } from '../../shared/redux/reduxHooks';
+import { useAppSelector } from '../../shared/redux/reduxHooks';
 
 
 const LogIn = () => {
@@ -19,37 +19,33 @@ const LogIn = () => {
     const [email, setEmail] = useState('')
     const [passwordType, setPasswordType] = useState("password")
     const [showModal, setShowModal] = useState(false)
-    // const [loading, setLoading] = useState(false);
-    // const dispatch = useDispatch();
-    // const loginUser = useAppSelector((state) => state.landing.getloginUser)
-    // const [data] = useState(loginUser)
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const loginUser = useAppSelector((state) => state.landing.getloginUser)
+    const [data] = useState(loginUser)
 
 
-    // useEffect(() => {
-    //     loginUserData();
-    // }, [data]);
 
+    const loginUserData = () => {
+        setLoading(true);
+        let body = {
+            "email": email,
+            "password": password,
+        }
 
-    // const loginUserData = () => {
-    //     setLoading(true);
-    //     let body = {
-    //         "email": email,
-    //         "password": password,
-    //     }
-
-    //     console.log('body', body)
-    //     dispatch(LoginUser(body))
-    //         .unwrap()
-    //         .then(() => {
-    //             setLoading(false);
-    //         })
-    //         .catch((err) => {
-    //             toast.error(err, {
-    //                 position: toast.POSITION.TOP_RIGHT,
-    //             });
-    //             setLoading(false);
-    //         });
-    // };
+        dispatch(LoginUser(body))
+            .unwrap()
+            .then(() => {
+                setLoading(false);
+                navigate("/dashboard")
+            })
+            .catch((err) => {
+                toast.error(err, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setLoading(false);
+            });
+    };
 
 
     const validate = () => {
@@ -127,7 +123,7 @@ const LogIn = () => {
                                     className={styles.btnrequest}
                                     disabled={validate()}
                                     style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
-                                    // onClick={loginUserData}
+                                    onClick={loginUserData}
                                 >
                                     Sign In
                                 </button>

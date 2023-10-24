@@ -4,7 +4,7 @@ const API_URL_ADD_CURRENCY_PAIR = process.env.REACT_APP_API_URL + "/request";
 const API_URL_GET_CURRENCY_PAIR = process.env.REACT_APP_API_URL + "/pair";
 const API_URL_GET_CURRENCY = process.env.REACT_APP_API_URL + "/currency";
 const API_URL_LOGIN_USER = process.env.REACT_APP_API_URL + "/auth/login";
-
+const API_URL_REGISTER_USER = process.env.REACT_APP_API_URL + "/auth/register";
 
 
 const AddGetAllCurrencyPair = async (body) => {
@@ -38,12 +38,23 @@ const GetCurrencyCode = async () => {
 const LoginUser = async (body) => {
   return await axios.post(
     API_URL_LOGIN_USER, body, {
-    headers: authHeader(),
+  }
+  ).then((response) => {
+    sessionStorage.setItem("userData", response.data.data.accessToken)
+    return response.data;
+  });
+};
+
+const RegisterUser = async (body) => {
+  return await axios.post(
+    API_URL_REGISTER_USER, body, {
   }
   ).then((response) => {
     return response.data;
   });
 };
+
+
 
 
 export async function GET_CURRENCY_CALCULATOR(endpoint) {
@@ -60,6 +71,7 @@ const LandingServices = {
   GetCurrencyPair,
   GetCurrencyCode,
   LoginUser,
+  RegisterUser,
 };
 
 export default LandingServices

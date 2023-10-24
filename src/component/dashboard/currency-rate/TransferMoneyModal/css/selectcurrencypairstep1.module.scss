@@ -4,7 +4,10 @@
 }
 
 .content {
-    width: 60%;
+    // width: 100%;
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
 }
 
 .header{
@@ -17,11 +20,11 @@
 }
 
 .descone {
-    // width:45%;
+    width:48%;
     border-radius: 8px;
     // background: var(--white-grey, #F9F9F9);
     align-items: center;
-    padding:2em;
+    // padding:2em;
 
     .mid{
         display:flex;
@@ -108,6 +111,10 @@ a {
       background: #011B6D;
       border-radius: 10px;
   }
+  .btnrequest:hover {
+    background: #0e30a1;
+    color: #ffffff;
+}
 
   .flagstyle{
     width: 20px;
@@ -117,4 +124,85 @@ a {
 .flagcontent{
     display: flex;
     align-items: center;
+}
+
+.desctwo{
+    width: 48%;
+}
+
+.orangecard{
+    border-radius: 4px;
+    background: rgba(237, 76, 92, 0.10);
+    padding: 1em;
+}
+
+.desctwoh2{
+    color: #ED4C5C;
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 157.143% */
+    letter-spacing: 0.035px;
+}
+
+.request{
+    color: var(--Blue-Primary, #011B6D);
+    // text-align: center;
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px; /* 137.5% */
+    margin-top: 13em;
+    cursor: pointer;
+
+    span{
+        margin-left: 4em;
+    }
+}
+
+.showcard{
+    border-radius: 4px;
+    background: var(--White-Grey, #F9F9F9);
+    padding: 1em;
+    margin-top: 2em;
+}
+
+.showcardh1{
+    color: var(--Blue-Primary, #011B6D);
+    // text-align: center;
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px; /* 137.5% */
+    margin-bottom: 1em;
+}
+
+.flagholder {
+    display: flex;
+    align-items: center;
+
+    span{
+        margin-left: 7em;
+        padding-bottom: 1em;
+    }
+}
+
+.flagcountry {
+    display: flex;
+    align-items: center;
+
+    img{
+        width: 20px;
+        margin-right: 7px;
+        padding-bottom: 1em;
+    }
+}
+
+.dash {
+    margin-right: 5px;
+    margin-left: 5px;
+    // padding-bottom: 1em;
 }
