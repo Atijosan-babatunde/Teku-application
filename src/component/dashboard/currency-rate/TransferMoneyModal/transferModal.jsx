@@ -164,6 +164,12 @@ const TransferModal = ({ handleModalShowTransfer }) => {
                             setBankName={setBankName}
                             dropDownValueFour={dropDownValueFour}
                             dropDownValueBank={dropDownValueBank}
+                            dropDownValue={dropDownValue}
+                            dropDownValueTwo={dropDownValueTwo}
+                            country={country}
+                            purpose={purpose}
+                            paymentMethod={paymentMethod}
+                            amount={amount}
                             setDropDownValueFour={setDropDownValueFour}
                             setDropDownValueBank={setDropDownValueBank}
                         />

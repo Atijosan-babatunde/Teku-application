@@ -140,13 +140,13 @@ const SelectCurrencyPairStep3 = ({
     const goToStepFour = () => {
         if (checkBox) {
             recipientUserData()
-            setStep(4);
+            setStep(6);
         }
-        setStep(4);
+        setStep(6);
     };
 
     const goToStepTwo = () => {
-        setStep(2);
+        setStep(4);
     };
 
     return (
