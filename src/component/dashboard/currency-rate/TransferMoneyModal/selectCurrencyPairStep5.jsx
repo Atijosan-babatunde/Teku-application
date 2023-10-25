@@ -8,24 +8,30 @@ import blank from '../../../../assets/svg/blank.svg'
 import { useAppSelector } from '../../../../shared/redux/reduxHooks';
 import { useDispatch } from 'react-redux';
 import { GetUsersBanksListed } from "../../../../shared/redux/slices/transaction.slices"
+import { AllTransactionCart } from "../../../../shared/redux/slices/transaction.slices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom"
 
 
-const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank, setDropDownValueBank, setDropDownValueFour }) => {
+const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank, dropDownValue, dropDownValueTwo, amount, country, purpose, paymentMethod, setDropDownValueBank, setDropDownValueFour }) => {
     const [menuFour, setMenuFour] = useState(false)
     const [menuBank, setMenuBank] = useState(false)
     const [showThis, setShowThis] = useState(false)
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const banksListed = useAppSelector((state) => state.transaction.getBanksListed)
+    const transactionCart = useAppSelector((state) => state.transaction.allTransactionCart)
+    // const [data] = useState(transactionCart)
     const [data] = useState(banksListed)
+    let navigate = useNavigate();
+
 
     useEffect(() => {
         getBanksListed();
     }, [data]);
 
-    console.log('BANKS', data)
+
     const getBanksListed = () => {
         setLoading(true);
         dispatch(GetUsersBanksListed())
@@ -41,8 +47,33 @@ const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank
             });
     };
 
+    const transactionCartData = () => {
+        setLoading(true);
+        let body = {
+            "baseCurrencyId": dropDownValue,
+            "pairCurrencyId": dropDownValueTwo,
+            "amount": amount,
+            "country": country?.label,
+            "purpose": purpose,
+            "paymentMethod": paymentMethod,
+        }
+
+        dispatch(AllTransactionCart(body))
+            .unwrap()
+            .then(() => {
+                setLoading(false);
+                navigate('/payment-cart');
+            })
+            .catch((err) => {
+                toast.error(err, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setLoading(false);
+            });
+    };
+
     const validate = () => {
-        return dropDownValueFour === "Select" || dropDownValueBank === "Select"
+        return dropDownValueFour === "Select" || dropDownValueBank === null
     }
 
     const [amountFour] = useState([
@@ -51,10 +82,10 @@ const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank
         { id: 3, paymentType: 'Bank card' },
     ])
 
-    const [bankData] = useState([
-        { id: 1, bankType: 'Providious bank' },
-        { id: 2, bankType: 'Polaris bank' },
-    ])
+    // const [bankData] = useState([
+    //     { id: 1, bankType: 'Providious bank' },
+    //     { id: 2, bankType: 'Polaris bank' },
+    // ])
 
     const changeValueFour = async (e) => {
         setDropDownValueFour(e.paymentType)
@@ -64,12 +95,19 @@ const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank
         setDropDownValueBank(e)
     }
 
+    const goToPaymentCart = () => {
+        if (amount){
+            transactionCartData()
+        }
+    }
+
+
     const goToStepFour = () => {
-        setStep(4)
+        setStep(2)
     }
 
     const goToStepSix = () => {
-        setStep(6)
+        setStep(4)
     }
 
 
@@ -102,14 +140,14 @@ const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank
 
                     <Dropdown isOpen={menuBank} toggle={() => setMenuBank(!menuBank)} style={{ cursor: 'pointer', marginBottom: '3em' }} >
                         <DropdownToggle tag="a" className={styles.dropdownToggle} >
-                            <div className={styles.dropDownValue}>{dropDownValueBank}</div>
+                            <div className={styles.dropDownValue}>{dropDownValueBank?.bankName}</div>
                             <div className={styles.dropDownrow}>
                                 <div style={{ color: '#011B6D', }}><MdArrowDropDown style={{ fontSize: '2em' }} /></div>
                             </div>
                         </DropdownToggle>
                         <DropdownMenu className={styles.dropBox}>
                             {data.map((type, second) =>
-                                <DropdownItem className={styles.value} key={second} onClick={() => changeValueBank(type)}>{type.bankName} </DropdownItem>
+                                <DropdownItem className={styles.value} key={second} onClick={() => changeValueBank(type)} value={type.bankName}>{type.bankName} </DropdownItem>
                             )}
                         </DropdownMenu>
                     </Dropdown>
@@ -123,7 +161,7 @@ const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank
                                 <div className={styles.confimationcontent}>
                                     <h1>Total amount to pay</h1>
                                     <div className={styles.confimationsplit}>
-                                        <div className={styles.confimationamount}>ZAR <span>50,150</span></div>
+                                        <div className={styles.confimationamount}>{dropDownValue?.code} <span>{amount}</span></div>
                                         <img src={copy} alt="" />
                                     </div>
 
@@ -132,21 +170,21 @@ const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank
                                         <div className={styles.confimationsplit}>
                                             <div className={styles.confimationbanknamet}>
                                                 <h3>Bank name</h3>
-                                                <p>Providus Bank</p>
+                                                <p>{dropDownValueBank?.bankName}</p>
                                             </div>
                                             <img src={blank} alt="" />
                                         </div>
                                         <div >
                                             <h3 className={styles.banknameh3}>Bank account number</h3>
                                             <div className={styles.bankflex}>
-                                                <p className={styles.banknamep}>2056742391</p>
+                                                <p className={styles.banknamep}>{dropDownValueBank?.accountNo}</p>
                                                 <img src={copy} alt="" />
                                             </div>
                                         </div>
 
                                         <div >
                                             <h3 className={styles.banknameh3}>Bank account name</h3>
-                                            <p className={styles.banknamep}>Teku-PVR</p>
+                                            <p className={styles.banknamep}>{dropDownValueBank?.accountName}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +213,7 @@ const SelectCurrencyPairStep5 = ({ setStep, dropDownValueFour, dropDownValueBank
                                 </button>
                             </div>
 
-                            <div className={styles.paylater}>
+                            <div className={styles.paylater} onClick={goToPaymentCart}>
                                 Pay later (save for later)
                             </div>
                         </>

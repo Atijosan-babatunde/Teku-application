@@ -51,6 +51,7 @@ const GetAllTransactionUsers = async () => {
 const AllTransactionCart = async (body) => {
     return await axios.post(
         API_URL_TRANSACTION_CART, body, {
+        headers: authHeader(),
     }
     ).then((response) => {
         return response.data;
