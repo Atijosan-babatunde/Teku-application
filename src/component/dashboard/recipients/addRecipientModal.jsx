@@ -7,18 +7,56 @@ import countryList from 'react-select-country-list'
 import { MdArrowDropDown } from "react-icons/md";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import documentKYCIcon from '../../../assets/svg//documentKYC.svg'
+import { useDispatch } from 'react-redux';
+import { RecipientUser } from "../../../shared/redux/slices/recipient.slices"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAppSelector } from '../../../shared/redux/reduxHooks';
 
 
 
 const AddRecipientModal = ({ handleModalShow }) => {
     const options = useMemo(() => countryList().getData(), [])
     const [country, setcountry] = useState('')
+    const [paymentMethod, setPaymentMethod] = useState("BANK_TRANSFER");
+    const [paymentDocument, setPaymentDocument] = useState("document.png");
+    const [paymentDescription, setPaymentDescription] = useState("");
+    const [purpose, setPurpose] = useState("");
     const [menuThree, setMenuThree] = useState(false)
-    const [dropDownValueThree, setDropDownValueThree] = useState('Select')
     const [checkBox, setCheckBox] = useState('')
     const [paymentInstruction, setPaymentInstruction] = useState('')
     const [filesName, setFilesName] = useState("");
     const [formData, setFormData] = useState({});
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const recipientUser = useAppSelector((state) => state.recipient.allRecipientUsers)
+    const [data] = useState(recipientUser)
+
+
+    const recipientUserData = () => {
+        setLoading(true);
+        let body = {
+            "country": country?.label,
+            "paymentInstruction": paymentInstruction,
+            "paymentMethod": paymentMethod,
+            "paymentPurpose": purpose,
+            "paymentDocument": paymentDocument,
+            "paymentDescription": paymentDescription,
+        }
+
+        dispatch(RecipientUser(body))
+            .unwrap()
+            .then(() => {
+                setLoading(false);
+                // getRecipientUser()
+            })
+            .catch((err) => {
+                toast.error(err, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setLoading(false);
+            });
+    };
 
     const changeHandler = value => {
         setcountry(value)
@@ -26,7 +64,7 @@ const AddRecipientModal = ({ handleModalShow }) => {
 
 
     const changeValueThree = async (e) => {
-        setDropDownValueThree(e.amount)
+        setPurpose(e.amount);
     }
 
     const [amountThree] = useState([
@@ -70,7 +108,7 @@ const AddRecipientModal = ({ handleModalShow }) => {
     const documentdoc = useRef(null);
 
     const validate = () => {
-        return !checkBox || dropDownValueThree === "Select" || !paymentInstruction || !country || !filesName
+        return !checkBox || purpose === "" || !paymentInstruction || !country || !filesName
     }
 
     const modalref = useRef()
@@ -107,7 +145,7 @@ const AddRecipientModal = ({ handleModalShow }) => {
                         <h2 className={styles.rowname}>Purpose of payment</h2>
                         <Dropdown isOpen={menuThree} toggle={() => setMenuThree(!menuThree)} style={{ cursor: 'pointer' }} >
                             <DropdownToggle tag="a" className={styles.dropdownToggle} >
-                                <div className={styles.dropDownValue}>{dropDownValueThree}</div>
+                                <div className={styles.dropDownValue}>{purpose}</div>
                                 <div className={styles.dropDownrow}>
                                     <div style={{ color: '#011B6D', }}><MdArrowDropDown style={{ fontSize: '2em' }} /></div>
                                 </div>
@@ -138,11 +176,26 @@ const AddRecipientModal = ({ handleModalShow }) => {
 
 
                         <h2 className={styles.rowname}>Payment instruction</h2>
-                        <textarea className={styles.calculatorinputtextarea} type="number" placeholder="Input recipient account details." cols="30" onChange={e => setPaymentInstruction(e.target.value)} />
-                        <p className={styles.green}>0/500</p>
+                        <textarea
+                            className={styles.calculatorinputtextarea}
+                            type="number"
+                            placeholder="Input recipient account details."
+                            cols="30"
+                            onChange={e => setPaymentInstruction(e.target.value)}
+                            maxLength={500}
+                            value={paymentInstruction}
+                        />
+                        <p className={styles.green}>{paymentInstruction.length}/500</p>
 
                         <h2 className={styles.rowname}>Payment description (optional)</h2>
-                        <textarea className={styles.calculatorinputtextarea} type="number" placeholder="Write here" cols="10" />
+                        <textarea
+                            className={styles.calculatorinputtextarea}
+                            type="number"
+                            placeholder="Write here"
+                            cols="10"
+                            value={paymentDescription}
+                            onChange={(e) => setPaymentDescription(e.target.value)}
+                        />
 
                         <div className={styles.clickhere}>
                             <input type='checkbox' onChange={e => setCheckBox(e.target.value)} />
@@ -153,7 +206,7 @@ const AddRecipientModal = ({ handleModalShow }) => {
                             <button
                                 className={styles.btnrequest}
                                 disabled={validate()}
-                                // onClick={goToStepThree}
+                                onClick={recipientUserData}
                                 style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
                             >
                                 Save
@@ -162,6 +215,7 @@ const AddRecipientModal = ({ handleModalShow }) => {
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     );
 }

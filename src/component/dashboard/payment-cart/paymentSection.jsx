@@ -33,8 +33,8 @@ const PaymentSection = () => {
     useEffect(() => {
         getAllTransactionCart();
     }, [data]);
-    
-  
+
+
 
     const getAllTransactionCart = () => {
         setLoading(true);
@@ -137,7 +137,7 @@ const PaymentSection = () => {
                                 </thead>
                                 <tbody>
                                     {data.map((prod, index) =>
-                                        <tr style={{}} key={index}>
+                                        <tr key={index}>
                                             <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
                                                 <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Cash pickup</span>
                                             </td>

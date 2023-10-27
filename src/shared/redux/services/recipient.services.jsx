@@ -20,6 +20,7 @@ const GetRecipientUsersData = async () => {
     return await axios({
         url: API_URL_GET_RECIPIENT_USERS_DATA,
         method: "get",
+        headers: authHeader()
     }).then((response) => {
         return response.data;
     });
