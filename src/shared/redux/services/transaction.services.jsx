@@ -3,8 +3,8 @@ import authHeader from "./headers";
 const API_URL_GRT_USERS_TRANSACTION = process.env.REACT_APP_API_URL + "/transaction/users/personal?page=1&limit=7";
 const API_URL_TRANSACTION_USERS = process.env.REACT_APP_API_URL + "/transaction"
 const API_URL_GET_ALL_TRANSACTION_USERS = process.env.REACT_APP_API_URL + "/transaction"
-const API_URL_TRANSACTION_CART = process.env.REACT_APP_API_URL + "/transaction/cart"
-const API_URL_GET_ALL_TRANSACTION_CART = process.env.REACT_APP_API_URL + "/transaction/cart"
+const API_URL_TRANSACTION_CART = process.env.REACT_APP_API_URL + "/transaction-cart"
+const API_URL_GET_ALL_TRANSACTION_CART = process.env.REACT_APP_API_URL + "/transaction-cart/user"
 const API_URL_GET_BANK_LIST = process.env.REACT_APP_API_URL + "/bank"
 
 
@@ -48,7 +48,7 @@ const GetAllTransactionUsers = async () => {
     });
 };
 
-const AllTransactionCart = async (body) => {
+const SaveTransactionToCart = async (body) => {
     return await axios.post(
         API_URL_TRANSACTION_CART, body, {
         headers: authHeader(),
@@ -74,7 +74,7 @@ const TransactionServices = {
     TransactionUser,
     GetUsersBanksListed,
     GetAllTransactionUsers,
-    AllTransactionCart,
+    SaveTransactionToCart,
     GetAllTransactionCart,
 }
 
