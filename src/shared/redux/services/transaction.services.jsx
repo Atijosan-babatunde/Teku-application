@@ -4,7 +4,7 @@ const API_URL_GRT_USERS_TRANSACTION = process.env.REACT_APP_API_URL + "/transact
 const API_URL_TRANSACTION_USERS = process.env.REACT_APP_API_URL + "/transaction"
 const API_URL_GET_ALL_TRANSACTION_USERS = process.env.REACT_APP_API_URL + "/transaction"
 const API_URL_TRANSACTION_CART = process.env.REACT_APP_API_URL + "/transaction-cart"
-const API_URL_GET_ALL_TRANSACTION_CART = process.env.REACT_APP_API_URL + "/transaction-cart/user"
+const API_URL_GET_ALL_TRANSACTION_CART = process.env.REACT_APP_API_URL + "/transaction-cart/user?page=1&limit=10"
 const API_URL_GET_BANK_LIST = process.env.REACT_APP_API_URL + "/bank"
 
 
