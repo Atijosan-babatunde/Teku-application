@@ -30,7 +30,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
     const modalref = useRef();
     useOnClickOutside(modalref, handleModalShowTransfer);
 
-    console.log("CURRENCY_ONE", dropDownValue);
+    // console.log("CURRENCY_ONE", dropDownValue);
     return (
         <div className={styles.parent}>
             <div className={styles.content} ref={modalref}>
