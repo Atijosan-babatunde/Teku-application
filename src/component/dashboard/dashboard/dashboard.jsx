@@ -276,258 +276,134 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {transactions.map((prod, first) => (
-                  <tr style={{}} key={first}>
-                    <td
-                      className={styles.tabledata}
-                      style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
-                    >
-                      {prod.purpose}
-                      <span
-                        className={styles.insidebtn}
-                        style={{
-                          backgroundColor: "rgba(240, 243, 255, 1)",
-                          borderRadius: "100px",
-                          width: "160px",
-                        }}
+                {transactions &&
+                  transactions.map((prod, first) => (
+                    <tr style={{}} key={first}>
+                      <td
+                        className={styles.tabledata}
+                        style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
                       >
-                        {prod.paymentMethod}
-                      </span>
-                    </td>
+                        {prod.purpose}
+                        <span
+                          className={styles.insidebtn}
+                          style={{
+                            backgroundColor: "rgba(240, 243, 255, 1)",
+                            borderRadius: "100px",
+                            width: "160px",
+                          }}
+                        >
+                          {prod.paymentMethod}
+                        </span>
+                      </td>
 
-                    <td
-                      className={styles.tabledata}
-                      style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
-                    >
-                      {prod.amount}
-                      <span
-                        className={styles.insidebtn}
-                        style={{
-                          backgroundColor: "rgba(240, 243, 255, 1)",
-                          borderRadius: "100px",
-                          width: "160px",
-                        }}
+                      <td
+                        className={styles.tabledata}
+                        style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
                       >
-                        Paid
-                      </span>
-                    </td>
+                        {prod.amount}
+                        <span
+                          className={styles.insidebtn}
+                          style={{
+                            backgroundColor: "rgba(240, 243, 255, 1)",
+                            borderRadius: "100px",
+                            width: "160px",
+                          }}
+                        >
+                          Paid
+                        </span>
+                      </td>
 
-                    <td
-                      className={styles.tabledata}
-                      style={{ paddingTop: "1.5000em" }}
-                    >
-                      <img
-                        src={prod.baseCurrency.icon}
-                        alt=""
-                        className={styles.flagstyle}
-                      />
-                      <span className={styles.flagnamestyle}>
-                        {prod.baseCurrency.code}
-                      </span>
-                      <span className={styles.dash}>-</span>
-                      <img
-                        src={prod.pairCurrency.icon}
-                        alt=""
-                        className={styles.flagstyle}
-                      />
-                      <span className={styles.flagnamestyle}>
-                        {prod.pairCurrency.code}
-                      </span>
-                    </td>
-                    <td
-                      className={styles.tabledata}
-                      style={{ paddingTop: "1.5000em" }}
-                    >
-                      {prod.createdAt}
-                      {/* <div className={styles.tableparagraph}>{prod.sendingMethod}</div> */}
-                    </td>
-                    <td
-                      className={styles.tabledataa}
-                      style={{ paddingTop: "1em" }}
-                    >
-                      <button
-                        className={styles.btn}
-                        // style={{ backgroundColor:  ? "#fff" : "", color:  ? "#000" : ""}}
+                      <td
+                        className={styles.tabledata}
+                        style={{ paddingTop: "1.5000em" }}
                       >
-                        {prod.status}
-                      </button>
-                    </td>
-                    <td
-                      className={styles.tabledatas}
-                      style={{ paddingTop: "1em" }}
-                    >
-                      <Button
-                        id="demo-customized-button"
-                        aria-controls={
-                          open ? "demo-customized-menu" : undefined
-                        }
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                        variant="contained"
-                        disableElevation
-                        onClick={handleBtn}
-                        className="btntable"
-                        style={{ backgroundColor: "transparent" }}
+                        <img
+                          src={prod.baseCurrency.icon}
+                          alt=""
+                          className={styles.flagstyle}
+                        />
+                        <span className={styles.flagnamestyle}>
+                          {prod.baseCurrency.code}
+                        </span>
+                        <span className={styles.dash}>-</span>
+                        <img
+                          src={prod.pairCurrency.icon}
+                          alt=""
+                          className={styles.flagstyle}
+                        />
+                        <span className={styles.flagnamestyle}>
+                          {prod.pairCurrency.code}
+                        </span>
+                      </td>
+                      <td
+                        className={styles.tabledata}
+                        style={{ paddingTop: "1.5000em" }}
                       >
-                        <img src={ellip} alt="" />
-                      </Button>
-                      <StyledMenu
-                        id="demo-customized-menu"
-                        MenuListProps={{
-                          "aria-labelledby": "demo-customized-button",
-                        }}
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
+                        {prod.createdAt}
+                        {/* <div className={styles.tableparagraph}>{prod.sendingMethod}</div> */}
+                      </td>
+                      <td
+                        className={styles.tabledataa}
+                        style={{ paddingTop: "1em" }}
                       >
-                        {subtitle.map((item) => (
-                          <MenuItem
-                            key={item}
-                            className="dropdowndetails"
-                            onClick={() => handleClose(item.text)}
-                            disableRipple
-                          >
-                            {item.imgs}
-                            {item.text}
-                          </MenuItem>
-                        ))}
-                      </StyledMenu>
-                    </td>
-                  </tr>
-                ))}
-
-                {/* {data.map((prod, second) =>
-                                        <tr style={{}} key={second}>
-                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
-                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>{prod.paymentMethod}</span>
-                                            </td>
-
-                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
-                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>In review</span>
-                                            </td>
-
-                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                                <img src={prod.flagone} alt="" className={styles.flagstyle} />
-                                                <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
-                                                <span className={styles.dash}>-</span>
-                                                <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
-                                                <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
-                                            </td>
-                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                                {prod.datetime}
-                                                <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                            </td>
-                                            <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
-                                                <button className={styles.completedbtn}>Completed</button>
-                                            </td>
-                                            <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
-                                                <Button
-                                                    id="demo-customized-button"
-                                                    aria-controls={openCompleted ? "demo-customized-menu" : undefined}
-                                                    aria-haspopup="true"
-                                                    aria-expanded={openCompleted ? "true" : undefined}
-                                                    variant="contained"
-                                                    disableElevation
-                                                    onClick={handleBtnCompleted}
-                                                    className="btntable"
-                                                    style={{ backgroundColor: "transparent" }}
-                                                >
-                                                    <img src={ellip} alt="" />
-                                                </Button>
-                                                <StyledMenu
-                                                    id="demo-customized-menu"
-                                                    MenuListProps={{
-                                                        "aria-labelledby": "demo-customized-button",
-                                                    }}
-                                                    anchorCompletedEl={anchorCompletedEl}
-                                                    open={openCompleted}
-                                                    onClose={handleCloseCompleted}
-                                                >
-                                                    {subtitlecompleted.map((itemcompleted) => (
-                                                        <MenuItem
-                                                            key={itemcompleted}
-                                                            className="dropdowndetails"
-                                                            onClick={() => handleCloseCompleted(itemcompleted.text)}
-                                                            disableRipple
-                                                        >
-                                                            {itemcompleted.imgs}
-                                                            {itemcompleted.text}
-                                                        </MenuItem>
-                                                    ))}
-                                                </StyledMenu>
-                                            </td>
-                                        </tr>
-                                    )} */}
-
-                {/* {data.map((prod, third) =>
-                                        <tr style={{}} key={third}>
-                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
-                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Cash pickup</span>
-                                            </td>
-
-                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
-                                            </td>
-
-                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                                <img src={prod.flagone} alt="" className={styles.flagstyle} />
-                                                <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
-                                                <span className={styles.dash}>-</span>
-                                                <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
-                                                <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
-                                            </td>
-                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                                {prod.datetime}
-                                                <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                            </td>
-                                            <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
-                                                <button className={styles.cancelledbtn}>Cancelled</button>
-                                            </td>
-                                            <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
-                                                <Button
-                                                    id="demo-customized-button"
-                                                    aria-controls={openCancelled ? "demo-customized-menu" : undefined}
-                                                    aria-haspopup="true"
-                                                    aria-expanded={openCancelled ? "true" : undefined}
-                                                    variant="contained"
-                                                    disableElevation
-                                                    onClick={handleBtnCancelled}
-                                                    className="btntable"
-                                                    style={{ backgroundColor: "transparent" }}
-                                                >
-                                                    <img src={ellip} alt="" />
-                                                </Button>
-                                                <StyledMenu
-                                                    id="demo-customized-menu"
-                                                    MenuListProps={{
-                                                        "aria-labelledby": "demo-customized-button",
-                                                    }}
-                                                    anchorCancelledEl={anchorCancelledEl}
-                                                    open={openCancelled}
-                                                    onClose={handleCloseCancelled}
-                                                >
-                                                    {subtitlecancelled.map((itemcancelled) => (
-                                                        <MenuItem
-                                                            key={itemcancelled}
-                                                            className="dropdowndetails"
-                                                            onClick={() => handleCloseCancelled(itemcancelled.text)}
-                                                            disableRipple
-                                                        >
-                                                            {itemcancelled.imgs}
-                                                            {itemcancelled.text}
-                                                        </MenuItem>
-                                                    ))}
-                                                </StyledMenu>
-                                            </td>
-                                        </tr>
-                                    )} */}
+                        <button
+                          className={styles.btn}
+                          // style={{ backgroundColor:  ? "#fff" : "", color:  ? "#000" : ""}}
+                        >
+                          {prod.status}
+                        </button>
+                      </td>
+                      <td
+                        className={styles.tabledatas}
+                        style={{ paddingTop: "1em" }}
+                      >
+                        <Button
+                          id="demo-customized-button"
+                          aria-controls={
+                            open ? "demo-customized-menu" : undefined
+                          }
+                          aria-haspopup="true"
+                          aria-expanded={open ? "true" : undefined}
+                          variant="contained"
+                          disableElevation
+                          onClick={handleBtn}
+                          className="btntable"
+                          style={{ backgroundColor: "transparent" }}
+                        >
+                          <img src={ellip} alt="" />
+                        </Button>
+                        <StyledMenu
+                          id="demo-customized-menu"
+                          MenuListProps={{
+                            "aria-labelledby": "demo-customized-button",
+                          }}
+                          anchorEl={anchorEl}
+                          open={open}
+                          onClose={handleClose}
+                        >
+                          {subtitle.map((item) => (
+                            <MenuItem
+                              key={item}
+                              className="dropdowndetails"
+                              onClick={() => handleClose(item.text)}
+                              disableRipple
+                            >
+                              {item.imgs}
+                              {item.text}
+                            </MenuItem>
+                          ))}
+                        </StyledMenu>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
           <div className={styles.inner}>
-            {product.length < 1 && (
+            {!transactions && (
               <div>
                 <img src={holder} alt="middleimage" />
-                <div className={styles.nocurrency}>No currency</div>
+                <div className={styles.nocurrency}>You have not performed any transaction</div>
               </div>
             )}
           </div>
