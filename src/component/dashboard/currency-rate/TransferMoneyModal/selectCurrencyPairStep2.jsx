@@ -49,10 +49,6 @@ const SelectCurrencyPairStep2 = ({
     }
   };
 
-  // const validate = () => {
-  //     return !amount || !payment
-  // }
-
   const goToStepThree = () => {
     setStep(3);
   };
