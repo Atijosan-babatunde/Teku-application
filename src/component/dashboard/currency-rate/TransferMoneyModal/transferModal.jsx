@@ -18,6 +18,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
   const [dropDownValueTwo, setDropDownValueTwo] = useState(null);
   const [dropDownValueFour, setDropDownValueFour] = useState("Select");
   const [dropDownValueBank, setDropDownValueBank] = useState(null);
+  const [currencyPair, setCurrencyPair] = useState(null);
   const [country, setCountry] = useState("");
   const [purpose, setPurpose] = useState("");
   const [paymentDocument, setPaymentDocument] = useState("document.png");
@@ -30,7 +31,6 @@ const TransferModal = ({ handleModalShowTransfer }) => {
   const modalref = useRef();
   useOnClickOutside(modalref, handleModalShowTransfer);
 
-  console.log("CURRENCY_ONE", dropDownValue);
   return (
     <div className={styles.parent}>
       <div className={styles.content} ref={modalref}>
@@ -144,6 +144,8 @@ const TransferModal = ({ handleModalShowTransfer }) => {
               dropDownValue={dropDownValue}
               dropDownValueTwo={dropDownValueTwo}
               setDropDownValueTwo={setDropDownValueTwo}
+              setCurrencyPair={setCurrencyPair}
+              currencyPair={currencyPair}
             />
           </div>
           <div style={{ display: step === 2 ? "" : "none" }}>
@@ -154,6 +156,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
               amount={amount}
               setAmount={setAmount}
               recipientAmount={recipientAmount}
+              currencyPair={currencyPair}
               setRecipientAmount={setRecipientAmount}
             />
           </div>
