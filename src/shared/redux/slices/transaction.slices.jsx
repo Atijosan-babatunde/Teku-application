@@ -82,11 +82,11 @@ export const GetUsersTransaction = createAsyncThunk(
     }
   );
 
-  export const AllTransactionCart = createAsyncThunk(
-    "transaction/allTransactionCart",
+  export const SaveTransactionToCart = createAsyncThunk(
+    "transaction/saveTransactionCart",
     async (body, thunkAPI) => {
       try {
-        const data = await TransactionServices.AllTransactionCart(
+        const data = await TransactionServices.SaveTransactionToCart(
           body
         );
         return { transaction: data };
@@ -127,7 +127,7 @@ export const GetUsersTransaction = createAsyncThunk(
     allTransactionusers: null,
     getBanksListed: null,
     getAllTransaction: null,
-    allTransactionCart: null,
+    SaveTransactionToCart: null,
     getAllTransactionCart: null,
   };
 
@@ -164,11 +164,11 @@ export const GetUsersTransaction = createAsyncThunk(
         state.getAllTransaction = null;
       })
 
-      builder.addCase(AllTransactionCart.fulfilled, (state, action) => {
-        state.allTransactionCart = action.payload.transaction;
+      builder.addCase(SaveTransactionToCart.fulfilled, (state, action) => {
+        state.saveTransactionToCart = action.payload.transaction;
       })
-      builder.addCase(AllTransactionCart.rejected, (state) => {
-        state.allTransactionCart = null;
+      builder.addCase(SaveTransactionToCart.rejected, (state) => {
+        state.saveTransactionToCart = null;
       })
 
       builder.addCase(GetAllTransactionCart.fulfilled, (state, action) => {
