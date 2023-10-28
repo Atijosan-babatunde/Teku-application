@@ -50,6 +50,13 @@
     align-items: center;
     cursor: pointer;
 }
+
+.userdata{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .title{
     font-family: 'Kanit';
     font-style: normal;
@@ -150,4 +157,72 @@
   
   .dropdown:hover .dropdownContent {
     display: block;
+  }
+
+  .inputspan {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+  }
+  
+  .menuDiv{
+    cursor: pointer;
+  }
+  .menu{
+    color:#000;
+    font-size: 2em;
+    display: none;
+  }             
+  .modalParent{
+    background-color: #ffffff;
+  }
+  .modalMenu{
+    display: grid;
+  }
+  .modalClose{
+   display: flex;
+   justify-content: flex-end;
+  }
+  .modalMenufirst{
+    display: grid;
+  }
+  
+  .hold{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+  @media screen and (max-width:960px) {
+    .parent{
+      padding:1em;
+      align-items: center;
+    }
+    .logoDiv{
+      padding: 0;
+    }
+    .userdata{
+      display: none;
+    }
+   
+    .modal-content{
+      width: 60% !important;
+    }
+    .titleModal{
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.9em;
+      line-height: 48px;
+      /* text-align: center; */
+      color: #ffffff;  
+      cursor: pointer;
+      text-decoration:none;  
+  }
+  .menu{
+    display: inline;
+    cursor: pointer;
+  }
   }

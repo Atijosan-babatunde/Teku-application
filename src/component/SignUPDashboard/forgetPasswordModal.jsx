@@ -94,6 +94,7 @@ const ForgetPasswordModal = ({ handleModalShow }) => {
           </p>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

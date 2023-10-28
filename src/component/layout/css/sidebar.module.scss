@@ -184,13 +184,13 @@
 @media screen and (max-width: 1000px) {
     .parent{
         width: 10%;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         overflow: hidden;
     }
     .main{
-        width: 90%;
+        width: 100%;
         overflow-x: scroll;
         background: #F6F9FC;
         height: 100vh;
