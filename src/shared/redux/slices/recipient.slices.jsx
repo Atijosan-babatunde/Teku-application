@@ -44,9 +44,29 @@ export const GetRecipientUsersData = createAsyncThunk(
   }
 );
 
+export const GetNotificationsData = createAsyncThunk(
+  "recipient/getNotificationUser",
+  async (thunkAPI) => {
+      try {
+          const data = await RecipientServices.GetNotificationsData();
+          return { notification: data.data };
+      } catch (error) {
+          const message =
+              (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+              error.message ||
+              error.toString();
+          thunkAPI.dispatch(setMessage(message));
+          return thunkAPI.rejectWithValue(message);
+      }
+  }
+);
+
 const initialState = {
   allRecipientUsers: null,
   getRecipientUsersData: null,
+  getNotificationsData: null,
 };
 
 export const recipientSlice = createSlice({
@@ -66,6 +86,13 @@ export const recipientSlice = createSlice({
     })
     builder.addCase(GetRecipientUsersData.rejected, (state) => {
       state.getRecipientUsersData = null;
+    })
+
+    builder.addCase(GetNotificationsData.fulfilled, (state, action) => {
+      state.getNotificationsData = action.payload.recipient;
+    })
+    builder.addCase(GetNotificationsData.rejected, (state) => {
+      state.getNotificationsData = null;
     })
   }
 });

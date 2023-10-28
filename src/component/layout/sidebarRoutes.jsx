@@ -1,8 +1,8 @@
 
 import {
-    Route,
-    Routes,
-  } from "react-router-dom";
+  Route,
+  Routes,
+} from "react-router-dom";
 
 import SideMenu from "./sidebar";
 import { useEffect } from "react";
@@ -16,30 +16,31 @@ import Support from "../dashboard/support/support";
 import Transactions from "../dashboard/transaction/transaction";
 
 
-  
-  const SideBarRoute=()=>{
-    useEffect(() => {
-      window.scrollTo(0,0)
-    },[])
-    return (
-      <div >
+
+const SideBarRoute = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  return (
+    <div >
+      {/* <ProtectedRoutes> */}
         <SideMenu>
-        <Routes>   
-          <Route> 
-            <Route  path='/dashboard' element={<Dashboard/>}/>  
-            <Route  path='/currency-rate' element={<CurrencyRate/>}/> 
-            <Route  path='/payment-cart' element={<PaymentCart />}/> 
-            <Route  path='/notification' element={<Notification />}/>
-            <Route  path='/recipient' element={<Recipients />}/>
-            <Route  path='/support' element={<Support />}/>
-            <Route path='/transactions' element={<Transactions />}/>
-            <Route  path='/*' element={<Dashboard/>}/>    
-          </Route> 
-          </Routes>  
+          <Routes>
+            <Route>
+              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/currency-rate' element={<CurrencyRate />} />
+              <Route path='/payment-cart' element={<PaymentCart />} />
+              <Route path='/notification' element={<Notification />} />
+              <Route path='/recipient' element={<Recipients />} />
+              <Route path='/support' element={<Support />} />
+              <Route path='/transactions' element={<Transactions />} />
+              <Route path='/*' element={<Dashboard />} />
+            </Route>
+          </Routes>
         </SideMenu>
-      </div>
-    );
-  }
-  
-  export default SideBarRoute;
-  
+      {/* </ProtectedRoutes> */}
+    </div>
+  );
+}
+
+export default SideBarRoute;

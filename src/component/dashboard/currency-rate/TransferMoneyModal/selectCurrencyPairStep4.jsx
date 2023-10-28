@@ -1,7 +1,7 @@
 import styles from "../../currency-rate/TransferMoneyModal/css/selectcurrencypairstep4.module.scss";
-import nigeria from "../../../../assets/svg/nigeria.svg";
-import usa from "../../../../assets/svg/unitedkingdom.svg";
-import attached from "../../../../assets/png/attached.png";
+// import nigeria from "../../../../assets/svg/nigeria.svg";
+// import usa from "../../../../assets/svg/unitedkingdom.svg";
+// import attached from "../../../../assets/png/attached.png";
 import { BsArrowLeft } from "react-icons/bs";
 
 const SelectCurrencyPairStep4 = ({
