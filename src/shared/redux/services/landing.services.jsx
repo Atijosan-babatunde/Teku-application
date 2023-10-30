@@ -65,6 +65,15 @@ export async function FORGOT_PASSWORD(endpoint, data) {
   }
 }
 
+export async function RESET_PASSWORD(endpoint, data) {
+  const url = process.env.REACT_APP_API_URL + endpoint;
+  try {
+    return await axios.put(url, data);
+  } catch (error) {
+    return error.response;
+  }
+}
+
 const LandingServices = {
   AddGetAllCurrencyPair,
   GetCurrencyPair,
