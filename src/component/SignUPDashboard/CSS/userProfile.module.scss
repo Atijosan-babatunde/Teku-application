@@ -1,0 +1,92 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
+}
+
+
+
+.parent {
+    background: var(--white-grey, #F9F9F9);
+}
+
+.content {
+    background: linear-gradient(180deg, rgba(0, 107, 255, 0.10) 0%, rgba(121, 81, 175, 0.10) 76.04%);
+    height:200px;
+    width: 100%;
+    padding:2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position:initial;
+    z-index: 3000 !important;
+   
+
+    img{
+        padding-bottom:1.4000em;
+    }
+}
+
+.tophead{
+    color: var(--blue-primary, #011B6D);
+    font-family: Gilroy;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+}
+
+.toppara{
+    color: var(--grey-primary, #373737);
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+}
+
+
+.requestbut {
+    justify-content: center;
+    align-items: center;
+    // position: absolute;
+    // bottom:0px;
+}
+
+.btnrequest {
+    gap: 10px;
+      border: none;
+      height: 40px;   
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 28px;
+      text-align: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      padding-left: 2em;
+      padding-right: 2em;
+      width:100%;
+      background: #011B6D;
+      border-radius: 10px;
+}
+
+.btnrequest:hover {
+    background: #0e30a1;
+    color: #ffffff;
+}
+
+.herosection {
+    margin-top: 18em;
+    width:100%;
+}
+.icon{
+    margin-right: 5px;
+}
+
+@media screen and (max-width:960px) {
+    .content{
+        display: grid;
+        height:300px;
+    }
+}

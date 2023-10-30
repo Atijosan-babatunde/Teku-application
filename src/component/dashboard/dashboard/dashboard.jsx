@@ -9,7 +9,7 @@ import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
-import RequestModal from "../currency-rate/RequestModal/requestModal";
+// import RequestModal from "../currency-rate/RequestModal/requestModal";
 import eye from "../../../assets/svg/eye.svg";
 import makeappeal from "../../../assets/svg/makeappeal.svg";
 import download from "../../../assets/svg/download.svg";
@@ -22,11 +22,11 @@ import { styled, alpha } from "@mui/material/styles";
 import PreviewModal from "../payment-cart/previewModal";
 import PaymentRequestModal from "../currency-rate/RequestModal/paymentRequestModal";
 import DeletePaymentModal from "../payment-cart/deletePaymentModal";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [showModalRequest, setShowModalRequest] = useState(false);
   const transactionData = useAppSelector(
     (state) => state.transaction.getTransactionUsers
   );
@@ -34,6 +34,7 @@ const Dashboard = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  let navigate = useNavigate();
 
   const handleBtn = (event) => {
     setAnchorEl(event.currentTarget);
@@ -104,11 +105,14 @@ const Dashboard = () => {
   }
 
   // MODAL STATE FOR REQUEST
-  function handleModalShowRequest() {
-    setShowModalRequest(!showModalRequest);
+  // function handleModalShowRequest() {
+  //   setShowModalRequest(!showModalRequest);
+  // }
+
+  const goToCurrencyPage = () => {
+    navigate('/currency-rate')
   }
 
-  console.log("TRANSACTION", transactions);
   const [product] = useState([
     {
       id: 1,
@@ -178,13 +182,13 @@ const Dashboard = () => {
             <div className={styles.requestbut}>
               <button
                 className={styles.btnrequestcustomise}
-                onClick={handleModalShowRequest}
+                onClick={goToCurrencyPage}
               >
                 Customised request
               </button>
-              {showModalRequest && (
+              {/* {showModalRequest && (
                 <RequestModal {...{ handleModalShowRequest }} />
-              )}
+              )} */}
             </div>
           </div>
 
@@ -198,7 +202,7 @@ const Dashboard = () => {
             </p>
 
             <div className={styles.requestbut}>
-              <button className={styles.btnrequest}>View rate</button>
+              <button className={styles.btnrequest} onClick={goToCurrencyPage}>View rate</button>
             </div>
           </div>
         </div>

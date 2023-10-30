@@ -3,7 +3,11 @@ import styles from './css/sidebar.module.scss';
 import DashboardHeader from "./dashboardheader";  
 import ActiveDashboard from '../../assets/svg/activedashboard.svg';
 import ActiveCurrency from '../../assets/svg/activecurrency.svg';
-import ActiveTransactions from '../../assets/svg/inactivetransactions.svg';
+import ActiveTransactions from '../../assets/svg/activetransactions.svg';
+import ActivePayment from '../../assets/svg/activepayment.svg'
+import ActiveRecipient from '../../assets/svg/activerecipient.svg'
+import ActiveNotification from '../../assets/svg/activenotification.svg'
+import ActiveSupport from '../../assets/svg/activesupport.svg'
 // import ActiveWallet from '../../assets/activewallet.svg';
 import InActiveDashboard from '../../assets/svg/inactivedashboard.svg';
 import InActiveCurrency from '../../assets/svg/inactivecurrency.svg';
@@ -102,7 +106,7 @@ const SideMenu = ({children}) => {
               <NavLink to='/payment-cart' className={styles.link}>  
                  <div className={styles.iconpagename} style={{background:location==='/payment-cart' ? "linear-gradient(#e1e9f5, #F6F6F6)" : ''}}>
                    {location === '/payment-cart' ? 
-                    <img src={ActiveTransactions} className={styles.icon} alt="horse"/> : <img src={InActivePayment} className={styles.icon} alt="horse"/>
+                    <img src={ActivePayment} className={styles.icon} alt="horse"/> : <img src={InActivePayment} className={styles.icon} alt="horse"/>
                    }
                    <div style={{color:location==='/payment-cart' ? '#011B6D' : '#888888'}} className={styles.pageName}>Payment Cart</div>
                 </div>
@@ -111,7 +115,7 @@ const SideMenu = ({children}) => {
               <NavLink to='/recipient' className={styles.link}>  
                  <div className={styles.iconpagename} style={{background:location==='/recipient' ? "linear-gradient(#e1e9f5, #F6F6F6)" : ''}}>
                    {location === '/recipient' ? 
-                    <img src={ActiveTransactions} className={styles.icon} alt="horse"/> : <img src={InActiveRecipient} className={styles.icon} alt="horse"/>
+                    <img src={ActiveRecipient} className={styles.icon} alt="horse"/> : <img src={InActiveRecipient} className={styles.icon} alt="horse"/>
                    }
                    <div style={{color:location==='/recipient' ? '#011B6D' : '#888888'}} className={styles.pageName}>Recipients</div>
                 </div>
@@ -120,7 +124,7 @@ const SideMenu = ({children}) => {
               <NavLink to='/notification' className={styles.link}>  
                  <div className={styles.iconpagename} style={{background:location==='/notification' ? "linear-gradient(#e1e9f5, #F6F6F6)" : ''}}>
                    {location === '/notification' ? 
-                    <img src={ActiveTransactions} className={styles.icon} alt="horse"/> : <img src={InActiveNotification} className={styles.icon} alt="horse"/>
+                    <img src={ActiveNotification} className={styles.icon} alt="horse"/> : <img src={InActiveNotification} className={styles.icon} alt="horse"/>
                    }
                    <div style={{color:location==='/notification' ? '#011B6D' : '#888888'}} className={styles.pageName}>Notification</div>
                 </div>
@@ -129,7 +133,7 @@ const SideMenu = ({children}) => {
               <NavLink to='/support' className={styles.link}>  
                  <div className={styles.iconpagename} style={{background:location==='/support' ? "linear-gradient(#e1e9f5, #F6F6F6)" : ''}}>
                    {location === '/support' ? 
-                    <img src={ActiveTransactions} className={styles.icon} alt="horse"/> : <img src={InActiveSupport} className={styles.icon} alt="horse"/>
+                    <img src={ActiveSupport} className={styles.icon} alt="horse"/> : <img src={InActiveSupport} className={styles.icon} alt="horse"/>
                    }
                    <div style={{color:location==='/support' ? '#011B6D' : '#888888'}} className={styles.pageName}>Support</div>
                 </div>

@@ -14,6 +14,7 @@ import Notification from "../dashboard/notification/notification";
 import Recipients from "../dashboard/recipients/recipients";
 import Support from "../dashboard/support/support";
 import Transactions from "../dashboard/transaction/transaction";
+import UserProfile from "../SignUPDashboard/userProfile";
 
 
 
@@ -34,6 +35,7 @@ const SideBarRoute = () => {
               <Route path='/recipient' element={<Recipients />} />
               <Route path='/support' element={<Support />} />
               <Route path='/transactions' element={<Transactions />} />
+              <Route path="/user-profile" element={<UserProfile/>}/>
               <Route path='/*' element={<Dashboard />} />
             </Route>
           </Routes>

@@ -1,6 +1,6 @@
 import styles from "../SignUPDashboard/CSS/login.module.scss";
 import logo from "../../assets/svg/logo.svg";
-import loginpic from "../../assets/svg/loginpic.svg";
+import loginpic from "../../assets/svg/loginpic.png";
 import arrow from "../../assets/png/arrowright.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";

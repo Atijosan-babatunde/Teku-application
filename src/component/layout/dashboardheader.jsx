@@ -3,9 +3,9 @@ import Logo from ".././../assets/svg/logo.svg";
 import Passport from "../../assets/png/passport.jpg";
 import { IoMdArrowDropdown } from "react-icons/io";
 import usericon from '../../assets/svg/usericon.svg'
-import settingsimg from '../../assets/svg/settingsimg.svg'
+// import settingsimg from '../../assets/svg/settingsimg.svg'
 import logoutuser from '../../assets/svg/logoutuser.svg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
 import { Modal, ModalBody } from "reactstrap";
 import { useState } from 'react';
@@ -14,11 +14,16 @@ import { useState } from 'react';
 const DashboardHeader = () => {
     const [showMenu, setShowMenu] = useState(true);
     const [modal, setModal] = useState(false);
+    let navigate = useNavigate();
 
     const toggle = () => {
         setModal(!modal);
         setShowMenu(!showMenu);
     };
+
+    const goToUserProfile = () => {
+        navigate('/user-profile')
+    }
 
     return (
         <div className={styles.parent}>
@@ -37,22 +42,24 @@ const DashboardHeader = () => {
                     <div className={styles.dropdown}>
                         <div className={styles.name}>Babatunde <span><IoMdArrowDropdown /></span></div>
                         <div className={styles.dropdownContent}>
-                            <div className={styles.dropDownRow}>
-                                <div className={styles.logoDrodownDiv}>
-                                    <img
-                                        src={usericon}
-                                        className={styles.dropIcon}
-                                        alt="horse"
-                                    />
-                                </div>
-                                <div className={styles.logoTitleDiv}>
-                                    <div className={styles.dropDowntitle}>
-                                        Profile
+
+                            <div className={styles.dropDownRow} onClick={goToUserProfile}>
+                                    <div className={styles.logoDrodownDiv}>
+                                        <img
+                                            src={usericon}
+                                            className={styles.dropIcon}
+                                            alt="horse"
+                                        />
                                     </div>
-                                </div>
+                                    <div className={styles.logoTitleDiv}>
+
+                                        <div className={styles.dropDowntitle}>
+                                            Profile
+                                        </div>
+                                    </div>
                             </div>
 
-                            <div className={styles.dropDownRow}>
+                            {/* <div className={styles.dropDownRow}>
 
                                 <div className={styles.logoDrodownDiv}>
                                     <img
@@ -67,7 +74,7 @@ const DashboardHeader = () => {
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> */}
                             <div className={styles.dropDownRow}>
 
                                 <div className={styles.logoDrodownDiv}>
