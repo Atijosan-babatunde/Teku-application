@@ -12,6 +12,7 @@ import { LoginUser } from "../../shared/redux/slices/landing.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "../../shared/redux/reduxHooks";
+import ReactLoading from "react-loading";
 
 const LogIn = () => {
   const [password, setPassword] = useState("");
@@ -137,6 +138,9 @@ const LogIn = () => {
                 >
                   Sign In
                 </button>
+                {loading && (
+                  <ReactLoading color="blue" width={25} height={25} type="spin" />
+                )}
               </div>
             </div>
             {showModal && <ForgetPasswordModal {...{ handleModalShow }} />}

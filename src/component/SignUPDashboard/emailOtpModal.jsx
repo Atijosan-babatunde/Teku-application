@@ -4,6 +4,12 @@ import useOnClickOutside from "../../shared/Hooks/useOnClickOutside";
 import cancel from "../../assets/png/cancel.png";
 import flyimg from "../../assets/svg/flymodal.svg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { VerifyUserAuth } from "../../shared/redux/slices/landing.slices";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAppSelector } from "../../shared/redux/reduxHooks";
+import ReactLoading from "react-loading";
 
 const EmailOtpModal = ({ handleModalShow }) => {
   const [firstSpace, setFirstSpace] = useState("");
@@ -14,12 +20,36 @@ const EmailOtpModal = ({ handleModalShow }) => {
   const [sixthSpace, setSixthSpace] = useState("");
   const navigate = useNavigate();
   const modalref = useRef();
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const verifyDetails = useAppSelector((state) => state.landing.verifyAuthData);
+  const [data] = useState(verifyDetails);
+
+  const verifyUserData = () => {
+    setLoading(true);
+    let body = {
+      token:""
+    };
+
+    dispatch( VerifyUserAuth(body))
+      .unwrap()
+      .then(() => {
+        setLoading(false);
+        navigate("/welcome-personal-data");
+      })
+      .catch((err) => {
+        toast.error(err, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setLoading(false);
+      });
+  };
 
   useOnClickOutside(modalref, handleModalShow);
 
-  const goToWelcome = () => {
-    navigate("/welcome-personal-data");
-  };
+  // const goToWelcome = () => {
+  //   navigate("/welcome-personal-data");
+  // };
 
   const validate = () => {
     return (
@@ -88,13 +118,16 @@ const EmailOtpModal = ({ handleModalShow }) => {
               <button
                 className={styles.btnrequest}
                 disabled={validate()}
-                onClick={goToWelcome}
+                onClick={verifyUserData}
                 style={{
                   backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " ",
                 }}
               >
                 Continue
               </button>
+              {loading && (
+                <ReactLoading color="blue" width={25} height={25} type="spin" />
+              )}
             </div>
           </div>
         </div>
@@ -102,6 +135,7 @@ const EmailOtpModal = ({ handleModalShow }) => {
           Resend code: <span>60secs</span>
         </p>
       </div>
+      <ToastContainer />
     </div>
   );
 };

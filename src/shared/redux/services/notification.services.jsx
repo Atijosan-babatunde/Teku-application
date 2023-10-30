@@ -27,6 +27,7 @@ const GetInboxData = async () => {
 
 const NotificationServices = {
   GetNotificationsData,
+  GetInboxData
 };
 
 export default NotificationServices;

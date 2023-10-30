@@ -29,7 +29,6 @@ export const GetCurrencyPair = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const data = await LandingServices.GetCurrencyPair();
-      console.log("dataas",data)
       return { landing: data.data };
     } catch (error) {
       const message =
@@ -124,6 +123,27 @@ export const RegisterUser = createAsyncThunk(
   }
 );
 
+export const VerifyUserAuth = createAsyncThunk(
+  "landing/verifyauth",
+  async (body, thunkAPI) => {
+    try {
+      const data = await LandingServices.VerifyUserAuth(
+        body
+      );
+      return { landing: data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 
 const initialState = {
   addAllCurrencyData: null,
@@ -132,6 +152,7 @@ const initialState = {
   getAllCurrencyRate: null,
   getloginUser: null,
   getUserRegistered: null,
+  verifyAuthData: null,
 };
 
 export const landingSlice = createSlice({
@@ -179,6 +200,13 @@ export const landingSlice = createSlice({
     })
     builder.addCase(RegisterUser.rejected, (state) => {
       state.getUserRegistered = null;
+    })
+
+    builder.addCase(VerifyUserAuth.fulfilled, (state, action) => {
+      state.verifyAuthData = action.payload.landing;
+    })
+    builder.addCase(VerifyUserAuth.rejected, (state) => {
+      state.verifyAuthData = null;
     })
   }
 });
