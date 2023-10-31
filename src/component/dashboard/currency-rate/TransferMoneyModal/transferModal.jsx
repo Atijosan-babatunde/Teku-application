@@ -214,7 +214,18 @@ const TransferModal = ({ handleModalShowTransfer }) => {
             />
           </div>
           <div style={{ display: step === 6 ? "" : "none" }}>
-            <SelectCurrencyPairStep6 setStep={setStep} />
+            <SelectCurrencyPairStep6
+              setStep={setStep}
+              country={country}
+              recipientAmount={recipientAmount}
+              purpose={purpose}
+              dropDownValue={dropDownValue}
+              dropDownValueTwo={dropDownValueTwo}
+              paymentDocument={paymentDocument}
+              paymentInstruction={paymentInstruction}
+              paymentDescription={paymentDescription}
+              paymentMethod={paymentMethod}
+            />
           </div>
         </div>
       </div>
