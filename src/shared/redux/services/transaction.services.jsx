@@ -82,11 +82,11 @@ const checkCurrencyPair = async (endpoint) => {
 const performTrasaction = async (endpoint, data) => {
   const url = process.env.REACT_APP_API_URL + endpoint;
   try {
-    return await axios.post(url, data);
+    return await axios.post(url, data, { headers: authHeader() });
   } catch (error) {
     return error.response;
   }
-}
+};
 
 const TransactionServices = {
   GetUsersTransaction,
@@ -96,7 +96,7 @@ const TransactionServices = {
   SaveTransactionToCart,
   GetAllTransactionCart,
   checkCurrencyPair,
-  performTrasaction
+  performTrasaction,
 };
 
 export default TransactionServices;

@@ -57,7 +57,7 @@ const SelectCurrencyPairStep6 = ({
   const payload = {
     baseCurrencyId: dropDownValue?.id,
     pairCurrencyId: dropDownValueTwo?.id,
-    amount: recipientAmount,
+    amount: parseFloat(recipientAmount),
     country: country?.label,
     purpose,
     paymentDocument,
