@@ -219,7 +219,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
               country={country}
               recipientAmount={recipientAmount}
               purpose={purpose}
-              bankName={bankName}
+              dropDownValueBank={dropDownValueBank}
               dropDownValue={dropDownValue}
               dropDownValueTwo={dropDownValueTwo}
               paymentDocument={paymentDocument}
