@@ -28,17 +28,13 @@ const EmailOtpModal = ({ handleModalShow }) => {
   const verifyUserData = () => {
     setLoading(true);
     let body = {
-      token: firstSpace, 
-             secondSpace, 
-             thirdSpace,
-             fourthSpace,
-             fifthSpace,
-             sixthSpace
+      token: `${firstSpace}${secondSpace}${thirdSpace}${fourthSpace}${fifthSpace}${sixthSpace}`,
     };
 
-    dispatch( VerifyUserAuth(body))
+    dispatch(VerifyUserAuth(body))
       .unwrap()
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         setLoading(false);
         navigate("/welcome-personal-data");
       })
@@ -129,10 +125,15 @@ const EmailOtpModal = ({ handleModalShow }) => {
                 }}
               >
                 {loading ? (
-                  <ReactLoading color="white" width={25} height={25} type="spin" />
-                  ) : (
+                  <ReactLoading
+                    color="white"
+                    width={25}
+                    height={25}
+                    type="spin"
+                  />
+                ) : (
                   "Continue"
-                  )}
+                )}
               </button>
             </div>
           </div>
