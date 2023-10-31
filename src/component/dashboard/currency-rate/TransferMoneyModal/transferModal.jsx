@@ -26,7 +26,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
   const [paymentDescription, setPaymentDescription] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("BANK_TRANSFER");
   const [bankName, setBankName] = useState("");
-  const [confirmation, setConfirmation] = useState("");
+  const [confirmation, setConfirmation] = useState("hello.pdf");
 
   const modalref = useRef();
   useOnClickOutside(modalref, handleModalShowTransfer);
@@ -219,12 +219,15 @@ const TransferModal = ({ handleModalShowTransfer }) => {
               country={country}
               recipientAmount={recipientAmount}
               purpose={purpose}
+              bankName={bankName}
               dropDownValue={dropDownValue}
               dropDownValueTwo={dropDownValueTwo}
               paymentDocument={paymentDocument}
               paymentInstruction={paymentInstruction}
               paymentDescription={paymentDescription}
               paymentMethod={paymentMethod}
+              confirmation={confirmation}
+              setConfirmation={setConfirmation}
             />
           </div>
         </div>

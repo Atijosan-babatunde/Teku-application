@@ -2,10 +2,28 @@ import styles from "../../currency-rate/TransferMoneyModal/css/selectcurrencypai
 import { BsArrowLeft } from "react-icons/bs";
 import documentKYCIcon from "../../../../assets/svg//documentKYC.svg";
 import { useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PaymentProccessing from "../RequestModal/paymentProcessing";
+import TransactionServices from "../../../../shared/redux/services/transaction.services";
 
-const SelectCurrencyPairStep6 = ({ setStep }) => {
+const SelectCurrencyPairStep6 = ({
+  setStep,
+  country,
+  recipientAmount,
+  purpose,
+  bankName,
+  dropDownValue,
+  dropDownValueTwo,
+  paymentDocument,
+  paymentInstruction,
+  paymentDescription,
+  paymentMethod,
+  confirmation,
+  setConfirmation,
+}) => {
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [filesName, setFilesName] = useState("");
   const [formData, setFormData] = useState({});
 
@@ -34,6 +52,35 @@ const SelectCurrencyPairStep6 = ({ setStep }) => {
 
   const handleClickReciept = () => {
     document.current.click();
+  };
+
+  const payload = {
+    baseCurrencyId: dropDownValue?.id,
+    pairCurrencyId: dropDownValueTwo?.id,
+    amount: recipientAmount,
+    country: country?.label,
+    purpose,
+    paymentDocument,
+    paymentInstruction,
+    paymentDescription,
+    paymentMethod,
+    bankName,
+    confirmation,
+  };
+
+  const handleTransaction = async () => {
+    setLoading(true);
+    const endpoint = `/transaction`;
+    try {
+      const response = await TransactionServices.performTrasaction(endpoint, {
+        payload,
+      });
+      console.log(response)
+      setLoading(false);
+      setShowModal(!showModal);
+    } catch (e) {
+      toast.error(`Network error, Kindly check internet connections`);
+    }
   };
 
   const goToStepFive = () => {
@@ -75,7 +122,7 @@ const SelectCurrencyPairStep6 = ({ setStep }) => {
         </div>
 
         <div className={styles.requestbut}>
-          <button className={styles.btnrequest} onClick={handleModalShow}>
+          <button className={styles.btnrequest} onClick={handleTransaction}>
             Submit
           </button>
         </div>
