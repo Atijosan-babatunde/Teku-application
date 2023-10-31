@@ -1,25 +1,23 @@
 import { useState } from "react";
 import styles from "../transaction/css/transaction.module.scss";
-import RequestModal from "../currency-rate/RequestModal/requestModal";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
 import TransactionSection from "./transactionSection";
+import { useNavigate } from "react-router-dom";
 
 const Transactions = () => {
   // MODAL STATE
-
   const [showModal, setShowModal] = useState(false);
 
   function handleModalShowTransfer() {
     setShowModal(!showModal);
   }
 
-  // MODAL STATE
+  let navigate = useNavigate();
+  const goToCurrencyPage = () => {
+    navigate("/currency-rate");
+  };
 
-  const [showModalRequest, setShowModalRequest] = useState(false);
-
-  function handleModalShowRequest() {
-    setShowModalRequest(!showModalRequest);
-  }
+ 
   return (
     <div className={styles.parent}>
       <div className={styles.content}>
@@ -32,11 +30,10 @@ const Transactions = () => {
         <div className={styles.requestbut}>
           <button
             className={styles.btnrequest}
-            onClick={handleModalShowRequest}
+            onClick={goToCurrencyPage}
           >
             Request money
           </button>
-          {showModalRequest && <RequestModal {...{ handleModalShowRequest }} />}
           <button
             className={styles.btnrequest}
             onClick={handleModalShowTransfer}

@@ -19,6 +19,7 @@ import { RecipientUser } from "../../../../shared/redux/slices/recipient.slices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from '../../../../shared/redux/reduxHooks';
+import ReactLoading from "react-loading";
 
 
 const SelectCurrencyPairStep3 = ({
@@ -264,7 +265,11 @@ const SelectCurrencyPairStep3 = ({
                                 backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " ",
                             }}
                         >
-                            Continue
+                            {loading ? (
+                                <ReactLoading color="white" width={25} height={25} type="spin" />
+                            ) : (
+                                "Continue"
+                            )}
                         </button>
                     </div>
                 </div>

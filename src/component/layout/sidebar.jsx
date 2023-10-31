@@ -1,4 +1,4 @@
-import {NavLink, useLocation, useNavigate } from "react-router-dom";
+import {NavLink, useLocation } from "react-router-dom";
 import styles from './css/sidebar.module.scss';
 import DashboardHeader from "./dashboardheader";  
 import ActiveDashboard from '../../assets/svg/activedashboard.svg';
@@ -17,57 +17,57 @@ import InActiveRecipient from '../../assets/svg/inactiverecipient.svg';
 import InActiveNotification from '../../assets/svg/inactivenotification.svg';
 import InActiveSupport from '../../assets/svg/inactivesupport.svg';
 import LogOut from '../../assets/svg/logout.svg';
-import { useEffect, useState } from "react";
-import { useIdleTimer } from 'react-idle-timer'
+import { useState } from "react";
+// import { useIdleTimer } from 'react-idle-timer'
 import { Modal, ModalBody } from "reactstrap";
 // import { AppPrimaryButton } from "../../shared/utils/buttons";
 const SideMenu = ({children}) => {
-  const [state, setState] = useState('Active')
-  const [count, setCount] = useState(0)
-  const [remaining, setRemaining] = useState(0)
+  // const [state, setState] = useState('Active')
+  // const [count, setCount] = useState(0)
+  // const [remaining, setRemaining] = useState(0)
   const [modal, setModal] = useState(false);
   const [backdrop] = useState(false);
   const location = useLocation().pathname;
-  let navigate=useNavigate()
+  // let navigate=useNavigate()
 
   const toggle = () => {
     setModal(!modal);
   } 
-  const onIdle = () => {
-    setState('Idle')
-  }
-  const logOut=()=>{
-    navigate('/')
-  }
+  // const onIdle = () => {
+  //   setState('Idle')
+  // }
+  // const logOut=()=>{
+  //   navigate('/')
+  // }
 
-  const onActive = () => {
-    setState('Active')
-  }
+  // const onActive = () => {
+  //   setState('Active')
+  // }
 
-  const onAction = () => {
-    setCount(count + 1)
-  }
-  const { getRemainingTime } = useIdleTimer({
-    onIdle,
-    onActive,
-    onAction,
-    timeout: 5_000,
-    throttle: 500
-  })
+  // const onAction = () => {
+  //   setCount(count + 1)
+  // }
+  // const { getRemainingTime } = useIdleTimer({
+  //   // onIdle,
+  //   // onActive,
+  //   onAction,
+  //   timeout: 5_000,
+  //   throttle: 500
+  // })
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRemaining(Math.ceil(getRemainingTime() / 1000))
-    }, 500)
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setRemaining(Math.ceil(getRemainingTime() / 1000))
+  //   }, 500)
 
-    return () => {
-      clearInterval(interval)
-    }
-  })
+  //   return () => {
+  //     clearInterval(interval)
+  //   }
+  // })
 
-  useEffect(() => {
-    window.scrollTo(0,0)
-  },[])
+  // useEffect(() => {
+  //   window.scrollTo(0,0)
+  // },[])
 
 
     return ( 

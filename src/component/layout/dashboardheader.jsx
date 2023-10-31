@@ -32,6 +32,7 @@ const DashboardHeader = () => {
 
     useEffect(() => {
         getUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     const getUser = () => {
@@ -133,81 +134,81 @@ const DashboardHeader = () => {
                         </div>
                     </div>
 
-                </div>
-            </div>
-
-            <div onClick={toggle} className={styles.menuDiv}>
-                {/* <div className={styles.logoDivmobile}>
+                    <div onClick={toggle} className={styles.menuDiv}>
+                        {/* <div className={styles.logoDivmobile}>
                     <img src={Logo} className={styles.logomobile} alt="logo" />
                 </div> */}
-                <AiOutlineMenu className={styles.menu} />
-            </div>
-
-            <Modal isOpen={modal} toggle={toggle} fullscreen style={{ width: "60%" }}>
-                <ModalBody className={styles.modalParent}>
-                    <div onClick={toggle} className={styles.modalClose}> <AiOutlineClose className={styles.menu} /></div>
-                    <div className={styles.modalMenu}>
-                        <div className={styles.modalMenufirst}>
-                            <Link
-                                onClick={toggle}
-                                className={styles.titleModal}
-                                to="/dashboard"
-                            >
-                                Dashboard
-                            </Link>
-                            <Link
-                                onClick={toggle}
-                                className={styles.titleModal}
-                                to="/currency-rate"
-                            >
-                                Currency rate
-                            </Link>
-                            <Link
-                                onClick={toggle}
-                                className={styles.titleModal}
-                                to="/payment-cart"
-                            >
-                                Payment cart
-                            </Link>
-                            <Link
-                                onClick={toggle}
-                                className={styles.titleModal}
-                                to="/transactions"
-                            >
-                                Transactions
-                            </Link>
-                            <Link
-                                onClick={toggle}
-                                className={styles.titleModal}
-                                to="/recipient"
-                            >
-                                Recipients
-                            </Link>
-                            <Link
-                                onClick={toggle}
-                                className={styles.titleModal}
-                                to="/notification"
-                            >
-                                Notification
-                            </Link>
-                            <Link
-                                onClick={toggle}
-                                className={styles.titleModal}
-                                to="/support"
-                            >
-                                Support
-                            </Link>
-                            <Link
-                                onClick={toggle}
-                                className={styles.titleModal}
-                                to="/login"
-                            >
-                                Log out
-                            </Link>
-                        </div>
+                        <AiOutlineMenu className={styles.menu} />
                     </div>
-                </ModalBody>
-            </Modal>
+
+                    <Modal isOpen={modal} toggle={toggle} fullscreen style={{ width: "60%" }}>
+                        <ModalBody className={styles.modalParent}>
+                            <div onClick={toggle} className={styles.modalClose}> <AiOutlineClose className={styles.menu} /></div>
+                            <div className={styles.modalMenu}>
+                                <div className={styles.modalMenufirst}>
+                                    <Link
+                                        onClick={toggle}
+                                        className={styles.titleModal}
+                                        to="/dashboard"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                    <Link
+                                        onClick={toggle}
+                                        className={styles.titleModal}
+                                        to="/currency-rate"
+                                    >
+                                        Currency rate
+                                    </Link>
+                                    <Link
+                                        onClick={toggle}
+                                        className={styles.titleModal}
+                                        to="/payment-cart"
+                                    >
+                                        Payment cart
+                                    </Link>
+                                    <Link
+                                        onClick={toggle}
+                                        className={styles.titleModal}
+                                        to="/transactions"
+                                    >
+                                        Transactions
+                                    </Link>
+                                    <Link
+                                        onClick={toggle}
+                                        className={styles.titleModal}
+                                        to="/recipient"
+                                    >
+                                        Recipients
+                                    </Link>
+                                    <Link
+                                        onClick={toggle}
+                                        className={styles.titleModal}
+                                        to="/notification"
+                                    >
+                                        Notification
+                                    </Link>
+                                    <Link
+                                        onClick={toggle}
+                                        className={styles.titleModal}
+                                        to="/support"
+                                    >
+                                        Support
+                                    </Link>
+                                    <Link
+                                        onClick={toggle}
+                                        className={styles.titleModal}
+                                        to="/login"
+                                    >
+                                        Log out
+                                    </Link>
+                                </div>
+                            </div>
+                        </ModalBody>
+                    </Modal>
+
+                </div>
+            </div>
             <ToastContainer />
         </div>
     );

@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { GetInboxData } from "../../../shared/redux/slices/notification.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
+
 
 const InboxMessage = () => {
   const [loading, setLoading] = useState(false);
@@ -19,6 +21,7 @@ const InboxMessage = () => {
   console.log(data)
   useEffect(() => {
     getInboxMessages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const getInboxMessages = () => {
@@ -53,6 +56,9 @@ const InboxMessage = () => {
             </div>
           ))}
         </>
+        {loading && (
+          <ReactLoading color="blue" width={25} height={25} type="spin" />
+        )}
         <div className={styles.inner}>
           {data.length < 1 && (
             <div>
@@ -62,6 +68,7 @@ const InboxMessage = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

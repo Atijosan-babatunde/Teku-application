@@ -17,6 +17,7 @@ import { SaveTransactionToCart } from "../../../../shared/redux/slices/transacti
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 const SelectCurrencyPairStep5 = ({
   setStep,
@@ -249,7 +250,11 @@ const SelectCurrencyPairStep5 = ({
                       : " ",
                   }}
                 >
-                  Confirm payment
+                  {loading ? (
+                    <ReactLoading color="white" width={25} height={25} type="spin" />
+                  ) : (
+                    "Confirm payment"
+                  )}
                 </button>
               </div>
             </>
@@ -266,12 +271,20 @@ const SelectCurrencyPairStep5 = ({
                       : " ",
                   }}
                 >
-                  Generate account details
+                  {loading ? (
+                    <ReactLoading color="white" width={25} height={25} type="spin" />
+                  ) : (
+                    "Generate account details"
+                  )}
                 </button>
               </div>
 
               <div className={styles.paylater} onClick={goToPaymentCart}>
-                Pay later (save for later)
+                {loading ? (
+                  <ReactLoading color="white" width={25} height={25} type="spin" />
+                ) : (
+                  "Pay later (save for later)"
+                )}
               </div>
             </>
           )}

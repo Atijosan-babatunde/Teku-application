@@ -9,6 +9,12 @@ import countryList from 'react-select-country-list'
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from 'react-icons/md'
 import { Link } from "react-router-dom"
 import SignUpEmailOtpModal from "../../signUpEmailOtpModal";
+import { useDispatch } from "react-redux";
+import { RegisterUser } from "../../../../shared/redux/slices/landing.slices";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAppSelector } from "../../../../shared/redux/reduxHooks";
+import ReactLoading from "react-loading";
 
 const BusinessRegistration = () => {
     const options = useMemo(() => countryList().getData(), [])
@@ -20,7 +26,40 @@ const BusinessRegistration = () => {
     const [checkBox, setCheckBox] = useState('')
     const [passwordType, setPasswordType] = useState("password");
     const [confirmPasswordType, setConfirmPasswordType] = useState("password")
-    
+    const [showErrorBox, setShowErrorBox] = useState(false);
+    const [special, setSpecial] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const registerUser = useAppSelector(
+        (state) => state.landing.getUserRegistered
+    );
+    const [data] = useState(registerUser);
+    const accountType = sessionStorage.getItem("accountType");
+
+    const registerUserData = () => {
+        setLoading(true);
+        let body = {
+            email: email,
+            password: password,
+            businessName: businessName,
+            country: country.label,
+            accountType: accountType,
+        };
+
+        dispatch(RegisterUser(body))
+            .unwrap()
+            .then(() => {
+                setLoading(false);
+                handleModalShow()
+            })
+            .catch((err) => {
+                toast.error(err, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setLoading(false);
+            });
+    };
+
 
     const togglePassword = () => {
         if (passwordType === "password") {
@@ -62,6 +101,32 @@ const BusinessRegistration = () => {
         navigate("/");
     };
 
+    const handleChange2 = (event) => {
+        const value = event.target.value;
+
+        // Check for special characters
+        const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+
+        // Handle the conditions as needed
+        if (hasSpecialCharacter) {
+            setSpecial(true);
+            console.log(hasSpecialCharacter);
+        }
+        setPassword(value);
+    };
+
+    const validatePassword = () => {
+        setShowErrorBox(!showErrorBox);
+
+        const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        // Handle the conditions as needed
+        if (hasSpecialCharacter) {
+            setSpecial(true);
+        }
+    };
+
+
     return (
         <div className={styles.parent}>
             <div className={styles.content}>
@@ -97,17 +162,36 @@ const BusinessRegistration = () => {
 
                                     <h2 className={styles.rowname}>Password</h2>
                                     <div className={styles.group}>
-                                        <input className={styles.calculatorinputgroup}
+                                        <input
+                                            className={styles.calculatorinputgroup}
                                             type={passwordType}
                                             placeholder="Enter password"
-                                            onChange={e => setPassword(e.target.value)}
+                                            onChange={handleChange2}
+                                            onFocus={validatePassword}
                                             value={password}
                                             name="password"
                                         />
                                         <div className="input-group-btn">
-                                            <button className={styles.visibility} onClick={togglePassword}>
-                                                {passwordType === "password" ? <MdOutlineVisibilityOff /> : < MdOutlineVisibility />}
+                                            <button
+                                                className={styles.visibility}
+                                                onClick={togglePassword}
+                                            >
+                                                {passwordType === "password" ? (
+                                                    <MdOutlineVisibilityOff />
+                                                ) : (
+                                                    <MdOutlineVisibility />
+                                                )}
                                             </button>
+                                        </div>
+                                    </div>
+                                    <div style={{ display: showErrorBox ? "" : "none" }}>
+                                        <div
+                                            style={{ display: password.length < 8 ? " " : "none" }}
+                                        >
+                                            8 characters minimum
+                                        </div>
+                                        <div style={{ display: special ? "none" : "" }}>
+                                            At least one number or symbol (like !@#$%^&*)
                                         </div>
                                     </div>
 
@@ -157,11 +241,15 @@ const BusinessRegistration = () => {
                             <div className={styles.requestbut}>
                                 <button
                                     className={styles.btnrequest}
-                                    onClick={handleModalShow}
+                                    onClick={registerUserData}
                                     disabled={validate()}
                                     style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
                                 >
-                                    Create account
+                                    {loading ? (
+                                        <ReactLoading color="white" width={25} height={25} type="spin" />
+                                    ) : (
+                                        "Create account"
+                                    )}
                                 </button>
                             </div>
                             {showModal && <SignUpEmailOtpModal {...{ handleModalShow }} />}
@@ -172,6 +260,7 @@ const BusinessRegistration = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

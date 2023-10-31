@@ -5,14 +5,14 @@ import styles from '../payment-cart/css/permanentlydeletedmodal.module.scss'
 import deleteimg from '../../../assets/svg/deleteimg.svg'
 
 
-const PermernentlyDeletedModal = ({ handleModalShow }) => {
+const PermernentlyDeletedModal = ({ handleModalPermanentlyDel }) => {
     const modalref = useRef()
-    useOnClickOutside(modalref, handleModalShow)
+    useOnClickOutside(modalref, handleModalPermanentlyDel)
 
     return (
         <div className={styles.parent}>
             <div className={styles.content} ref={modalref}>
-                <div className={styles.closemodal} onClick={handleModalShow}>
+                <div className={styles.closemodal} onClick={handleModalPermanentlyDel}>
                     <img src={cancel} alt="close modal" />
                 </div>
                 <div className={styles.contentholder}>
@@ -24,7 +24,7 @@ const PermernentlyDeletedModal = ({ handleModalShow }) => {
                     <div className={styles.requestbut}>
                         <button
                             className={styles.btnrequest}
-                            onClick={handleModalShow}
+                            // onClick={handleModalShow}
                         >
                             Done
                         </button>

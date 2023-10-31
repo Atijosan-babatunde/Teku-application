@@ -7,15 +7,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from '../../../shared/redux/reduxHooks';
 import international from "../../../assets/svg/international.svg"
+import { useNavigate } from "react-router-dom"
+import ReactLoading from "react-loading";
 
 const SeeAllTodayRate = () => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const currencyData = useAppSelector((state) => state.landing.getAllCurrencyData)
     const [data] = useState(currencyData)
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         getCurrencyPair();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
 
@@ -33,6 +38,10 @@ const SeeAllTodayRate = () => {
                 setLoading(false);
             });
     };
+
+    const goToLogin = () => {
+        navigate("/login")
+    }
 
 
     if (data) {
@@ -67,12 +76,15 @@ const SeeAllTodayRate = () => {
                                             <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
                                         </td>
                                         <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.btn}>Request <BsFillSendFill /></button>
+                                            <button className={styles.btn} onClick={goToLogin}>Request <BsFillSendFill /></button>
                                         </td>
                                     </tr>
                                 )}
                             </tbody>
                         </table>
+                        {loading && (
+                            <ReactLoading color="blue" width={25} height={25} type="spin" />
+                        )}
                         <div className={styles.inner}>
                             {data.length < 1 && (
                                 <div>

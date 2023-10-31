@@ -18,6 +18,7 @@ import {
 } from "../../../../shared/redux/slices/landing.slices";
 import { useAppSelector } from "../../../../shared/redux/reduxHooks";
 import TransactionServices from "../../../../shared/redux/services/transaction.services";
+import ReactLoading from "react-loading";
 
 const SelectCurrencyPairStep1 = ({
   setStep,
@@ -225,7 +226,11 @@ const SelectCurrencyPairStep1 = ({
                   backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " ",
                 }}
               >
-                Continue
+                {loading ? (
+                  <ReactLoading color="white" width={25} height={25} type="spin" />
+                ) : (
+                  "Continue"
+                )}
               </button>
             </div>
           </div>

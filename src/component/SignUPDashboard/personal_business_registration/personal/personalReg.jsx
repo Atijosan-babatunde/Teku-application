@@ -14,6 +14,7 @@ import { RegisterUser } from "../../../../shared/redux/slices/landing.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "../../../../shared/redux/reduxHooks";
+import ReactLoading from "react-loading";
 
 const PersonalRegistration = () => {
   const options = useMemo(() => countryList().getData(), []);
@@ -51,7 +52,7 @@ const PersonalRegistration = () => {
       .unwrap()
       .then(() => {
         setLoading(false);
-        navigate("/welcome-personal-data");
+        handleModalShow()
       })
       .catch((err) => {
         toast.error(err, {
@@ -114,7 +115,6 @@ const PersonalRegistration = () => {
     // Handle the conditions as needed
     if (hasSpecialCharacter) {
       setSpecial(true);
-      console.log(hasSpecialCharacter);
     }
     setPassword(value);
   };
@@ -278,7 +278,11 @@ const PersonalRegistration = () => {
                       : " ",
                   }}
                 >
-                  Create account
+                   {loading ? (
+                  <ReactLoading color="white" width={25} height={25} type="spin" />
+                  ) : (
+                  "Create account"
+                  )}
                 </button>
               </div>
               {showModal && <EmailOtpModal {...{ handleModalShow }} />}

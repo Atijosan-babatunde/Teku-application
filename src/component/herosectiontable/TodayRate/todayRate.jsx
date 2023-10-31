@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { useAppSelector } from '../../../shared/redux/reduxHooks';
 import international from "../../../assets/svg/international.svg"
-// import ReactLoading from "react-loading";
+import ReactLoading from "react-loading";
 
 
 
@@ -23,6 +23,7 @@ const TodayRate = () => {
 
     useEffect(() => {
         getCurrencyPair();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
 
@@ -43,6 +44,10 @@ const TodayRate = () => {
 
     const seeAllTodayRate = () => {
         navigate("/see-all")
+    }
+
+    const goToLogin = () => {
+        navigate("/login")
     }
 
     if (data) {
@@ -82,13 +87,16 @@ const TodayRate = () => {
                                             <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
                                         </td>
                                         <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.btn}>Request <BsFillSendFill /></button>
+                                            <button className={styles.btn} onClick={goToLogin}>Request <BsFillSendFill /></button>
                                         </td>
                                     </tr>
                                 )}
 
                             </tbody>
                         </table>
+                        {loading && (
+                            <ReactLoading color="blue" width={25} height={25} type="spin" />
+                        )}
                         <div className={styles.dimbutton} onClick={seeAllTodayRate}>
                             <button className={styles.seeallbut}>See all<MdKeyboardArrowRight /></button>
                         </div>

@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { GetAllTransactionCart } from "../../../shared/redux/slices/transaction.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
 
 const PaymentSection = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -32,6 +33,7 @@ const PaymentSection = () => {
 
   useEffect(() => {
     getAllTransactionCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const getAllTransactionCart = () => {
@@ -318,6 +320,9 @@ const PaymentSection = () => {
                 </tbody>
               </table>
             </div>
+            {loading && (
+              <ReactLoading color="blue" width={25} height={25} type="spin" />
+            )}
             <div className={styles.inner}>
               {product.length < 1 && (
                 <div>

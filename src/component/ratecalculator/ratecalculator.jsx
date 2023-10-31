@@ -201,9 +201,6 @@ const RateCalculator = () => {
             </div>
           </div>
           <div className={styles.exchange}>
-            {loading && (
-              <ReactLoading color="blue" width={25} height={25} type="spin" />
-            )}
           </div>
           <div className={styles.exchange}>
             <div className={styles.exchangeFont}>
@@ -212,10 +209,18 @@ const RateCalculator = () => {
           </div>
           <div className={styles.requestbut}>
             <Link to="/">
-              <RequestButton buttonText="Request Now"></RequestButton>
+              <RequestButton
+                buttonText=
+                {loading ? (
+                  <ReactLoading color="white" width={25} height={25} type="spin" />
+                ) : (
+                  "Request Now"
+                )}
+              >
+              </RequestButton>
             </Link>
           </div>
-        </div>
+        </div >
         <ToastContainer />
       </>
     );

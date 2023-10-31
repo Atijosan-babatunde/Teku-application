@@ -28,7 +28,12 @@ const EmailOtpModal = ({ handleModalShow }) => {
   const verifyUserData = () => {
     setLoading(true);
     let body = {
-      token:""
+      token: firstSpace, 
+             secondSpace, 
+             thirdSpace,
+             fourthSpace,
+             fifthSpace,
+             sixthSpace
     };
 
     dispatch( VerifyUserAuth(body))
@@ -123,11 +128,12 @@ const EmailOtpModal = ({ handleModalShow }) => {
                   backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " ",
                 }}
               >
-                Continue
+                {loading ? (
+                  <ReactLoading color="white" width={25} height={25} type="spin" />
+                  ) : (
+                  "Continue"
+                  )}
               </button>
-              {loading && (
-                <ReactLoading color="blue" width={25} height={25} type="spin" />
-              )}
             </div>
           </div>
         </div>

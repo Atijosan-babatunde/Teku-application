@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CreateCurrencyPair, GetCurrencyCode } from "../../../shared/redux/slices/landing.slices";
 import { useAppSelector } from "../../../shared/redux/reduxHooks";
+import ReactLoading from "react-loading";
 
 
 const CustomRequest = () => {
@@ -32,6 +33,7 @@ const CustomRequest = () => {
 
     useEffect(() => {
         getCurrencyCode();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
 
@@ -54,7 +56,6 @@ const CustomRequest = () => {
                     setLoading(false);
                     toast.success("Succesfully Created");
                     setAmount()
-                    console.log(amount, "amount")
                 }
             })
             .catch((err) => {
@@ -65,10 +66,10 @@ const CustomRequest = () => {
             });
     };
 
-    const clear = () => {
-        setAmount("")
-        setDropDownValue(dropDownValue)
-    }
+    // const clear = () => {
+    //     setAmount("")
+    //     setDropDownValue(dropDownValue)
+    // }
 
     const validate = () => {
         return !amount
@@ -219,7 +220,11 @@ const CustomRequest = () => {
                                     onClick={addCurrencyPair}
                                     style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
                                 >
-                                    Send request
+                                    {loading ? (
+                                        <ReactLoading color="white" width={25} height={25} type="spin" />
+                                    ) : (
+                                        "Send request"
+                                    )}
                                 </button>
                             </div>
                         </div>

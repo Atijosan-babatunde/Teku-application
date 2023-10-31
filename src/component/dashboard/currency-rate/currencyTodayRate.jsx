@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from '../../../shared/redux/reduxHooks';
 import RequestModal from "./RequestModal/requestModal";
 import international from "../../../assets/svg/international.svg"
-// import ReactLoading from "react-loading";
+import ReactLoading from "react-loading";
 
 
 
@@ -29,6 +29,7 @@ const CurrencyTodayRate = () => {
 
     useEffect(() => {
         getCurrencyPair();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
 
@@ -91,6 +92,9 @@ const CurrencyTodayRate = () => {
                                 )}
                             </tbody>
                         </table>
+                        {loading && (
+                            <ReactLoading color="blue" width={25} height={25} type="spin" />
+                        )}
                         <div className={styles.inner}>
                             {data.length < 1 && (
                                 <div>

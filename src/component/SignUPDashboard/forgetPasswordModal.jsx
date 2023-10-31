@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FORGOT_PASSWORD } from "../../shared/redux/services/landing.services";
+import ReactLoading from "react-loading";
+
 
 const ForgetPasswordModal = ({ handleModalShow }) => {
   const [email, setEmail] = useState("");
@@ -77,7 +79,11 @@ const ForgetPasswordModal = ({ handleModalShow }) => {
                   }}
                   onClick={() => forgotPasswordFunc(email)}
                 >
-                  Continue
+                   {loading ? (
+                  <ReactLoading color="white" width={25} height={25} type="spin" />
+                ) : (
+                  "Continue"
+                )}
                 </button>
               </div>
             </div>
@@ -87,7 +93,7 @@ const ForgetPasswordModal = ({ handleModalShow }) => {
           ""
         ) : (
           <p className={styles.donthave}>
-            Alreadyhave an account?{" "}
+            Already have an account?{" "}
             <span>
               <Link to="/login">Signin here</Link>
             </span>

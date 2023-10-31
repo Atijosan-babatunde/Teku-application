@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "../../shared/redux/reduxHooks";
 import ReactLoading from "react-loading";
 
+
 const LogIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -67,6 +68,8 @@ const LogIn = () => {
   const gotoHome = () => {
     navigate("/");
   };
+
+
   return (
     <div className={styles.parent}>
       <div className={styles.content}>
@@ -136,11 +139,12 @@ const LogIn = () => {
                   }}
                   onClick={loginUserData}
                 >
-                  Sign In
+                   {loading ? (
+                  <ReactLoading color="white" width={25} height={25} type="spin" />
+                  ) : (
+                  "Sign In"
+                  )}
                 </button>
-                {loading && (
-                  <ReactLoading color="blue" width={25} height={25} type="spin" />
-                )}
               </div>
             </div>
             {showModal && <ForgetPasswordModal {...{ handleModalShow }} />}

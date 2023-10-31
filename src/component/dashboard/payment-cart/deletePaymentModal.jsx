@@ -12,10 +12,10 @@ const DeletePaymentModal = ({ handleModalShow }) => {
 
      // MODAL STATE
 
-     const [showModal, setShowModal] = useState(false)
+     const [showModalDeleted, setShowModalDeleted] = useState(false)
 
-     function handleModalShow() {
-         setShowModal(!showModal)
+     function handleModalPermanentlyDel() {
+         setShowModalDeleted(!showModalDeleted)
      }
     return (
         <div className={styles.parent}>
@@ -38,7 +38,7 @@ const DeletePaymentModal = ({ handleModalShow }) => {
                     <div className={styles.probtn}>
                         <button className={styles.btnblue} onClick={handleModalShow}>Proceed</button>
                     </div>
-                    {showModal && <PermernentlyDeletedModal {...{handleModalShow}}/>}
+                    {showModalDeleted && <PermernentlyDeletedModal {...{handleModalPermanentlyDel}}/>}
                  </div>
             </div>
         </div>

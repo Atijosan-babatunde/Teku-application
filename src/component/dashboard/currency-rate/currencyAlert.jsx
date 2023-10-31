@@ -8,6 +8,7 @@ import { GetCurrencyPair } from "../../../shared/redux/slices/landing.slices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RequestModal from "./RequestModal/requestModal";
+import ReactLoading from "react-loading";
 
 
 
@@ -19,6 +20,7 @@ const CurrencyAlert = () => {
 
     useEffect(() => {
         getCurrencyPair();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
 
@@ -85,6 +87,9 @@ const CurrencyAlert = () => {
                             </tbody>
                         </table>
                     </div>
+                    {loading && (
+                        <ReactLoading color="blue" width={25} height={25} type="spin" />
+                    )}
                     <div className={styles.inner}>
                         {data.length < 1 && (
                             <div>

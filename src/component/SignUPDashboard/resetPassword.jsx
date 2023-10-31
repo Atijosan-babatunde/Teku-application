@@ -8,6 +8,8 @@ import { RESET_PASSWORD } from "../../shared/redux/services/landing.services";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import ReactLoading from "react-loading";
+
 
 const ResetPassword = () => {
   const [showErrorBox, setShowErrorBox] = useState(false);
@@ -128,14 +130,14 @@ const ResetPassword = () => {
                 showErrorBox || password.length < 8
                   ? ""
                   : "none" || special
-                  ? "none"
-                  : "",
+                    ? "none"
+                    : "",
               backgroundColor:
                 showErrorBox || password.length < 8
                   ? "var(--White-Blue, #F0F3FF)"
                   : "none" || special
-                  ? "none"
-                  : "",
+                    ? "none"
+                    : "",
             }}
             className={styles.color}
           >
@@ -184,11 +186,16 @@ const ResetPassword = () => {
                 backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " ",
               }}
             >
-              Reset password
+              {loading ? (
+                <ReactLoading color="white" width={25} height={25} type="spin" />
+              ) : (
+                "Reset password"
+              )}
             </button>
           </div>
         </div>
       </div>
+      < ToastContainer />
     </div>
   );
 };

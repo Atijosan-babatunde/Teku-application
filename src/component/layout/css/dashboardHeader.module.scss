@@ -206,7 +206,6 @@
     }
     .logoDiv{
       padding: 0;
-      display: none;
     }
     
     .userdata{
@@ -238,11 +237,11 @@
   }
   }
 
-  @media screen and (max-width:1200px) {
-     .logoDivmobile{
-      display: none !important;
-     }
-     .logomobile{
-      display: none !important;
-     }
-  }
+  // @media screen and (max-width:1200px) {
+  //    .logoDivmobile{
+  //     display: none !important;
+  //    }
+  //    .logomobile{
+  //     display: none !important;
+  //    }
+  // }

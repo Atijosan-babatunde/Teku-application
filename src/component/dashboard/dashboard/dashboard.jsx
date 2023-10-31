@@ -4,8 +4,8 @@ import put from "../../../assets/svg/put.svg";
 import blank from "../../../assets/svg/blank.svg";
 import globe from "../../../assets/svg/globe.svg";
 import holder from "../../../assets/svg/holder.svg";
-import Nigeria from "../../../assets/svg/nigeria.svg";
-import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg";
+// import Nigeria from "../../../assets/svg/nigeria.svg";
+// import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
@@ -113,22 +113,28 @@ const Dashboard = () => {
     navigate('/currency-rate')
   }
 
-  const [product] = useState([
-    {
-      id: 1,
-      flagone: <img src={Nigeria} className={styles.flagicon} alt="flag" />,
-      flagnameone: "NGN",
-      flagtwo: (
-        <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />
-      ),
-      flagnametwo: "GBP",
-      amount: "1,000.00",
-      purpose: "Tuition fees",
-      datetime: "21-12-2021, 10:38am",
-      process: "Processing Time: Within 24hrs",
-      action: "",
-    },
-  ]);
+  const goToTransaction = () => {
+    navigate('/transactions')
+  }
+
+  // const [product] = useState([
+  //   {
+  //     id: 1,
+  //     flagone: <img src={Nigeria} className={styles.flagicon} alt="flag" />,
+  //     flagnameone: "NGN",
+  //     flagtwo: (
+  //       <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />
+  //     ),
+  //     flagnametwo: "GBP",
+  //     amount: "1,000.00",
+  //     purpose: "Tuition fees",
+  //     datetime: "21-12-2021, 10:38am",
+  //     process: "Processing Time: Within 24hrs",
+  //     action: "",
+  //   },
+  // ]);
+
+
   return (
     <>
       {showModalPreview && saveItemModal === "Preview" && (
@@ -228,7 +234,7 @@ const Dashboard = () => {
         <div className={styles.contenttable}>
           <div className={styles.tableheader}>
             <h1 className={styles.headerh1}>Recent transactions</h1>
-            <p>
+            <p onClick={goToTransaction}>
               See all <IoIosArrowForward />
             </p>
           </div>

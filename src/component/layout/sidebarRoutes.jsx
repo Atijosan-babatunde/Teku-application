@@ -6,7 +6,7 @@ import {
 
 import SideMenu from "./sidebar";
 import { useEffect } from "react";
-import ProtectedRoutes from "./protectedRoutes";
+// import ProtectedRoutes from "./protectedRoutes";
 import Dashboard from "../dashboard/dashboard/dashboard";
 import CurrencyRate from "../dashboard/currency-rate/currency-rate";
 import PaymentCart from "../dashboard/payment-cart/payment-card";

@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { GetNotificationsData } from "../../../shared/redux/slices/notification.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
+
 
 const NewNotification = () => {
   const [loading, setLoading] = useState(false);
@@ -17,6 +19,7 @@ const NewNotification = () => {
 
   useEffect(() => {
     getNotifications();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const getNotifications = () => {
@@ -47,6 +50,9 @@ const NewNotification = () => {
               </div>
             ))}
           </>
+          {loading && (
+            <ReactLoading color="blue" width={25} height={25} type="spin" />
+          )}
           <div className={styles.inner}>
             {data.length < 1 && (
               <div>

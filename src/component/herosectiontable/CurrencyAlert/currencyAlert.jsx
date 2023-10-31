@@ -9,6 +9,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom"
 import { MdKeyboardArrowRight } from 'react-icons/md'
+import ReactLoading from "react-loading";
+
 
 const CurrencyAlert = () => {
     const navigate = useNavigate()
@@ -19,6 +21,7 @@ const CurrencyAlert = () => {
 
     useEffect(() => {
         getCurrencyPair();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
 
@@ -39,6 +42,10 @@ const CurrencyAlert = () => {
 
     const seeAllTodayRate = () => {
         navigate("/see-all")
+    }
+
+    const goToLogin = () => {
+        navigate("/login")
     }
 
 
@@ -74,7 +81,7 @@ const CurrencyAlert = () => {
                                             <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
                                         </td>
                                         <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
-                                            <button className={styles.btn}>Request <BsFillSendFill /></button>
+                                            <button className={styles.btn} onClick={goToLogin}>Request <BsFillSendFill /></button>
                                         </td>
                                     </tr>
                                 )}
@@ -84,6 +91,9 @@ const CurrencyAlert = () => {
                             <button className={styles.seeallbut}>See all<MdKeyboardArrowRight /></button>
                         </div>
                     </div>
+                    {loading && (
+                        <ReactLoading color="blue" width={25} height={25} type="spin" />
+                    )}
                     <div className={styles.inner}>
                         {data.length < 1 && (
                             <div>
