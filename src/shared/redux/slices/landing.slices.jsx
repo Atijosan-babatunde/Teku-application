@@ -144,6 +144,27 @@ export const VerifyUserAuth = createAsyncThunk(
   }
 );
 
+export const LogoutUserAuth = createAsyncThunk(
+  "landing/logoutauth",
+  async (body, thunkAPI) => {
+    try {
+      const data = await LandingServices.LogoutUserAuth(
+        body
+      );
+      return { landing: data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 
 const initialState = {
   addAllCurrencyData: null,
@@ -153,6 +174,7 @@ const initialState = {
   getloginUser: null,
   getUserRegistered: null,
   verifyAuthData: null,
+  logoutAuthData: null,
 };
 
 export const landingSlice = createSlice({
@@ -207,6 +229,13 @@ export const landingSlice = createSlice({
     })
     builder.addCase(VerifyUserAuth.rejected, (state) => {
       state.verifyAuthData = null;
+    })
+
+    builder.addCase(LogoutUserAuth.fulfilled, (state, action) => {
+      state.logoutAuthData = action.payload.landing;
+    })
+    builder.addCase(LogoutUserAuth.rejected, (state) => {
+      state.logoutAuthData = null;
     })
   }
 });
