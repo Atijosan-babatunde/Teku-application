@@ -31,11 +31,11 @@ const TransactionSection = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
   const [saveItemModalCompleted, setSaveItemModalCompleted] = useState("");
   const [saveItemModalCancelled, setSaveItemModalCancelled] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
   const [anchorCancelledEl, setAnchorCancelledEl] = useState(null);
   const openCancelled = Boolean(anchorCancelledEl);
   const [anchorCompletedEl, setAnchorCompletedEl] = useState(null);
   const openCompleted = Boolean(anchorCompletedEl);
-  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -43,6 +43,32 @@ const TransactionSection = () => {
     (state) => state.transaction.getTransactionUsers
   );
   const [data] = useState(transactionData);
+  const [selectedSubmenu, setSelectedSubmenu] = useState('');
+
+  const handleBtn = (event, submenu) => {
+    setAnchorEl(event.currentTarget);
+    setSelectedSubmenu(submenu);
+  };
+
+  const handleClose = (item) => {
+    setAnchorEl(null);
+    setSelectedSubmenu([]);
+
+    if (item === "Preview") {
+      setShowModalPreview(true);
+      setSaveItemModal(item);
+    }
+
+    if (item === "Ask for refund") {
+      setAskForRefundModal(true);
+      setSaveItemModal(item);
+    }
+
+    if (item === "Delete") {
+      setDeleteModal(true);
+      setSaveItemModal(item);
+    }
+  };
 
   useEffect(() => {
     getTransactionUser();
@@ -81,7 +107,48 @@ const TransactionSection = () => {
   ]);
 
   // IN PROGRESS ELLIPS BUTTON
-  const [subtitle] = useState([
+  const subtitlecancelled = [
+    {
+      id: 1,
+      imgs: <img src={eye} className={styles.icon} alt="img" />,
+      text: "Preview",
+    },
+    {
+      id: 2,
+      imgs: <img src={makeappeal} className={styles.icon} alt="img" />,
+      text: "Request again",
+    },
+    {
+      id: 3,
+      imgs: <img src={download} className={styles.icon} alt="img" />,
+      text: "Download Receipt",
+    },
+  ];
+
+  const subtitlecompleted = [
+    {
+      id: 1,
+      imgs: <img src={eye} className={styles.icon} alt="img" />,
+      text: "Preview",
+    },
+    {
+      id: 2,
+      imgs: <img src={makeappeal} className={styles.icon} alt="img" />,
+      text: "Make an appeal",
+    },
+    {
+      id: 3,
+      imgs: <img src={download} className={styles.icon} alt="img" />,
+      text: "Download Receipt",
+    },
+    {
+      id: 4,
+      imgs: <img src={download} className={styles.icon} alt="img" />,
+      text: "Proof of payment",
+    },
+  ];
+
+  const subtitle = [
     {
       id: 1,
       imgs: <img src={eye} className={styles.icon} alt="eye" />,
@@ -105,31 +172,22 @@ const TransactionSection = () => {
       ),
       text: "Download Receipt",
     },
-  ]);
+  ];
 
-  const handleBtn = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (item) => {
-    setAnchorEl(null);
-    if (item === "Preview") {
-      setShowModalPreview(true);
-      setSaveItemModal(item);
-    }
-
-    if (item === "Ask for refund") {
-      setAskForRefundModal(true);
-      setSaveItemModal(item);
-    }
-
-    if (item === "Delete") {
-      setDeleteModal(true);
-      setSaveItemModal(item);
+  const getSubmenu = () => {
+    switch (selectedSubmenu) {
+      case "REFUNDED":
+        return subtitle;
+      case "CANCELLED":
+        return subtitlecancelled;
+      case "SUCCESSFUL":
+        return subtitlecompleted;
+      case "PROCESSING":
+        return subtitlecompleted;
+      default:
+        return subtitle;
     }
   };
-
-  // MODAL STATE FOR PREVIEW
 
   const [showModalPreview, setShowModalPreview] = useState(false);
   const [askForRefundModal, setAskForRefundModal] = useState(false);
@@ -150,50 +208,27 @@ const TransactionSection = () => {
   // BUTTON END
 
   // COMPLETED ELLIPS BUTTON
-  const handleBtnCompleted = (event) => {
-    setAnchorCompletedEl(event.currentTarget);
-  };
+  // const handleBtnCompleted = (event) => {
+  //   setAnchorCompletedEl(event.currentTarget);
+  // };
 
-  const handleCloseCompleted = (itemcompleted) => {
-    setAnchorCompletedEl(null);
-    if (itemcompleted === "Preview") {
-      setShowModalCompleted(true);
-      setSaveItemModalCompleted(itemcompleted);
-    }
+  // const handleCloseCompleted = (itemcompleted) => {
+  //   setAnchorCompletedEl(null);
+  //   if (itemcompleted === "Preview") {
+  //     setShowModalCompleted(true);
+  //     setSaveItemModalCompleted(itemcompleted);
+  //   }
 
-    if (itemcompleted === "Make an appeal") {
-      setMakeAppealModal(true);
-      setSaveItemModalCompleted(itemcompleted);
-    }
+  //   if (itemcompleted === "Make an appeal") {
+  //     setMakeAppealModal(true);
+  //     setSaveItemModalCompleted(itemcompleted);
+  //   }
 
-    if (itemcompleted === "Delete") {
-      setDeleteModal(true);
-      setSaveItemModalCompleted(itemcompleted);
-    }
-  };
-
-  const [subtitlecompleted] = useState([
-    {
-      id: 1,
-      imgs: <img src={eye} className={styles.icon} alt="img" />,
-      text: "Preview",
-    },
-    {
-      id: 2,
-      imgs: <img src={makeappeal} className={styles.icon} alt="img" />,
-      text: "Make an appeal",
-    },
-    {
-      id: 3,
-      imgs: <img src={download} className={styles.icon} alt="img" />,
-      text: "Download Receipt",
-    },
-    {
-      id: 4,
-      imgs: <img src={download} className={styles.icon} alt="img" />,
-      text: "Proof of payment",
-    },
-  ]);
+  //   if (itemcompleted === "Delete") {
+  //     setDeleteModal(true);
+  //     setSaveItemModalCompleted(itemcompleted);
+  //   }
+  // };
 
   // MODAL STATE COMPLETED
 
@@ -214,45 +249,27 @@ const TransactionSection = () => {
   //BUTTON END
 
   // CANCELLED ELLIPS BUTTON
-  const handleBtnCancelled = (event) => {
-    setAnchorCancelledEl(event.currentTarget);
-  };
+  // const handleBtnCancelled = (event) => {
+  //   setAnchorCancelledEl(event.currentTarget);
+  // };
 
-  const handleCloseCancelled = (itemcancelled) => {
-    setAnchorCancelledEl(null);
-    if (itemcancelled === "Preview") {
-      setShowModalCancelled(true);
-      setSaveItemModalCancelled(itemcancelled);
-    }
+  // const handleCloseCancelled = (itemcancelled) => {
+  //   setAnchorCancelledEl(null);
+  //   if (itemcancelled === "Preview") {
+  //     setShowModalCancelled(true);
+  //     setSaveItemModalCancelled(itemcancelled);
+  //   }
 
-    if (itemcancelled === "Request again") {
-      setMakeAppealModal(true);
-      setSaveItemModalCancelled(itemcancelled);
-    }
+  //   if (itemcancelled === "Request again") {
+  //     setMakeAppealModal(true);
+  //     setSaveItemModalCancelled(itemcancelled);
+  //   }
 
-    if (itemcancelled === "Download Receipt") {
-      setDeleteModal(true);
-      setSaveItemModalCancelled(itemcancelled);
-    }
-  };
-
-  const [subtitlecancelled] = useState([
-    {
-      id: 1,
-      imgs: <img src={eye} className={styles.icon} alt="img" />,
-      text: "Preview",
-    },
-    {
-      id: 2,
-      imgs: <img src={makeappeal} className={styles.icon} alt="img" />,
-      text: "Request again",
-    },
-    {
-      id: 3,
-      imgs: <img src={download} className={styles.icon} alt="img" />,
-      text: "Download Receipt",
-    },
-  ]);
+  //   if (itemcancelled === "Download Receipt") {
+  //     setDeleteModal(true);
+  //     setSaveItemModalCancelled(itemcancelled);
+  //   }
+  // };
 
   // MODAL STATE CANCELLED
 
@@ -497,7 +514,7 @@ const TransactionSection = () => {
                           aria-expanded={open ? "true" : undefined}
                           variant="contained"
                           disableElevation
-                          onClick={handleBtn}
+                          onClick={(event) => handleBtn(event, prod.status)}
                           className="btntable"
                           style={{ backgroundColor: "transparent" }}
                         >
@@ -509,12 +526,12 @@ const TransactionSection = () => {
                             "aria-labelledby": "demo-customized-button",
                           }}
                           anchorEl={anchorEl}
-                          open={open}
+                          open={Boolean(anchorEl)}
                           onClose={handleClose}
                         >
-                          {subtitle.map((item) => (
+                          {getSubmenu().map((item) => (
                             <MenuItem
-                              key={item}
+                              key={item.id}
                               className="dropdowndetails"
                               onClick={() => handleClose(item.text)}
                               disableRipple
@@ -527,131 +544,6 @@ const TransactionSection = () => {
                       </td>
                     </tr>
                   ))}
-
-                  {/* {data.map((prod, second) =>
-                                        <tr style={{}} key={second}>
-                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
-                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>{prod.paymentMethod}</span>
-                                            </td>
-
-                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
-                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>In review</span>
-                                            </td>
-
-                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                                <img src={prod.flagone} alt="" className={styles.flagstyle} />
-                                                <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
-                                                <span className={styles.dash}>-</span>
-                                                <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
-                                                <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
-                                            </td>
-                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                                {prod.datetime}
-                                                <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                            </td>
-                                            <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
-                                                <button className={styles.completedbtn}>Completed</button>
-                                            </td>
-                                            <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
-                                                <Button
-                                                    id="demo-customized-button"
-                                                    aria-controls={openCompleted ? "demo-customized-menu" : undefined}
-                                                    aria-haspopup="true"
-                                                    aria-expanded={openCompleted ? "true" : undefined}
-                                                    variant="contained"
-                                                    disableElevation
-                                                    onClick={handleBtnCompleted}
-                                                    className="btntable"
-                                                    style={{ backgroundColor: "transparent" }}
-                                                >
-                                                    <img src={ellip} alt="" />
-                                                </Button>
-                                                <StyledMenu
-                                                    id="demo-customized-menu"
-                                                    MenuListProps={{
-                                                        "aria-labelledby": "demo-customized-button",
-                                                    }}
-                                                    anchorCompletedEl={anchorCompletedEl}
-                                                    open={openCompleted}
-                                                    onClose={handleCloseCompleted}
-                                                >
-                                                    {subtitlecompleted.map((itemcompleted) => (
-                                                        <MenuItem
-                                                            key={itemcompleted}
-                                                            className="dropdowndetails"
-                                                            onClick={() => handleCloseCompleted(itemcompleted.text)}
-                                                            disableRipple
-                                                        >
-                                                            {itemcompleted.imgs}
-                                                            {itemcompleted.text}
-                                                        </MenuItem>
-                                                    ))}
-                                                </StyledMenu>
-                                            </td>
-                                        </tr>
-                                    )} */}
-
-                  {/* {data.map((prod, third) =>
-                                        <tr style={{}} key={third}>
-                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.purpose}
-                                                <span className={styles.insidebtn} style={{ backgroundColor: "rgba(240, 243, 255, 1)", borderRadius: "100px", width: "160px" }}>Cash pickup</span>
-                                            </td>
-
-                                            <td className={styles.tabledata} style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}>{prod.amount}
-                                            </td>
-
-                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                                <img src={prod.flagone} alt="" className={styles.flagstyle} />
-                                                <span className={styles.flagnamestyle} >{prod.flagnameone}</span>
-                                                <span className={styles.dash}>-</span>
-                                                <img src={prod.flagtwo} alt="" className={styles.flagstyle} />
-                                                <span className={styles.flagnamestyle}>{prod.flagnametwo}</span>
-                                            </td>
-                                            <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
-                                                {prod.datetime}
-                                                <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
-                                            </td>
-                                            <td className={styles.tabledataa} style={{ paddingTop: "1em" }}>
-                                                <button className={styles.cancelledbtn}>Cancelled</button>
-                                            </td>
-                                            <td className={styles.tabledatas} style={{ paddingTop: "1em" }}>
-                                                <Button
-                                                    id="demo-customized-button"
-                                                    aria-controls={openCancelled ? "demo-customized-menu" : undefined}
-                                                    aria-haspopup="true"
-                                                    aria-expanded={openCancelled ? "true" : undefined}
-                                                    variant="contained"
-                                                    disableElevation
-                                                    onClick={handleBtnCancelled}
-                                                    className="btntable"
-                                                    style={{ backgroundColor: "transparent" }}
-                                                >
-                                                    <img src={ellip} alt="" />
-                                                </Button>
-                                                <StyledMenu
-                                                    id="demo-customized-menu"
-                                                    MenuListProps={{
-                                                        "aria-labelledby": "demo-customized-button",
-                                                    }}
-                                                    anchorCancelledEl={anchorCancelledEl}
-                                                    open={openCancelled}
-                                                    onClose={handleCloseCancelled}
-                                                >
-                                                    {subtitlecancelled.map((itemcancelled) => (
-                                                        <MenuItem
-                                                            key={itemcancelled}
-                                                            className="dropdowndetails"
-                                                            onClick={() => handleCloseCancelled(itemcancelled.text)}
-                                                            disableRipple
-                                                        >
-                                                            {itemcancelled.imgs}
-                                                            {itemcancelled.text}
-                                                        </MenuItem>
-                                                    ))}
-                                                </StyledMenu>
-                                            </td>
-                                        </tr>
-                                    )} */}
                 </tbody>
               </table>
             </div>
