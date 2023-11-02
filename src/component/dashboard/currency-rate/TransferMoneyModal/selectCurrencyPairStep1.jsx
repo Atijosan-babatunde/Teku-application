@@ -259,11 +259,11 @@ const SelectCurrencyPairStep1 = ({
                       {dropDownValueTwo?.code}
                     </p>
                   </div>
-                  <p>{currencyPair?.sendingMethod}</p>
                   <span>
                     <MdArrowForwardIos />
                   </span>
                 </div>
+                <p className={styles.ban}>{currencyPair?.sendingMethod}</p>
               </div>
             ) : (
               <div className={styles.orangecard}>

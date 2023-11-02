@@ -6,6 +6,7 @@ const API_URL_GET_CURRENCY = process.env.REACT_APP_API_URL + "/currency";
 const API_URL_LOGIN_USER = process.env.REACT_APP_API_URL + "/auth/login";
 const API_URL_REGISTER_USER = process.env.REACT_APP_API_URL + "/auth/register";
 const API_URL_VERIFY_USER = process.env.REACT_APP_API_URL + "/auth/verify";
+const API_URL_LOGOUT_USER = process.env.REACT_APP_API_URL + "/auth/logout"
 
 const AddGetAllCurrencyPair = async (body) => {
   return await axios
@@ -87,6 +88,16 @@ export async function RESET_PASSWORD(endpoint, data) {
   }
 }
 
+const LogoutUserAuth = async (body) => {
+  return await axios
+    .post(API_URL_LOGOUT_USER, body, {
+      headers: authHeader(),
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
 
 
 const LandingServices = {
@@ -96,6 +107,7 @@ const LandingServices = {
   LoginUser,
   RegisterUser,
   VerifyUserAuth,
+  LogoutUserAuth,
 };
 
 export default LandingServices;

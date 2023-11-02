@@ -5,7 +5,7 @@
 
 .content {
     display: flex;
-    align-items: center;
+    // align-items: center;
 }
 
 .contenth1 {
@@ -350,6 +350,9 @@ font-weight: 500;
         padding:0.4000em 1.9000em;
     }
 }
+.plusholder{
+    cursor: pointer;
+}
 
 
 @media screen and (max-width:960px) {
@@ -371,5 +374,23 @@ font-weight: 500;
         padding: 1em 1em;
         margin:0em;
         margin-top: 2em;
-      }
+    }
+    .recipiantflex {
+        display: grid;
+    }
+    .paratwo {
+        width: 200px;
+        text-align: center;
+    }
+    .paraone{
+        width: 200px;
+        text-align: center;
+    }
+    .recipiantdataflex {
+        display: grid;
+        p{
+            width: 200px;
+            text-align: center;
+        }
+    }
 }

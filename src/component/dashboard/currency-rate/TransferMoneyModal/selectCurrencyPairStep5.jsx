@@ -133,7 +133,7 @@ const SelectCurrencyPairStep5 = ({
       <div className={styles.parent}>
         <p className={styles.firsttext} onClick={goToStepFour}>
           <BsArrowLeft className={styles.arrow} />
-          Go back to Payment checkout
+          Go back to Enter Amount
         </p>
         <h1 className={styles.contenth1}>Payment details</h1>
         <p className={styles.contentp}>Make a payment to the account below.</p>

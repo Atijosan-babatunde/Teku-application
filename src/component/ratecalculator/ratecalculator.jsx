@@ -208,7 +208,7 @@ const RateCalculator = () => {
             </div>
           </div>
           <div className={styles.requestbut}>
-            <Link to="/">
+            <Link to="/login">
               <RequestButton
                 buttonText=
                 {loading ? (

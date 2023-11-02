@@ -150,7 +150,7 @@ a {
     color: var(--Blue-Primary, #011B6D);
     // text-align: center;
     font-family: Gilroy;
-    font-size: 16px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 700;
     line-height: 22px; /* 137.5% */
@@ -185,7 +185,7 @@ a {
     align-items: center;
 
     span{
-        margin-left: 7em;
+        margin-left: 3.5em;
         padding-bottom: 1em;
     }
 }
@@ -201,8 +201,28 @@ a {
     }
 }
 
+.ban{
+    padding: 0.7em 0.7em;
+    border-radius: 100px;
+    background: var(--White-full, #FFF);
+    text-align: center;
+}
+
 .dash {
     margin-right: 5px;
     margin-left: 5px;
     // padding-bottom: 1em;
+}
+
+@media screen and (max-width:960px) {
+    .content{
+        display: grid;
+    }
+    .descone{
+        width: 100%;
+    }
+    .desctwo{
+        width: 100%;
+        margin-top: 2em;
+    }
 }

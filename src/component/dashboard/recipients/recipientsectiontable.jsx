@@ -17,14 +17,15 @@ import { useDispatch } from "react-redux";
 import { GetRecipientUsersData } from "../../../shared/redux/slices/recipient.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
 
 const RecipientSectionTable = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-//   const recipientData = useAppSelector(
-//     (state) => state.transaction.getRecipientUsersData
-//   );
+  //   const recipientData = useAppSelector(
+  //     (state) => state.transaction.getRecipientUsersData
+  //   );
   const [data, setData] = useState([]);
 
   const getRecipientUser = () => {
@@ -45,7 +46,7 @@ const RecipientSectionTable = () => {
 
   useEffect(() => {
     getRecipientUser();
-  }, [data, getRecipientUser]);
+  }, []);
 
   const [product] = useState([
     {
@@ -266,6 +267,9 @@ const RecipientSectionTable = () => {
                 </tbody>
               </table>
             </div>
+            {loading && (
+              <ReactLoading color="blue" width={25} height={25} type="spin" />
+            )}
             <div className={styles.inner}>
               {product.length < 1 && (
                 <div>
