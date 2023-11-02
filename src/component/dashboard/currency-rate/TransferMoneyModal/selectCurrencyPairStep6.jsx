@@ -53,11 +53,13 @@ const SelectCurrencyPairStep6 = ({
   const handleClickReciept = () => {
     document.current.click();
   };
+  const amountString = recipientAmount.toString();
 
   const payload = {
     baseCurrencyId: dropDownValue?.id,
     pairCurrencyId: dropDownValueTwo?.id,
-    amount: parseFloat(recipientAmount.toString()).toFixed(2),
+    // amount: parseFloat(amountString).toFixed(2),
+    amount: 20.10,
     country: country?.label,
     purpose,
     paymentDocument,
@@ -68,12 +70,14 @@ const SelectCurrencyPairStep6 = ({
     confirmation,
   };
 
+  console.log(payload);
+
   const handleTransaction = async () => {
     setLoading(true);
     const endpoint = `/transaction`;
     try {
       const response = await TransactionServices.performTrasaction(endpoint, {
-        payload,
+        data: payload,
       });
       console.log(response)
       setLoading(false);
