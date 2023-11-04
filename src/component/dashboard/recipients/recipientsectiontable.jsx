@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "../recipients/css/recipientsectiontable.module.scss";
 import holder from "../../../assets/svg/recipientholder.svg";
@@ -18,6 +19,8 @@ import { GetRecipientUsersData } from "../../../shared/redux/slices/recipient.sl
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
+import axios from "axios";
+import customAxios from "../../../shared/utils/axios";
 
 const RecipientSectionTable = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -93,6 +96,15 @@ const RecipientSectionTable = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleDeleteRecipient = async (entity) => {
+    try {
+      const response = await customAxios.delete(`recipient/${entity?.id}`);
+      console.log(response);
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
+
   const handleClose = (item, entity) => {
     setAnchorEl(null);
     if (item === "Preview") {
@@ -106,8 +118,8 @@ const RecipientSectionTable = () => {
     }
 
     if (item === "Delete") {
-      // setDeleteModal(true);
-      // setSaveItemModal(item);
+      setDeleteModal(true);
+      handleDeleteRecipient(entity);
     }
   };
 
