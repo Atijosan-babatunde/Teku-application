@@ -23,6 +23,8 @@ import PreviewModal from "../payment-cart/previewModal";
 import PaymentRequestModal from "../currency-rate/RequestModal/paymentRequestModal";
 import DeletePaymentModal from "../payment-cart/deletePaymentModal";
 import { useNavigate } from "react-router-dom";
+import KycBusinessUser from "../../SignUPDashboard/personal_business_registration/business/KYC/kycBusinessUser";
+
 
 const Dashboard = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -134,6 +136,14 @@ const Dashboard = () => {
   //   },
   // ]);
 
+  // MODAL STATE
+
+  const [showModalKyc, setShowModalKyc] = useState(false)
+
+  function handleModalShowKyc() {
+    setShowModalKyc(!showModalKyc)
+  }
+
 
   return (
     <>
@@ -223,11 +233,12 @@ const Dashboard = () => {
                 to continue using this application.
               </p>
 
-              <h3>
+              <h3 onClick={handleModalShowKyc}>
                 Start KYC Verification{" "}
                 <IoIosArrowForward className={styles.arrow} />
               </h3>
             </div>
+            {showModalKyc && <KycBusinessUser {...{ handleModalShowKyc }} />}
           </div>
         </div>
 
@@ -358,7 +369,7 @@ const Dashboard = () => {
                       >
                         <button
                           className={styles.btn}
-                          // style={{ backgroundColor:  ? "#fff" : "", color:  ? "#000" : ""}}
+                        // style={{ backgroundColor:  ? "#fff" : "", color:  ? "#000" : ""}}
                         >
                           {prod.status}
                         </button>

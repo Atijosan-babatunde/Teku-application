@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 const WelcomeToTeku = () => {
   // MODAL STATE
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModalKyc, setShowModalKyc] = useState(false);
 
-  function handleModalShow() {
-    setShowModal(!showModal);
+  function handleModalShowKyc() {
+    setShowModalKyc(!showModalKyc);
   }
 
   let navigate = useNavigate();
@@ -34,11 +34,11 @@ const WelcomeToTeku = () => {
         </p>
 
         <div className={styles.requestbut}>
-          <button className={styles.btnrequest} onClick={handleModalShow}>
+          <button className={styles.btnrequest} onClick={handleModalShowKyc}>
             Continue to KYC
           </button>
         </div>
-        {showModal && <KycPersonalUser {...{ handleModalShow }} />}
+        {showModalKyc && <KycPersonalUser {...{ handleModalShowKyc }} />}
         <div className={styles.skipholder} onClick={goToDashboard}>
           <p className={styles.skip}>Skip to dashboard</p>
           <BsArrowRight className={styles.icon} />

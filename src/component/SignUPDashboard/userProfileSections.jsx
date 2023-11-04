@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from 'react';
 import ReactLoading from "react-loading";
+import KycBusinessUser from './personal_business_registration/business/KYC/kycBusinessUser'
 
 
 
@@ -41,6 +42,14 @@ const UserProfileSections = () => {
                 setLoading(false);
             });
     };
+
+     // MODAL STATE
+
+     const [showModalKyc, setShowModalKyc] = useState(false)
+
+     function handleModalShowKyc() {
+         setShowModalKyc(!showModalKyc)
+     }
 
 
     return (
@@ -75,11 +84,12 @@ const UserProfileSections = () => {
                                 to continue using this application.
                             </p>
 
-                            <h3>
+                            <h3 onClick={handleModalShowKyc}>
                                 Start KYC Verification{" "}
                                 <IoIosArrowForward className={styles.arrow} />
                             </h3>
                         </div>
+                        {showModalKyc && <KycBusinessUser {...{handleModalShowKyc}}/>}
                     </div>
                 </div>
 
@@ -95,22 +105,22 @@ const UserProfileSections = () => {
                         <div className={styles.firstdivflex}>
                             <div className={styles.firstname}>
                                 <div className={styles.firstdivh1}>First name</div>
-                                <div className={styles.firstp}>{data?.firstName}</div>
+                                <input type="text" className={styles.firstp} value={data?.firstName} />
                             </div>
                             <div className={styles.firstname}>
                                 <div className={styles.firstdivh1}> Last name</div>
-                                <div className={styles.firstp}>{data?.lastName}</div>
+                                <input type="text" className={styles.firstp} value={data?.lastName} />
                             </div>
                         </div>
 
                         <div className={styles.firstdivflex}>
                             <div className={styles.firstname}>
                                 <div className={styles.firstdivh1}>Email address</div>
-                                <div className={styles.firstp}>{data?.email}</div>
+                                <input type="email" className={styles.firstp} value={data?.email} />
                             </div>
                             <div className={styles.firstname}>
                                 <div className={styles.firstdivh1}> Country of nationality</div>
-                                <div className={styles.firstp}>{data?.country}</div>
+                                <input type="text" className={styles.firstp} value={data?.country} />
                             </div>
                         </div>
                     </div>
@@ -206,22 +216,22 @@ const UserProfileSections = () => {
                             <div className={styles.firstdivflex}>
                                 <div className={styles.firstname}>
                                     <div className={styles.firstdivh1}>Business name</div>
-                                    <div className={styles.firstp}>{data?.firstName}</div>
+                                    <input type="text" className={styles.firstp} value={data?.firstName} />
                                 </div>
                                 <div className={styles.firstname}>
                                     <div className={styles.firstdivh1}>Business type</div>
-                                    <div className={styles.firstp}>{data?.lastName}</div>
+                                    <input type="text" className={styles.firstp} value={data?.lastName} />
                                 </div>
                             </div>
 
                             <div className={styles.firstdivflex}>
                                 <div className={styles.firstname}>
                                     <div className={styles.firstdivh1}>Email address</div>
-                                    <div className={styles.firstp}>{data?.email}</div>
+                                    <input type="email" className={styles.firstp} value={data?.email} />
                                 </div>
                                 <div className={styles.firstname}>
                                     <div className={styles.firstdivh1}> Country of business</div>
-                                    <div className={styles.firstp}>{data?.country}</div>
+                                    <input type="text" className={styles.firstp} value={data?.country} />
                                 </div>
                             </div>
                         </div>
