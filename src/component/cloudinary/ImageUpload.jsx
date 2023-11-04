@@ -21,7 +21,7 @@ function ImageUpload() {
 
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <input type="file" accept="*" onChange={handleFileChange} />
       <button onClick={handleImageUpload}>Upload Image</button>
       {secureUrl && <img src={secureUrl} alt="Uploaded" />}
     </div>

@@ -6,14 +6,12 @@ const useCloudinaryImageUpload = () => {
 
   const uploadImageToCloudinary = async (file) => {
     try {
-      //   console.log(process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
-      //   console.log(process.env.REACT_APP_CLOUDINARY_PRESET_KEY);
       const formData = new FormData();
       formData.append("file", file);
       formData.append("upload_preset", "moxavms4");
 
       const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/dvcjgxou9/image/upload`,
+        `https://api.cloudinary.com/v1_1/dvcjgxou9/upload`,
         formData,
         {
           headers: {
