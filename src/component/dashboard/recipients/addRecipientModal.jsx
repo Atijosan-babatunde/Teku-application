@@ -36,37 +36,45 @@ const AddRecipientModal = ({ handleModalShow }) => {
     (state) => state.recipient.allRecipientUsers
   );
   const [data] = useState(recipientUser);
-  const [secureUrl, uploadImage] = useCloudinaryImageUpload();
+  const [uploadImage] = useCloudinaryImageUpload();
 
   let navigate = useNavigate();
 
-  const recipientUserData = () => {
+  const recipientUserData = async () => {
     setLoading(true);
+    let secureUrl = "";
     if (paymentDocument) {
-      uploadImage(paymentDocument);
+      try {
+        secureUrl = await uploadImage(paymentDocument);
+        console.log(secureUrl);
+      } catch (error) {
+        console.error("Error uploading image to Cloudinary:", error);
+        setLoading(false);
+        return;
+      }
     }
+
     let body = {
-      country: country?.label,
+      country: country ? country.label : "", // Handle null case
       paymentInstruction: paymentInstruction,
       paymentMethod: paymentMethod,
       paymentPurpose: purpose,
-      paymentDocument: secureUrl ?? "",
+      paymentDocument: secureUrl, // Use the secureUrl from state
       paymentDescription: paymentDescription,
     };
 
     console.log("BODY", body);
-    dispatch(RecipientUser(body))
-      .unwrap()
-      .then(() => {
-        setLoading(false);
-        navigate("/recipient");
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setLoading(false);
+
+    try {
+      await dispatch(RecipientUser(body));
+      setLoading(false);
+      navigate("/recipient");
+    } catch (err) {
+      toast.error(err, {
+        position: toast.POSITION.TOP_RIGHT,
       });
+      setLoading(false);
+    }
   };
 
   const changeHandler = (value) => {
