@@ -6,13 +6,14 @@ const useCloudinaryImageUpload = () => {
 
   const uploadImageToCloudinary = async (file) => {
     try {
+      //   console.log(process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
+      //   console.log(process.env.REACT_APP_CLOUDINARY_PRESET_KEY);
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET_KEY);
-
+      formData.append("upload_preset", "moxavms4");
 
       const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/dvcjgxou9/image/upload`,
         formData,
         {
           headers: {
@@ -23,7 +24,7 @@ const useCloudinaryImageUpload = () => {
 
       setSecureUrl(response.data.secure_url);
     } catch (error) {
-      console.error("Error uploading image to Cloudinary:", error);
+      console.log("Error uploading image to Cloudinary:", error);
     }
   };
 
