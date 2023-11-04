@@ -19,6 +19,7 @@ import useCloudinaryImageUpload from "../../../shared/Hooks/useCloudinaryImageUp
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "../../../shared/redux/reduxHooks";
+import ReactLoading from "react-loading";
 
 const AddRecipientModal = ({ handleModalShow }) => {
   const options = useMemo(() => countryList().getData(), []);
@@ -28,10 +29,7 @@ const AddRecipientModal = ({ handleModalShow }) => {
   const [paymentDescription, setPaymentDescription] = useState("");
   const [purpose, setPurpose] = useState("");
   const [menuThree, setMenuThree] = useState(false);
-  const [checkBox, setCheckBox] = useState("");
   const [paymentInstruction, setPaymentInstruction] = useState("");
-  const [filesName, setFilesName] = useState("");
-  const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const recipientUser = useAppSelector(
@@ -168,8 +166,8 @@ const AddRecipientModal = ({ handleModalShow }) => {
                 style={{ display: "none" }}
               />
               <img src={documentKYCIcon} alt="" />
-              {filesName ? (
-                <p onClick={handleClickDoc}>{filesName}</p>
+              {paymentDocument ? (
+                <p onClick={handleClickDoc}>{paymentDocument.name}</p>
               ) : (
                 <p onClick={handleClickDoc}>
                   Tap to upload payment document/invoice. <br />
@@ -202,7 +200,16 @@ const AddRecipientModal = ({ handleModalShow }) => {
 
             <div className={styles.requestbut}>
               <button className={styles.btnrequest} onClick={recipientUserData}>
-                Save
+                {loading ? (
+                  <ReactLoading
+                    color="white"
+                    width={25}
+                    height={25}
+                    type="spin"
+                  />
+                ) : (
+                  "Save"
+                )}
               </button>
             </div>
           </div>
