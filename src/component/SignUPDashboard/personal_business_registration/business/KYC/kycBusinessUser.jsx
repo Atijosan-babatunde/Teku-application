@@ -9,11 +9,11 @@ import StepFourBusiness from './stepFourBusiness'
 import StepFiveBusiness from './stepFiveBusiness'
 import StepSixBusiness from './stepSixBusiness'
 
-const KycBusinessUser = ({handleModalShow}) => {
+const KycBusinessUser = ({handleModalShowKyc}) => {
     const [selectId, setSelectId] = useState(false)
     const [step, setStep] = useState(1)
     const modalref = useRef()
-    useOnClickOutside(modalref, handleModalShow)
+    useOnClickOutside(modalref, handleModalShowKyc)
 
 
 
@@ -21,7 +21,7 @@ const KycBusinessUser = ({handleModalShow}) => {
     return ( 
         <div className={styles.parent}>
             <div className={styles.content} ref={modalref}>
-                <div className={styles.closemodal} onClick={handleModalShow}>
+                <div className={styles.closemodal} onClick={handleModalShowKyc}>
                     <img src={cancel} alt="close modal" />
                 </div>
                 <div className={styles.discone}>

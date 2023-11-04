@@ -178,6 +178,20 @@
     margin-left: 2em;
 }
 
+.firstp{
+    border: none !important;
+    color: var(--Grey-text, #999);
+    font-family: Gilroy;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px; /* 137.5% */
+}
+
+// input{
+//     border: none !important;
+// }
+
 @media screen and (max-width:960px) {
     .cardholder{
         display: grid;

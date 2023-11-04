@@ -93,7 +93,7 @@ const RecipientSectionTable = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (item) => {
+  const handleClose = (item, entity) => {
     setAnchorEl(null);
     if (item === "Preview") {
       setShowModal(true);
@@ -106,8 +106,8 @@ const RecipientSectionTable = () => {
     }
 
     if (item === "Delete") {
-      setDeleteModal(true);
-      setSaveItemModal(item);
+      // setDeleteModal(true);
+      // setSaveItemModal(item);
     }
   };
 
@@ -253,7 +253,7 @@ const RecipientSectionTable = () => {
                             <MenuItem
                               key={item}
                               className="dropdowndetails"
-                              onClick={() => handleClose(item.text)}
+                              onClick={() => handleClose(item.text, prod)}
                               disableRipple
                             >
                               {item.imgs}
