@@ -14,6 +14,7 @@ import SignUpWelcomeToTeku from "./component/SignUPDashboard/signUpWelcomeToTeku
 import SideBarRoute from './component/layout/sidebarRoutes';
 import './App.css'
 import ResetPassword from "./component/SignUPDashboard/resetPassword";
+import ImageUpload from "./component/cloudinary/ImageUpload";
 
 
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/welcome-personal-data" element={<WelcomeToTeku/>}/>
           <Route path="/signup-welcome-business-data" element={<SignUpWelcomeToTeku/>}/>
           <Route path="/reset-password" element={<ResetPassword/>}/>
+          <Route path="/image" element={<ImageUpload/>}/>
           <Route  path='/*' element={<SideBarRoute/>}/>  
         </Routes>
       </Router>

@@ -15,54 +15,66 @@ import {
 import documentKYCIcon from "../../../assets/svg//documentKYC.svg";
 import { useDispatch } from "react-redux";
 import { RecipientUser } from "../../../shared/redux/slices/recipient.slices";
+import useCloudinaryImageUpload from "../../../shared/Hooks/useCloudinaryImageUpload";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "../../../shared/redux/reduxHooks";
+import ReactLoading from "react-loading";
 
 const AddRecipientModal = ({ handleModalShow }) => {
   const options = useMemo(() => countryList().getData(), []);
   const [country, setcountry] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("BANK_TRANSFER");
-  const [paymentDocument, setPaymentDocument] = useState("document.png");
+  const [paymentDocument, setPaymentDocument] = useState(null);
   const [paymentDescription, setPaymentDescription] = useState("");
   const [purpose, setPurpose] = useState("");
   const [menuThree, setMenuThree] = useState(false);
-  const [checkBox, setCheckBox] = useState("");
   const [paymentInstruction, setPaymentInstruction] = useState("");
-  const [filesName, setFilesName] = useState("");
-  const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const recipientUser = useAppSelector(
     (state) => state.recipient.allRecipientUsers
   );
   const [data] = useState(recipientUser);
+  const [uploadImage] = useCloudinaryImageUpload();
 
   let navigate = useNavigate();
 
-  const recipientUserData = () => {
+  const recipientUserData = async () => {
     setLoading(true);
+    let secureUrl = "";
+    if (paymentDocument) {
+      try {
+        secureUrl = await uploadImage(paymentDocument);
+        console.log(secureUrl);
+      } catch (error) {
+        console.error("Error uploading image to Cloudinary:", error);
+        setLoading(false);
+        return;
+      }
+    }
+
     let body = {
-      country: country?.label,
+      country: country ? country.label : "", // Handle null case
       paymentInstruction: paymentInstruction,
       paymentMethod: paymentMethod,
       paymentPurpose: purpose,
-      paymentDocument: paymentDocument,
+      paymentDocument: secureUrl, // Use the secureUrl from state
       paymentDescription: paymentDescription,
     };
 
-    dispatch(RecipientUser(body))
-      .unwrap()
-      .then(() => {
-        setLoading(false);
-        navigate("/recipient");
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setLoading(false);
+    console.log("BODY", body);
+
+    try {
+      await dispatch(RecipientUser(body));
+      setLoading(false);
+      navigate("/recipient");
+    } catch (err) {
+      toast.error(err, {
+        position: toast.POSITION.TOP_RIGHT,
       });
+      setLoading(false);
+    }
   };
 
   const changeHandler = (value) => {
@@ -84,52 +96,14 @@ const AddRecipientModal = ({ handleModalShow }) => {
 
   const handleChangeDoc = async (event, name) => {
     const fileUploaded = event.target.files[0];
-    setFilesName(fileUploaded.name);
-    getBase64(fileUploaded, async (result) => {
-      setFormData((curr) => {
-        return { ...curr, [name]: result };
-      });
-    });
+    setPaymentDocument(fileUploaded);
   };
-
-  const getBase64 = (file, cb) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  };
-
-  const [recipiantdata] = useState([
-    {
-      id: 1,
-      shortname: "TF",
-      reason: "Tuition fees",
-      method: "cash pickup",
-      payingto: "Coventry University, student number...",
-      attached: "Document attached",
-      country: "UK",
-    },
-  ]);
 
   const handleClickDoc = () => {
     documentdoc.current.click();
   };
 
   const documentdoc = useRef(null);
-
-  const validate = () => {
-    return (
-      !checkBox ||
-      purpose === "" ||
-      !paymentInstruction ||
-      !country ||
-      !filesName
-    );
-  };
 
   const modalref = useRef();
   useOnClickOutside(modalref, handleModalShow);
@@ -200,8 +174,8 @@ const AddRecipientModal = ({ handleModalShow }) => {
                 style={{ display: "none" }}
               />
               <img src={documentKYCIcon} alt="" />
-              {filesName ? (
-                <p onClick={handleClickDoc}>{filesName}</p>
+              {paymentDocument ? (
+                <p onClick={handleClickDoc}>{paymentDocument.name}</p>
               ) : (
                 <p onClick={handleClickDoc}>
                   Tap to upload payment document/invoice. <br />
@@ -232,24 +206,18 @@ const AddRecipientModal = ({ handleModalShow }) => {
               onChange={(e) => setPaymentDescription(e.target.value)}
             />
 
-            {/* <div className={styles.clickhere}>
-              <input
-                type="checkbox"
-                onChange={(e) => setCheckBox(e.target.value)}
-              />
-              Save beneficiary details
-            </div> */}
-
             <div className={styles.requestbut}>
-              <button
-                className={styles.btnrequest}
-                onClick={recipientUserData}
-                style={{
-                  backgroundColor: "rgba(1, 27, 109, 0.20)",
-                  cursor: "pointer",
-                }}
-              >
-                Save
+              <button className={styles.btnrequest} onClick={recipientUserData}>
+                {loading ? (
+                  <ReactLoading
+                    color="white"
+                    width={25}
+                    height={25}
+                    type="spin"
+                  />
+                ) : (
+                  "Save"
+                )}
               </button>
             </div>
           </div>
