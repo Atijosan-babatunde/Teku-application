@@ -43,7 +43,7 @@ const TransactionSection = () => {
     (state) => state.transaction.getTransactionUsers
   );
   const [data] = useState(transactionData);
-  const [selectedSubmenu, setSelectedSubmenu] = useState('');
+  const [selectedSubmenu, setSelectedSubmenu] = useState("");
 
   const handleBtn = (event, submenu) => {
     setAnchorEl(event.currentTarget);
