@@ -12,7 +12,7 @@ import SelectCurrencyPairStep6 from "./selectCurrencyPairStep6";
 const TransferModal = ({ handleModalShowTransfer }) => {
   const [step, setStep] = useState(1);
   const [amount, setAmount] = useState("");
-  const [totalAmount, setTotalAmount] = useState("");
+  const [totalAmount, setTotalAmount] = useState(0);
   const [recipientAmount, setRecipientAmount] = useState("2000");
   const [dropDownValue, setDropDownValue] = useState(null);
   const [dropDownValueTwo, setDropDownValueTwo] = useState(null);
@@ -217,7 +217,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
             <SelectCurrencyPairStep6
               setStep={setStep}
               country={country}
-              recipientAmount={recipientAmount}
+              totalAmount={totalAmount}
               purpose={purpose}
               dropDownValueBank={dropDownValueBank}
               dropDownValue={dropDownValue}
