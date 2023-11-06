@@ -1,236 +1,236 @@
 @font-face {
-    font-family: Gilroy;
-    src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
+  font-family: Gilroy;
+  src: url(../../../shared/utils/fonts/Gilroy-Regular.ttf);
 }
 .parent {
-    justify-content: center;
-    align-items: center;
-    position:sticky;
-    margin-top: -21em;
-    z-index: 30;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  margin-top: -21em;
+  z-index: 30;
 }
-.content{
-    z-index: 3000 !important;
-    border-radius: 10px;
-    background-color: #FFFFFF;
-    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.04);
-    padding:2em 2em;
-    margin: 1em 1em;
-    margin-bottom: 2em;
-    // width: 100%;
-}
-
-.cardholder{
-    display: flex;
-    align-items: center;
+.content {
+  z-index: 3000 !important;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.04);
+  padding: 2em 2em;
+  margin: 1em 1em;
+  margin-bottom: 2em;
+  // width: 100%;
 }
 
-.userpassportimg{
-    height: 150px;
-    width: 150px;
-    border-radius: 100px;
-    margin-right: 1em;
+.cardholder {
+  display: flex;
+  align-items: center;
 }
 
-.name{
-    color: var(--Black, #00040F);
-    font-family: Gilroy;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 40px; /* 166.667% */
+.userpassportimg {
+  height: 150px;
+  width: 150px;
+  border-radius: 100px;
+  margin-right: 1em;
 }
 
-.country{
-    border-radius: 100px;
-    background: var(--White-Blue, #F0F3FF);
-    padding: 0.5em 0.5em;
+.name {
+  color: var(--Black, #00040f);
+  font-family: Gilroy;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px; /* 166.667% */
 }
 
-.countryh1{ 
-    color: var(--Blue-Primary, #011B6D);
-    font-family: Gilroy;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 26px; /* 162.5% */
-    text-align: center;
+.country {
+  border-radius: 100px;
+  background: var(--White-Blue, #f0f3ff);
+  padding: 0.5em 0.5em;
 }
 
-.contenthead{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.countryh1 {
+  color: var(--Blue-Primary, #011b6d);
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px; /* 162.5% */
+  text-align: center;
 }
 
-.contenth2{
-    color: var(--Black, #00040F);
-    font-family: Gilroy;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 32px; /* 177.778% */
+.contenthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.editholder{
-    border-radius: 30px;
-    background: var(--White-Blue, #F0F3FF);
-    padding: 0.5em 0.5em;
-    width: 80px;
+.contenth2 {
+  color: var(--Black, #00040f);
+  font-family: Gilroy;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px; /* 177.778% */
 }
 
-.edith1{
-    color: var(--Blue-Primary, #011B6D);
-    font-family: Gilroy;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 26px; /* 162.5% */
-    text-align: center;
+.editholder {
+  border-radius: 30px;
+  background: var(--White-Blue, #f0f3ff);
+  padding: 0.5em 0.5em;
+  width: 80px;
+  cursor: pointer;
+}
+
+.edith1 {
+  color: var(--Blue-Primary, #011b6d);
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px; /* 162.5% */
+  text-align: center;
 }
 
 .firstdivflex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    // padding:1em 1em;
-    width: 50%;
-    margin-bottom: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // padding:1em 1em;
+  width: 50%;
+  margin-bottom: 2em;
 }
 
 .firstdivh1 {
-    color: var(--grey-text, #999);
-    font-family: Gilroy;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
+  color: var(--grey-text, #999);
+  font-family: Gilroy;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
 }
 
-.changepass{
-    border-radius: 100px;
-    background: var(--White-Blue, #F0F3FF);
-    padding: 0.7em 0.7em;
+.changepass {
+  border-radius: 100px;
+  background: var(--White-Blue, #f0f3ff);
+  padding: 0.7em 0.7em;
 }
 
-.changepassh1{
-    color: var(--Blue-Primary, #011B6D);
-    font-family: Gilroy;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 26px; /* 162.5% */
-    text-align: center;
+.changepassh1 {
+  color: var(--Blue-Primary, #011b6d);
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px; /* 162.5% */
+  text-align: center;
 }
 
-.icon{
-    margin-right: 5px;
+.icon {
+  margin-right: 5px;
+  cursor: pointer;
 }
-
 
 // KYC REGISTRATION //
 
 .kycreg {
-    border-radius: 16px;
-    background: rgba(255, 15, 15, 0.05);
-    padding:1em 1em;
-    margin: 1em;
-    margin-bottom: 2em;
+  border-radius: 16px;
+  background: rgba(255, 15, 15, 0.05);
+  padding: 1em 1em;
+  margin: 1em;
+  margin-bottom: 2em;
 }
 
-.kych1{
-    color: var(--red, #FF0F0F);
+.kych1 {
+  color: var(--red, #ff0f0f);
+  font-family: Gilroy;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.kycflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    color: var(--blue-primary, #011b6d);
     font-family: Gilroy;
-    font-size: 18px;
+    font-size: 14px;
     font-style: normal;
-    font-weight: 600;
-    line-height: 32px; 
-}
+    font-weight: 500;
+    line-height: 26px;
+    width: 60%;
+  }
 
-.kycflex{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-
-    p{
-        color: var(--blue-primary, #011B6D);
-        font-family: Gilroy;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 26px;
-        width:60%; 
-    }
-
-    h3{
-        color: var(--blue-primary, #011B6D);
-        text-align: center;
-        font-family: Gilroy;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 22px; 
-        cursor: pointer;
-    }
+  h3 {
+    color: var(--blue-primary, #011b6d);
+    text-align: center;
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    cursor: pointer;
+  }
 }
 
 .arrow {
-    margin-left: 2em;
+  margin-left: 2em;
 }
 
-.firstp{
-    border: none !important;
-    color: var(--Grey-text, #999);
-    font-family: Gilroy;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 22px; /* 137.5% */
+.firstp {
+  border: none !important;
+  color: var(--Grey-text, #999);
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px; /* 137.5% */
 }
 
 // input{
 //     border: none !important;
 // }
 
-@media screen and (max-width:960px) {
-    .cardholder{
-        display: grid;
+@media screen and (max-width: 960px) {
+  .cardholder {
+    display: grid;
+  }
+  .userpassportimg {
+    margin: auto;
+    justify-content: center;
+    display: flex;
+  }
+  .name {
+    text-align: center;
+  }
+  .contenthead {
+    display: grid;
+    justify-content: center;
+    margin: auto;
+  }
+  .editholder {
+    width: 100%;
+  }
+  .firstdivflex {
+    width: 100%;
+    margin-top: 1em;
+  }
+  .contenth2 {
+    text-align: center;
+  }
+  .kycflex {
+    display: grid;
 
+    p {
+      width: 100%;
     }
-    .userpassportimg{
-        margin: auto;
-        justify-content: center;
-        display: flex;
+    h3 {
+      text-align: left;
     }
-    .name{
-        text-align: center;
-    }
-    .contenthead{
-        display: grid;
-        justify-content: center;
-        margin: auto;
-    }
-    .editholder{
-        width: 100%;
-    }
-    .firstdivflex {
-        width: 100%;
-        margin-top: 1em;
-    }
-    .contenth2{
-        text-align: center;
-    }
-    .kycflex{
-        display: grid;
-
-        p{
-            width: 100%;
-        }
-        h3{
-            text-align: left;
-        }
-    }
-    .kycreg {
-        margin: 1em;
-    }
+  }
+  .kycreg {
+    margin: 1em;
+  }
 }
