@@ -86,7 +86,7 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
         style={{ cursor: "pointer" }}
       >
         <DropdownToggle tag="a" className={styles.dropdownToggle}>
-          <div>{formData.documentdoc}</div>
+          <div>{formData.identification}</div>
           <div className={styles.dropDownrow}>
             <div style={{ color: "#777E90" }}>
               <MdArrowDropDown style={{ fontSize: "2em" }} />
@@ -99,7 +99,7 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
               className={styles.value}
               key={index}
               onClick={() =>
-                handleChange({ target: { name: "documentdoc", value: option } })
+                handleChange({ target: { name: "identification", value: option } })
               }
             >
               {option}

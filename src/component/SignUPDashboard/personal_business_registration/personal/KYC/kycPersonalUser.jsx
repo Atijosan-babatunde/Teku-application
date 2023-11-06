@@ -18,7 +18,6 @@ const KycPersonalUser = ({ handleModalShow }) => {
     address: "",
     local_government: "",
     document: null,
-    ownerId: "",
   });
 
   const handleChange = (e) => {
@@ -158,6 +157,7 @@ const KycPersonalUser = ({ handleModalShow }) => {
               setStep={setStep}
               handleChange={handleChange}
               formData={formData}
+              setFormData={setFormData}
             />
           </div>
           <div style={{ display: step === 4 ? "" : "none" }}>
