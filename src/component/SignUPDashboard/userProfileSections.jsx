@@ -12,12 +12,16 @@ import ReactLoading from "react-loading";
 import KycBusinessUser from "./personal_business_registration/business/KYC/kycBusinessUser";
 import BusinessInfoSection from "./BusinessInfoSection";
 import customAxios from "../../shared/utils/axios";
+import KycPersonalUser from "./personal_business_registration/personal/KYC/kycPersonalUser";
 
 const UserProfileSections = () => {
   const [loading, setLoading] = useState(false);
   const [userEdit, setUserEdit] = useState(false);
+  const [selectedProfilePicture, setSelectedProfilePicture] = useState(null);
+
   const dispatch = useDispatch();
   const data = useAppSelector((state) => state.users.getUsersData);
+  console.log("USER PROFILE", data);
   // const [data] = useState(userData);
   const [formData, setFormData] = useState({
     email: data.email,
@@ -26,14 +30,19 @@ const UserProfileSections = () => {
     firstName: data?.firstName,
     lastName: data?.lastName,
     country: data?.country,
+    profilePicture:
+      data.profilePicture ?? `${data?.firstName[0]} ${data?.lastName[0]}`,
     accountType: data?.accountType,
   });
 
   console.log(formData);
 
-  // useEffect(() => {
-  //   getUser();
-  // }, [data]);
+  const handleProfilePictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData({ ...formData, profilePicture: file });
+    }
+  };
 
   const updateUserProfile = async () => {
     try {
@@ -66,13 +75,19 @@ const UserProfileSections = () => {
         <div className={styles.content}>
           <div className={styles.cardholder}>
             <div className={styles.userimg}>
-              <img
-                src={userpassport}
-                alt=""
-                className={styles.userpassportimg}
-              />
-              {/* <span><AiOutlinePicture/></span> */}
+              {data.profilePicture ? (
+                <img
+                  src={data.profilePicture}
+                  alt="User Profile"
+                  className={styles.userpassportimg}
+                />
+              ) : (
+                <span className={styles.userimgspan}>
+                  {formData.profilePicture}
+                </span>
+              )}
             </div>
+
             <div className={styles.username}>
               <div className={styles.name}>
                 {data?.firstName} {data?.lastName}
@@ -86,7 +101,6 @@ const UserProfileSections = () => {
             <ReactLoading color="blue" width={25} height={25} type="spin" />
           )}
         </div>
-
         {data?.kycVerified ? null : (
           <div className={styles.kycreg}>
             <div className={styles.kyccontent}>
@@ -103,7 +117,13 @@ const UserProfileSections = () => {
                   <IoIosArrowForward className={styles.arrow} />
                 </h3>
               </div>
-              {showModalKyc && <KycBusinessUser {...{ handleModalShowKyc }} />}
+              {showModalKyc ? (
+                data?.accountType === "PERSONAL" ? (
+                  <KycPersonalUser {...{ handleModalShowKyc }} />
+                ) : (
+                  <KycBusinessUser {...{ handleModalShowKyc }} />
+                )
+              ) : null}
             </div>
           </div>
         )}
