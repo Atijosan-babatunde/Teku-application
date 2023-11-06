@@ -7,7 +7,6 @@ import {
 } from "reactstrap";
 import { MdArrowDropDown } from "react-icons/md";
 import steponeimg from "../../../../../assets/png/steponeimg.png";
-import documentKYCIcon from "../../../../../assets/svg/documentKYC.svg";
 import { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

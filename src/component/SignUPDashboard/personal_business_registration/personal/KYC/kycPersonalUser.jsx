@@ -150,6 +150,7 @@ const KycPersonalUser = ({ handleModalShow }) => {
               setStep={setStep}
               handleChange={handleChange}
               formData={formData}
+              setFormData={setFormData}
             />
           </div>
           <div style={{ display: step === 3 ? "" : "none" }}>
