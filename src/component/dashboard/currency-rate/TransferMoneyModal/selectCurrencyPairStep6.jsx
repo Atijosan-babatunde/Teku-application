@@ -10,7 +10,7 @@ import TransactionServices from "../../../../shared/redux/services/transaction.s
 const SelectCurrencyPairStep6 = ({
   setStep,
   country,
-  recipientAmount,
+  totalAmount,
   purpose,
   dropDownValueBank,
   dropDownValue,
@@ -53,13 +53,11 @@ const SelectCurrencyPairStep6 = ({
   const handleClickReciept = () => {
     document.current.click();
   };
-  const amountString = recipientAmount.toString();
 
   const payload = {
     baseCurrencyId: dropDownValue?.id,
     pairCurrencyId: dropDownValueTwo?.id,
-    // amount: parseFloat(amountString).toFixed(2),
-    amount: 20.10,
+    amount: totalAmount,
     country: country?.label,
     purpose,
     paymentDocument,
@@ -76,9 +74,7 @@ const SelectCurrencyPairStep6 = ({
     setLoading(true);
     const endpoint = `/transaction`;
     try {
-      const response = await TransactionServices.performTrasaction(endpoint, {
-        data: payload,
-      });
+      const response = await TransactionServices.performTrasaction(endpoint, payload);
       console.log(response)
       setLoading(false);
       setShowModal(!showModal);
