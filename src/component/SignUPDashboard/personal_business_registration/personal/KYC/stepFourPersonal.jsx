@@ -1,14 +1,22 @@
 import React, { useState, useRef } from "react";
 import styles from "../KYC/CSS/stepFourPersonal.module.scss";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+} from "reactstrap";
+import ReactLoading from "react-loading";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { MdArrowDropDown } from "react-icons/md";
+import customAxios from "../../../../../shared/utils/axios";
 import proof from "../../../../../assets/png/proof.png";
-import documentKYCIcon from "../../../../../assets/svg/documentKYC.svg";
 import { BsArrowLeft } from "react-icons/bs";
 
 const StepFourPersonal = ({ setStep, handleChange, formData }) => {
   const [menu, setMenu] = useState(false);
-  const [filesName, setFilesName] = useState("");
+  const [loading, setLoading] = useState(false);
   const document = useRef(null);
 
   const localGovernmentOptions = [
@@ -28,18 +36,30 @@ const StepFourPersonal = ({ setStep, handleChange, formData }) => {
     setStep(3);
   };
 
-  const validate = () => {
-    return !formData.address || formData.local_government === "Select" || !filesName;
+  const handleSubmitKyc = async () => {
+    try {
+      setLoading(true);
+      const response = await customAxios.post(`/kyc/personal`, formData);
+      console.log(response);
+      setLoading(false);
+      setStep(5);
+    } catch (error) {
+      console.log("Error:", error);
+    }
   };
 
-  const handleDocumentChange = (e) => {
-    const fileUploaded = e.target.files[0];
-    setFilesName(fileUploaded.name);
-    handleChange(e);
+  const validate = () => {
+    return (
+      !formData.address ||
+      formData.local_government === "Select" ||
+      !formData.proof_of_address
+    );
   };
 
   const handleDropdownChange = (selectedLocalGovernment) => {
-    handleChange({ target: { name: "local_government", value: selectedLocalGovernment } });
+    handleChange({
+      target: { name: "local_government", value: selectedLocalGovernment },
+    });
   };
 
   return (
@@ -101,14 +121,16 @@ const StepFourPersonal = ({ setStep, handleChange, formData }) => {
         <div className={styles.driverdoc}>
           <input
             type="file"
-            accept=".png,.jpeg,.jpg,.doc,.docx,.pdf"
+            accept=".png,.jpeg,.jpg"
             ref={document}
-            onChange={handleDocumentChange}
+            name="proof_of_address"
+            onChange={handleChange}
             style={{ display: "none" }}
           />
-          <img src={documentKYCIcon} alt="" />
-          {filesName ? (
-            <p onClick={() => document.current.click()}>{filesName}</p>
+          {formData.proof_of_address ? (
+            <>
+              <img src={formData.proof_of_address} alt="Uploaded Document" />
+            </>
           ) : (
             <p onClick={() => document.current.click()}>
               Tap to upload document <br />
@@ -130,12 +152,16 @@ const StepFourPersonal = ({ setStep, handleChange, formData }) => {
         <button
           className={styles.btnrequest}
           disabled={validate()}
-          onClick={goToStepThree}
+          onClick={handleSubmitKyc}
           style={{
             backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " ",
           }}
         >
-          Continue
+          {loading ? (
+            <ReactLoading color="white" width={25} height={25} type="spin" />
+          ) : (
+            "Continue"
+          )}
         </button>
       </div>
     </div>

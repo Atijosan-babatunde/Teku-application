@@ -17,6 +17,7 @@ const KycPersonalUser = ({ handleModalShow }) => {
     phone_no: "",
     address: "",
     local_government: "",
+    proof_of_address: "",
     document: null,
   });
 
