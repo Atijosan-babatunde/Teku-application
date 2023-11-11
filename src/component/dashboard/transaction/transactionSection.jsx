@@ -247,7 +247,7 @@ const TransactionSection = () => {
           <TransactionPreview {...{ handleModalShow }} selectedTransaction={selectedTransaction} />
         )}
         {askForRefundModal && saveItemModal === "Ask for refund" && (
-          <AskForRefund {...{ handleModalShow }} />
+          <AskForRefund {...{ handleModalShow }} selectedTransaction={selectedTransaction} />
         )}
 
         <div className={styles.parent}>
