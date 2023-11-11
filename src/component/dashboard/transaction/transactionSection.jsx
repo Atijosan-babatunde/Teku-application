@@ -30,7 +30,6 @@ import "react-toastify/dist/ReactToastify.css";
 const TransactionSection = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
   const [saveItemModalCompleted, setSaveItemModalCompleted] = useState("");
-  const [saveItemModalCancelled, setSaveItemModalCancelled] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorCancelledEl, setAnchorCancelledEl] = useState(null);
   const openCancelled = Boolean(anchorCancelledEl);
@@ -194,60 +193,33 @@ const TransactionSection = () => {
   const [askForRefundModal, setAskForRefundModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
 
-  const [showModalCompleted, setShowModalCompleted] = useState(false);
   const [makeAppealModal, setMakeAppealModal] = useState(false);
-
-  // CANCELLED ELLIPS BUTTON
-  // const handleBtnCancelled = (event) => {
-  //   setAnchorCancelledEl(event.currentTarget);
-  // };
-
-  // const handleCloseCancelled = (itemcancelled) => {
-  //   setAnchorCancelledEl(null);
-  //   if (itemcancelled === "Preview") {
-  //     setShowModalCancelled(true);
-  //     setSaveItemModalCancelled(itemcancelled);
-  //   }
-
-  //   if (itemcancelled === "Request again") {
-  //     setMakeAppealModal(true);
-  //     setSaveItemModalCancelled(itemcancelled);
-  //   }
-
-  //   if (itemcancelled === "Download Receipt") {
-  //     setDeleteModal(true);
-  //     setSaveItemModalCancelled(itemcancelled);
-  //   }
-  // };
-
-  // MODAL STATE CANCELLED
-
-  const [showModalCancelled, setShowModalCancelled] = useState(false);
 
 
   const handleModalShow = (modalState, setModalState) => {
     setModalState(!modalState);
     setDeleteModal(!deleteModal);
     setMakeAppealModal(!makeAppealModal);
+    setShowModalPreview(!showModalPreview);
   };
 
   if (data) {
     return (
       <>
-        {showModalCancelled && saveItemModalCancelled === "Preview" && (
-          <CancelledPreviewModal {...{ handleModalShow }} selectedTransaction={selectedTransaction} />
-        )}
-        {showModalCompleted && saveItemModalCompleted === "Preview" && (
-          <CompletePreviewModal {...{ handleModalShow }} />
-        )}
         {makeAppealModal && saveItemModalCompleted === "Make an appeal" && (
           <MakeAnAppeal {...{ handleModalShow }} />
         )}
         {showModalPreview && saveItemModal === "Preview" && (
-          <TransactionPreview {...{ handleModalShow }} selectedTransaction={selectedTransaction} />
+          <TransactionPreview
+            {...{ handleModalShow }}
+            selectedTransaction={selectedTransaction}
+          />
         )}
         {askForRefundModal && saveItemModal === "Ask for refund" && (
-          <AskForRefund {...{ handleModalShow }} selectedTransaction={selectedTransaction} />
+          <AskForRefund
+            {...{ handleModalShow }}
+            selectedTransaction={selectedTransaction}
+          />
         )}
 
         <div className={styles.parent}>

@@ -1,8 +1,12 @@
 import styles from "../transaction/css/transactionpreview.module.scss";
+import completed from "../transaction/css/completepreviewmodal.module.scss";
+import declined from "../transaction/css/cancelledpreviewmodal.module.scss";
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../../../shared/Hooks/useOnClickOutside";
 import can from "../../../assets/png/can.png";
+import bigcancel from "../../../assets/svg/bigcancel.svg";
 import loading from "../../../assets/svg/loading.svg";
+import approve from "../../../assets/svg/approveimg.svg";
 import download from "../../../assets/svg/download.svg";
 import shear from "../../../assets/svg/shearimg.svg";
 import AskForRefund from "./askForRefund";
@@ -36,10 +40,23 @@ const TransactionPreview = ({
         >
           <img src={can} alt="close modal" />
         </div>
-        <div className={styles.contentholder}>
-          <img src={loading} alt="" />
-          <h1 className={styles.h1holder}>Payment in progress</h1>
-        </div>
+        {selectedTransaction.status === "SUCCESSFUL" ? (
+          <div className={completed.contentholder}>
+            <img src={approve} alt="" />
+            <h1 className={completed.contentholdh1}>Payment successful</h1>
+          </div>
+        ) : selectedTransaction.status === "CANCELLED" ? (
+          <div className={declined.contentholder}>
+            <img src={bigcancel} alt="" />
+            <h1 className={declined.h1holder}>Payment declined</h1>
+          </div>
+        ) : (
+          <div className={styles.contentholder}>
+            <img src={loading} alt="" />
+            <h1 className={styles.h1holder}>Payment in progress</h1>
+          </div>
+        )}
+
         <div className={styles.downcontent}>
           <p className={styles.ptag}>Amount to be paid:</p>
           <h2 className={styles.h2tag}>
