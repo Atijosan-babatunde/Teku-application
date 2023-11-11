@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import axios from "axios";
 import customAxios from "../../../shared/utils/axios";
+import { truncateMiddle } from "../../../shared/utils/truncate";
 
 const RecipientSectionTable = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -225,13 +226,13 @@ const RecipientSectionTable = () => {
                         className={styles.tabledata}
                         style={{ paddingTop: "1.5000em", paddingLeft: "2em" }}
                       >
-                        {prod.paymentDocument}
+                        {truncateMiddle(prod.paymentDocument, 15)}
                       </td>
                       <td
                         className={styles.tabledataa}
                         style={{ paddingTop: "1.5000em", paddingLeft: "2em" }}
                       >
-                        {prod.paymentDescription}
+                        {truncateMiddle(prod.paymentDescription, 15)}
                       </td>
                       <td
                         className={styles.tabledatas}
