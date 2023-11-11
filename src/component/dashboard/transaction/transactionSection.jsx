@@ -44,10 +44,12 @@ const TransactionSection = () => {
   );
   const [data] = useState(transactionData);
   const [selectedSubmenu, setSelectedSubmenu] = useState("");
+  const [selectedTransaction, setSelectedTransaction] = useState();
 
   const handleBtn = (event, submenu) => {
     setAnchorEl(event.currentTarget);
-    setSelectedSubmenu(submenu);
+    setSelectedTransaction(submenu);
+    setSelectedSubmenu(submenu.status);
   };
 
   const handleClose = (item) => {
@@ -106,7 +108,6 @@ const TransactionSection = () => {
     },
   ]);
 
-  // IN PROGRESS ELLIPS BUTTON
   const subtitlecancelled = [
     {
       id: 1,
@@ -193,60 +194,8 @@ const TransactionSection = () => {
   const [askForRefundModal, setAskForRefundModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
 
-  function handleAskForRefund() {
-    setShowModalPreview(!showModalPreview);
-    setDeleteModal(!deleteModal);
-    setAskForRefundModal(!askForRefundModal);
-  }
-
-  function handleModalShowTransactionPreview() {
-    setShowModalPreview(!showModalPreview);
-    setDeleteModal(!deleteModal);
-    setAskForRefundModal(!askForRefundModal);
-  }
-
-  // BUTTON END
-
-  // COMPLETED ELLIPS BUTTON
-  // const handleBtnCompleted = (event) => {
-  //   setAnchorCompletedEl(event.currentTarget);
-  // };
-
-  // const handleCloseCompleted = (itemcompleted) => {
-  //   setAnchorCompletedEl(null);
-  //   if (itemcompleted === "Preview") {
-  //     setShowModalCompleted(true);
-  //     setSaveItemModalCompleted(itemcompleted);
-  //   }
-
-  //   if (itemcompleted === "Make an appeal") {
-  //     setMakeAppealModal(true);
-  //     setSaveItemModalCompleted(itemcompleted);
-  //   }
-
-  //   if (itemcompleted === "Delete") {
-  //     setDeleteModal(true);
-  //     setSaveItemModalCompleted(itemcompleted);
-  //   }
-  // };
-
-  // MODAL STATE COMPLETED
-
   const [showModalCompleted, setShowModalCompleted] = useState(false);
   const [makeAppealModal, setMakeAppealModal] = useState(false);
-  //  const [deleteModal, setDeleteModal] = useState(false)
-
-  function handleMakeAnAppeal() {
-    setMakeAppealModal(!makeAppealModal);
-    setShowModalCompleted(!showModalCompleted);
-  }
-
-  function handleModalShowCompleted() {
-    setShowModalCompleted(!showModalCompleted);
-    //  setDeleteModal(!deleteModal)
-    setMakeAppealModal(!makeAppealModal);
-  }
-  //BUTTON END
 
   // CANCELLED ELLIPS BUTTON
   // const handleBtnCancelled = (event) => {
@@ -274,43 +223,32 @@ const TransactionSection = () => {
   // MODAL STATE CANCELLED
 
   const [showModalCancelled, setShowModalCancelled] = useState(false);
-  //  const [makeAppealModal, setMakeAppealModal] = useState(false)
-  //  const [deleteModal, setDeleteModal] = useState(false)
 
-  function handleCancelledPreview() {
+
+  const handleModalShow = (modalState, setModalState) => {
+    setModalState(!modalState);
+    setDeleteModal(!deleteModal);
     setMakeAppealModal(!makeAppealModal);
-    setShowModalCancelled(!showModalCancelled);
-  }
-
-  //  function handleModalShowCompleted() {
-  //     setShowModalCompleted(!showModalCompleted)
-  //     setMakeAppealModal(!makeAppealModal)
-  //  }
-  //BUTTON END
+  };
 
   if (data) {
     return (
       <>
         {showModalCancelled && saveItemModalCancelled === "Preview" && (
-          <CancelledPreviewModal {...{ handleCancelledPreview }} />
+          <CancelledPreviewModal {...{ handleModalShow }} selectedTransaction={selectedTransaction} />
         )}
-        {/* {makeAppealModal && saveItemModalCompleted === 'Make an appeal' && <MakeAnAppeal {...{ handleMakeAnAppeal }} />} */}
-
         {showModalCompleted && saveItemModalCompleted === "Preview" && (
-          <CompletePreviewModal {...{ handleModalShowCompleted }} />
+          <CompletePreviewModal {...{ handleModalShow }} />
         )}
         {makeAppealModal && saveItemModalCompleted === "Make an appeal" && (
-          <MakeAnAppeal {...{ handleMakeAnAppeal }} />
+          <MakeAnAppeal {...{ handleModalShow }} />
         )}
-        {/* {deleteModal && saveItemModal === 'Delete' && <DeletePaymentModal {...{ handleModalShow }} />} */}
-
         {showModalPreview && saveItemModal === "Preview" && (
-          <TransactionPreview {...{ handleModalShowTransactionPreview }} />
+          <TransactionPreview {...{ handleModalShow }} selectedTransaction={selectedTransaction} />
         )}
         {askForRefundModal && saveItemModal === "Ask for refund" && (
-          <AskForRefund {...{ handleAskForRefund }} />
+          <AskForRefund {...{ handleModalShow }} />
         )}
-        {/* {deleteModal && saveItemModal === 'Delete' && <DeletePaymentModal {...{ handleModalShow }} />} */}
 
         <div className={styles.parent}>
           <div className={styles.content}>
@@ -514,7 +452,7 @@ const TransactionSection = () => {
                           aria-expanded={open ? "true" : undefined}
                           variant="contained"
                           disableElevation
-                          onClick={(event) => handleBtn(event, prod.status)}
+                          onClick={(event) => handleBtn(event, prod)}
                           className="btntable"
                           style={{ backgroundColor: "transparent" }}
                         >
