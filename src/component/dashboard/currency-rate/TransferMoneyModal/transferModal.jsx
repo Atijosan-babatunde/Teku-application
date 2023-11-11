@@ -186,6 +186,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
               dropDownValue={dropDownValue}
               dropDownValueTwo={dropDownValueTwo}
               amount={amount}
+              currencyPair={currencyPair}
               setAmount={setAmount}
               setTotalAmount={setTotalAmount}
               recipientAmount={recipientAmount}

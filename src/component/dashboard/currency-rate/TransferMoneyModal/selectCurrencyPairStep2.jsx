@@ -92,6 +92,7 @@ const SelectCurrencyPairStep2 = ({
                 <p className={styles.secondhalfp}>{dropDownValueTwo?.code}</p>
               </div>
             </div>
+            
             <div className={styles.firstdivflex}>
               <div className={styles.firstdivh1}>Current rate:</div>
               <div className={styles.firstdivp}>

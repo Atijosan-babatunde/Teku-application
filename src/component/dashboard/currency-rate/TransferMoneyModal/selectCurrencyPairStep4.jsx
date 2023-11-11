@@ -13,6 +13,7 @@ const SelectCurrencyPairStep4 = ({
   country,
   recipientAmount,
   purpose,
+  currencyPair,
   paymentDocument,
   paymentInstruction,
   paymentMethod,
@@ -55,29 +56,37 @@ const SelectCurrencyPairStep4 = ({
               <p>{dropDownValueTwo?.code}</p>
             </div>
           </div>
-          <div className={styles.firstdivflex}>
-            <div className={styles.firstdivh1}>Current rate:</div>
-            <div className={styles.firstdivp}> 1 ZAR = 0.00096 GBP</div>
-          </div>
-          <div className={styles.firstdivflex}>
-            <div className={styles.firstdivh1}>Available amount:</div>
-            <div className={styles.firstdivp}>£ 400,000</div>
-          </div>
 
           <div className={styles.firstdivflex}>
-            <div className={styles.firstdivh1}>Sending method:</div>
-            <div className={styles.firstdivp}>Bank transfer</div>
-          </div>
+              <div className={styles.firstdivh1}>Current rate:</div>
+              <div className={styles.firstdivp}>
+                {" "}
+                {`1 ${currencyPair?.baseCurrency?.code} = ${currencyPair?.rate} ${currencyPair?.pairCurrency?.code}`}
+              </div>
+            </div>
+            <div className={styles.firstdivflex}>
+              <div className={styles.firstdivh1}>Available amount:</div>
+              <div className={styles.firstdivp}>
+                {currencyPair?.availableAmount}
+              </div>
+            </div>
 
-          <div className={styles.firstdivflex}>
-            <div className={styles.firstdivh1}>Minimum order request:</div>
-            <div className={styles.firstdivp}>£ 10,000</div>
-          </div>
+            <div className={styles.firstdivflex}>
+              <div className={styles.firstdivh1}>Sending method:</div>
+              <div className={styles.firstdivp}>
+                {currencyPair?.sendingMethod}
+              </div>
+            </div>
 
-          <div className={styles.firstdivflex}>
-            <div className={styles.firstdivh1}>Processing time:</div>
-            <div className={styles.firstdivp}>Within 24hrs</div>
-          </div>
+            <div className={styles.firstdivflex}>
+              <div className={styles.firstdivh1}>Minimum order request:</div>
+              <div className={styles.firstdivp}>{currencyPair?.pairCurrency?.code} {currencyPair?.minimumOrderRequest}</div>
+            </div>
+
+            <div className={styles.firstdivflex}>
+              <div className={styles.firstdivh1}>Processing time:</div>
+              <div className={styles.firstdivp}>Within {currencyPair?.processingTime}</div>
+            </div>
         </div>
 
         <div className={styles.seconddiv}>
