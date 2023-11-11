@@ -110,12 +110,12 @@ const SelectCurrencyPairStep2 = ({
 
             <div className={styles.firstdivflex}>
               <div className={styles.firstdivh1}>Minimum order request:</div>
-              <div className={styles.firstdivp}>£ 10,000</div>
+              <div className={styles.firstdivp}>{currencyPair?.pairCurrency?.code} {currencyPair?.minimumOrderRequest}</div>
             </div>
 
             <div className={styles.firstdivflex}>
               <div className={styles.firstdivh1}>Processing time:</div>
-              <div className={styles.firstdivp}>Within 24hrs</div>
+              <div className={styles.firstdivp}>Within {currencyPair?.processingTime}</div>
             </div>
           </div>
 
