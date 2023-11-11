@@ -38,12 +38,11 @@ const SelectCurrencyPairStep3 = ({
   setPaymentDocument,
   paymentDescription,
   setPaymentDescription,
+  setPaymentDocumentCloud
 }) => {
   const options = useMemo(() => countryList().getData(), []);
   const [menuThree, setMenuThree] = useState(false);
   const [checkBox, setCheckBox] = useState("");
-  const [filesName, setFilesName] = useState("");
-  const [formData, setFormData] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -64,6 +63,7 @@ const SelectCurrencyPairStep3 = ({
     if (paymentDocument) {
       try {
         secureUrl = await uploadImage(paymentDocument);
+        setPaymentDocumentCloud(secureUrl);
         console.log(secureUrl);
       } catch (error) {
         console.error("Error uploading image to Cloudinary:", error);

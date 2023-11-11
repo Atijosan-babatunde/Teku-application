@@ -24,9 +24,10 @@ const TransferModal = ({ handleModalShowTransfer }) => {
   const [paymentDocument, setPaymentDocument] = useState(null);
   const [paymentInstruction, setPaymentInstruction] = useState("");
   const [paymentDescription, setPaymentDescription] = useState("");
+  const [paymentDocumentCloud, setPaymentDocumentCloud] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("BANK_TRANSFER");
   const [bankName, setBankName] = useState("");
-  const [confirmation, setConfirmation] = useState("hello.pdf");
+  const [confirmation, setConfirmation] = useState(null);
 
   const modalref = useRef();
   useOnClickOutside(modalref, handleModalShowTransfer);
@@ -173,6 +174,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
               setCountry={setCountry}
               setPurpose={setPurpose}
               setPaymentDocument={setPaymentDocument}
+              setPaymentDocumentCloud={setPaymentDocumentCloud}
               setPaymentInstruction={setPaymentInstruction}
               setPaymentDescription={setPaymentDescription}
               setPaymentMethod={setPaymentInstruction}
@@ -186,6 +188,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
               dropDownValue={dropDownValue}
               dropDownValueTwo={dropDownValueTwo}
               amount={amount}
+              paymentDocumentCloud={paymentDocumentCloud}
               currencyPair={currencyPair}
               setAmount={setAmount}
               setTotalAmount={setTotalAmount}

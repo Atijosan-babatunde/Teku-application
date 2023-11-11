@@ -13,6 +13,7 @@ const SelectCurrencyPairStep4 = ({
   currencyPair,
   paymentDocument,
   paymentInstruction,
+  paymentDocumentCloud,
   paymentMethod,
   paymentDescription
 }) => {
@@ -103,9 +104,9 @@ const SelectCurrencyPairStep4 = ({
               <p>{paymentInstruction}.</p>
               <h3>
                 <span>
-                  <img src={paymentDocument} alt="" />
+                  <img src={paymentDocument?.name} alt="" />
                 </span>
-                Document attached
+                {paymentDocument?.name}
               </h3>
               <div className={styles.country}>
                 <div className={styles.countrycode}>{country?.code}</div>

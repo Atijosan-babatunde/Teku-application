@@ -4,8 +4,10 @@ import documentKYCIcon from "../../../../assets/svg//documentKYC.svg";
 import { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
 import PaymentProccessing from "../RequestModal/paymentProcessing";
 import TransactionServices from "../../../../shared/redux/services/transaction.services";
+import useCloudinaryImageUpload from "../../../../shared/Hooks/useCloudinaryImageUpload";
 
 const SelectCurrencyPairStep6 = ({
   setStep,
@@ -24,28 +26,11 @@ const SelectCurrencyPairStep6 = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [filesName, setFilesName] = useState("");
-  const [formData, setFormData] = useState({});
+  const [uploadImage] = useCloudinaryImageUpload();
 
   const handleChangeReciept = async (event, name) => {
     const fileUploaded = event.target.files[0];
-    setFilesName(fileUploaded.name);
-    getBase64(fileUploaded, async (result) => {
-      setFormData((curr) => {
-        return { ...curr, [name]: result };
-      });
-    });
-  };
-
-  const getBase64 = (file, cb) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
+    setConfirmation(fileUploaded);
   };
 
   const document = useRef(null);
@@ -54,28 +39,51 @@ const SelectCurrencyPairStep6 = ({
     document.current.click();
   };
 
-  const payload = {
-    baseCurrencyId: dropDownValue?.id,
-    pairCurrencyId: dropDownValueTwo?.id,
-    amount: totalAmount,
-    country: country?.label,
-    purpose,
-    paymentDocument,
-    paymentInstruction,
-    paymentDescription,
-    paymentMethod,
-    bankName: dropDownValueBank?.bankName,
-    confirmation,
-  };
-
-  console.log(payload);
-
   const handleTransaction = async () => {
     setLoading(true);
+    let secureUrl = "";
+    let confirmationUrl = "";
+    if (paymentDocument) {
+      try {
+        secureUrl = await uploadImage(paymentDocument);
+        console.log(secureUrl);
+      } catch (error) {
+        console.error("Error uploading image to Cloudinary:", error);
+        setLoading(false);
+        return;
+      }
+    }
+    if (confirmation) {
+      try {
+        confirmationUrl = await uploadImage(confirmation);
+        console.log(confirmationUrl);
+      } catch (error) {
+        console.error("Error uploading image to Cloudinary:", error);
+        setLoading(false);
+        return;
+      }
+    }
+
+    const payload = {
+      baseCurrencyId: dropDownValue?.id,
+      pairCurrencyId: dropDownValueTwo?.id,
+      amount: totalAmount,
+      country: country?.label,
+      purpose,
+      paymentInstruction,
+      paymentDescription,
+      paymentMethod,
+      paymentDocument: secureUrl,
+      bankName: dropDownValueBank?.bankName,
+      confirmation: confirmationUrl,
+    };
     const endpoint = `/transaction`;
     try {
-      const response = await TransactionServices.performTrasaction(endpoint, payload);
-      console.log(response)
+      const response = await TransactionServices.performTrasaction(
+        endpoint,
+        payload
+      );
+      console.log(response);
       setLoading(false);
       setShowModal(!showModal);
     } catch (e) {
@@ -111,8 +119,8 @@ const SelectCurrencyPairStep6 = ({
             style={{ display: "none" }}
           />
           <img src={documentKYCIcon} alt="" />
-          {filesName ? (
-            <p onClick={handleClickReciept}>{filesName}</p>
+          {confirmation ? (
+            <p onClick={handleClickReciept}>{confirmation.name}</p>
           ) : (
             <p onClick={handleClickReciept}>
               Tap to upload payment receipt <br />
@@ -123,7 +131,11 @@ const SelectCurrencyPairStep6 = ({
 
         <div className={styles.requestbut}>
           <button className={styles.btnrequest} onClick={handleTransaction}>
-            Submit
+            {loading ? (
+              <ReactLoading color="white" width={25} height={25} type="spin" />
+            ) : (
+              "Submit"
+            )}
           </button>
         </div>
         {showModal && <PaymentProccessing {...{ handleModalShow }} />}

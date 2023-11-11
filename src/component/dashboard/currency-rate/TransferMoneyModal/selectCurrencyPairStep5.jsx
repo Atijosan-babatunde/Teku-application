@@ -30,6 +30,7 @@ const SelectCurrencyPairStep5 = ({
   purpose,
   paymentMethod,
   setDropDownValueBank,
+  setPaymentMethod,
   setDropDownValueFour,
 }) => {
   const [menuFour, setMenuFour] = useState(false);
@@ -92,14 +93,14 @@ const SelectCurrencyPairStep5 = ({
   };
 
   const validate = () => {
-    return dropDownValueFour === "Select" || dropDownValueBank === null;
+    return paymentMethod === "Select" || dropDownValueBank === null;
   };
 
-  const [amountFour] = useState([
-    { id: 1, paymentType: "Bank transfer" },
-    { id: 2, paymentType: "Cryptocurrency" },
-    { id: 3, paymentType: "Bank card" },
-  ]);
+  const amountFour = [
+    { id: 1, paymentType: "Bank transfer", backend: "BANK_TRANSFER" },
+    { id: 2, paymentType: "Cash Pickup", backend: "CASH_PICKUP" },
+    { id: 3, paymentType: "Online Transfer", backend: "ONLINE_TRANSFER" },
+  ];
 
   // const [bankData] = useState([
   //     { id: 1, bankType: 'Providious bank' },
@@ -107,7 +108,7 @@ const SelectCurrencyPairStep5 = ({
   // ])
 
   const changeValueFour = async (e) => {
-    setDropDownValueFour(e.paymentType);
+    setPaymentMethod(e.backend);
   };
 
   const changeValueBank = async (e) => {
@@ -125,7 +126,7 @@ const SelectCurrencyPairStep5 = ({
   };
 
   const goToStepSix = () => {
-    setStep(4);
+    setStep(6);
   };
 
   if (data) {
@@ -146,7 +147,7 @@ const SelectCurrencyPairStep5 = ({
             style={{ cursor: "pointer" }}
           >
             <DropdownToggle tag="a" className={styles.dropdownToggle}>
-              <div className={styles.dropDownValue}>{dropDownValueFour}</div>
+              <div className={styles.dropDownValue}>{paymentMethod}</div>
               <div className={styles.dropDownrow}>
                 <div style={{ color: "#011B6D" }}>
                   <MdArrowDropDown style={{ fontSize: "2em" }} />
@@ -251,7 +252,12 @@ const SelectCurrencyPairStep5 = ({
                   }}
                 >
                   {loading ? (
-                    <ReactLoading color="white" width={25} height={25} type="spin" />
+                    <ReactLoading
+                      color="white"
+                      width={25}
+                      height={25}
+                      type="spin"
+                    />
                   ) : (
                     "Confirm payment"
                   )}
@@ -272,7 +278,12 @@ const SelectCurrencyPairStep5 = ({
                   }}
                 >
                   {loading ? (
-                    <ReactLoading color="white" width={25} height={25} type="spin" />
+                    <ReactLoading
+                      color="white"
+                      width={25}
+                      height={25}
+                      type="spin"
+                    />
                   ) : (
                     "Generate account details"
                   )}
@@ -281,7 +292,12 @@ const SelectCurrencyPairStep5 = ({
 
               <div className={styles.paylater} onClick={goToPaymentCart}>
                 {loading ? (
-                  <ReactLoading color="white" width={25} height={25} type="spin" />
+                  <ReactLoading
+                    color="white"
+                    width={25}
+                    height={25}
+                    type="spin"
+                  />
                 ) : (
                   "Pay later (save for later)"
                 )}
