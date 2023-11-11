@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "../../../../shared/redux/reduxHooks";
 import ReactLoading from "react-loading";
 import AddRecipientModal from "../../recipients/addRecipientModal";
+import useCloudinaryImageUpload from "../../../../shared/Hooks/useCloudinaryImageUpload";
 
 const SelectCurrencyPairStep3 = ({
   setStep,
@@ -43,7 +44,7 @@ const SelectCurrencyPairStep3 = ({
   const [checkBox, setCheckBox] = useState("");
   const [filesName, setFilesName] = useState("");
   const [formData, setFormData] = useState({});
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const recipientUser = useAppSelector(
@@ -52,18 +53,30 @@ const SelectCurrencyPairStep3 = ({
   // const recipientData = useAppSelector(
   //   (state) => state.transaction.getRecipientUsersData
   // );
+  const [uploadImage] = useCloudinaryImageUpload();
   const [data] = useState(recipientUser);
   const [datacoming, setDatacoming] = useState([]);
 
-
-  const recipientUserData = () => {
+  const recipientUserData = async () => {
     setLoading(true);
+
+    let secureUrl = "";
+    if (paymentDocument) {
+      try {
+        secureUrl = await uploadImage(paymentDocument);
+        console.log(secureUrl);
+      } catch (error) {
+        console.error("Error uploading image to Cloudinary:", error);
+        setLoading(false);
+        return;
+      }
+    }
     let body = {
       country: country?.label,
       paymentInstruction: paymentInstruction,
       paymentMethod: paymentMethod,
       paymentPurpose: purpose,
-      paymentDocument: paymentDocument,
+      paymentDocument: secureUrl,
       paymentDescription: paymentDescription,
     };
 
@@ -80,7 +93,6 @@ const SelectCurrencyPairStep3 = ({
         setLoading(false);
       });
   };
-
 
   const getRecipientUser = () => {
     setLoading(true);
@@ -103,7 +115,7 @@ const SelectCurrencyPairStep3 = ({
   }, []);
 
   function handleModalShow() {
-    setShowModal(!showModal)
+    setShowModal(!showModal);
   }
 
   const changeHandler = (value) => {
@@ -125,36 +137,8 @@ const SelectCurrencyPairStep3 = ({
 
   const handleChangeDoc = async (event, name) => {
     const fileUploaded = event.target.files[0];
-    setFilesName(fileUploaded.name);
-    getBase64(fileUploaded, async (result) => {
-      setFormData((curr) => {
-        return { ...curr, [name]: result };
-      });
-    });
+    setPaymentDocument(fileUploaded);
   };
-
-  const getBase64 = (file, cb) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  };
-
-  // const [recipiantdata] = useState([
-  //   {
-  //     id: 1,
-  //     shortname: "TF",
-  //     reason: "Tuition fees",
-  //     method: "cash pickup",
-  //     payingto: "Coventry University, student number...",
-  //     attached: "Document attached",
-  //     country: "UK",
-  //   },
-  // ]);
 
   const handleClickDoc = () => {
     documentdoc.current.click();
@@ -163,25 +147,20 @@ const SelectCurrencyPairStep3 = ({
   const documentdoc = useRef(null);
 
   const validate = () => {
-    return (
-      !checkBox ||
-      purpose === "" ||
-      !paymentInstruction ||
-      !country ||
-      !filesName
-    );
+    return purpose === "" || !paymentInstruction || !country;
   };
 
+  console.log(paymentDocument);
   const goToStepFour = () => {
     if (checkBox) {
       recipientUserData();
-      setStep(6);
+      setStep(4);
     }
-    setStep(6);
+    setStep(4);
   };
 
   const goToStepTwo = () => {
-    setStep(4);
+    setStep(2);
   };
 
   if (datacoming) {
@@ -189,7 +168,7 @@ const SelectCurrencyPairStep3 = ({
       <div className={styles.parent}>
         <p className={styles.firsttext} onClick={goToStepTwo}>
           <BsArrowLeft className={styles.arrow} />
-          Go back to Payment Checkout
+          Go back to Enter Amount
         </p>
         <h1 className={styles.contenth1}>Add recipient</h1>
         <p className={styles.contentp}>
@@ -251,8 +230,8 @@ const SelectCurrencyPairStep3 = ({
                 style={{ display: "none" }}
               />
               <img src={documentKYCIcon} alt="" />
-              {filesName ? (
-                <p onClick={handleClickDoc}>{filesName}</p>
+              {paymentDocument ? (
+                <p onClick={handleClickDoc}>{paymentDocument.name}</p>
               ) : (
                 <p onClick={handleClickDoc}>
                   Tap to upload payment document/invoice. <br />
@@ -318,7 +297,9 @@ const SelectCurrencyPairStep3 = ({
             <div className={styles.sidedata}>
               <div className={styles.recipiantplus}>
                 <h1>Choose recipient</h1>
-                <div className={styles.plusholder} onClick={handleModalShow}><img src={plus} alt="" /></div>
+                <div className={styles.plusholder} onClick={handleModalShow}>
+                  <img src={plus} alt="" />
+                </div>
               </div>
               {showModal && <AddRecipientModal {...{ handleModalShow }} />}
               <div className={styles.search}>
@@ -336,7 +317,9 @@ const SelectCurrencyPairStep3 = ({
                       <h1 className={styles.headone}>{prod.paymentPurpose}</h1>
                       <p className={styles.paratwo}>{prod.paymentMethod}</p>
                     </div>
-                    <h2 className={styles.recipiantotherdata}>{prod.paymentDescription}</h2>
+                    <h2 className={styles.recipiantotherdata}>
+                      {prod.paymentDescription}
+                    </h2>
                     <div className={styles.recipiantdataflex}>
                       <h2>
                         <span>

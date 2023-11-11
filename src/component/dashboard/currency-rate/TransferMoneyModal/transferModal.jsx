@@ -21,7 +21,7 @@ const TransferModal = ({ handleModalShowTransfer }) => {
   const [currencyPair, setCurrencyPair] = useState(null);
   const [country, setCountry] = useState("");
   const [purpose, setPurpose] = useState("");
-  const [paymentDocument, setPaymentDocument] = useState("document.png");
+  const [paymentDocument, setPaymentDocument] = useState(null);
   const [paymentInstruction, setPaymentInstruction] = useState("");
   const [paymentDescription, setPaymentDescription] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("BANK_TRANSFER");
@@ -162,20 +162,20 @@ const TransferModal = ({ handleModalShowTransfer }) => {
           </div>
 
           <div style={{ display: step === 3 ? "" : "none" }}>
-            <SelectCurrencyPairStep5
+            <SelectCurrencyPairStep3
               setStep={setStep}
-              setPaymentMethod={setPaymentMethod}
-              setBankName={setBankName}
-              dropDownValueFour={dropDownValueFour}
-              dropDownValueBank={dropDownValueBank}
-              dropDownValue={dropDownValue}
-              dropDownValueTwo={dropDownValueTwo}
               country={country}
               purpose={purpose}
+              paymentDocument={paymentDocument}
+              paymentInstruction={paymentInstruction}
+              paymentDescription={paymentDescription}
               paymentMethod={paymentMethod}
-              amount={amount}
-              setDropDownValueFour={setDropDownValueFour}
-              setDropDownValueBank={setDropDownValueBank}
+              setCountry={setCountry}
+              setPurpose={setPurpose}
+              setPaymentDocument={setPaymentDocument}
+              setPaymentInstruction={setPaymentInstruction}
+              setPaymentDescription={setPaymentDescription}
+              setPaymentMethod={setPaymentInstruction}
             />
           </div>
 
@@ -197,23 +197,25 @@ const TransferModal = ({ handleModalShowTransfer }) => {
               setPaymentMethod={setPaymentInstruction}
             />
           </div>
+
           <div style={{ display: step === 5 ? "" : "none" }}>
-            <SelectCurrencyPairStep3
+            <SelectCurrencyPairStep5
               setStep={setStep}
+              setPaymentMethod={setPaymentMethod}
+              setBankName={setBankName}
+              dropDownValueFour={dropDownValueFour}
+              dropDownValueBank={dropDownValueBank}
+              dropDownValue={dropDownValue}
+              dropDownValueTwo={dropDownValueTwo}
               country={country}
               purpose={purpose}
-              paymentDocument={paymentDocument}
-              paymentInstruction={paymentInstruction}
-              paymentDescription={paymentDescription}
               paymentMethod={paymentMethod}
-              setCountry={setCountry}
-              setPurpose={setPurpose}
-              setPaymentDocument={setPaymentDocument}
-              setPaymentInstruction={setPaymentInstruction}
-              setPaymentDescription={setPaymentDescription}
-              setPaymentMethod={setPaymentInstruction}
+              amount={amount}
+              setDropDownValueFour={setDropDownValueFour}
+              setDropDownValueBank={setDropDownValueBank}
             />
           </div>
+
           <div style={{ display: step === 6 ? "" : "none" }}>
             <SelectCurrencyPairStep6
               setStep={setStep}
