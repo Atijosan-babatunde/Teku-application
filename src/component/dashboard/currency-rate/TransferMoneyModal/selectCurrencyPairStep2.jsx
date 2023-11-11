@@ -42,6 +42,11 @@ const SelectCurrencyPairStep2 = ({
     }
   };
 
+  const getAmountPercentage = (amount) => {
+    const totalAmount = (parseFloat(amount) / 100) * 10;
+    return totalAmount;
+  };
+
   const handleRecipiantGet = (e) => {
     if (e.target.value) {
       setAmount(e.target.value);
@@ -133,7 +138,7 @@ const SelectCurrencyPairStep2 = ({
                 value={amount}
               />
               <p className={styles.undertext}>
-                Minimum amount: <span>10,000GBP</span>
+                Minimum amount: <span>10 {currencyPair?.baseCurrency?.code}</span>
               </p>
 
               <h2 className={styles.rowname}>Recipient get</h2>
@@ -145,7 +150,7 @@ const SelectCurrencyPairStep2 = ({
                 readOnly
               />
               <p className={styles.undertext}>
-                Transfer fee: <span>0.00 GBP</span>
+                Transfer fee: <span>{getAmountPercentage(amount)} {currencyPair?.baseCurrency?.code}</span>
               </p>
             </div>
 
