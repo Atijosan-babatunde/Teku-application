@@ -10,6 +10,7 @@ import steponeimg from "../../../../../assets/png/steponeimg.png";
 import { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getBase64 } from "../../../../../shared/utils/base64";
 
 const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
   const [menu, setMenu] = useState(false);
@@ -28,9 +29,9 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
 
   const documentdoc = [
     "Select",
-    "International passport",
-    "National ID",
-    "Drivers License",
+    "INTERNATION_PASSPORT",
+    "NIN",
+    "DRIVER_LICENSE",
   ];
 
   const instruction = [
@@ -49,6 +50,17 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
         return base64Data;
     }
   };
+
+  // const getBase64 = (file, cb) => {
+  //   let reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onload = function () {
+  //     cb(reader.result);
+  //   };
+  //   reader.onerror = function (error) {
+  //     console.log("Error: ", error);
+  //   };
+  // };
 
   const goToStepTwo = () => {
     setStep(2);
@@ -72,6 +84,8 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
       <input
         className={styles.calculatorinput}
         type="text"
+        max={11}
+        min={11}
         name="bvn_no"
         value={formData.bvn_no}
         placeholder="Enter your BVN number"
@@ -99,7 +113,9 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
               className={styles.value}
               key={index}
               onClick={() =>
-                handleChange({ target: { name: "identification", value: option } })
+                handleChange({
+                  target: { name: "identification", value: option },
+                })
               }
             >
               {option}
@@ -115,12 +131,17 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
             accept=".png,.jpeg,.jpg,.doc,.docx,.pdf"
             ref={document}
             name="document"
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, document: e.target.files[0] })
+            }
             style={{ display: "none" }}
           />
           {formData.document ? (
             <>
-              <img src={formData.document} alt="Uploaded Document" />
+              <img
+                src={getBase64(formData.document, (url) => url)}
+                alt="Uploaded Document"
+              />
               {/* <p onClick={() => document.current.click()}>
                 {base64ToOriginal(formData.document, "image")}
               </p> */}

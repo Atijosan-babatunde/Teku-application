@@ -17,7 +17,7 @@ const KycPersonalUser = ({ handleModalShow }) => {
     phone_no: "",
     address: "",
     local_government: "",
-    proof_of_address: "",
+    proof_of_address: null,
     document: null,
   });
 
@@ -25,10 +25,7 @@ const KycPersonalUser = ({ handleModalShow }) => {
     const { name, value, type, files } = e.target;
 
     if (type === "file" && files.length > 0) {
-      // Handle file input
-      getBase64(files[0], (base64Data) => {
-        setFormData({ ...formData, [name]: base64Data });
-      });
+      setFormData({ ...formData, [name]: files[0] });
     } else {
       // Handle text input
       setFormData({ ...formData, [name]: value });
@@ -143,6 +140,7 @@ const KycPersonalUser = ({ handleModalShow }) => {
               setStep={setStep}
               handleChange={handleChange}
               formData={formData}
+              setFormData={setFormData}
             />
           </div>
           <div style={{ display: step === 2 ? "" : "none" }}>
@@ -166,6 +164,7 @@ const KycPersonalUser = ({ handleModalShow }) => {
               setStep={setStep}
               handleChange={handleChange}
               formData={formData}
+              setFormData={setFormData}
             />
           </div>
           <div style={{ display: step === 5 ? "" : "none" }}>

@@ -13,10 +13,12 @@ import { MdArrowDropDown } from "react-icons/md";
 import customAxios from "../../../../../shared/utils/axios";
 import proof from "../../../../../assets/png/proof.png";
 import { BsArrowLeft } from "react-icons/bs";
+import useCloudinaryImageUpload from "../../../../../shared/Hooks/useCloudinaryImageUpload";
 
-const StepFourPersonal = ({ setStep, handleChange, formData }) => {
+const StepFourPersonal = ({ setStep, handleChange, formData, setFormData }) => {
   const [menu, setMenu] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [uploadImage] = useCloudinaryImageUpload();
   const document = useRef(null);
 
   const localGovernmentOptions = [
@@ -39,6 +41,44 @@ const StepFourPersonal = ({ setStep, handleChange, formData }) => {
   const handleSubmitKyc = async () => {
     try {
       setLoading(true);
+
+      let pictureUrl = "";
+      let documentUrl = "";
+      let proof_of_address_url = "";
+      if (formData.picture) {
+        try {
+          pictureUrl = await uploadImage(formData.picture);
+          console.log(pictureUrl);
+          setFormData({ ...formData, picture: pictureUrl });
+        } catch (error) {
+          console.error("Error uploading image to Cloudinary:", error);
+          setLoading(false);
+          return;
+        }
+      }
+      if (formData.picture) {
+        try {
+          documentUrl = await uploadImage(formData.document);
+          console.log(documentUrl);
+          setFormData({ ...formData, document: documentUrl });
+        } catch (error) {
+          console.error("Error uploading image to Cloudinary:", error);
+          setLoading(false);
+          return;
+        }
+      }
+      if (formData.proof_of_address) {
+        try {
+          proof_of_address_url = await uploadImage(formData.proof_of_address);
+          console.log(proof_of_address_url);
+          setFormData({ ...formData, proof_of_address: proof_of_address_url });
+        } catch (error) {
+          console.error("Error uploading image to Cloudinary:", error);
+          setLoading(false);
+          return;
+        }
+      }
+
       const response = await customAxios.post(`/kyc/personal`, formData);
       console.log(response);
       setLoading(false);
