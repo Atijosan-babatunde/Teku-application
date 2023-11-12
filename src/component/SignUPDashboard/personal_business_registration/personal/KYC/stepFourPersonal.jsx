@@ -37,55 +37,42 @@ const StepFourPersonal = ({ setStep, handleChange, formData, setFormData }) => {
   const goToStepThree = () => {
     setStep(3);
   };
-
   const handleSubmitKyc = async () => {
     try {
       setLoading(true);
 
-      let pictureUrl = "";
-      let documentUrl = "";
-      let proof_of_address_url = "";
-      if (formData.picture) {
-        try {
-          pictureUrl = await uploadImage(formData.picture);
-          console.log(pictureUrl);
-          setFormData({ ...formData, picture: pictureUrl });
-        } catch (error) {
-          console.error("Error uploading image to Cloudinary:", error);
-          setLoading(false);
-          return;
-        }
-      }
-      if (formData.picture) {
-        try {
-          documentUrl = await uploadImage(formData.document);
-          console.log(documentUrl);
-          setFormData({ ...formData, document: documentUrl });
-        } catch (error) {
-          console.error("Error uploading image to Cloudinary:", error);
-          setLoading(false);
-          return;
-        }
-      }
-      if (formData.proof_of_address) {
-        try {
-          proof_of_address_url = await uploadImage(formData.proof_of_address);
-          console.log(proof_of_address_url);
-          setFormData({ ...formData, proof_of_address: proof_of_address_url });
-        } catch (error) {
-          console.error("Error uploading image to Cloudinary:", error);
-          setLoading(false);
-          return;
-        }
-      }
+      const pictureUrl = formData.picture
+        ? await uploadImage(formData.picture)
+        : "";
+      const documentUrl = formData.document
+        ? await uploadImage(formData.document)
+        : "";
+      const proof_of_address_url = formData.proof_of_address
+        ? await uploadImage(formData.proof_of_address)
+        : "";
 
-      console.log("NEW FORM DATA", formData);
-      const response = await customAxios.post(`/kyc/personal`, formData);
+      setFormData({
+        ...formData,
+        picture: pictureUrl,
+        document: documentUrl,
+        proof_of_address: proof_of_address_url,
+      });
+
+      const payload = {
+        ...formData,
+        picture: pictureUrl,
+        document: documentUrl,
+        proof_of_address: proof_of_address_url,
+      };
+
+      const response = await customAxios.post(`/kyc/personal`, payload);
       console.log(response);
+
       setLoading(false);
       setStep(5);
     } catch (error) {
-      console.log("Error:", error);
+      console.error("Error:", error);
+      setLoading(false);
     }
   };
 

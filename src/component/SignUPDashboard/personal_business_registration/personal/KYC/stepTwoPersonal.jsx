@@ -98,7 +98,7 @@ const StepTwoPersonal = ({ setStep, setFormData, formData }) => {
             <Camera onTakePhoto={(dataUri) => handleTakePhoto(dataUri)} />
           ) : formData.picture ? (
             <img
-              src={URL.createObjectURL(formData.picture)}
+              src={formData.picture}
               alt=""
               className={styles.camsnap}
             />
