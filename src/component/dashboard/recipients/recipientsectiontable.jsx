@@ -20,14 +20,14 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
 import { truncateMiddle } from "../../../shared/utils/truncate";
+import EditRecipientModal from "./editRecipientModal";
 
 const RecipientSectionTable = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
+  const [selectedRecipient, setSelectedRecipient] = useState();
   const [loading, setLoading] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const dispatch = useDispatch();
-  //   const recipientData = useAppSelector(
-  //     (state) => state.transaction.getRecipientUsersData
-  //   );
   const [data, setData] = useState([]);
 
   const getRecipientUser = () => {
@@ -65,7 +65,7 @@ const RecipientSectionTable = () => {
     },
   ]);
 
-  const [subtitle] = useState([
+  const subtitle = [
     {
       id: 1,
       imgs: <img src={eye} className={styles.icon} alt="imgone" />,
@@ -82,11 +82,11 @@ const RecipientSectionTable = () => {
       text: "Download document",
     },
     {
-      id: 3,
+      id: 4,
       imgs: <img src={deleteimg} className={styles.icon} alt="imgfour" />,
       text: "Delete",
     },
-  ]);
+  ];
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -116,11 +116,18 @@ const RecipientSectionTable = () => {
       setSaveItemModal(item);
     }
 
+    if (item === "Edit") {
+      setEditModal(true);
+      setSelectedRecipient(entity);
+    }
+
     if (item === "Delete") {
       setDeleteModal(true);
       handleDeleteRecipient(entity);
     }
   };
+
+  console.log(selectedRecipient)
 
   // MODAL STATE
 
@@ -138,8 +145,8 @@ const RecipientSectionTable = () => {
     return (
       <>
         {/* {showModal && saveItemModal === 'Preview' && <PreviewModal {...{ handleModalShow }} />}
-            {payModal && saveItemModal === 'Pay now' && <StepFourRequestModal {...{handleModalShow}}/>}
-            {deleteModal && saveItemModal === 'Delete' && <DeletePaymentModal {...{ handleModalShow }} />} */}
+            {payModal && saveItemModal === 'Pay now' && <StepFourRequestModal {...{handleModalShow}}/>} */}
+            {editModal && <EditRecipientModal recipientData={selectedRecipient} />}
 
         <div className={styles.parent}>
           <div className={styles.contenttable}>
@@ -262,7 +269,7 @@ const RecipientSectionTable = () => {
                         >
                           {subtitle.map((item) => (
                             <MenuItem
-                              key={item}
+                              key={item.id}
                               className="dropdowndetails"
                               onClick={() => handleClose(item.text, prod)}
                               disableRipple
