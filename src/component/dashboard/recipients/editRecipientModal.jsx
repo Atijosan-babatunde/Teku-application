@@ -22,8 +22,7 @@ import { useAppSelector } from "../../../shared/redux/reduxHooks";
 import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
 
-const EditRecipientModal = ({ handleModalShow, recipientData }) => {
-  console.log(recipientData);
+const EditRecipientModal = ({ handleModalShowEdit, recipientData }) => {
   const options = useMemo(() => countryList().getData(), []);
   const [country, setcountry] = useState(recipientData?.country);
   const [paymentMethod, setPaymentMethod] = useState(
@@ -119,12 +118,12 @@ const EditRecipientModal = ({ handleModalShow, recipientData }) => {
   const documentdoc = useRef(null);
 
   const modalref = useRef();
-  useOnClickOutside(modalref, handleModalShow);
+  useOnClickOutside(modalref, handleModalShowEdit);
 
   return (
     <div className={styles.parent}>
       <div className={styles.content} ref={modalref}>
-        <div className={styles.closemodal} onClick={handleModalShow}>
+        <div className={styles.closemodal} onClick={handleModalShowEdit}>
           <img src={cancel} alt="close modal" />
         </div>
         <h1 className={styles.contenth1}>Add recipient</h1>

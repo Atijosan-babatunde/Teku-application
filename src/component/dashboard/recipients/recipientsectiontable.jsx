@@ -26,7 +26,7 @@ const RecipientSectionTable = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
   const [selectedRecipient, setSelectedRecipient] = useState();
   const [loading, setLoading] = useState(false);
-  const [editModal, setEditModal] = useState(false);
+  // const [editModal, setEditModal] = useState(false);
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
 
@@ -106,18 +106,18 @@ const RecipientSectionTable = () => {
 
   const handleClose = (item, entity) => {
     setAnchorEl(null);
-    if (item === "Preview") {
-      setShowModal(true);
-      setSaveItemModal(item);
-    }
-
-    if (item === "Pay now") {
-      setPayModal(true);
-      setSaveItemModal(item);
-    }
-
     if (item === "Edit") {
       setEditModal(true);
+      setSaveItemModal(item);
+    }
+
+    if (item === "Transfer money") {
+      setTransferModal(true);
+      setSaveItemModal(item);
+    }
+
+    if (item === "Download document") {
+      setDownloadModal(true);
       setSelectedRecipient(entity);
     }
 
@@ -131,14 +131,16 @@ const RecipientSectionTable = () => {
 
   // MODAL STATE
 
-  const [showModal, setShowModal] = useState(false);
-  const [payModal, setPayModal] = useState(false);
+  const [showEditModal, setEditModal] = useState(false);
+  const [transferModal, setTransferModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [downloadModal, setDownloadModal] = useState(false);
 
-  function handleModalShow() {
-    setShowModal(!showModal);
+  function handleModalShowEdit() {
+    setDownloadModal(!downloadModal);
     setDeleteModal(!deleteModal);
-    setPayModal(!payModal);
+    setTransferModal(!transferModal);
+    setEditModal(!showEditModal)
   }
 
   if (data) {
@@ -146,7 +148,7 @@ const RecipientSectionTable = () => {
       <>
         {/* {showModal && saveItemModal === 'Preview' && <PreviewModal {...{ handleModalShow }} />}
             {payModal && saveItemModal === 'Pay now' && <StepFourRequestModal {...{handleModalShow}}/>} */}
-            {editModal && <EditRecipientModal recipientData={selectedRecipient} />}
+            {showEditModal && saveItemModal === 'Edit' && <EditRecipientModal {...{handleModalShowEdit}}/>}
 
         <div className={styles.parent}>
           <div className={styles.contenttable}>
