@@ -139,7 +139,7 @@ const UserProfileSections = () => {
               handleChange={handleChange}
               updateUserProfile={updateUserProfile}
             />
-            <IdentificationSection />
+            <IdentificationSection data={data} />
             <PasswordSection />
           </>
         ) : (
@@ -233,7 +233,7 @@ const UserInfoSection = ({
   );
 };
 
-const IdentificationSection = () => {
+const IdentificationSection = ({ data }) => {
   return (
     <div className={styles.content}>
       <div className={styles.contenthead}>
@@ -250,22 +250,36 @@ const IdentificationSection = () => {
         <div className={styles.firstdivflex}>
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>BVN Verifcation</div>
-            <div className={styles.firstp}>Completed</div>
+            <div className={styles.firstp}>
+              {data.Personalkycverification[0].bvn_no ? "Completed" : "Pending"}
+            </div>
           </div>
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}> Document</div>
-            <div className={styles.firstp}>Completed</div>
+            <div className={styles.firstp}>
+              {data.Personalkycverification[0].document
+                ? "Completed"
+                : "Pending"}
+            </div>
           </div>
         </div>
 
         <div className={styles.firstdivflex}>
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>ID Selfie</div>
-            <div className={styles.firstp}>Completed</div>
+            <div className={styles.firstp}>
+              {data.Personalkycverification[0].picture
+                ? "Completed"
+                : "Pending"}
+            </div>
           </div>
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>Phone number verification</div>
-            <div className={styles.firstp}>Completed</div>
+            <div className={styles.firstp}>
+              {data.Personalkycverification[0].phone_no
+                ? "Completed"
+                : "Pending"}
+            </div>
           </div>
         </div>
 
@@ -273,12 +287,16 @@ const IdentificationSection = () => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>Address</div>
             <div className={styles.firstp}>
-              5 Allen Avenue street, Lagos, Nigeria
+              {data.Personalkycverification[0].address}
             </div>
           </div>
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>Address verification</div>
-            <div className={styles.firstp}>Completed</div>
+            <div className={styles.firstp}>
+              {data.Personalkycverification[0].proof_of_address
+                ? "Completed"
+                : "Pending"}
+            </div>
           </div>
         </div>
       </div>
