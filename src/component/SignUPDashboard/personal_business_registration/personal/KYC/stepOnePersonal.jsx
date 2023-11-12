@@ -44,7 +44,7 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
   const base64ToOriginal = (base64Data, type) => {
     switch (type) {
       case "image":
-        return `data:image/jpeg;base64,${base64Data}`;
+        return `data:image/png;base64,${base64Data}`;
       // Add more cases for other data types (e.g., audio, video, documents) if needed.
       default:
         return base64Data;

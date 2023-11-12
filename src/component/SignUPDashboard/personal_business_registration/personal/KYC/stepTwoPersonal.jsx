@@ -1,49 +1,58 @@
-import styles from "../KYC/CSS/steptwopersonal.module.scss";
-import steptwoimg from "../../../../../assets/png/steptwoimg.png";
-import { useState } from "react";
-import Camera from "react-html5-camera-photo";
-import selfieIcon from "../../../../../assets/png/camerauser.png";
+import React, { useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
+import Camera from "react-html5-camera-photo";
+import steptwoimg from "../../../../../assets/png/steptwoimg.png";
+import selfieIcon from "../../../../../assets/png/camerauser.png";
+import styles from "../KYC/CSS/steptwopersonal.module.scss";
 
 const StepTwoPersonal = ({ setStep, setFormData, formData }) => {
-  const [photoUrl, setphotoUrl] = useState("");
   const [showCamera, setshowCamera] = useState(false);
   const [inputError, setInputError] = useState({});
 
   const validate = () => {
     let selfieError = "";
-    if (!photoUrl) {
-      selfieError = "selfie with id is required";
+    if (!formData.picture) {
+      selfieError = "Selfie with ID is required";
     }
 
     if (selfieError) {
-      setInputError((curr) => {
-        return {
-          selfie: selfieError,
-        };
-      });
+      setInputError((curr) => ({
+        ...curr,
+        selfie: selfieError,
+      }));
 
       return false;
     }
+
     return true;
   };
 
   const handleTakePhoto = (dataUri) => {
-    // Do stuff with the photo...
-    setFormData({ ...formData, picture: dataUri });
+    const byteString = atob(dataUri.split(",")[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    const file = new Blob([ab], { type: "image/png" });
+
+    setFormData({ ...formData, picture: file });
     setshowCamera(false);
   };
 
-  console.log(formData);
   const goToStepThree = () => {
-    setStep(3);
+    if (validate()) {
+      setStep(3);
+    }
   };
 
   const goToStepOne = () => {
     setStep(1);
   };
 
-  const [instruction] = useState([
+  const instruction = [
     {
       id: 1,
       instruction:
@@ -65,7 +74,7 @@ const StepTwoPersonal = ({ setStep, setFormData, formData }) => {
       instruction:
         "To prevent glare or reflections, take off any ID cases or protective holders.",
     },
-  ]);
+  ];
 
   return (
     <div className={styles.parent}>
@@ -80,20 +89,19 @@ const StepTwoPersonal = ({ setStep, setFormData, formData }) => {
             Take a live clear picture of your face.
           </p>
         </div>
-
         <img src={steptwoimg} alt="" />
       </div>
 
       <div className={styles.split}>
         <div className={styles.driverdoc}>
           {showCamera ? (
-            <Camera
-              onTakePhoto={(dataUri) => {
-                handleTakePhoto(dataUri);
-              }}
-            />
+            <Camera onTakePhoto={(dataUri) => handleTakePhoto(dataUri)} />
           ) : formData.picture ? (
-            <img src={formData.picture} alt="" className={styles.camsnap} />
+            <img
+              src={URL.createObjectURL(formData.picture)}
+              alt=""
+              className={styles.camsnap}
+            />
           ) : (
             <>
               <img src={selfieIcon} alt="" />
@@ -114,12 +122,7 @@ const StepTwoPersonal = ({ setStep, setFormData, formData }) => {
         </div>
       </div>
       <div className={styles.requestbut}>
-        <button
-          className={styles.btnrequest}
-          // disabled={!snap}
-          onClick={goToStepThree}
-          // style={{ backgroundColor: snap ? "rgba(1, 27, 109, 0.20)" : " " }}
-        >
+        <button className={styles.btnrequest} onClick={goToStepThree}>
           Continue
         </button>
       </div>

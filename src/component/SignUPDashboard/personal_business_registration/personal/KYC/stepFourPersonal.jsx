@@ -79,6 +79,7 @@ const StepFourPersonal = ({ setStep, handleChange, formData, setFormData }) => {
         }
       }
 
+      console.log("NEW FORM DATA", formData);
       const response = await customAxios.post(`/kyc/personal`, formData);
       console.log(response);
       setLoading(false);
