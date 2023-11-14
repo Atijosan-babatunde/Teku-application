@@ -10,6 +10,7 @@ import approve from "../../../assets/svg/approveimg.svg";
 import download from "../../../assets/svg/download.svg";
 import shear from "../../../assets/svg/shearimg.svg";
 import AskForRefund from "./askForRefund";
+import { Margin, usePDF } from "react-to-pdf";
 
 const TransactionPreview = ({
   handleModalShowTransactionPreview,
@@ -31,8 +32,13 @@ const TransactionPreview = ({
     return totalAmount;
   };
 
+  const { toPDF, targetRef } = usePDF({
+    filename: "transactionDoc.pdf",
+    page: { margin: Margin.MEDIUM }
+  });
+
   return (
-    <div className={styles.parent}>
+    <div className={styles.parent} ref={targetRef}>
       <div className={styles.content} ref={modalref}>
         <div
           className={styles.closemodal}
@@ -198,9 +204,9 @@ const TransactionPreview = ({
           <div className={styles.requestbut}>
             <button
               className={styles.btnrequest}
-              // disabled={validate()}
-              // onClick={handleModalShow}
-              // style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
+            // disabled={validate()}
+            // onClick={handleModalShow}
+            // style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
             >
               Done
             </button>
@@ -228,12 +234,18 @@ const TransactionPreview = ({
                 <img src={shear} alt="" />
               </span>
             </button>
-            <button className={styles.firstbtn}>
-              Download{" "}
-              <span>
-                <img src={download} alt="" />
-              </span>
-            </button>
+
+            {/* <Pdf targetRef={ref} filename="invoice.pdf">
+              {({ toPdf }) => ( */}
+                <button className={styles.firstbtn} onClick={toPDF}>
+                  {/* <img src={FileDownload} alt="icon" /> */}
+                  Download{" "}
+                  <span>
+                    <img src={download} alt="" />
+                  </span>
+                </button>
+              {/* )}
+            </Pdf> */}
           </div>
 
           <div className={styles.processed}>Payment is being processed...</div>

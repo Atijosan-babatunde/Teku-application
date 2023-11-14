@@ -76,11 +76,11 @@ const RecipientSectionTable = () => {
       imgs: <img src={flyarrow} className={styles.icon} alt="imgtwo" />,
       text: "Transfer money",
     },
-    {
-      id: 3,
-      imgs: <img src={download} className={styles.icon} alt="imgthree" />,
-      text: "Download document",
-    },
+    // {
+    //   id: 3,
+    //   imgs: <img src={download} className={styles.icon} alt="imgthree" />,
+    //   text: "Download document",
+    // },
     {
       id: 4,
       imgs: <img src={deleteimg} className={styles.icon} alt="imgfour" />,
@@ -116,10 +116,10 @@ const RecipientSectionTable = () => {
       setSaveItemModal(item);
     }
 
-    if (item === "Download document") {
-      setDownloadModal(true);
-      setSelectedRecipient(entity);
-    }
+    // if (item === "Download document") {
+    //   setDownloadModal(true);
+    //   setSelectedRecipient(entity);
+    // }
 
     if (item === "Delete") {
       setDeleteModal(true);
@@ -134,10 +134,10 @@ const RecipientSectionTable = () => {
   const [showEditModal, setEditModal] = useState(false);
   const [transferModal, setTransferModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [downloadModal, setDownloadModal] = useState(false);
+  // const [downloadModal, setDownloadModal] = useState(false);
 
   function handleModalShowEdit() {
-    setDownloadModal(!downloadModal);
+    // setDownloadModal(!downloadModal);
     setDeleteModal(!deleteModal);
     setTransferModal(!transferModal);
     setEditModal(!showEditModal)
@@ -209,13 +209,9 @@ const RecipientSectionTable = () => {
                         {prod.paymentPurpose}
                         <span
                           className={styles.insidebtn}
-                          style={{
-                            backgroundColor: "rgba(240, 243, 255, 1)",
-                            borderRadius: "100px",
-                            width: "160px",
-                          }}
+                          style={{textTransform: "capitalize"}}
                         >
-                          {prod.paymentMethod}
+                          {prod.paymentMethod.split('_')?.join(' ').toLowerCase()}
                         </span>
                       </td>
 

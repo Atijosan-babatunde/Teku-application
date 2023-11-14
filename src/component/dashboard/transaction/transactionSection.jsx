@@ -14,10 +14,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { styled, alpha } from "@mui/material/styles";
 import { FiSearch } from "react-icons/fi";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
 import arrow from "../../../assets/png/arrow.png";
 import { IoMdArrowDropdown } from "react-icons/io";
 import CompletePreviewModal from "./completePreviewModal";
-import MakeAnAppeal from "./makeAnAppeal";
 import TransactionPreview from "./transactionPreviewModal";
 import AskForRefund from "./askForRefund";
 import CancelledPreviewModal from "./cancelledPreviewModal";
@@ -26,10 +26,15 @@ import { useDispatch } from "react-redux";
 import { GetUsersTransaction } from "../../../shared/redux/slices/transaction.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MakeAnAppeal from "./makeAnAppeal";
+import { MdArrowDropDown } from "react-icons/md";
+import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
 
 const TransactionSection = () => {
+  const [days, setDays] = useState(false)
+  const [dropDownValue, setDropDownValue] = useState('Last 7 days')
   const [saveItemModal, setSaveItemModal] = useState("");
-  const [saveItemModalCompleted, setSaveItemModalCompleted] = useState("");
+  // const [saveItemModalCompleted, setSaveItemModalCompleted] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorCancelledEl, setAnchorCancelledEl] = useState(null);
   const openCancelled = Boolean(anchorCancelledEl);
@@ -44,6 +49,19 @@ const TransactionSection = () => {
   const [data] = useState(transactionData);
   const [selectedSubmenu, setSelectedSubmenu] = useState("");
   const [selectedTransaction, setSelectedTransaction] = useState();
+
+
+  const [periods] = useState([
+    { id: 1, period: 'Past 24 hours' },
+    { id: 2, period: 'Last 7 days' },
+    { id: 3, period: 'past month' },
+    { id: 4, period: 'Custom date' },
+  ])
+
+  const changeValue = async (e) => {
+    setDropDownValue(e.period);
+    // updateQueryParams({ days: e.id });
+  };
 
   const handleBtn = (event, submenu) => {
     setAnchorEl(event.currentTarget);
@@ -60,13 +78,18 @@ const TransactionSection = () => {
       setSaveItemModal(item);
     }
 
-    if (item === "Ask for refund") {
-      setAskForRefundModal(true);
+    if (item === "Request again") {
+      setRequestAgainModal(true);
       setSaveItemModal(item);
     }
 
-    if (item === "Delete") {
-      setDeleteModal(true);
+    // if (item === "Download receipt") {
+    //   setDownloadReceiptModal(true);
+    //   setSaveItemModal(item);
+    // }
+
+    if (item === "Make an appeal") {
+      setMakeAppealModal(true);
       setSaveItemModal(item);
     }
   };
@@ -118,11 +141,11 @@ const TransactionSection = () => {
       imgs: <img src={makeappeal} className={styles.icon} alt="img" />,
       text: "Request again",
     },
-    {
-      id: 3,
-      imgs: <img src={download} className={styles.icon} alt="img" />,
-      text: "Download Receipt",
-    },
+    // {
+    //   id: 3,
+    //   imgs: <img src={download} className={styles.icon} alt="img" />,
+    //   text: "Download receipt",
+    // },
   ];
 
   const subtitlecompleted = [
@@ -136,11 +159,11 @@ const TransactionSection = () => {
       imgs: <img src={makeappeal} className={styles.icon} alt="img" />,
       text: "Make an appeal",
     },
-    {
-      id: 3,
-      imgs: <img src={download} className={styles.icon} alt="img" />,
-      text: "Download Receipt",
-    },
+    // {
+    //   id: 3,
+    //   imgs: <img src={download} className={styles.icon} alt="img" />,
+    //   text: "Download Receipt",
+    // },
     {
       id: 4,
       imgs: <img src={download} className={styles.icon} alt="img" />,
@@ -154,24 +177,24 @@ const TransactionSection = () => {
       imgs: <img src={eye} className={styles.icon} alt="eye" />,
       text: "Preview",
     },
-    {
-      id: 2,
-      imgs: (
-        <img src={askforrefund} className={styles.icon} alt="askforrefund" />
-      ),
-      text: "Ask for refund",
-    },
-    {
-      id: 3,
-      imgs: (
-        <img
-          src={downloadreceiptimg}
-          className={styles.icon}
-          alt="downloadreceipt"
-        />
-      ),
-      text: "Download Receipt",
-    },
+    // {
+    //   id: 2,
+    //   imgs: (
+    //     <img src={askforrefund} className={styles.icon} alt="askforrefund" />
+    //   ),
+    //   text: "Ask for refund",
+    // },
+    // {
+    //   id: 3,
+    //   imgs: (
+    //     <img
+    //       src={downloadreceiptimg}
+    //       className={styles.icon}
+    //       alt="downloadreceipt"
+    //     />
+    //   ),
+    //   text: "Download Receipt",
+    // },
   ];
 
   const getSubmenu = () => {
@@ -190,37 +213,53 @@ const TransactionSection = () => {
   };
 
   const [showModalPreview, setShowModalPreview] = useState(false);
-  const [askForRefundModal, setAskForRefundModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
-
+  const [requestModal, setRequestAgainModal] = useState(false);
+  const [downloadReceiptModal, setDownloadReceiptModal] = useState(false);
   const [makeAppealModal, setMakeAppealModal] = useState(false);
 
 
-  const handleModalShow = (modalState, setModalState) => {
-    setModalState(!modalState);
-    setDeleteModal(!deleteModal);
-    setMakeAppealModal(!makeAppealModal);
+  function handleMakeAnAppeal() {
     setShowModalPreview(!showModalPreview);
+    setRequestAgainModal(!requestModal);
+    setDownloadReceiptModal(!downloadReceiptModal);
+    setMakeAppealModal(!makeAppealModal);
   };
+
+  function handleModalShowTransactionPreview() {
+    setShowModalPreview(!showModalPreview);
+    setRequestAgainModal(!requestModal);
+    setDownloadReceiptModal(!downloadReceiptModal);
+    setMakeAppealModal(!makeAppealModal);
+  }
+
+  function handleModalShowTransfer() {
+    setShowModalPreview(!showModalPreview);
+    setRequestAgainModal(!requestModal);
+    setDownloadReceiptModal(!downloadReceiptModal);
+    setMakeAppealModal(!makeAppealModal);
+  }
 
   if (data) {
     return (
       <>
-        {makeAppealModal && saveItemModalCompleted === "Make an appeal" && (
-          <MakeAnAppeal {...{ handleModalShow }} />
+        {makeAppealModal && saveItemModal === "Make an appeal" && (
+          <MakeAnAppeal {...{ handleMakeAnAppeal }} />
         )}
         {showModalPreview && saveItemModal === "Preview" && (
           <TransactionPreview
-            {...{ handleModalShow }}
+            {...{ handleModalShowTransactionPreview }}
             selectedTransaction={selectedTransaction}
           />
         )}
-        {askForRefundModal && saveItemModal === "Ask for refund" && (
+        {requestModal && saveItemModal === "Request again" && (
+          <TransferModal  {...{ handleModalShowTransfer }} />
+        )}
+        {/* {askForRefundModal && saveItemModal === "Ask for refund" && (
           <AskForRefund
             {...{ handleModalShow }}
             selectedTransaction={selectedTransaction}
           />
-        )}
+        )} */}
 
         <div className={styles.parent}>
           <div className={styles.content}>
@@ -235,13 +274,13 @@ const TransactionSection = () => {
                 </div>
               </div>
               <div className={styles.rightholder}>
-                <h3>
+                {/* <h3>
                   Download{" "}
                   <span>
                     <img src={arrow} alt="" />
                   </span>
-                </h3>
-                <div className={styles.dropdown}>
+                </h3> */}
+                {/* <div className={styles.dropdown}>
                   <div className={styles.lastdays}>
                     Last 7 days{" "}
                     <span>
@@ -284,7 +323,22 @@ const TransactionSection = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
+
+
+                <Dropdown isOpen={days} toggle={() => setDays(!days)} style={{ cursor: 'pointer' }} className={styles.drop}>
+                  <DropdownToggle tag="a" className={styles.dropdownToggle} >
+                    <div className={styles.dropname}>{dropDownValue}</div>
+                    <div className={styles.dropDownrow}>
+                      <div style={{ color: '#777E90', marginLeft: '0.4000em' }}><MdArrowDropDown style={{ fontSize: '2em' }} /></div>
+                    </div>
+                  </DropdownToggle>
+                  <DropdownMenu className="dropdown-menu-end btn-rounded" style={{ marginTop: '1em', color: 'black', height: '150px', overflow: 'auto', }}>
+                    {periods.map((period, index) =>
+                      <DropdownItem className={styles.value} key={index} onClick={() => changeValue(period)}>{period.period} </DropdownItem>
+                    )}
+                  </DropdownMenu>
+                </Dropdown>
               </div>
             </div>
             <div className="table-responsive">
@@ -344,13 +398,9 @@ const TransactionSection = () => {
                         {prod.purpose}
                         <span
                           className={styles.insidebtn}
-                          style={{
-                            backgroundColor: "rgba(240, 243, 255, 1)",
-                            borderRadius: "100px",
-                            width: "160px",
-                          }}
+                          style={{textTransform: "capitalize"}}
                         >
-                          {prod.paymentMethod}
+                          {prod.paymentMethod.split('_')?.join(' ').toLowerCase()}
                         </span>
                       </td>
 
@@ -360,12 +410,7 @@ const TransactionSection = () => {
                       >
                         {prod.amount}
                         <span
-                          className={styles.insidebtn}
-                          style={{
-                            backgroundColor: "rgba(240, 243, 255, 1)",
-                            borderRadius: "100px",
-                            width: "160px",
-                          }}
+                          className={styles.insidebtnpaid}
                         >
                           Paid
                         </span>
@@ -405,8 +450,7 @@ const TransactionSection = () => {
                         style={{ paddingTop: "1em" }}
                       >
                         <button
-                          className={styles.btn}
-                          // style={{ backgroundColor:  ? "#fff" : "", color:  ? "#000" : ""}}
+                          className={prod.status === "CANCELLED" ? styles.cancelledbtn : prod.status === "PROCESSING" ? styles.btn : styles.completedbtn }
                         >
                           {prod.status}
                         </button>

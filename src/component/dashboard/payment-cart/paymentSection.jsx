@@ -210,11 +210,6 @@ const PaymentSection = () => {
                         {prod?.purpose}
                         <span
                           className={styles.insidebtn}
-                          style={{
-                            backgroundColor: "rgba(240, 243, 255, 1)",
-                            borderRadius: "100px",
-                            width: "160px",
-                          }}
                         >
                           Cash pickup
                         </span>
@@ -227,11 +222,6 @@ const PaymentSection = () => {
                         {prod?.amount}
                         <span
                           className={styles.insidebtn}
-                          style={{
-                            backgroundColor: "rgba(240, 243, 255, 1)",
-                            borderRadius: "100px",
-                            width: "160px",
-                          }}
                         >
                           In review
                         </span>

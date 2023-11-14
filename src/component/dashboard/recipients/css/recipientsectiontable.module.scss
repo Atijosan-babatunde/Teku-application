@@ -122,13 +122,17 @@
 }
 
 .insidebtn {
-        color: var(--blue-primary, #011B6D);
-        font-family: Gilroy;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 22px;
-        margin-left: 1.5000em;
+    color: var(--blue-primary, #011B6D);
+    font-family: Gilroy;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    margin-left: 1.5000em;
+    background-color: rgba(240, 243, 255, 1);
+    border-radius: 100px;
+    padding: 1em;
+    text-transform: capitalize !important;
 }
 
 .tableheader {
