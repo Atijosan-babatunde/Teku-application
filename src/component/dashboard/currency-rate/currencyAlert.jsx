@@ -76,7 +76,9 @@ const CurrencyAlert = () => {
                                         <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>{prod.availableAmount}</td>
                                         <td className={styles.tabledata} style={{ paddingTop: "1.5000em" }}>
                                             {prod.method}
-                                            <div className={styles.tableparagraph}>{prod.sendingMethod}</div>
+                                            <div className={styles.tableparagraph} style={{textTransform: "capitalize"}}>
+                                                {prod.sendingMethod.split('_')?.join(' ').toLowerCase()}
+                                            </div>
                                         </td>
                                         <td className={styles.tabledata} style={{ paddingTop: "1em" }}>
                                             <button className={styles.btn} onClick={handleModalShowRequest}>Request <BsFillSendFill /></button>

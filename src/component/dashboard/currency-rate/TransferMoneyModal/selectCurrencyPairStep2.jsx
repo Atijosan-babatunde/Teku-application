@@ -109,8 +109,8 @@ const SelectCurrencyPairStep2 = ({
 
             <div className={styles.firstdivflex}>
               <div className={styles.firstdivh1}>Sending method:</div>
-              <div className={styles.firstdivp}>
-                {currencyPair?.sendingMethod}
+              <div className={styles.firstdivp} style={{textTransform: "capitalize"}}>
+                {currencyPair?.sendingMethod.split('_')?.join(' ').toLowerCase()}
               </div>
             </div>
 

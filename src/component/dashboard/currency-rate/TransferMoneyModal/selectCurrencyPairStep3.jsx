@@ -315,7 +315,9 @@ const SelectCurrencyPairStep3 = ({
                     <div className={styles.recipiantflex}>
                       <p className={styles.paraone}>TF</p>
                       <h1 className={styles.headone}>{prod.paymentPurpose}</h1>
-                      <p className={styles.paratwo}>{prod.paymentMethod}</p>
+                      <p className={styles.paratwo} style={{ textTransform: "capitalize" }}>
+                        {prod.paymentMethod.split('_')?.join(' ').toLowerCase()}
+                      </p>
                     </div>
                     <h2 className={styles.recipiantotherdata}>
                       {prod.paymentDescription}
