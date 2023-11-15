@@ -51,22 +51,21 @@ const StepThreePersonal = ({ setStep, formData, setFormData }) => {
       setLoading(true);
 
       const response = await customAxios.post(`/kyc/sms`, {
-        phone_number: formData.phone_no,
+        phone_number: `+${formData.phone_no.toString()}`,
       });
       console.log(response);
 
-      if (response.success) {
+      if (response.status === 201) {
         setLoading(false);
-        setStep(5);
+        setStepOtp(2);
       }
       setLoading(false);
       toast.error("An error occured");
     } catch (error) {
       console.error("Error:", error);
+      startResendTimer();
       setLoading(false);
     }
-    // setStepOtp(2);
-    // startResendTimer();
   };
 
   const handleContinue = () => {
