@@ -251,13 +251,13 @@ const IdentificationSection = ({ data }) => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>BVN Verifcation</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0].bvn_no ? "Completed" : "Pending"}
+              {data.Personalkycverification[0]?.bvn_no ? "Completed" : "Pending"}
             </div>
           </div>
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}> Document</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0].document
+              {data.Personalkycverification[0]?.document
                 ? "Completed"
                 : "Pending"}
             </div>
