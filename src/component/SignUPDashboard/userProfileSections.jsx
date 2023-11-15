@@ -251,13 +251,13 @@ const IdentificationSection = ({ data }) => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>BVN Verifcation</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0].bvn_no ? "Completed" : "Pending"}
+              {data.Personalkycverification[0]?.bvn_no ? "Completed" : "Pending"}
             </div>
           </div>
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}> Document</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0].document
+              {data.Personalkycverification[0]?.document
                 ? "Completed"
                 : "Pending"}
             </div>
@@ -268,7 +268,7 @@ const IdentificationSection = ({ data }) => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>ID Selfie</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0].picture
+              {data.Personalkycverification[0]?.picture
                 ? "Completed"
                 : "Pending"}
             </div>
@@ -276,7 +276,7 @@ const IdentificationSection = ({ data }) => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>Phone number verification</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0].phone_no
+              {data.Personalkycverification[0]?.phone_no
                 ? "Completed"
                 : "Pending"}
             </div>
@@ -287,13 +287,13 @@ const IdentificationSection = ({ data }) => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>Address</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0].address}
+              {data.Personalkycverification[0]?.address ?? 'Not set'}
             </div>
           </div>
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>Address verification</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0].proof_of_address
+              {data.Personalkycverification[0]?.proof_of_address
                 ? "Completed"
                 : "Pending"}
             </div>

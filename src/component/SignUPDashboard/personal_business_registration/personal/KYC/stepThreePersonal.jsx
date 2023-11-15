@@ -6,9 +6,12 @@ import PhoneInput from "react-phone-input-2";
 import { BsArrowLeft } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
+import customAxios from "../../../../../shared/utils/axios";
 
 const StepThreePersonal = ({ setStep, formData, setFormData }) => {
   const [stepOtp, setStepOtp] = useState(1);
+  const [loading, setLoading] = useState(false);
   const otpLength = 6; // Define the length of the OTP
   const [otpValues, setOtpValues] = useState(Array(otpLength).fill(""));
   const [phoneNumber, setPhoneNumber] = useState(formData.phone_no);
@@ -40,20 +43,56 @@ const StepThreePersonal = ({ setStep, formData, setFormData }) => {
     return otpValues.includes("") || otpValues.length !== otpLength;
   };
 
-  const handleRequestOtp = () => {
+  const handleRequestOtp = async () => {
     if (validatePhoneNumber()) {
       toast.error("Please enter a valid phone number.");
-    } else {
-      setStepOtp(2);
+    }
+    try {
+      setLoading(true);
+
+      const response = await customAxios.post(`/kyc/sms`, {
+        phone_number: `+${formData.phone_no.toString()}`,
+      });
+      console.log(response);
+
+      if (response.status === 201) {
+        setLoading(false);
+        setStepOtp(2);
+      } else {
+        setLoading(false);
+        toast.error("An error occured");
+      }
+    } catch (error) {
+      console.error("Error:", error);
       startResendTimer();
+      setLoading(false);
     }
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (validateOtp()) {
       toast.error("Please enter a valid OTP.");
-    } else {
-      setStep(4);
+    } 
+    try {
+      setLoading(true);
+
+      const response = await customAxios.post(`/kyc/sms/verify`, {
+        phone_number: `+${formData.phone_no.toString()}`,
+        code: otpValues.join('')
+      });
+      console.log(response);
+
+      if (response.status === 201) {
+        setLoading(false);
+        setStep(4);
+      } else {
+        setLoading(false);
+        toast.error("An error occured");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      startResendTimer();
+      setLoading(false);
     }
   };
 
@@ -125,7 +164,16 @@ const StepThreePersonal = ({ setStep, formData, setFormData }) => {
                   : " ",
               }}
             >
-              Request OTP
+              {loading ? (
+                <ReactLoading
+                  color="white"
+                  width={25}
+                  height={25}
+                  type="spin"
+                />
+              ) : (
+                "Request OTP"
+              )}
             </button>
           </div>
         </div>
