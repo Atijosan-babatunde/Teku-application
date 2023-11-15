@@ -1,48 +1,45 @@
 import { useEffect, useState } from "react";
 import styles from "../notification/css/newnotification.module.scss";
 import notification from "../../../assets/svg/notification.svg";
-import { useAppSelector } from "../../../shared/redux/reduxHooks";
-import { useDispatch } from "react-redux";
-import { GetNotificationsData } from "../../../shared/redux/slices/notification.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
+import customAxios from "../../../shared/utils/axios";
 
-
-const NewNotification = () => {
+const NewNotification = ({ searchValue }) => {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const notificationData = useAppSelector(
-    (state) => state.notification.getDataNotifications
-  );
-  const [data] = useState(notificationData);
+  const [notificationsData, setNotificationsData] = useState(false);
 
   useEffect(() => {
     getNotifications();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [searchValue]);
 
-  const getNotifications = () => {
+  const getNotifications = async () => {
     setLoading(true);
-    dispatch(GetNotificationsData())
-      .unwrap()
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setLoading(false);
+
+    try {
+      const response = await customAxios.get(`/notifications/me`, {
+        params: { search: searchValue }, // Send searchValue as a query parameter
       });
+      console.log(response);
+      setNotificationsData(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setLoading(false);
+    }
   };
 
-  if (data) {
+  if (notificationsData) {
     return (
       <div className={styles.parent}>
         <div className={styles.content}>
           <>
-            {data.map((prod, index) => (
+            {notificationsData.map((prod, index) => (
               <div className={styles.contentinside} key={index}>
                 <h1>{prod.title}</h1>
                 <p>{prod.description}</p>
@@ -54,7 +51,7 @@ const NewNotification = () => {
             <ReactLoading color="blue" width={25} height={25} type="spin" />
           )}
           <div className={styles.inner}>
-            {data.length < 1 && (
+            {notificationsData.length < 1 && (
               <div>
                 <img src={notification} alt="middleimage" />
                 <div className={styles.nocurrency}>No notification</div>

@@ -8,48 +8,48 @@ import { GetInboxData } from "../../../shared/redux/slices/notification.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
+import customAxios from "../../../shared/utils/axios";
 
-
-const InboxMessage = () => {
+const InboxMessage = ({ searchValue }) => {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const notificationData = useAppSelector(
-    (state) => state.notification.getDataNotifications
-  );
-  const [data] = useState(notificationData);
+  const [inboxData, setInboxData] = useState(false);
 
-  console.log(data)
   useEffect(() => {
     getInboxMessages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [searchValue]);
 
-  const getInboxMessages = () => {
+
+  console.log(inboxData)
+  const getInboxMessages = async () => {
     setLoading(true);
-    dispatch(GetInboxData())
-      .unwrap()
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setLoading(false);
+
+    try {
+      const response = await customAxios.get(`/message/me`, {
+        params: { search: searchValue }, // Send searchValue as a query parameter
       });
+      console.log(response);
+      setInboxData(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setLoading(false);
+    }
   };
 
-
-  if (data) {
+  if (inboxData) {
     return (
       <div className={styles.parent}>
         <div className={styles.content}>
           <>
-            {data.map((prod, index) => (
+            {inboxData.map((prod, index) => (
               <div className={styles.contentinside} key={index}>
-                <h1>{prod.title}</h1>
+                <h1>{`${prod.sender.firstName} ${prod.sender.lastName}`}</h1>
                 <div className={styles.backcolor}>
-                  <p>{prod.description}</p>
+                  <p>{prod.message}</p>
                   <span>
                     view <img src={eye} alt="" />
                   </span>
@@ -62,7 +62,7 @@ const InboxMessage = () => {
             <ReactLoading color="blue" width={25} height={25} type="spin" />
           )}
           <div className={styles.inner}>
-            {data.length < 1 && (
+            {inboxData.length < 1 && (
               <div>
                 <img src={receivemail} alt="middleimage" />
                 <div className={styles.nocurrency}>No inbox</div>
