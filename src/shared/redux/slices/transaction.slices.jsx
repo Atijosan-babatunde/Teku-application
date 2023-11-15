@@ -6,9 +6,9 @@ import TransactionServices from "../services/transaction.services";
 
 export const GetUsersTransaction = createAsyncThunk(
     "transaction/getUsersTransaction",
-    async (thunkAPI) => {
+    async (url, thunkAPI) => {
       try {
-        const data = await TransactionServices.GetUsersTransaction();
+        const data = await TransactionServices.GetUsersTransaction(url);
         return { transaction: data.data };
       } catch (error) {
         const message =

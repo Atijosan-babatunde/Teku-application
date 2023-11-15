@@ -12,9 +12,9 @@ const API_URL_GET_ALL_TRANSACTION_CART =
   process.env.REACT_APP_API_URL + "/transaction-cart/user?page=1&limit=10";
 const API_URL_GET_BANK_LIST = process.env.REACT_APP_API_URL + "/bank";
 
-const GetUsersTransaction = async () => {
+const GetUsersTransaction = async (url) => {
   return await axios({
-    url: API_URL_GRT_USERS_TRANSACTION,
+    url,
     headers: authHeader(),
     method: "get",
   }).then((response) => {

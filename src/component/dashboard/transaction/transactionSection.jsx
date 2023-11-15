@@ -4,8 +4,6 @@ import holder from "../../../assets/svg/holder.svg";
 import Nigeria from "../../../assets/svg/nigeria.svg";
 import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg";
 import eye from "../../../assets/svg/eye.svg";
-import askforrefund from "../../../assets/svg/askforrefund.svg";
-import downloadreceiptimg from "../../../assets/svg/downloadreceiptimg.svg";
 import ellip from "../../../assets/png/ellis.png";
 import makeappeal from "../../../assets/svg/makeappeal.svg";
 import download from "../../../assets/svg/download.svg";
@@ -14,13 +12,13 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { styled, alpha } from "@mui/material/styles";
 import { FiSearch } from "react-icons/fi";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
-import arrow from "../../../assets/png/arrow.png";
-import { IoMdArrowDropdown } from "react-icons/io";
-import CompletePreviewModal from "./completePreviewModal";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+} from "reactstrap";
 import TransactionPreview from "./transactionPreviewModal";
-import AskForRefund from "./askForRefund";
-import CancelledPreviewModal from "./cancelledPreviewModal";
 import { useAppSelector } from "../../../shared/redux/reduxHooks";
 import { useDispatch } from "react-redux";
 import { GetUsersTransaction } from "../../../shared/redux/slices/transaction.slices";
@@ -31,8 +29,9 @@ import { MdArrowDropDown } from "react-icons/md";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
 
 const TransactionSection = () => {
-  const [days, setDays] = useState(false)
-  const [dropDownValue, setDropDownValue] = useState('Last 7 days')
+  const [days, setDays] = useState(false);
+  const [dropDownValue, setDropDownValue] = useState("Last 7 days");
+  const [searchValue, setSearchValue] = useState("");
   const [saveItemModal, setSaveItemModal] = useState("");
   // const [saveItemModalCompleted, setSaveItemModalCompleted] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -50,13 +49,12 @@ const TransactionSection = () => {
   const [selectedSubmenu, setSelectedSubmenu] = useState("");
   const [selectedTransaction, setSelectedTransaction] = useState();
 
-
   const [periods] = useState([
-    { id: 1, period: 'Past 24 hours' },
-    { id: 2, period: 'Last 7 days' },
-    { id: 3, period: 'past month' },
-    { id: 4, period: 'Custom date' },
-  ])
+    { id: 1, period: "Past 24 hours" },
+    { id: 2, period: "Last 7 days" },
+    { id: 3, period: "past month" },
+    { id: 4, period: "Custom date" },
+  ]);
 
   const changeValue = async (e) => {
     setDropDownValue(e.period);
@@ -83,11 +81,6 @@ const TransactionSection = () => {
       setSaveItemModal(item);
     }
 
-    // if (item === "Download receipt") {
-    //   setDownloadReceiptModal(true);
-    //   setSaveItemModal(item);
-    // }
-
     if (item === "Make an appeal") {
       setMakeAppealModal(true);
       setSaveItemModal(item);
@@ -100,7 +93,11 @@ const TransactionSection = () => {
 
   const getTransactionUser = () => {
     setLoading(true);
-    dispatch(GetUsersTransaction())
+    dispatch(
+      GetUsersTransaction(
+        `${process.env.REACT_APP_API_URL}/transaction/users/personal?search=${searchValue}`
+      )
+    )
       .unwrap()
       .then(() => {
         setLoading(false);
@@ -141,11 +138,6 @@ const TransactionSection = () => {
       imgs: <img src={makeappeal} className={styles.icon} alt="img" />,
       text: "Request again",
     },
-    // {
-    //   id: 3,
-    //   imgs: <img src={download} className={styles.icon} alt="img" />,
-    //   text: "Download receipt",
-    // },
   ];
 
   const subtitlecompleted = [
@@ -159,11 +151,6 @@ const TransactionSection = () => {
       imgs: <img src={makeappeal} className={styles.icon} alt="img" />,
       text: "Make an appeal",
     },
-    // {
-    //   id: 3,
-    //   imgs: <img src={download} className={styles.icon} alt="img" />,
-    //   text: "Download Receipt",
-    // },
     {
       id: 4,
       imgs: <img src={download} className={styles.icon} alt="img" />,
@@ -177,24 +164,6 @@ const TransactionSection = () => {
       imgs: <img src={eye} className={styles.icon} alt="eye" />,
       text: "Preview",
     },
-    // {
-    //   id: 2,
-    //   imgs: (
-    //     <img src={askforrefund} className={styles.icon} alt="askforrefund" />
-    //   ),
-    //   text: "Ask for refund",
-    // },
-    // {
-    //   id: 3,
-    //   imgs: (
-    //     <img
-    //       src={downloadreceiptimg}
-    //       className={styles.icon}
-    //       alt="downloadreceipt"
-    //     />
-    //   ),
-    //   text: "Download Receipt",
-    // },
   ];
 
   const getSubmenu = () => {
@@ -217,13 +186,12 @@ const TransactionSection = () => {
   const [downloadReceiptModal, setDownloadReceiptModal] = useState(false);
   const [makeAppealModal, setMakeAppealModal] = useState(false);
 
-
   function handleMakeAnAppeal() {
     setShowModalPreview(!showModalPreview);
     setRequestAgainModal(!requestModal);
     setDownloadReceiptModal(!downloadReceiptModal);
     setMakeAppealModal(!makeAppealModal);
-  };
+  }
 
   function handleModalShowTransactionPreview() {
     setShowModalPreview(!showModalPreview);
@@ -252,14 +220,8 @@ const TransactionSection = () => {
           />
         )}
         {requestModal && saveItemModal === "Request again" && (
-          <TransferModal  {...{ handleModalShowTransfer }} />
+          <TransferModal {...{ handleModalShowTransfer }} />
         )}
-        {/* {askForRefundModal && saveItemModal === "Ask for refund" && (
-          <AskForRefund
-            {...{ handleModalShow }}
-            selectedTransaction={selectedTransaction}
-          />
-        )} */}
 
         <div className={styles.parent}>
           <div className={styles.content}>
@@ -267,24 +229,50 @@ const TransactionSection = () => {
               <div className={styles.contentinner}>
                 <h1>Recent transactions</h1>
                 <div className={styles.search}>
-                  <input type="text" placeholder="Search" />
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                  />
                   <span>
                     <FiSearch />
                   </span>
                 </div>
               </div>
               <div className={styles.rightholder}>
-                <Dropdown isOpen={days} toggle={() => setDays(!days)} style={{ cursor: 'pointer' }} className={styles.drop}>
-                  <DropdownToggle tag="a" className={styles.dropdownToggle} >
+                <Dropdown
+                  isOpen={days}
+                  toggle={() => setDays(!days)}
+                  style={{ cursor: "pointer" }}
+                  className={styles.drop}
+                >
+                  <DropdownToggle tag="a" className={styles.dropdownToggle}>
                     <div className={styles.dropname}>{dropDownValue}</div>
                     <div className={styles.dropDownrow}>
-                      <div style={{ color: '#777E90', marginLeft: '0.4000em' }}><MdArrowDropDown style={{ fontSize: '2em' }} /></div>
+                      <div style={{ color: "#777E90", marginLeft: "0.4000em" }}>
+                        <MdArrowDropDown style={{ fontSize: "2em" }} />
+                      </div>
                     </div>
                   </DropdownToggle>
-                  <DropdownMenu className="dropdown-menu-end btn-rounded" style={{ marginTop: '1em', color: 'black', height: '150px', overflow: 'auto', }}>
-                    {periods.map((period, index) =>
-                      <DropdownItem className={styles.value} key={index} onClick={() => changeValue(period)}>{period.period} </DropdownItem>
-                    )}
+                  <DropdownMenu
+                    className="dropdown-menu-end btn-rounded"
+                    style={{
+                      marginTop: "1em",
+                      color: "black",
+                      height: "150px",
+                      overflow: "auto",
+                    }}
+                  >
+                    {periods.map((period, index) => (
+                      <DropdownItem
+                        className={styles.value}
+                        key={index}
+                        onClick={() => changeValue(period)}
+                      >
+                        {period.period}{" "}
+                      </DropdownItem>
+                    ))}
                   </DropdownMenu>
                 </Dropdown>
               </div>
@@ -346,9 +334,12 @@ const TransactionSection = () => {
                         {prod.purpose}
                         <span
                           className={styles.insidebtn}
-                          style={{textTransform: "capitalize"}}
+                          style={{ textTransform: "capitalize" }}
                         >
-                          {prod.paymentMethod.split('_')?.join(' ').toLowerCase()}
+                          {prod.paymentMethod
+                            .split("_")
+                            ?.join(" ")
+                            .toLowerCase()}
                         </span>
                       </td>
 
@@ -357,11 +348,7 @@ const TransactionSection = () => {
                         style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
                       >
                         {prod.amount}
-                        <span
-                          className={styles.insidebtnpaid}
-                        >
-                          Paid
-                        </span>
+                        <span className={styles.insidebtnpaid}>Paid</span>
                       </td>
 
                       <td
@@ -397,7 +384,13 @@ const TransactionSection = () => {
                         style={{ paddingTop: "1em" }}
                       >
                         <button
-                          className={prod.status === "CANCELLED" ? styles.cancelledbtn : prod.status === "PROCESSING" ? styles.btn : styles.completedbtn }
+                          className={
+                            prod.status === "CANCELLED"
+                              ? styles.cancelledbtn
+                              : prod.status === "PROCESSING"
+                              ? styles.btn
+                              : styles.completedbtn
+                          }
                         >
                           {prod.status}
                         </button>
