@@ -287,7 +287,7 @@ const IdentificationSection = ({ data }) => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>Address</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0]?.address}
+              {data.Personalkycverification[0]?.address ?? 'Not set'}
             </div>
           </div>
           <div className={styles.firstname}>
