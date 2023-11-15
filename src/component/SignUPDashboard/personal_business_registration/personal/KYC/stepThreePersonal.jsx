@@ -58,9 +58,10 @@ const StepThreePersonal = ({ setStep, formData, setFormData }) => {
       if (response.status === 201) {
         setLoading(false);
         setStepOtp(2);
+      } else {
+        setLoading(false);
+        toast.error("An error occured");
       }
-      setLoading(false);
-      toast.error("An error occured");
     } catch (error) {
       console.error("Error:", error);
       startResendTimer();
@@ -68,11 +69,30 @@ const StepThreePersonal = ({ setStep, formData, setFormData }) => {
     }
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (validateOtp()) {
       toast.error("Please enter a valid OTP.");
-    } else {
-      setStep(4);
+    } 
+    try {
+      setLoading(true);
+
+      const response = await customAxios.post(`/kyc/sms/verify`, {
+        phone_number: `+${formData.phone_no.toString()}`,
+        code: otpValues.join('')
+      });
+      console.log(response);
+
+      if (response.status === 201) {
+        setLoading(false);
+        setStep(4);
+      } else {
+        setLoading(false);
+        toast.error("An error occured");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      startResendTimer();
+      setLoading(false);
     }
   };
 
