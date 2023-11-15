@@ -15,40 +15,38 @@ import { styled, alpha } from "@mui/material/styles";
 import PreviewModal from "./previewModal";
 import DeletePaymentModal from "./deletePaymentModal";
 import PaymentRequestModal from "../currency-rate/RequestModal/paymentRequestModal";
-import { useAppSelector } from "../../../shared/redux/reduxHooks";
-import { useDispatch } from "react-redux";
-import { GetAllTransactionCart } from "../../../shared/redux/slices/transaction.slices";
 import { ToastContainer, toast } from "react-toastify";
+import customAxios from "../../../shared/utils/axios";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 
 const PaymentSection = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const getAllTransaction = useAppSelector(
-    (state) => state.transaction.getAllTransactionCart
-  );
-  const [data] = useState(getAllTransaction);
+  const [searchValue, setSearchValue] = useState("");
+  const [transactionCartsData, setTransactionCartsData] = useState("");
 
   useEffect(() => {
     getAllTransactionCart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [searchValue]);
 
-  const getAllTransactionCart = () => {
+  const getAllTransactionCart = async () => {
     setLoading(true);
-    dispatch(GetAllTransactionCart())
-      .unwrap()
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setLoading(false);
+    try {
+      const response = await customAxios.get(`/transaction-cart/user`, {
+        params: { search: searchValue }, // Send searchValue as a query parameter
       });
+      console.log(response);
+      setTransactionCartsData(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setLoading(false);
+    }
   };
 
   const [product] = useState([
@@ -129,7 +127,7 @@ const PaymentSection = () => {
     setPayModal(!payModal);
   }
 
-  if (data) {
+  if (transactionCartsData) {
     return (
       <>
         {showModal && saveItemModal === "Preview" && (
@@ -147,7 +145,12 @@ const PaymentSection = () => {
             <div className={styles.contentinner}>
               <h1>Recent transactions</h1>
               <div className={styles.search}>
-                <input type="text" placeholder="Search" />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
+                />
                 <span>
                   <FiSearch />
                 </span>
@@ -201,7 +204,7 @@ const PaymentSection = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((prod, index) => (
+                  {transactionCartsData.map((prod, index) => (
                     <tr style={{}} key={index}>
                       <td
                         className={styles.tabledata}
@@ -210,9 +213,12 @@ const PaymentSection = () => {
                         {prod?.purpose}
                         <span
                           className={styles.insidebtn}
-                          style={{textTransform: "capitalize"}}
+                          style={{ textTransform: "capitalize" }}
                         >
-                          {prod?.paymentMethod.split('_')?.join(' ').toLowerCase()}
+                          {prod?.paymentMethod
+                            .split("_")
+                            ?.join(" ")
+                            .toLowerCase()}
                         </span>
                       </td>
 
@@ -221,11 +227,7 @@ const PaymentSection = () => {
                         style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
                       >
                         {prod?.amount}
-                        <span
-                          className={styles.insidebtn}
-                        >
-                          In review
-                        </span>
+                        <span className={styles.insidebtn}>In review</span>
                       </td>
 
                       <td
@@ -259,7 +261,7 @@ const PaymentSection = () => {
                           {prod.sendingMethod}
                         </div>
                       </td>
-                      
+
                       <td
                         className={styles.tabledataa}
                         style={{ paddingTop: "1em" }}

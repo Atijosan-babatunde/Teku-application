@@ -20,7 +20,6 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import TransactionPreview from "./transactionPreviewModal";
-import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MakeAnAppeal from "./makeAnAppeal";
