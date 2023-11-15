@@ -45,12 +45,13 @@
     font-weight: 500;
     line-height: 22px;
     color:#999999;
+    text-transform: capitalize !important;
 }
 
 .flagstyle {
-    height:20px;
-    width:20px;
-    padding-bottom: 3px;
+    height:26px;
+    width:26px;
+    border-radius: 26px !important;
 }
 .dash {
     padding-right: 6px;

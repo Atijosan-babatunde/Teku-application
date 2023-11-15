@@ -134,11 +134,12 @@ a {
     color: #ffffff;
 }
 
-  .flagstyle{
-    width: 20px;
-    height:20px;
-    padding-right:4px;
- }
+.flagstyle {
+    height:26px !important;
+    width:26px !important;
+    border-radius: 26px !important;
+    margin-right:4px;
+}
 .flagcontent{
     display: flex;
     align-items: center;

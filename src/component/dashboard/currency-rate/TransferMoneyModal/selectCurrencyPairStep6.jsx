@@ -140,6 +140,7 @@ const SelectCurrencyPairStep6 = ({
         </div>
         {showModal && <PaymentProccessing {...{ handleModalShow }} />}
       </div>
+      <ToastContainer />
     </div>
   );
 };

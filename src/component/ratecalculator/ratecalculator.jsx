@@ -126,7 +126,6 @@ const RateCalculator = () => {
                         src={amount.icon}
                         alt=""
                         className={styles.flagstyle}
-                        style={{ paddingBottom: "3px" }}
                       />
                       {amount.code}
                     </DropdownItem>
@@ -184,7 +183,6 @@ const RateCalculator = () => {
                         src={amount.icon}
                         alt=""
                         className={styles.flagstyle}
-                        style={{ paddingBottom: "3px" }}
                       />
                       {amount.code}
                     </DropdownItem>

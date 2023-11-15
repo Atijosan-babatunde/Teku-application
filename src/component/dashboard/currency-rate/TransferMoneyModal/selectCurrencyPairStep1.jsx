@@ -164,7 +164,6 @@ const SelectCurrencyPairStep1 = ({
                       src={amount.icon}
                       alt=""
                       className={styles.flagstyle}
-                      style={{ paddingBottom: "3px" }}
                     />
                     {amount.code}
                   </DropdownItem>
@@ -209,7 +208,6 @@ const SelectCurrencyPairStep1 = ({
                       src={amount.icon}
                       alt=""
                       className={styles.flagstyle}
-                      style={{ paddingBottom: "3px" }}
                     />
                     {amount.code}
                   </DropdownItem>
@@ -263,7 +261,9 @@ const SelectCurrencyPairStep1 = ({
                     <MdArrowForwardIos />
                   </span>
                 </div>
-                <p className={styles.ban}>{currencyPair?.sendingMethod}</p>
+                <p className={styles.ban} style={{textTransform: "capitalize"}}>
+                  {currencyPair?.sendingMethod.split('_')?.join(' ').toLowerCase()}
+                </p>
               </div>
             ) : (
               <div className={styles.orangecard}>

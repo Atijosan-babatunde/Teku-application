@@ -45,12 +45,12 @@ const SelectCurrencyPairStep4 = ({
         <div className={styles.firstdiv}>
           <div className={styles.flagholder}>
             <div className={styles.flagcountry}>
-              <img src={dropDownValue?.icon} alt="" />
+              <img src={dropDownValue?.icon} alt="" className={styles.flagimg}/>
               <p>{dropDownValue?.code}</p>
             </div>
             <p className={styles.dash}>-</p>
             <div className={styles.flagcountry}>
-              <img src={dropDownValueTwo?.icon} alt="" />
+              <img src={dropDownValueTwo?.icon} alt="" className={styles.flagimg} />
               <p>{dropDownValueTwo?.code}</p>
             </div>
           </div>
@@ -71,8 +71,8 @@ const SelectCurrencyPairStep4 = ({
 
             <div className={styles.firstdivflex}>
               <div className={styles.firstdivh1}>Sending method:</div>
-              <div className={styles.firstdivp}>
-                {currencyPair?.sendingMethod}
+              <div className={styles.firstdivp} style={{textTransform: "capitalize"}}>
+                {currencyPair?.sendingMethod.split('_')?.join(' ').toLowerCase()}
               </div>
             </div>
 

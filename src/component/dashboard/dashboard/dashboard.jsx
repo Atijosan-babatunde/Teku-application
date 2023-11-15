@@ -307,13 +307,9 @@ const Dashboard = () => {
                         {prod.purpose}
                         <span
                           className={styles.insidebtn}
-                          style={{
-                            backgroundColor: "rgba(240, 243, 255, 1)",
-                            borderRadius: "100px",
-                            width: "160px",
-                          }}
+                          style={{textTransform: "capitalize"}}
                         >
-                          {prod.paymentMethod}
+                          {prod.paymentMethod.split('_')?.join(' ').toLowerCase()}
                         </span>
                       </td>
 
@@ -368,8 +364,7 @@ const Dashboard = () => {
                         style={{ paddingTop: "1em" }}
                       >
                         <button
-                          className={styles.btn}
-                        // style={{ backgroundColor:  ? "#fff" : "", color:  ? "#000" : ""}}
+                          className={prod.status === "CANCELLED" ? styles.cancelledbtn : prod.status === "PROCESSING" ? styles.btn : styles.completedbtn }
                         >
                           {prod.status}
                         </button>

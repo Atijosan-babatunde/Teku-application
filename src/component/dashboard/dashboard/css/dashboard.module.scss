@@ -268,9 +268,9 @@
 }
 
 .flagstyle {
-    height:20px;
-    width:20px;
-    padding-bottom: 3px;
+    height:26px;
+    width:26px;
+    border-radius: 26px !important;
 }
 .dash {
     padding-right: 6px;
@@ -287,20 +287,54 @@
     font-weight: 700;
     font-size: 0.9em;
     line-height: 28px;
-    color: var(--green, #7FE881);
+    color: #FBB500;
     width: 130px;
     border-radius: 8px;
-    background: rgba(127, 232, 129, 0.10);
+    background: rgba(251, 181, 0, 0.10);
+}
+
+.completedbtn {
+  gap: 10px;
+  border: none;
+  height: 40px;   
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.9em;
+  line-height: 28px;
+  color: var(--green, #7FE881);
+  width: 130px;
+  border-radius: 8px;
+  background: rgba(127, 232, 129, 0.10);
+}
+
+.cancelledbtn{
+  gap: 10px;
+  border: none;
+  height: 40px;   
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.9em;
+  line-height: 28px;
+  color: var(--red, #FF0F0F);
+  width: 130px;
+  border-radius: 8px;
+  background: rgba(255, 15, 15, 0.10);
 }
 
 .insidebtn {
-        color: var(--blue-primary, #011B6D);
-        font-family: Gilroy;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 22px;
-        margin-left: 1.5000em;
+    color: var(--blue-primary, #011B6D);
+    font-family: Gilroy;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    margin-left: 1.5000em;
+    background-color: rgba(240, 243, 255, 1);
+    border-radius: 100px;
+    padding: 1em;
+    text-transform: capitalize !important;
 }
 
 .tableheader {

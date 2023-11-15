@@ -210,8 +210,9 @@ const PaymentSection = () => {
                         {prod?.purpose}
                         <span
                           className={styles.insidebtn}
+                          style={{textTransform: "capitalize"}}
                         >
-                          Cash pickup
+                          {prod?.paymentMethod.split('_')?.join(' ').toLowerCase()}
                         </span>
                       </td>
 
@@ -232,32 +233,33 @@ const PaymentSection = () => {
                         style={{ paddingTop: "1.5000em" }}
                       >
                         <img
-                          src={prod?.dropDownValue?.icon}
+                          src={prod.baseCurrency.icon}
                           alt=""
                           className={styles.flagstyle}
                         />
                         <span className={styles.flagnamestyle}>
-                          {prod?.flagnameone}
+                          {prod.baseCurrency.code}
                         </span>
                         <span className={styles.dash}>-</span>
                         <img
-                          src={prod?.flagtwo}
+                          src={prod.pairCurrency.icon}
                           alt=""
                           className={styles.flagstyle}
                         />
                         <span className={styles.flagnamestyle}>
-                          {prod?.flagnametwo}
+                          {prod.pairCurrency.code}
                         </span>
                       </td>
                       <td
                         className={styles.tabledata}
                         style={{ paddingTop: "1.5000em" }}
                       >
-                        {prod.datetime}
+                        {prod?.createdAt}
                         <div className={styles.tableparagraph}>
                           {prod.sendingMethod}
                         </div>
                       </td>
+                      
                       <td
                         className={styles.tabledataa}
                         style={{ paddingTop: "1em" }}

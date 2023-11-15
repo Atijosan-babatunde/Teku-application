@@ -44,6 +44,7 @@ const SectionTable = () => {
                             type="number"
                             placeholder="Write here"
                             cols="10"
+                            maxLength={500}
                             onChange={e => setTextArea(e.target.value)}
                         />
 

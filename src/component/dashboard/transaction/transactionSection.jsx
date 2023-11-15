@@ -443,7 +443,6 @@ const TransactionSection = () => {
                         style={{ paddingTop: "1.5000em" }}
                       >
                         {prod.createdAt}
-                        {/* <div className={styles.tableparagraph}>{prod.sendingMethod}</div> */}
                       </td>
                       <td
                         className={styles.tabledataa}
