@@ -274,58 +274,6 @@ const TransactionSection = () => {
                 </div>
               </div>
               <div className={styles.rightholder}>
-                {/* <h3>
-                  Download{" "}
-                  <span>
-                    <img src={arrow} alt="" />
-                  </span>
-                </h3> */}
-                {/* <div className={styles.dropdown}>
-                  <div className={styles.lastdays}>
-                    Last 7 days{" "}
-                    <span>
-                      <IoMdArrowDropdown />
-                    </span>
-                  </div>
-                  <div className={styles.dropdownContent}>
-                    <div className={styles.dropDownRow}>
-                      <div className={styles.logoDrodownDiv}></div>
-                      <div className={styles.logoTitleDiv}>
-                        <div className={styles.dropDowntitle}>
-                          Past 24 hours
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={styles.dropDownRow}>
-                      <div className={styles.logoDrodownDiv}></div>
-                      <div className={styles.logoTitleDiv}>
-                        <div className={styles.dropDowntitle}>Past week</div>
-                      </div>
-                    </div>
-                    <div className={styles.dropDownRow}>
-                      <div className={styles.logoDrodownDiv}></div>
-                      <div className={styles.logoTitleDiv}>
-                        <div className={styles.dropDowntitle}>Past week</div>
-                      </div>
-                    </div>
-                    <div className={styles.dropDownRow}>
-                      <div className={styles.logoDrodownDiv}></div>
-                      <div className={styles.logoTitleDiv}>
-                        <div className={styles.dropDowntitle}>Past month</div>
-                      </div>
-                    </div>
-
-                    <div className={styles.dropDownRow}>
-                      <div className={styles.logoDrodownDiv}></div>
-                      <div className={styles.logoTitleDiv}>
-                        <div className={styles.dropDowntitle}>Custom date</div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-
-
                 <Dropdown isOpen={days} toggle={() => setDays(!days)} style={{ cursor: 'pointer' }} className={styles.drop}>
                   <DropdownToggle tag="a" className={styles.dropdownToggle} >
                     <div className={styles.dropname}>{dropDownValue}</div>

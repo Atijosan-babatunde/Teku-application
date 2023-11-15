@@ -24,7 +24,7 @@ import PaymentRequestModal from "../currency-rate/RequestModal/paymentRequestMod
 import DeletePaymentModal from "../payment-cart/deletePaymentModal";
 import { useNavigate } from "react-router-dom";
 import KycBusinessUser from "../../SignUPDashboard/personal_business_registration/business/KYC/kycBusinessUser";
-
+import KycPersonalUser from "../../SignUPDashboard/personal_business_registration/personal/KYC/kycPersonalUser";
 
 const Dashboard = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -32,6 +32,7 @@ const Dashboard = () => {
   const transactionData = useAppSelector(
     (state) => state.transaction.getTransactionUsers
   );
+  const userData = useAppSelector((state) => state.users.getUsersData);
   const [transactions] = useState(transactionData);
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -112,12 +113,12 @@ const Dashboard = () => {
   // }
 
   const goToCurrencyPage = () => {
-    navigate('/currency-rate')
-  }
+    navigate("/currency-rate");
+  };
 
   const goToTransaction = () => {
-    navigate('/transactions')
-  }
+    navigate("/transactions");
+  };
 
   // const [product] = useState([
   //   {
@@ -138,12 +139,11 @@ const Dashboard = () => {
 
   // MODAL STATE
 
-  const [showModalKyc, setShowModalKyc] = useState(false)
+  const [showModalKyc, setShowModalKyc] = useState(false);
 
   function handleModalShowKyc() {
-    setShowModalKyc(!showModalKyc)
+    setShowModalKyc(!showModalKyc);
   }
-
 
   return (
     <>
@@ -218,29 +218,39 @@ const Dashboard = () => {
             </p>
 
             <div className={styles.requestbut}>
-              <button className={styles.btnrequest} onClick={goToCurrencyPage}>View rate</button>
+              <button className={styles.btnrequest} onClick={goToCurrencyPage}>
+                View rate
+              </button>
             </div>
           </div>
         </div>
 
-        <div className={styles.kycreg}>
-          <div className={styles.kyccontent}>
-            <h1 className={styles.kych1}>KYC Verification</h1>
-            <div className={styles.kycflex}>
-              <p>
-                You have not done your KYC Verification. Therefore some features
-                are being restricted. Kindly start your KYC Verification process
-                to continue using this application.
-              </p>
+        {userData?.kycVerified ? null : (
+          <div className={styles.kycreg}>
+            <div className={styles.kyccontent}>
+              <h1 className={styles.kych1}>KYC Verification</h1>
+              <div className={styles.kycflex}>
+                <p>
+                  You have not done your KYC Verification. Therefore some
+                  features are being restricted. Kindly start your KYC
+                  Verification process to continue using this application.
+                </p>
 
-              <h3 onClick={handleModalShowKyc}>
-                Start KYC Verification{" "}
-                <IoIosArrowForward className={styles.arrow} />
-              </h3>
+                <h3 onClick={handleModalShowKyc}>
+                  Start KYC Verification{" "}
+                  <IoIosArrowForward className={styles.arrow} />
+                </h3>
+              </div>
+              {showModalKyc ? (
+                userData?.accountType === "PERSONAL" ? (
+                  <KycPersonalUser {...{ handleModalShowKyc }} />
+                ) : (
+                  <KycBusinessUser {...{ handleModalShowKyc }} />
+                )
+              ) : null}
             </div>
-            {showModalKyc && <KycBusinessUser {...{ handleModalShowKyc }} />}
           </div>
-        </div>
+        )}
 
         <div className={styles.contenttable}>
           <div className={styles.tableheader}>
@@ -307,9 +317,12 @@ const Dashboard = () => {
                         {prod.purpose}
                         <span
                           className={styles.insidebtn}
-                          style={{textTransform: "capitalize"}}
+                          style={{ textTransform: "capitalize" }}
                         >
-                          {prod.paymentMethod.split('_')?.join(' ').toLowerCase()}
+                          {prod.paymentMethod
+                            .split("_")
+                            ?.join(" ")
+                            .toLowerCase()}
                         </span>
                       </td>
 
@@ -364,7 +377,13 @@ const Dashboard = () => {
                         style={{ paddingTop: "1em" }}
                       >
                         <button
-                          className={prod.status === "CANCELLED" ? styles.cancelledbtn : prod.status === "PROCESSING" ? styles.btn : styles.completedbtn }
+                          className={
+                            prod.status === "CANCELLED"
+                              ? styles.cancelledbtn
+                              : prod.status === "PROCESSING"
+                              ? styles.btn
+                              : styles.completedbtn
+                          }
                         >
                           {prod.status}
                         </button>
@@ -419,7 +438,9 @@ const Dashboard = () => {
             {!transactions && (
               <div>
                 <img src={holder} alt="middleimage" />
-                <div className={styles.nocurrency}>You have not performed any transaction</div>
+                <div className={styles.nocurrency}>
+                  You have not performed any transaction
+                </div>
               </div>
             )}
           </div>
