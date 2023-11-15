@@ -27,20 +27,8 @@ const KycPersonalUser = ({ handleModalShow }) => {
     if (type === "file" && files.length > 0) {
       setFormData({ ...formData, [name]: files[0] });
     } else {
-      // Handle text input
       setFormData({ ...formData, [name]: value });
     }
-  };
-
-  const getBase64 = (file, cb) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
   };
 
   const modalref = useRef();

@@ -6,9 +6,12 @@ import PhoneInput from "react-phone-input-2";
 import { BsArrowLeft } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
+import customAxios from "../../../../../shared/utils/axios";
 
 const StepThreePersonal = ({ setStep, formData, setFormData }) => {
   const [stepOtp, setStepOtp] = useState(1);
+  const [loading, setLoading] = useState(false);
   const otpLength = 6; // Define the length of the OTP
   const [otpValues, setOtpValues] = useState(Array(otpLength).fill(""));
   const [phoneNumber, setPhoneNumber] = useState(formData.phone_no);
@@ -40,13 +43,30 @@ const StepThreePersonal = ({ setStep, formData, setFormData }) => {
     return otpValues.includes("") || otpValues.length !== otpLength;
   };
 
-  const handleRequestOtp = () => {
+  const handleRequestOtp = async () => {
     if (validatePhoneNumber()) {
       toast.error("Please enter a valid phone number.");
-    } else {
-      setStepOtp(2);
-      startResendTimer();
     }
+    try {
+      setLoading(true);
+
+      const response = await customAxios.post(`/kyc/sms`, {
+        phone_number: formData.phone_no,
+      });
+      console.log(response);
+
+      if (response.success) {
+        setLoading(false);
+        setStep(5);
+      }
+      setLoading(false);
+      toast.error("An error occured");
+    } catch (error) {
+      console.error("Error:", error);
+      setLoading(false);
+    }
+    // setStepOtp(2);
+    // startResendTimer();
   };
 
   const handleContinue = () => {
@@ -125,7 +145,16 @@ const StepThreePersonal = ({ setStep, formData, setFormData }) => {
                   : " ",
               }}
             >
-              Request OTP
+              {loading ? (
+                <ReactLoading
+                  color="white"
+                  width={25}
+                  height={25}
+                  type="spin"
+                />
+              ) : (
+                "Request OTP"
+              )}
             </button>
           </div>
         </div>
