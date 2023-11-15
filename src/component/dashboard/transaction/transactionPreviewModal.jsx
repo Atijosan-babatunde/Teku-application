@@ -1,7 +1,7 @@
 import styles from "../transaction/css/transactionpreview.module.scss";
 import completed from "../transaction/css/completepreviewmodal.module.scss";
 import declined from "../transaction/css/cancelledpreviewmodal.module.scss";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../../../shared/Hooks/useOnClickOutside";
 import can from "../../../assets/png/can.png";
 import bigcancel from "../../../assets/svg/bigcancel.svg";
@@ -20,8 +20,10 @@ const TransactionPreview = ({
   const modalref = useRef();
   useOnClickOutside(modalref, handleModalShowTransactionPreview);
 
-  console.log(selectedTransaction);
-  // // SHOW MODAL
+  const [seconds, setSeconds] = useState(24 * 60 * 60); // 24hrs in seconds
+  const [download, setDownload] = useState(false);
+
+  // SHOW MODAL
   const [showModalAskRefund, setShowModalAskRefund] = useState(false);
   function handleAskForRefund() {
     setShowModalAskRefund(!showModalAskRefund);
@@ -32,14 +34,41 @@ const TransactionPreview = ({
     return totalAmount;
   };
 
+  function handleDownload() {
+    setDownload(true)
+  }
+
+  useEffect(() => {
+    download && toPDF()
+  }, [download]);
+
   const { toPDF, targetRef } = usePDF({
     filename: "transactionDoc.pdf",
     page: { margin: Margin.MEDIUM }
   });
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [seconds]);
+  const formatTime = time => {
+    const hour = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = time % 60;
+    return `${hour}:${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
   return (
-    <div className={styles.parent} ref={targetRef}>
-      <div className={styles.content} ref={modalref}>
+    <div className={styles.parent} >
+      <div className={styles.content} 
+        // ref={modalref}
+        ref={targetRef}
+      >
         <div
           className={styles.closemodal}
           onClick={handleModalShowTransactionPreview}
@@ -99,8 +128,8 @@ const TransactionPreview = ({
 
             <div className={styles.firstdivflex}>
               <div className={styles.firstdivh1}>Payment method:</div>
-              <div className={styles.firstdivp}>
-                {selectedTransaction.paymentMethod}
+              <div className={styles.firstdivp} style={{ textTransform: "capitalize" }}>
+                {selectedTransaction.paymentMethod.split('_')?.join(' ').toLowerCase()}
               </div>
             </div>
 
@@ -167,8 +196,8 @@ const TransactionPreview = ({
 
                 <div className={styles.firstdivflex}>
                   <div className={styles.firstdivh1}>Sending method:</div>
-                  <div className={styles.firstdivp}>
-                    {selectedTransaction.paymentMethod}
+                  <div className={styles.firstdivp} style={{ textTransform: "capitalize" }}>
+                    {selectedTransaction.paymentMethod.split('_')?.join(' ').toLowerCase()}
                   </div>
                 </div>
 
@@ -201,57 +230,56 @@ const TransactionPreview = ({
             </>
           )}
 
-          <div className={styles.requestbut}>
-            <button
-              className={styles.btnrequest}
-            // disabled={validate()}
-            // onClick={handleModalShow}
-            // style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
-            >
-              Done
-            </button>
+
+          <div style={{ display: download && "none" }}>
+            <div className={styles.requestbut}>
+              <button
+                className={styles.btnrequest}
+              // disabled={validate()}
+              // onClick={handleModalShow}
+              // style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
+              >
+                Done
+              </button>
+            </div>
+
+            <div className={styles.requestbut}>
+              <button
+                className={styles.btnrequestred}
+                onClick={handleAskForRefund}
+              >
+                Ask for refund
+              </button>
+              {showModalAskRefund && (
+                <AskForRefund
+                  {...{ handleAskForRefund }}
+                  selectedTransaction={selectedTransaction}
+                />
+              )}
+            </div>
+
+            <div className={styles.btnflex}>
+              <button className={styles.firstbtn}>
+                Share{" "}
+                <span>
+                  <img src={shear} alt="" />
+                </span>
+              </button>
+
+
+              <button className={styles.firstbtn} onClick={handleDownload}>
+                Download{" "}
+                <span>
+                  <img src={download} alt="" />
+                </span>
+              </button>
+            </div>
+
+            <div className={styles.processed}>Payment is being processed...</div>
+
+            <div className={styles.time}>{formatTime(seconds)}</div>
+            <div className={styles.hms}>HRS : MM : SS</div>
           </div>
-
-          <div className={styles.requestbut}>
-            <button
-              className={styles.btnrequestred}
-              onClick={handleAskForRefund}
-            >
-              Ask for refund
-            </button>
-            {showModalAskRefund && (
-              <AskForRefund
-                {...{ handleAskForRefund }}
-                selectedTransaction={selectedTransaction}
-              />
-            )}
-          </div>
-
-          <div className={styles.btnflex}>
-            <button className={styles.firstbtn}>
-              Share{" "}
-              <span>
-                <img src={shear} alt="" />
-              </span>
-            </button>
-
-            {/* <Pdf targetRef={ref} filename="invoice.pdf">
-              {({ toPdf }) => ( */}
-                <button className={styles.firstbtn} onClick={toPDF}>
-                  {/* <img src={FileDownload} alt="icon" /> */}
-                  Download{" "}
-                  <span>
-                    <img src={download} alt="" />
-                  </span>
-                </button>
-              {/* )}
-            </Pdf> */}
-          </div>
-
-          <div className={styles.processed}>Payment is being processed...</div>
-
-          <div className={styles.time}>24:00:00</div>
-          <div className={styles.hms}>HRS : MM : SS</div>
         </div>
       </div>
     </div>

@@ -320,14 +320,14 @@ const SelectCurrencyPairStep3 = ({
                       </p>
                     </div>
                     <h2 className={styles.recipiantotherdata}>
-                      {prod.paymentDescription}
+                      {prod.paymentDescription?.slice(0,30)}...
                     </h2>
                     <div className={styles.recipiantdataflex}>
                       <h2>
                         <span>
                           <img src={attached} alt="" />
                         </span>{" "}
-                        {prod.paymentDocument}
+                        {prod.paymentDocument?.slice(0,15)}.png
                       </h2>
                       <p>{prod.country}</p>
                     </div>

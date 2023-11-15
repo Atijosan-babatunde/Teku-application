@@ -11,6 +11,24 @@
   display: none !important;
 }
 
+body{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 1px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #011B6D !important;
+  border-radius: 40px !important;
+}
+::-webkit-scrollbar-track {
+  background-color:transparent !important;
+}
+
+
 
 /* //////// react-html5-camera-photo //////////// */
 

@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import useOnClickOutside from "../../../../shared/Hooks/useOnClickOutside"
 import cancel from '../../../../assets/png/cancel.png'
 import styles from '../RequestModal/css/paymentprocessing.module.scss'
@@ -6,6 +6,7 @@ import loading from '../../../../assets/svg/loading.svg'
 import { useNavigate } from "react-router-dom"
 
 const PaymentProccessing = ({ handleModalShow }) => {
+    const [seconds, setSeconds] = useState(24 * 60 * 60); // 24hrs in seconds
     const modalref = useRef()
     useOnClickOutside(modalref, handleModalShow)
 
@@ -13,6 +14,23 @@ const PaymentProccessing = ({ handleModalShow }) => {
     const goToDashboard = () => {
         navigate("/dashboard");
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (seconds > 0) {
+                setSeconds(seconds - 1);
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [seconds]);
+    const formatTime = time => {
+        const hour = Math.floor(time / 3600);
+        const minutes = Math.floor((time % 3600) / 60);
+        const seconds = time % 60;
+        return `${ hour }:${ minutes }:${ seconds < 10 ? '0' : '' }${ seconds }`;
+    };
+
 
     return (
         <div className={styles.parent}>
@@ -24,7 +42,7 @@ const PaymentProccessing = ({ handleModalShow }) => {
                 </div>
                 <div className={styles.contentholder}>
                     <img src={loading} alt="" />
-                    <h1>24:00:00 <br /><span>HRS : MM : SS</span></h1>
+                    <h1>{formatTime(seconds)}<br /><span>HRS : MM : SS</span></h1>
 
                     <div className={styles.contentdata}>
                         You payment is been processed. This may take up to 24 hours,
@@ -37,7 +55,7 @@ const PaymentProccessing = ({ handleModalShow }) => {
                             className={styles.btnrequest}
                             onClick={goToDashboard}
                         >
-                           Continue to dashboard
+                            Continue to dashboard
                         </button>
                     </div>
                 </div>
@@ -46,4 +64,4 @@ const PaymentProccessing = ({ handleModalShow }) => {
     );
 }
 
-export default PaymentProccessing;
+export default PaymentProccessing
