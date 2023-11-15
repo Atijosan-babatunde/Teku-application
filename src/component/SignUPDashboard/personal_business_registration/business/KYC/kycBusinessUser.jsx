@@ -11,6 +11,20 @@ import StepSixBusiness from "./stepSixBusiness";
 
 const KycBusinessUser = ({ handleModalShowKyc }) => {
   const [selectId, setSelectId] = useState(false);
+  const [formData, setFormData] = useState({
+    rc_number: "",
+    business_type: "",
+    businessAddress: "",
+    localGov: "",
+    DirectorName: "",
+    bvnNo: "",
+    identification: "",
+    DirectorAddress: "",
+    document: null,
+    selfie: null,
+    businessPhone: "",
+    addressDocument: null,
+  });
   const [step, setStep] = useState(1);
   const modalref = useRef();
   useOnClickOutside(modalref, handleModalShowKyc);
