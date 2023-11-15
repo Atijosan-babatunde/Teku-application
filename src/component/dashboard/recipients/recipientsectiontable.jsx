@@ -7,14 +7,11 @@ import attachment from "../../../assets/png/attached.png";
 import eye from "../../../assets/svg/eye.svg";
 import flyarrow from "../../../assets/svg/flyarrow .svg";
 import deleteimg from "../../../assets/svg/delete.svg";
-import download from "../../../assets/svg/download.svg";
 import ellip from "../../../assets/png/ellis.png";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { styled, alpha } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
-import { GetRecipientUsersData } from "../../../shared/redux/slices/recipient.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
@@ -22,33 +19,35 @@ import customAxios from "../../../shared/utils/axios";
 import { truncateMiddle } from "../../../shared/utils/truncate";
 import EditRecipientModal from "./editRecipientModal";
 
-const RecipientSectionTable = () => {
+const RecipientSectionTable = ({ searchValue }) => {
   const [saveItemModal, setSaveItemModal] = useState("");
   const [selectedRecipient, setSelectedRecipient] = useState();
+  const [recipientsData, setRecipientsData] = useState();
   const [loading, setLoading] = useState(false);
-  // const [editModal, setEditModal] = useState(false);
-  const dispatch = useDispatch();
-  const [data, setData] = useState([]);
 
-  const getRecipientUser = () => {
+  console.log(searchValue)
+  const getRecipientUser = async () => {
     setLoading(true);
-    dispatch(GetRecipientUsersData())
-      .unwrap()
-      .then((res) => {
-        setData(res.recipient);
-        setLoading(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setLoading(false);
+
+    try {
+      const response = await customAxios.get(`/recipient/user`, {
+        params: { search: searchValue }, // Send searchValue as a query parameter
       });
+      console.log(response);
+      setRecipientsData(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     getRecipientUser();
-  }, []);
+  }, [searchValue]);
 
   const [product] = useState([
     {
@@ -127,7 +126,7 @@ const RecipientSectionTable = () => {
     }
   };
 
-  console.log(selectedRecipient)
+  console.log(selectedRecipient);
 
   // MODAL STATE
 
@@ -140,15 +139,15 @@ const RecipientSectionTable = () => {
     // setDownloadModal(!downloadModal);
     setDeleteModal(!deleteModal);
     setTransferModal(!transferModal);
-    setEditModal(!showEditModal)
+    setEditModal(!showEditModal);
   }
 
-  if (data) {
+  if (recipientsData) {
     return (
       <>
-        {/* {showModal && saveItemModal === 'Preview' && <PreviewModal {...{ handleModalShow }} />}
-            {payModal && saveItemModal === 'Pay now' && <StepFourRequestModal {...{handleModalShow}}/>} */}
-            {showEditModal && saveItemModal === 'Edit' && <EditRecipientModal {...{handleModalShowEdit}}/>}
+        {showEditModal && saveItemModal === "Edit" && (
+          <EditRecipientModal {...{ handleModalShowEdit }} />
+        )}
 
         <div className={styles.parent}>
           <div className={styles.contenttable}>
@@ -200,7 +199,7 @@ const RecipientSectionTable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((prod, index) => (
+                  {recipientsData.map((prod, index) => (
                     <tr key={index}>
                       <td
                         className={styles.tabledata}
@@ -209,9 +208,12 @@ const RecipientSectionTable = () => {
                         {prod.paymentPurpose}
                         <span
                           className={styles.insidebtn}
-                          style={{textTransform: "capitalize"}}
+                          style={{ textTransform: "capitalize" }}
                         >
-                          {prod.paymentMethod.split('_')?.join(' ').toLowerCase()}
+                          {prod.paymentMethod
+                            .split("_")
+                            ?.join(" ")
+                            .toLowerCase()}
                         </span>
                       </td>
 
