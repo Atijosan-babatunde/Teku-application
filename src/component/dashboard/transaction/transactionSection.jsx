@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styles from "../transaction/css/transactionsection.module.scss";
 import { useEffect, useState } from "react";
 import holder from "../../../assets/svg/holder.svg";
@@ -19,14 +20,13 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import TransactionPreview from "./transactionPreviewModal";
-import { useAppSelector } from "../../../shared/redux/reduxHooks";
 import { useDispatch } from "react-redux";
-import { GetUsersTransaction } from "../../../shared/redux/slices/transaction.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MakeAnAppeal from "./makeAnAppeal";
 import { MdArrowDropDown } from "react-icons/md";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
+import customAxios from "../../../shared/utils/axios";
 
 const TransactionSection = () => {
   const [days, setDays] = useState(false);
@@ -36,16 +36,12 @@ const TransactionSection = () => {
   // const [saveItemModalCompleted, setSaveItemModalCompleted] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorCancelledEl, setAnchorCancelledEl] = useState(null);
+  const [transactionsData, setTransactionsData] = useState(null);
   const openCancelled = Boolean(anchorCancelledEl);
   const [anchorCompletedEl, setAnchorCompletedEl] = useState(null);
   const openCompleted = Boolean(anchorCompletedEl);
   const open = Boolean(anchorEl);
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const transactionData = useAppSelector(
-    (state) => state.transaction.getTransactionUsers
-  );
-  const [data] = useState(transactionData);
   const [selectedSubmenu, setSelectedSubmenu] = useState("");
   const [selectedTransaction, setSelectedTransaction] = useState();
 
@@ -88,26 +84,24 @@ const TransactionSection = () => {
   };
 
   useEffect(() => {
-    getTransactionUser();
-  }, [data]);
+    getTransactionUser(); // Pass the searchValue to fetch transactions
+  }, [searchValue]);
 
-  const getTransactionUser = () => {
+  const getTransactionUser = async () => {
     setLoading(true);
-    dispatch(
-      GetUsersTransaction(
-        `${process.env.REACT_APP_API_URL}/transaction/users/personal?search=${searchValue}`
-      )
-    )
-      .unwrap()
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setLoading(false);
+
+    try {
+      setLoading(true);
+      const response = await customAxios.get(`/transaction/users/personal?search=${searchValue}`);
+      console.log(response);
+      setTransactionsData(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.log("Error:", error);
+      toast.error(error, {
+        position: toast.POSITION.TOP_RIGHT,
       });
+    }
   };
 
   const [product] = useState([
@@ -207,7 +201,7 @@ const TransactionSection = () => {
     setMakeAppealModal(!makeAppealModal);
   }
 
-  if (data) {
+  if (transactionsData) {
     return (
       <>
         {makeAppealModal && saveItemModal === "Make an appeal" && (
@@ -325,7 +319,7 @@ const TransactionSection = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((prod, first) => (
+                  {transactionsData.map((prod, first) => (
                     <tr style={{}} key={first}>
                       <td
                         className={styles.tabledata}
