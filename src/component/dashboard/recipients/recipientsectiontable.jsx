@@ -171,7 +171,7 @@ const RecipientSectionTable = () => {
                     <th
                       className={styles.tablehead}
                       scope="col"
-                      style={{ paddingLeft: "4.1000em", padding: "1.5000em" }}
+                      style={{ paddingLeft: "2em", padding: "1.5000em" }}
                     >
                       Country
                     </th>

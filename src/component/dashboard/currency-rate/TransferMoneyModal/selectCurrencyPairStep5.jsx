@@ -7,11 +7,12 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import { MdArrowDropDown } from "react-icons/md";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import copy from "../../../../assets/png/copy.png";
 import blank from "../../../../assets/svg/blank.svg";
 import { useAppSelector } from "../../../../shared/redux/reduxHooks";
 import { useDispatch } from "react-redux";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { GetUsersBanksListed } from "../../../../shared/redux/slices/transaction.slices";
 import { SaveTransactionToCart } from "../../../../shared/redux/slices/transaction.slices";
 import { ToastContainer, toast } from "react-toastify";
@@ -102,11 +103,6 @@ const SelectCurrencyPairStep5 = ({
     { id: 3, paymentType: "Online Transfer", backend: "ONLINE_TRANSFER" },
   ];
 
-  // const [bankData] = useState([
-  //     { id: 1, bankType: 'Providious bank' },
-  //     { id: 2, bankType: 'Polaris bank' },
-  // ])
-
   const changeValueFour = async (e) => {
     setPaymentMethod(e.backend);
   };
@@ -129,6 +125,25 @@ const SelectCurrencyPairStep5 = ({
     setStep(6);
   };
 
+  // COPY TO CLIPBOARD
+  const [value, setValue] = React.useState('');
+  const [copied, setCopied] = React.useState(false);
+
+  const onChange = React.useCallback(({target: {value}}) => {
+    setValue(value);
+    setCopied(true);
+  }, [])
+
+  const onClick = React.useCallback(({ target: { innerText } }) => {
+    console.log(`Clicked on "${innerText}"!`);
+  }, [])
+  const onCopy = React.useCallback(() => {
+    setCopied(true);
+  }, [])
+
+
+
+
   if (data) {
     return (
       <div className={styles.parent}>
@@ -147,7 +162,9 @@ const SelectCurrencyPairStep5 = ({
             style={{ cursor: "pointer" }}
           >
             <DropdownToggle tag="a" className={styles.dropdownToggle}>
-              <div className={styles.dropDownValue}>{paymentMethod}</div>
+              <div className={styles.dropDownValue} style={{ textTransform: "capitalize" }}>
+                {paymentMethod.split('_')?.join(' ').toLowerCase()}
+              </div>
               <div className={styles.dropDownrow}>
                 <div style={{ color: "#011B6D" }}>
                   <MdArrowDropDown style={{ fontSize: "2em" }} />
@@ -205,12 +222,21 @@ const SelectCurrencyPairStep5 = ({
               <div className={styles.paymentconfimation}>
                 <div className={styles.confimationcontent}>
                   <h1>Total amount to pay</h1>
-                  <div className={styles.confimationsplit}>
-                    <div className={styles.confimationamount}>
-                      {dropDownValue?.code} <span>{amount}</span>
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={value}>
+                    <div className={styles.confimationsplit}>
+                      <div className={styles.confimationamount}>
+                        {dropDownValue?.code} <span>{amount}</span>
+                      </div>
+                      <img src={copy} alt="" onClick={onClick} />
                     </div>
-                    <img src={copy} alt="" />
-                  </div>
+                  </CopyToClipboard>
+
+                  <section className="section">
+                    {copied ? <span style={{ color: 'red' }}>Copied.</span> : null}
+                  </section>
 
                   <h1 style={{ marginTop: "2em" }}>Account details</h1>
                   <div className={styles.colorholder}>

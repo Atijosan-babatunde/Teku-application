@@ -18,13 +18,13 @@
 
 .content{
     width:40%;
-    /* height:90%; */
     background-color: white;
     border-radius: 16px;
     position: relative;
-    // padding:35px;
     margin-bottom:7em;
-    margin-top:3em;
+    top:19em;
+    min-height: 100vh;
+    overflow-y: scroll;
 }
 .closemodal {
     position: absolute;
