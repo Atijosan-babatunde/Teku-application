@@ -25,7 +25,6 @@ const RecipientSectionTable = ({ searchValue }) => {
   const [recipientsData, setRecipientsData] = useState();
   const [loading, setLoading] = useState(false);
 
-  console.log(searchValue)
   const getRecipientUser = async () => {
     setLoading(true);
 

@@ -27,6 +27,7 @@ import { MdArrowDropDown } from "react-icons/md";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
 import customAxios from "../../../shared/utils/axios";
 import { formatMoney } from "../../../shared/utils/moneyFormat";
+import { formatDate } from "../../../shared/utils/formatDate";
 
 const TransactionSection = () => {
   const [days, setDays] = useState(false);
@@ -373,7 +374,7 @@ const TransactionSection = () => {
                         className={styles.tabledata}
                         style={{ paddingTop: "1.5000em" }}
                       >
-                        {prod.createdAt}
+                        {formatDate(prod.createdAt)}
                       </td>
                       <td
                         className={styles.tabledataa}
