@@ -118,7 +118,7 @@ const CurrencyAlert = ({ searchValue }) => {
                       className={styles.tabledata}
                       style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
                     >
-                      {prod.rate}
+                      {formatMoney(prod.rate, prod.pairCurrency.code)}
                     </td>
                     <td
                       className={styles.tabledata}
