@@ -12,14 +12,14 @@ import StepSixBusiness from "./stepSixBusiness";
 const KycBusinessUser = ({ handleModalShowKyc }) => {
   const [selectId, setSelectId] = useState(false);
   const [formData, setFormData] = useState({
-    rc_number: "",
-    business_type: "",
+    rcNumber: "",
+    businessType: "",
     businessAddress: "",
     localGov: "",
-    DirectorName: "",
+    directorName: "",
     bvnNo: "",
     identification: "",
-    DirectorAddress: "",
+    directorAddress: "",
     document: null,
     selfie: null,
     businessPhone: "",

@@ -9,11 +9,13 @@ import { MdArrowDropDown } from "react-icons/md";
 import steponeimg from "../../../../../assets/png/steponeimg.png";
 import { useState } from "react";
 
-const StepOneBusiness = ({ setStep, setSelectId, handleChange, formData, setFormData }) => {
-  const [rcNumber, setRcNumber] = useState("");
-  const [businessNumber, setBusinessNumber] = useState("");
-  const [dropDownValue, setDropDownValue] = useState("Select");
-  const [dropDownLocalGov, setDropdownLocalGov] = useState("Select");
+const StepOneBusiness = ({
+  setStep,
+  setSelectId,
+  handleChange,
+  formData,
+  setFormData,
+}) => {
   const [menu, setMenu] = useState(false);
   const [menuTwo, setMenuTwo] = useState(false);
 
@@ -27,25 +29,12 @@ const StepOneBusiness = ({ setStep, setSelectId, handleChange, formData, setForm
     { id: 2, Localgov: "Taraba" },
   ]);
 
-  const changeBusinessType = async (e) => {
-    setDropDownValue(e.documentuser);
-    if (e.id === 1) {
-      setSelectId(true);
-    } else {
-      setSelectId(false);
-    }
-  };
-
-  const changeLocalGovType = async (e) => {
-    setDropdownLocalGov(e.Localgov);
-  };
-
   const validate = () => {
     return (
-      !rcNumber ||
-      !businessNumber ||
-      dropDownValue === "Select" ||
-      dropDownLocalGov === "Select"
+      !formData.rcNumber ||
+      !formData.businessAddress ||
+      !formData.businessType ||
+      !formData.localGov
     );
   };
 
@@ -71,7 +60,8 @@ const StepOneBusiness = ({ setStep, setSelectId, handleChange, formData, setForm
       <input
         className={styles.calculatorinput}
         type="number"
-        name="rc_number"
+        name="rcNumber"
+        value={formData.rc_number}
         placeholder="Enter your registration number"
         onChange={(e) => handleChange(e)}
         onKeyDown={(e) =>
@@ -87,7 +77,7 @@ const StepOneBusiness = ({ setStep, setSelectId, handleChange, formData, setForm
         style={{ cursor: "pointer" }}
       >
         <DropdownToggle tag="a" className={styles.dropdownToggle}>
-          <div>{dropDownValue}</div>
+          <div>{formData.businessType}</div>
           <div className={styles.dropDownrow}>
             <div style={{ color: "#777E90" }}>
               <MdArrowDropDown style={{ fontSize: "2em" }} />
@@ -99,7 +89,14 @@ const StepOneBusiness = ({ setStep, setSelectId, handleChange, formData, setForm
             <DropdownItem
               className={styles.value}
               key={index}
-              onClick={() => changeBusinessType(documentuser)}
+              onClick={() =>
+                handleChange({
+                  target: {
+                    name: "businessType",
+                    value: documentuser.documentuser,
+                  },
+                })
+              }
             >
               {documentuser.documentuser}{" "}
             </DropdownItem>
@@ -110,9 +107,11 @@ const StepOneBusiness = ({ setStep, setSelectId, handleChange, formData, setForm
       <h2 className={styles.rowname}>Business address</h2>
       <input
         className={styles.calculatorinput}
+        value={formData.businessAddress}
         type="text"
+        name="businessAddress"
         placeholder="Enter your business address"
-        onChange={(e) => setBusinessNumber(e.target.value)}
+        onChange={(e) => handleChange(e)}
       />
 
       <h2 className={styles.rowname}>Local government area/State</h2>
@@ -123,7 +122,7 @@ const StepOneBusiness = ({ setStep, setSelectId, handleChange, formData, setForm
         style={{ cursor: "pointer" }}
       >
         <DropdownToggle tag="a" className={styles.dropdownToggle}>
-          <div>{dropDownLocalGov}</div>
+          <div>{formData.localGov}</div>
           <div className={styles.dropDownLocalGov}>
             <div style={{ color: "#777E90" }}>
               <MdArrowDropDown style={{ fontSize: "2em" }} />
@@ -135,7 +134,11 @@ const StepOneBusiness = ({ setStep, setSelectId, handleChange, formData, setForm
             <DropdownItem
               className={styles.value}
               key={index}
-              onClick={() => changeLocalGovType(Localgov)}
+              onClick={() =>
+                handleChange({
+                  target: { name: "localGov", value: Localgov.Localgov },
+                })
+              }
             >
               {Localgov.Localgov}{" "}
             </DropdownItem>
