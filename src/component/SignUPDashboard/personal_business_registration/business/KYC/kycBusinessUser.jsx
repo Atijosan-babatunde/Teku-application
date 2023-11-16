@@ -29,6 +29,18 @@ const KycBusinessUser = ({ handleModalShowKyc }) => {
   const modalref = useRef();
   useOnClickOutside(modalref, handleModalShowKyc);
 
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+
+    if (type === "file" && files.length > 0) {
+      setFormData({ ...formData, [name]: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  console.log(formData);
+
   return (
     <div className={styles.parent}>
       <div className={styles.content} ref={modalref}>
@@ -136,22 +148,54 @@ const KycBusinessUser = ({ handleModalShowKyc }) => {
         </div>
         <div className={styles.disctwo}>
           <div style={{ display: step === 1 ? "" : "none" }}>
-            <StepOneBusiness setStep={setStep} setSelectId={setSelectId} />
+            <StepOneBusiness
+              setStep={setStep}
+              setSelectId={setSelectId}
+              handleChange={handleChange}
+              formData={formData}
+              setFormData={setFormData}
+            />
           </div>
           <div style={{ display: step === 2 ? "" : "none" }}>
-            <StepTwoBusiness setStep={setStep} selectId={selectId} />
+            <StepTwoBusiness
+              setStep={setStep}
+              selectId={selectId}
+              handleChange={handleChange}
+              formData={formData}
+              setFormData={setFormData}
+            />
           </div>
           <div style={{ display: step === 3 ? "" : "none" }}>
-            <StepThreeBusiness setStep={setStep} />
+            <StepThreeBusiness
+              setStep={setStep}
+              handleChange={handleChange}
+              formData={formData}
+              setFormData={setFormData}
+            />
           </div>
           <div style={{ display: step === 4 ? "" : "none" }}>
-            <StepFourBusiness setStep={setStep} />
+            <StepFourBusiness
+              setStep={setStep}
+              handleChange={handleChange}
+              formData={formData}
+              setFormData={setFormData}
+            />
           </div>
           <div style={{ display: step === 5 ? "" : "none" }}>
-            <StepFiveBusiness setStep={setStep} />
+            <StepFiveBusiness
+              setStep={setStep}
+              handleChange={handleChange}
+              formData={formData}
+              setFormData={setFormData}
+            />
           </div>
           <div style={{ display: step === 6 ? "" : "none" }}>
-            <StepSixBusiness setStep={setStep} />
+            <StepSixBusiness
+              setStep={setStep}
+              handleChange={handleChange}
+              formData={formData}
+              setFormData={setFormData}
+            />
           </div>
         </div>
       </div>

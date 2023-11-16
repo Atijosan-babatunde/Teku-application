@@ -12,7 +12,7 @@ import customAxios from "../../../../../shared/utils/axios";
 const StepThreePersonal = ({ setStep, formData, setFormData }) => {
   const [stepOtp, setStepOtp] = useState(1);
   const [loading, setLoading] = useState(false);
-  const otpLength = 6; // Define the length of the OTP
+  const otpLength = 6;
   const [otpValues, setOtpValues] = useState(Array(otpLength).fill(""));
   const [phoneNumber, setPhoneNumber] = useState(formData.phone_no);
   const [resendTimer, setResendTimer] = useState(60);
