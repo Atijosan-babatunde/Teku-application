@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
+import { formatDate } from "../../../shared/utils/formatDate";
 
 const NewNotification = ({ searchValue }) => {
   const [loading, setLoading] = useState(false);
@@ -43,7 +44,7 @@ const NewNotification = ({ searchValue }) => {
               <div className={styles.contentinside} key={index}>
                 <h1>{prod.title}</h1>
                 <p>{prod.description}</p>
-                <h2>{prod.createdAt}</h2>
+                <h2>{formatDate(prod.createdAt)}</h2>
               </div>
             ))}
           </>

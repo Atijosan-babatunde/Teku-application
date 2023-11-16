@@ -2,13 +2,11 @@ import styles from "../notification/css/inbox.module.scss";
 import { useState, useEffect } from "react";
 import receivemail from "../../../assets/svg/receivemail.svg";
 import eye from "../../../assets/svg/lucideeye.svg";
-import { useAppSelector } from "../../../shared/redux/reduxHooks";
-import { useDispatch } from "react-redux";
-import { GetInboxData } from "../../../shared/redux/slices/notification.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
+import { formatDate } from "../../../shared/utils/formatDate";
 
 const InboxMessage = ({ searchValue }) => {
   const [loading, setLoading] = useState(false);
@@ -28,7 +26,6 @@ const InboxMessage = ({ searchValue }) => {
       const response = await customAxios.get(`/message/me`, {
         params: { search: searchValue }, // Send searchValue as a query parameter
       });
-      console.log(response);
       setInboxData(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -54,7 +51,7 @@ const InboxMessage = ({ searchValue }) => {
                     view <img src={eye} alt="" />
                   </span>
                 </div>
-                <h2>{prod.createdAt}</h2>
+                <h2>{formatDate(prod.createdAt)}</h2>
               </div>
             ))}
           </>

@@ -125,7 +125,7 @@ const CurrencyTodayRate = ({ searchValue }) => {
                       className={styles.tabledata}
                       style={{ paddingTop: "1.5000em" }}
                     >
-                      {formatMoney(prod.availableAmount, prod.baseCurrency.code)}
+                      {formatMoney(prod.availableAmount, prod.pairCurrency.code)}
                     </td>
                     <td
                       className={styles.tabledata}

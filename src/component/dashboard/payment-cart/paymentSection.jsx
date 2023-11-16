@@ -19,6 +19,8 @@ import { ToastContainer, toast } from "react-toastify";
 import customAxios from "../../../shared/utils/axios";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
+import { formatDate } from "../../../shared/utils/formatDate";
+import { formatMoney } from "../../../shared/utils/moneyFormat";
 
 const PaymentSection = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -226,7 +228,7 @@ const PaymentSection = () => {
                         className={styles.tabledata}
                         style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
                       >
-                        {prod?.amount}
+                        {formatMoney(prod.amount, prod.pairCurrency.code)}
                         <span className={styles.insidebtn}>In review</span>
                       </td>
 
@@ -256,7 +258,7 @@ const PaymentSection = () => {
                         className={styles.tabledata}
                         style={{ paddingTop: "1.5000em" }}
                       >
-                        {prod?.createdAt}
+                        {formatDate(prod?.createdAt)}
                         <div className={styles.tableparagraph}>
                           {prod.sendingMethod}
                         </div>
