@@ -26,6 +26,7 @@ import MakeAnAppeal from "./makeAnAppeal";
 import { MdArrowDropDown } from "react-icons/md";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
 import customAxios from "../../../shared/utils/axios";
+import { formatMoney } from "../../../shared/utils/moneyFormat";
 
 const TransactionSection = () => {
   const [days, setDays] = useState(false);
@@ -91,7 +92,9 @@ const TransactionSection = () => {
 
     try {
       setLoading(true);
-      const response = await customAxios.get(`/transaction/users/personal?search=${searchValue}`);
+      const response = await customAxios.get(
+        `/transaction/users/personal?search=${searchValue}`
+      );
       console.log(response);
       setTransactionsData(response.data.data);
       setLoading(false);
@@ -340,7 +343,7 @@ const TransactionSection = () => {
                         className={styles.tabledata}
                         style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
                       >
-                        {prod.amount}
+                        {formatMoney(prod.amount, prod.baseCurrency.code)}
                         <span className={styles.insidebtnpaid}>Paid</span>
                       </td>
 

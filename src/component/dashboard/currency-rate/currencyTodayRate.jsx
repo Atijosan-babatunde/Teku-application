@@ -7,6 +7,7 @@ import RequestModal from "./RequestModal/requestModal";
 import international from "../../../assets/svg/international.svg";
 import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
+import { formatMoney } from "../../../shared/utils/moneyFormat";
 
 const CurrencyTodayRate = ({ searchValue }) => {
   const [loading, setLoading] = useState(false);
@@ -124,7 +125,7 @@ const CurrencyTodayRate = ({ searchValue }) => {
                       className={styles.tabledata}
                       style={{ paddingTop: "1.5000em" }}
                     >
-                      {prod.availableAmount}
+                      {formatMoney(prod.availableAmount, prod.baseCurrency.code)}
                     </td>
                     <td
                       className={styles.tabledata}

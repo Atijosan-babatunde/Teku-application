@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import RequestModal from "./RequestModal/requestModal";
 import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
+import { formatMoney } from "../../../shared/utils/moneyFormat";
 
 const CurrencyAlert = ({ searchValue }) => {
   const [loading, setLoading] = useState(false);
@@ -123,7 +124,10 @@ const CurrencyAlert = ({ searchValue }) => {
                       className={styles.tabledata}
                       style={{ paddingTop: "1.5000em" }}
                     >
-                      {prod.availableAmount}
+                      {formatMoney(
+                        prod.availableAmount,
+                        prod.baseCurrency.code
+                      )}
                     </td>
                     <td
                       className={styles.tabledata}
