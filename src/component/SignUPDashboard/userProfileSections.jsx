@@ -1,5 +1,5 @@
 import styles from "../SignUPDashboard/CSS/userprofilesections.module.scss";
-import userpassport from "../../assets/png/passport.jpg";
+import takepic from "../../assets/svg/takepic.svg";
 import { LuFileEdit } from "react-icons/lu";
 import { IoIosArrowForward } from "react-icons/io";
 import { useAppSelector } from "../../shared/redux/reduxHooks";
@@ -109,7 +109,7 @@ const UserProfileSections = () => {
       <div>
         <div className={styles.content}>
           <div className={styles.cardholder}>
-            <div className={styles.userimg}>
+            <div className={styles.userimg} onClick={() => handleClickimg(imageInput)}>
               <input
                 type="file"
                 ref={imageInput}
@@ -122,12 +122,13 @@ const UserProfileSections = () => {
                   src={data.profilePicture}
                   alt="User Profile"
                   className={styles.userpassportimg}
-                  onClick={() => handleClickimg(imageInput)}
                 />
               ) : (
                 <span className={styles.userimgspan}>
                   {formData.profilePicture}
-                  <SlPicture className={styles.relativeicon} />
+                  <div className={styles.imghold}>
+                    <img src={takepic} alt="docpic" className={styles.relativeicon} />
+                  </div>
                 </span>
               )}
             </div>

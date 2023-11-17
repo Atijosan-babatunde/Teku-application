@@ -30,9 +30,18 @@
 // }
 
 .relativeicon{
-//  position:absolute;
-// margin-right:2em;
-// left: -3em;
+  font-size: 3rem;
+  padding: 0.4em;
+}
+
+.imghold{
+  border-radius: 100px;
+  background: var(--White-Blue, #F0F3FF);
+  display: inline-table;
+  position: absolute;
+  right: -8%;
+  top: 60%;
+  cursor: pointer;
 }
 
 .userpassportimg {
@@ -48,7 +57,7 @@
   background: var(--White-Blue, #f0f3ff);
   border-radius: 50%;
   margin-right: 1em;
-  // position: relative;
+  position: relative;
 }
 
 .name {
