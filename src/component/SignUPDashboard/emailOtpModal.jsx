@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import styles from "../SignUPDashboard/CSS/emailotpmodal.module.scss";
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../../shared/Hooks/useOnClickOutside";
@@ -8,27 +9,25 @@ import { useDispatch } from "react-redux";
 import { VerifyUserAuth } from "../../shared/redux/slices/landing.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAppSelector } from "../../shared/redux/reduxHooks";
 import ReactLoading from "react-loading";
 
 const EmailOtpModal = ({ handleModalShow }) => {
-  const [firstSpace, setFirstSpace] = useState("");
-  const [secondSpace, setSecondSpace] = useState("");
-  const [thirdSpace, setThirdSpace] = useState("");
-  const [fourthSpace, setFourthSpace] = useState("");
-  const [fifthSpace, setFifthSpace] = useState("");
-  const [sixthSpace, setSixthSpace] = useState("");
+  const otpLength = 6;
+  const [otpValues, setOtpValues] = useState(Array(otpLength).fill(""));
+
   const navigate = useNavigate();
   const modalref = useRef();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const verifyDetails = useAppSelector((state) => state.landing.verifyAuthData);
-  const [data] = useState(verifyDetails);
+
+  const inputRefs = Array(otpLength)
+    .fill(null)
+    .map(() => useRef());
 
   const verifyUserData = () => {
     setLoading(true);
     let body = {
-      token: `${firstSpace}${secondSpace}${thirdSpace}${fourthSpace}${fifthSpace}${sixthSpace}`,
+      token: otpValues.join(''),
     };
 
     dispatch(VerifyUserAuth(body))
@@ -46,6 +45,15 @@ const EmailOtpModal = ({ handleModalShow }) => {
       });
   };
 
+  const handleOtpChange = (index, value) => {
+    const updatedOtpValues = [...otpValues];
+    updatedOtpValues[index] = value;
+    setOtpValues(updatedOtpValues);
+    if (value && index < otpLength - 1) {
+      inputRefs[index + 1].current.focus();
+    }
+  };
+
   useOnClickOutside(modalref, handleModalShow);
 
   // const goToWelcome = () => {
@@ -53,14 +61,7 @@ const EmailOtpModal = ({ handleModalShow }) => {
   // };
 
   const validate = () => {
-    return (
-      !firstSpace ||
-      !secondSpace ||
-      !thirdSpace ||
-      !fourthSpace ||
-      !fifthSpace ||
-      !sixthSpace
-    );
+    return otpValues.includes("") || otpValues.length !== otpLength;
   };
   return (
     <div className={styles.parent}>
@@ -77,42 +78,17 @@ const EmailOtpModal = ({ handleModalShow }) => {
               your registered Email address.
             </p>
             <div className={styles.otp}>
-              <input
-                className={styles.inputotp}
-                type="text"
-                onChange={(e) => setFirstSpace(e.target.value)}
-                maxlength="1"
-              />
-              <input
-                className={styles.inputotp}
-                type="text"
-                onChange={(e) => setSecondSpace(e.target.value)}
-                maxlength="1"
-              />
-              <input
-                className={styles.inputotp}
-                type="text"
-                onChange={(e) => setThirdSpace(e.target.value)}
-                maxlength="1"
-              />
-              <input
-                className={styles.inputotp}
-                type="text"
-                onChange={(e) => setFourthSpace(e.target.value)}
-                maxlength="1"
-              />
-              <input
-                className={styles.inputotp}
-                type="text"
-                onChange={(e) => setFifthSpace(e.target.value)}
-                maxlength="1"
-              />
-              <input
-                className={styles.inputotp}
-                type="text"
-                onChange={(e) => setSixthSpace(e.target.value)}
-                maxlength="1"
-              />
+              {otpValues.map((value, index) => (
+                <input
+                  key={index}
+                  className={styles.inputotp}
+                  type="text"
+                  value={value}
+                  onChange={(e) => handleOtpChange(index, e.target.value)}
+                  maxLength="1"
+                  ref={inputRefs[index]}
+                />
+              ))}
             </div>
 
             <div className={styles.requestbut}>
