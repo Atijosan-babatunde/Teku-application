@@ -7,7 +7,7 @@ import holder from "../../../assets/svg/holder.svg";
 // import Nigeria from "../../../assets/svg/nigeria.svg";
 // import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg";
 import { IoIosArrowForward } from "react-icons/io";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
 // import RequestModal from "../currency-rate/RequestModal/requestModal";
 import eye from "../../../assets/svg/eye.svg";
@@ -25,6 +25,11 @@ import DeletePaymentModal from "../payment-cart/deletePaymentModal";
 import { useNavigate } from "react-router-dom";
 import KycBusinessUser from "../../SignUPDashboard/personal_business_registration/business/KYC/kycBusinessUser";
 import KycPersonalUser from "../../SignUPDashboard/personal_business_registration/personal/KYC/kycPersonalUser";
+import { useDispatch } from "react-redux";
+import { GetUsersDatas } from "../../../shared/redux/slices/users.slices";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
 
 const Dashboard = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -42,6 +47,31 @@ const Dashboard = () => {
   const handleBtn = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const [data] = useState(userData);
+
+  useEffect(() => {
+    getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  const getUser = () => {
+    setLoading(true);
+    dispatch(GetUsersDatas())
+      .unwrap()
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((err) => {
+        toast.error(err, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setLoading(false);
+      });
+  };
+
 
   const handleClose = (item) => {
     setAnchorEl(null);
@@ -160,10 +190,13 @@ const Dashboard = () => {
       <div className={styles.parent}>
         <div className={styles.content}>
           <div className={styles.contenthead}>
-            <h1>Welcome Timothy</h1>
+            <h1>Welcome {data?.firstName}</h1>
             <p>Make your seamless transfer today!</p>
           </div>
           <img src={globe} alt="" />
+          {loading && (
+            <ReactLoading color="blue" width={25} height={25} type="spin" />
+          )}
         </div>
         <div className={styles.contentinside}>
           <div className={styles.boxone}>
@@ -381,8 +414,8 @@ const Dashboard = () => {
                             prod.status === "CANCELLED"
                               ? styles.cancelledbtn
                               : prod.status === "PROCESSING"
-                              ? styles.btn
-                              : styles.completedbtn
+                                ? styles.btn
+                                : styles.completedbtn
                           }
                         >
                           {prod.status}
@@ -445,6 +478,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

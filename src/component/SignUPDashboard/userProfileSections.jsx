@@ -7,17 +7,19 @@ import { useDispatch } from "react-redux";
 import { GetUsersDatas } from "../../shared/redux/slices/users.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactLoading from "react-loading";
 import KycBusinessUser from "./personal_business_registration/business/KYC/kycBusinessUser";
 import BusinessInfoSection from "./BusinessInfoSection";
 import customAxios from "../../shared/utils/axios";
 import KycPersonalUser from "./personal_business_registration/personal/KYC/kycPersonalUser";
+import { SlPicture } from "react-icons/sl";
 
 const UserProfileSections = () => {
   const [loading, setLoading] = useState(false);
   const [userEdit, setUserEdit] = useState(false);
   const [selectedProfilePicture, setSelectedProfilePicture] = useState(null);
+  const [dataImg, setDataImg] = useState(null);
 
   const dispatch = useDispatch();
   const data = useAppSelector((state) => state.users.getUsersData);
@@ -69,21 +71,63 @@ const UserProfileSections = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const imageInput = useRef(null);
+
+
+  const handleChangeimg = async (event) => {
+    const fileUploaded = event.target.files[0];
+
+    getBase64(fileUploaded, async (result) => {
+      setDataImg((curr) => {
+        return {
+          ...curr,
+          avatar: result,
+        };
+      });
+    });
+  };
+
+  const getBase64 = (file, cb) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      cb(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  };
+
+  const handleClickimg = (reference) => {
+    reference.current.click();
+  };
+
+
+
   return (
     <div className={styles.parent}>
       <div>
         <div className={styles.content}>
           <div className={styles.cardholder}>
             <div className={styles.userimg}>
+              <input
+                type="file"
+                ref={imageInput}
+                onChange={(e) => handleChangeimg(e)}
+                style={{ display: "none" }}
+                accept=".png,.jpeg,.jpg"
+              />
               {data.profilePicture ? (
                 <img
                   src={data.profilePicture}
                   alt="User Profile"
                   className={styles.userpassportimg}
+                  onClick={() => handleClickimg(imageInput)}
                 />
               ) : (
                 <span className={styles.userimgspan}>
                   {formData.profilePicture}
+                  <SlPicture className={styles.relativeicon} />
                 </span>
               )}
             </div>

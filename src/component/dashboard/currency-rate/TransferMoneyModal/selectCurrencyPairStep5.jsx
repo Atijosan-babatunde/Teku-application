@@ -100,7 +100,6 @@ const SelectCurrencyPairStep5 = ({
   const amountFour = [
     { id: 1, paymentType: "Bank transfer", backend: "BANK_TRANSFER" },
     { id: 2, paymentType: "Cash Pickup", backend: "CASH_PICKUP" },
-    { id: 3, paymentType: "Online Transfer", backend: "ONLINE_TRANSFER" },
   ];
 
   const changeValueFour = async (e) => {

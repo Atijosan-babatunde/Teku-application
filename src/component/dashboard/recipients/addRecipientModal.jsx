@@ -86,12 +86,11 @@ const AddRecipientModal = ({ handleModalShow }) => {
   };
 
   const [amountThree] = useState([
-    { id: 1, amount: "Tuition fees" },
-    { id: 2, amount: "Medical" },
-    { id: 3, amount: "Food bills" },
-    { id: 4, amount: "Traveling" },
-    { id: 4, amount: "House fee" },
-    { id: 4, amount: "Transport" },
+    { id: 1, amount: 'School Fees' },
+    { id: 2, amount: 'Medical Bills' },
+    { id: 3, amount: 'Family & Friends' },
+    { id: 4, amount: 'Good and Services' },
+    { id: 5, amount: 'Other' },
   ]);
 
   const handleChangeDoc = async (event, name) => {
