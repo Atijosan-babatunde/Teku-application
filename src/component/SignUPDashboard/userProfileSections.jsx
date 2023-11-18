@@ -4,7 +4,6 @@ import { LuFileEdit } from "react-icons/lu";
 import { IoIosArrowForward } from "react-icons/io";
 import { useAppSelector } from "../../shared/redux/reduxHooks";
 import { useDispatch } from "react-redux";
-import { GetUsersDatas } from "../../shared/redux/slices/users.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useRef, useState } from "react";
@@ -13,13 +12,12 @@ import KycBusinessUser from "./personal_business_registration/business/KYC/kycBu
 import BusinessInfoSection from "./BusinessInfoSection";
 import customAxios from "../../shared/utils/axios";
 import KycPersonalUser from "./personal_business_registration/personal/KYC/kycPersonalUser";
-import { SlPicture } from "react-icons/sl";
+import useCloudinaryImageUpload from "../../shared/Hooks/useCloudinaryImageUpload";
 
 const UserProfileSections = () => {
   const [loading, setLoading] = useState(false);
   const [userEdit, setUserEdit] = useState(false);
-  const [selectedProfilePicture, setSelectedProfilePicture] = useState(null);
-  const [dataImg, setDataImg] = useState(null);
+  const [uploadImage] = useCloudinaryImageUpload();
 
   const dispatch = useDispatch();
   const data = useAppSelector((state) => state.users.getUsersData);
@@ -39,16 +37,34 @@ const UserProfileSections = () => {
 
   console.log(formData);
 
-  const handleProfilePictureChange = (e) => {
+  const handleProfilePictureChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData({ ...formData, profilePicture: file });
+      try {
+        setLoading(true);
+        let pictureUrl = await uploadImage(formData.profilePicture);
+        setFormData({ ...formData, profilePicture: pictureUrl });
+
+        const response = await customAxios.put(`users/update`, formData);
+        console.log(response);
+        toast.success("User Profile updated successfully");
+        setLoading(false);
+      } catch (error) {
+        console.log("Error:", error);
+      }
     }
   };
 
   const updateUserProfile = async () => {
     try {
       setLoading(true);
+      let pictureUrl = "";
+
+      if (formData.profilePicture instanceof File) {
+        pictureUrl = await uploadImage(formData.profilePicture);
+        setFormData({ ...formData, profilePicture: pictureUrl });
+      }
+
       const response = await customAxios.put(`users/update`, formData);
       console.log(response);
       toast.success("User Profile updated successfully");
@@ -73,47 +89,23 @@ const UserProfileSections = () => {
 
   const imageInput = useRef(null);
 
-
-  const handleChangeimg = async (event) => {
-    const fileUploaded = event.target.files[0];
-
-    getBase64(fileUploaded, async (result) => {
-      setDataImg((curr) => {
-        return {
-          ...curr,
-          avatar: result,
-        };
-      });
-    });
-  };
-
-  const getBase64 = (file, cb) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  };
-
   const handleClickimg = (reference) => {
     reference.current.click();
   };
-
-
 
   return (
     <div className={styles.parent}>
       <div>
         <div className={styles.content}>
           <div className={styles.cardholder}>
-            <div className={styles.userimg} onClick={() => handleClickimg(imageInput)}>
+            <div
+              className={styles.userimg}
+              onClick={() => handleClickimg(imageInput)}
+            >
               <input
                 type="file"
                 ref={imageInput}
-                onChange={(e) => handleChangeimg(e)}
+                onChange={(e) => handleProfilePictureChange(e)}
                 style={{ display: "none" }}
                 accept=".png,.jpeg,.jpg"
               />
@@ -127,7 +119,11 @@ const UserProfileSections = () => {
                 <span className={styles.userimgspan}>
                   {formData.profilePicture}
                   <div className={styles.imghold}>
-                    <img src={takepic} alt="docpic" className={styles.relativeicon} />
+                    <img
+                      src={takepic}
+                      alt="docpic"
+                      className={styles.relativeicon}
+                    />
                   </div>
                 </span>
               )}
@@ -296,7 +292,9 @@ const IdentificationSection = ({ data }) => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>BVN Verifcation</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0]?.bvn_no ? "Completed" : "Pending"}
+              {data.Personalkycverification[0]?.bvn_no
+                ? "Completed"
+                : "Pending"}
             </div>
           </div>
           <div className={styles.firstname}>
@@ -332,7 +330,7 @@ const IdentificationSection = ({ data }) => {
           <div className={styles.firstname}>
             <div className={styles.firstdivh1}>Address</div>
             <div className={styles.firstp}>
-              {data.Personalkycverification[0]?.address ?? 'Not set'}
+              {data.Personalkycverification[0]?.address ?? "Not set"}
             </div>
           </div>
           <div className={styles.firstname}>
