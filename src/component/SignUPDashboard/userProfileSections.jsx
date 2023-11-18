@@ -38,20 +38,22 @@ const UserProfileSections = () => {
   console.log(formData);
 
   const handleProfilePictureChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      try {
+    try {
+      const file = e.target.files[0];
+      console.log(file);
+      if (file) {
         setLoading(true);
-        let pictureUrl = await uploadImage(formData.profilePicture);
-        setFormData({ ...formData, profilePicture: pictureUrl });
-
-        const response = await customAxios.put(`users/update`, formData);
+        const pictureUrl = await uploadImage(file);
+        const response = await customAxios.put(`users/update`, {
+          profilePicture: pictureUrl,
+        });
         console.log(response);
         toast.success("User Profile updated successfully");
         setLoading(false);
-      } catch (error) {
-        console.log("Error:", error);
       }
+    } catch (error) {
+      console.log("Error:", error);
+      setLoading(false);
     }
   };
 
@@ -109,7 +111,8 @@ const UserProfileSections = () => {
                 style={{ display: "none" }}
                 accept=".png,.jpeg,.jpg"
               />
-              {data.profilePicture ? (
+              {data.profilePicture &&
+              data.profilePicture.includes("res.cloudinary.com") ? (
                 <img
                   src={data.profilePicture}
                   alt="User Profile"
