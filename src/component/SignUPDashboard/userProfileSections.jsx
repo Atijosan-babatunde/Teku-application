@@ -3,10 +3,9 @@ import takepic from "../../assets/svg/takepic.svg";
 import { LuFileEdit } from "react-icons/lu";
 import { IoIosArrowForward } from "react-icons/io";
 import { useAppSelector } from "../../shared/redux/reduxHooks";
-import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ReactLoading from "react-loading";
 import KycBusinessUser from "./personal_business_registration/business/KYC/kycBusinessUser";
 import BusinessInfoSection from "./BusinessInfoSection";
@@ -18,11 +17,7 @@ const UserProfileSections = () => {
   const [loading, setLoading] = useState(false);
   const [userEdit, setUserEdit] = useState(false);
   const [uploadImage] = useCloudinaryImageUpload();
-
-  const dispatch = useDispatch();
   const data = useAppSelector((state) => state.users.getUsersData);
-  console.log("USER PROFILE", data);
-  // const [data] = useState(userData);
   const [formData, setFormData] = useState({
     email: data.email,
     businessName: data?.businessName,
