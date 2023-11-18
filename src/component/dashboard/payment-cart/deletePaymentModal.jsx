@@ -36,7 +36,7 @@ const DeletePaymentModal = ({ handleModalShow }) => {
                         <button className={styles.btnorange} onClick={handleModalShow}>Cancel</button>
                     </div>
                     <div className={styles.probtn}>
-                        <button className={styles.btnblue} onClick={handleModalShow}>Proceed</button>
+                        <button className={styles.btnblue} onClick={handleModalPermanentlyDel}>Proceed</button>
                     </div>
                     {showModalDeleted && <PermernentlyDeletedModal {...{handleModalPermanentlyDel}}/>}
                  </div>

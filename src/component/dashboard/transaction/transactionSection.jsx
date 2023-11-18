@@ -36,11 +36,11 @@ const TransactionSection = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
   // const [saveItemModalCompleted, setSaveItemModalCompleted] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorCancelledEl, setAnchorCancelledEl] = useState(null);
+  // const [anchorCancelledEl, setAnchorCancelledEl] = useState(null);
   const [transactionsData, setTransactionsData] = useState(null);
-  const openCancelled = Boolean(anchorCancelledEl);
-  const [anchorCompletedEl, setAnchorCompletedEl] = useState(null);
-  const openCompleted = Boolean(anchorCompletedEl);
+  // const openCancelled = Boolean(anchorCancelledEl);
+  // const [anchorCompletedEl, setAnchorCompletedEl] = useState(null);
+  // const openCompleted = Boolean(anchorCompletedEl);
   const open = Boolean(anchorEl);
   const [loading, setLoading] = useState(false);
   const [selectedSubmenu, setSelectedSubmenu] = useState("");

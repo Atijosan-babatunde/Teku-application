@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 import documentKYCIcon from "../../../assets/svg//documentKYC.svg";
 import { useDispatch } from "react-redux";
-import { RecipientUser } from "../../../shared/redux/slices/recipient.slices";
+// import { RecipientUser } from "../../../shared/redux/slices/recipient.slices";
 import useCloudinaryImageUpload from "../../../shared/Hooks/useCloudinaryImageUpload";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

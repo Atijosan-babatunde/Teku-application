@@ -14,13 +14,13 @@ import MenuItem from "@mui/material/MenuItem";
 import { styled, alpha } from "@mui/material/styles";
 import PreviewModal from "./previewModal";
 import DeletePaymentModal from "./deletePaymentModal";
-import PaymentRequestModal from "../currency-rate/RequestModal/paymentRequestModal";
 import { ToastContainer, toast } from "react-toastify";
 import customAxios from "../../../shared/utils/axios";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import { formatDate } from "../../../shared/utils/formatDate";
 import { formatMoney } from "../../../shared/utils/moneyFormat";
+import PaymentTransferModal from "../currency-rate/TransferMoneyModal/paymentTransferModal";
 
 const PaymentSection = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -117,13 +117,19 @@ const PaymentSection = () => {
   const [payModal, setPayModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
 
-  function handleModalShow() {
+  function handleModalShowTransfer() {
     setShowModal(!showModal);
     setDeleteModal(!deleteModal);
     setPayModal(!payModal);
   }
 
   function handleModalShowPreview() {
+    setShowModal(!showModal);
+    setDeleteModal(!deleteModal);
+    setPayModal(!payModal);
+  }
+
+  function handleModalShow() {
     setShowModal(!showModal);
     setDeleteModal(!deleteModal);
     setPayModal(!payModal);
@@ -136,7 +142,7 @@ const PaymentSection = () => {
           <PreviewModal {...{ handleModalShowPreview }} />
         )}
         {payModal && saveItemModal === "Pay now" && (
-          <PaymentRequestModal {...{ handleModalShow }} />
+          <PaymentTransferModal {...{ handleModalShowTransfer }} />
         )}
         {deleteModal && saveItemModal === "Delete" && (
           <DeletePaymentModal {...{ handleModalShow }} />

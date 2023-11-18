@@ -18,6 +18,9 @@ import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
 import { truncateMiddle } from "../../../shared/utils/truncate";
 import EditRecipientModal from "./editRecipientModal";
+import TransactionPreview from "../transaction/transactionPreviewModal";
+import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
+
 
 const RecipientSectionTable = ({ searchValue }) => {
   const [saveItemModal, setSaveItemModal] = useState("");
@@ -74,11 +77,6 @@ const RecipientSectionTable = ({ searchValue }) => {
       imgs: <img src={flyarrow} className={styles.icon} alt="imgtwo" />,
       text: "Transfer money",
     },
-    // {
-    //   id: 3,
-    //   imgs: <img src={download} className={styles.icon} alt="imgthree" />,
-    //   text: "Download document",
-    // },
     {
       id: 4,
       imgs: <img src={deleteimg} className={styles.icon} alt="imgfour" />,
@@ -114,28 +112,27 @@ const RecipientSectionTable = ({ searchValue }) => {
       setSaveItemModal(item);
     }
 
-    // if (item === "Download document") {
-    //   setDownloadModal(true);
-    //   setSelectedRecipient(entity);
-    // }
-
     if (item === "Delete") {
       setDeleteModal(true);
       handleDeleteRecipient(entity);
     }
   };
 
-  console.log(selectedRecipient);
+  // console.log(selectedRecipient);
 
   // MODAL STATE
 
   const [showEditModal, setEditModal] = useState(false);
   const [transferModal, setTransferModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  // const [downloadModal, setDownloadModal] = useState(false);
 
   function handleModalShowEdit() {
-    // setDownloadModal(!downloadModal);
+    setDeleteModal(!deleteModal);
+    setTransferModal(!transferModal);
+    setEditModal(!showEditModal);
+  }
+
+  function handleModalShowTransfer() {
     setDeleteModal(!deleteModal);
     setTransferModal(!transferModal);
     setEditModal(!showEditModal);
@@ -146,6 +143,9 @@ const RecipientSectionTable = ({ searchValue }) => {
       <>
         {showEditModal && saveItemModal === "Edit" && (
           <EditRecipientModal {...{ handleModalShowEdit }} />
+        )}
+         {transferModal && saveItemModal === "Transfer money" && (
+          <TransferModal {...{ handleModalShowTransfer }} />
         )}
 
         <div className={styles.parent}>

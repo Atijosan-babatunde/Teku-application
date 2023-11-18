@@ -4,10 +4,11 @@ import { BsFillSendFill } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RequestModal from "./RequestModal/requestModal";
+// import RequestModal from "./RequestModal/requestModal";
 import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
 import { formatMoney } from "../../../shared/utils/moneyFormat";
+import TransferModal from "./TransferMoneyModal/transferModal";
 
 const CurrencyAlert = ({ searchValue }) => {
   const [loading, setLoading] = useState(false);
@@ -38,10 +39,10 @@ const CurrencyAlert = ({ searchValue }) => {
 
   // MODAL STATE
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModalTransfer, setShowModalTransfer] = useState(false);
 
-  function handleModalShowRequest() {
-    setShowModal(!showModal);
+  function handleModalShowTransfer() {
+    setShowModalTransfer(!showModalTransfer);
   }
 
   if (currencyPairData) {
@@ -147,13 +148,13 @@ const CurrencyAlert = ({ searchValue }) => {
                     >
                       <button
                         className={styles.btn}
-                        onClick={handleModalShowRequest}
+                        onClick={handleModalShowTransfer}
                       >
                         Request <BsFillSendFill />
                       </button>
                     </td>
-                    {showModal && (
-                      <RequestModal {...{ handleModalShowRequest }} />
+                    {showModalTransfer && (
+                      <TransferModal {...{ handleModalShowTransfer }} />
                     )}
                   </tr>
                 ))}

@@ -36,19 +36,20 @@
     cursor: pointer;
 }
 
+
 .contentholder {
     justify-content: center;
     align-items: center;
-    
-    
-    img {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-        width: 130px;
+
+    .imgcontent{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: auto !important;
+        width: 130px !important;
     }
-    h1{
+    
+    .h1content{
         color: var(--grey-primary, #373737);
         font-family: Gilroy;
         font-size: 25px;
@@ -62,7 +63,7 @@
         margin: auto;
         margin-bottom: 0.7000em;
     }
-    p{color: var(--grey-text, #999);
+    .pcontent{color: var(--grey-text, #999);
         text-align: center;
         font-family: Gilroy;
         font-size: 18px;

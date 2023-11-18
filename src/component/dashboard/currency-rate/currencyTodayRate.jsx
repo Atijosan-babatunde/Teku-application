@@ -3,19 +3,19 @@ import { BsFillSendFill } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RequestModal from "./RequestModal/requestModal";
 import international from "../../../assets/svg/international.svg";
 import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
 import { formatMoney } from "../../../shared/utils/moneyFormat";
+import TransferModal from "./TransferMoneyModal/transferModal";
 
 const CurrencyTodayRate = ({ searchValue }) => {
   const [loading, setLoading] = useState(false);
   const [currencyPairData, setCurrencyPairData] = useState();
-  const [showModal, setShowModal] = useState(false);
+  const [showModalTransaction, setShowModalTransaction] = useState(false);
 
-  function handleModalShowRequest() {
-    setShowModal(!showModal);
+  function handleModalShowTransfer() {
+    setShowModalTransaction(!showModalTransaction);
   }
 
   useEffect(() => {
@@ -145,13 +145,13 @@ const CurrencyTodayRate = ({ searchValue }) => {
                     >
                       <button
                         className={styles.btn}
-                        onClick={handleModalShowRequest}
+                        onClick={handleModalShowTransfer}
                       >
                         Request <BsFillSendFill />
                       </button>
                     </td>
-                    {showModal && (
-                      <RequestModal {...{ handleModalShowRequest }} />
+                    {showModalTransaction && (
+                      <TransferModal {...{ handleModalShowTransfer }} />
                     )}
                   </tr>
                 ))}
