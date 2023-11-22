@@ -18,13 +18,12 @@ import ReactLoading from "react-loading";
 import customAxios from "../../../shared/utils/axios";
 import { truncateMiddle } from "../../../shared/utils/truncate";
 import EditRecipientModal from "./editRecipientModal";
-import TransactionPreview from "../transaction/transactionPreviewModal";
+// import TransactionPreview from "../transaction/transactionPreviewModal";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
 
 
 const RecipientSectionTable = ({ searchValue }) => {
   const [saveItemModal, setSaveItemModal] = useState("");
-  const [selectedRecipient, setSelectedRecipient] = useState();
   const [recipientsData, setRecipientsData] = useState();
   const [loading, setLoading] = useState(false);
 

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import styles from "../../currency-rate/TransferMoneyModal/css/selectcurrencypairstep5.module.scss";
 import { BsArrowLeft } from "react-icons/bs";
 import {
@@ -12,7 +14,7 @@ import copy from "../../../../assets/png/copy.png";
 import blank from "../../../../assets/svg/blank.svg";
 import { useAppSelector } from "../../../../shared/redux/reduxHooks";
 import { useDispatch } from "react-redux";
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { GetUsersBanksListed } from "../../../../shared/redux/slices/transaction.slices";
 import { SaveTransactionToCart } from "../../../../shared/redux/slices/transaction.slices";
 import { ToastContainer, toast } from "react-toastify";
@@ -49,9 +51,6 @@ const SelectCurrencyPairStep5 = ({
   const [data] = useState(banksListed);
   let navigate = useNavigate();
 
-  useEffect(() => {
-    getBanksListed();
-  }, [data]);
 
   const getBanksListed = () => {
     setLoading(true);
@@ -67,6 +66,10 @@ const SelectCurrencyPairStep5 = ({
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    getBanksListed();
+  }, [data, getBanksListed]);
 
   const transactionCartData = () => {
     setLoading(true);
@@ -125,23 +128,20 @@ const SelectCurrencyPairStep5 = ({
   };
 
   // COPY TO CLIPBOARD
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
   const [copied, setCopied] = React.useState(false);
 
-  const onChange = React.useCallback(({target: {value}}) => {
+  const onChange = React.useCallback(({ target: { value } }) => {
     setValue(value);
     setCopied(true);
-  }, [])
+  }, []);
 
   const onClick = React.useCallback(({ target: { innerText } }) => {
     console.log(`Clicked on "${innerText}"!`);
-  }, [])
+  }, []);
   const onCopy = React.useCallback(() => {
     setCopied(true);
-  }, [])
-
-
-
+  }, []);
 
   if (data) {
     return (
@@ -161,8 +161,11 @@ const SelectCurrencyPairStep5 = ({
             style={{ cursor: "pointer" }}
           >
             <DropdownToggle tag="a" className={styles.dropdownToggle}>
-              <div className={styles.dropDownValue} style={{ textTransform: "capitalize" }}>
-                {paymentMethod.split('_')?.join(' ').toLowerCase()}
+              <div
+                className={styles.dropDownValue}
+                style={{ textTransform: "capitalize" }}
+              >
+                {paymentMethod.split("_")?.join(" ").toLowerCase()}
               </div>
               <div className={styles.dropDownrow}>
                 <div style={{ color: "#011B6D" }}>
@@ -223,8 +226,9 @@ const SelectCurrencyPairStep5 = ({
                   <h1>Total amount to pay</h1>
                   <CopyToClipboard
                     onCopy={onCopy}
-                    options={{ message: 'Whoa!' }}
-                    text={value}>
+                    options={{ message: "Whoa!" }}
+                    text={value}
+                  >
                     <div className={styles.confimationsplit}>
                       <div className={styles.confimationamount}>
                         {dropDownValue?.code} <span>{amount}</span>
@@ -234,7 +238,9 @@ const SelectCurrencyPairStep5 = ({
                   </CopyToClipboard>
 
                   <section className="section">
-                    {copied ? <span style={{ color: 'red' }}>Copied.</span> : null}
+                    {copied ? (
+                      <span style={{ color: "red" }}>Copied.</span>
+                    ) : null}
                   </section>
 
                   <h1 style={{ marginTop: "2em" }}>Account details</h1>
