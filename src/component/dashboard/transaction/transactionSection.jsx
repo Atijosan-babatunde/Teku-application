@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "../transaction/css/transactionsection.module.scss";
 import { useEffect, useState } from "react";
