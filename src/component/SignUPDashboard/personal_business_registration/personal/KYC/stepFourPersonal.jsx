@@ -66,6 +66,8 @@ const StepFourPersonal = ({ setStep, handleChange, formData, setFormData }) => {
         proof_of_address: proof_of_address_url,
       };
 
+      const kyc = await customAxios.post(`/kyc/verify.document`, payload);
+
       const response = await customAxios.post(`/kyc/personal`, payload);
       console.log(response);
 
