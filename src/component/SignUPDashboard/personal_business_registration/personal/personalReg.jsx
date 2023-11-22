@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import styles from "../personal/personalreg.module.scss";
 import logo from "../../../../assets/svg/logo.svg";

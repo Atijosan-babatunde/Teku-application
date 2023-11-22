@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import authHeader from "./headers";
 const API_URL_GRT_USERS_TRANSACTION =

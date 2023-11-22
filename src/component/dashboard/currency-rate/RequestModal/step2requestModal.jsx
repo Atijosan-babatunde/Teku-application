@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useMemo, useRef } from 'react'
 import styles from '../RequestModal/css/step2requestmodal.module.scss'
 import Select from 'react-select'

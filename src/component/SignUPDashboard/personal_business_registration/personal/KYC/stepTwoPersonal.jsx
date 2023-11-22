@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import Camera from "react-html5-camera-photo";

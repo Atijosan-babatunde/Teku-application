@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styles from "../KYC/CSS/steponepersonal.module.scss";
 import {
   Dropdown,
