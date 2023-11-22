@@ -36,16 +36,12 @@ const TransactionPreview = ({
   };
 
   function handleDownload() {
-    setDownload(true)
+    setDownload(true);
   }
-
-  useEffect(() => {
-    download && toPDF()
-  }, [download]);
 
   const { toPDF, targetRef } = usePDF({
     filename: "transactionDoc.pdf",
-    page: { margin: Margin.MEDIUM }
+    page: { margin: Margin.MEDIUM },
   });
 
   useEffect(() => {
@@ -57,16 +53,21 @@ const TransactionPreview = ({
 
     return () => clearInterval(interval);
   }, [seconds]);
-  const formatTime = time => {
+  const formatTime = (time) => {
     const hour = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = time % 60;
-    return `${hour}:${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    return `${hour}:${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
+  useEffect(() => {
+    download && toPDF();
+  }, [download, toPDF]);
+
   return (
-    <div className={styles.parent} >
-      <div className={styles.content} 
+    <div className={styles.parent}>
+      <div
+        className={styles.content}
         // ref={modalref}
         ref={targetRef}
       >
@@ -129,8 +130,14 @@ const TransactionPreview = ({
 
             <div className={styles.firstdivflex}>
               <div className={styles.firstdivh1}>Payment method:</div>
-              <div className={styles.firstdivp} style={{ textTransform: "capitalize" }}>
-                {selectedTransaction.paymentMethod.split('_')?.join(' ').toLowerCase()}
+              <div
+                className={styles.firstdivp}
+                style={{ textTransform: "capitalize" }}
+              >
+                {selectedTransaction.paymentMethod
+                  .split("_")
+                  ?.join(" ")
+                  .toLowerCase()}
               </div>
             </div>
 
@@ -197,8 +204,14 @@ const TransactionPreview = ({
 
                 <div className={styles.firstdivflex}>
                   <div className={styles.firstdivh1}>Sending method:</div>
-                  <div className={styles.firstdivp} style={{ textTransform: "capitalize" }}>
-                    {selectedTransaction.paymentMethod.split('_')?.join(' ').toLowerCase()}
+                  <div
+                    className={styles.firstdivp}
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {selectedTransaction.paymentMethod
+                      .split("_")
+                      ?.join(" ")
+                      .toLowerCase()}
                   </div>
                 </div>
 
@@ -231,14 +244,13 @@ const TransactionPreview = ({
             </>
           )}
 
-
           <div style={{ display: download && "none" }}>
             <div className={styles.requestbut}>
               <button
                 className={styles.btnrequest}
-              // disabled={validate()}
-              // onClick={handleModalShow}
-              // style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
+                // disabled={validate()}
+                // onClick={handleModalShow}
+                // style={{ backgroundColor: validate() ? "rgba(1, 27, 109, 0.20)" : " " }}
               >
                 Done
               </button>
@@ -267,7 +279,6 @@ const TransactionPreview = ({
                 </span>
               </button>
 
-
               <button className={styles.firstbtn} onClick={handleDownload}>
                 Download{" "}
                 <span>
@@ -276,7 +287,9 @@ const TransactionPreview = ({
               </button>
             </div>
 
-            <div className={styles.processed}>Payment is being processed...</div>
+            <div className={styles.processed}>
+              Payment is being processed...
+            </div>
 
             <div className={styles.time}>{formatTime(seconds)}</div>
             <div className={styles.hms}>HRS : MM : SS</div>
