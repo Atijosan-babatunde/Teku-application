@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { LoginUser } from "../../shared/redux/slices/landing.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAppSelector } from "../../shared/redux/reduxHooks";
+// import { useAppSelector } from "../../shared/redux/reduxHooks";
 import ReactLoading from "react-loading";
 
 
@@ -22,8 +22,8 @@ const LogIn = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const loginUser = useAppSelector((state) => state.landing.getloginUser);
-  const [data] = useState(loginUser);
+  // const loginUser = useAppSelector((state) => state.landing.getloginUser);
+  // const [data] = useState(loginUser);
 
   const loginUserData = () => {
     setLoading(true);
