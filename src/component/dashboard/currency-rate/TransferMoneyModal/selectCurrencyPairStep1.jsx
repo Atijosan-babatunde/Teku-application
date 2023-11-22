@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "../TransferMoneyModal/css/selectcurrencypairstep1.module.scss";
 import Frame from "../../../../assets/svg/Frame.svg";

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import styles from "../../currency-rate/TransferMoneyModal/css/selectcurrencypairstep3.module.scss";
 import Select from "react-select";
 import React, { useState, useMemo, useRef, useEffect } from "react";
@@ -38,7 +40,7 @@ const SelectCurrencyPairStep3 = ({
   setPaymentDocument,
   paymentDescription,
   setPaymentDescription,
-  setPaymentDocumentCloud
+  setPaymentDocumentCloud,
 }) => {
   const options = useMemo(() => countryList().getData(), []);
   const [menuThree, setMenuThree] = useState(false);
@@ -112,7 +114,7 @@ const SelectCurrencyPairStep3 = ({
 
   useEffect(() => {
     getRecipientUser();
-  }, []);
+  }, [getRecipientUser]);
 
   function handleModalShow() {
     setShowModal(!showModal);
@@ -127,11 +129,11 @@ const SelectCurrencyPairStep3 = ({
   };
 
   const [amountThree] = useState([
-    { id: 1, amount: 'School Fees' },
-    { id: 2, amount: 'Medical Bills' },
-    { id: 3, amount: 'Family & Friends' },
-    { id: 4, amount: 'Good and Services' },
-    { id: 5, amount: 'Other' },
+    { id: 1, amount: "School Fees" },
+    { id: 2, amount: "Medical Bills" },
+    { id: 3, amount: "Family & Friends" },
+    { id: 4, amount: "Good and Services" },
+    { id: 5, amount: "Other" },
   ]);
 
   const handleChangeDoc = async (event, name) => {
@@ -314,19 +316,22 @@ const SelectCurrencyPairStep3 = ({
                     <div className={styles.recipiantflex}>
                       <p className={styles.paraone}>TF</p>
                       <h1 className={styles.headone}>{prod.paymentPurpose}</h1>
-                      <p className={styles.paratwo} style={{ textTransform: "capitalize" }}>
-                        {prod.paymentMethod.split('_')?.join(' ').toLowerCase()}
+                      <p
+                        className={styles.paratwo}
+                        style={{ textTransform: "capitalize" }}
+                      >
+                        {prod.paymentMethod.split("_")?.join(" ").toLowerCase()}
                       </p>
                     </div>
                     <h2 className={styles.recipiantotherdata}>
-                      {prod.paymentDescription?.slice(0,30)}...
+                      {prod.paymentDescription?.slice(0, 30)}...
                     </h2>
                     <div className={styles.recipiantdataflex}>
                       <h2>
                         <span>
                           <img src={attached} alt="" />
                         </span>{" "}
-                        {prod.paymentDocument?.slice(0,15)}.png
+                        {prod.paymentDocument?.slice(0, 15)}.png
                       </h2>
                       <p>{prod.country}</p>
                     </div>
