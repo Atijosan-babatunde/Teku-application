@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styles from "../KYC/CSS/stepthreebusiness.module.scss";
 import steptwoimg from "../../../../../assets/png/steptwoimg.png";
 import { useState } from "react";
