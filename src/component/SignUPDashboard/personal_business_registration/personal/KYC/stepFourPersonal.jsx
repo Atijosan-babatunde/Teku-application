@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef } from "react";
 import styles from "../KYC/CSS/stepFourPersonal.module.scss";
 import {

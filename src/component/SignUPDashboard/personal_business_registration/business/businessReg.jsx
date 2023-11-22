@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styles from "../business/businessreg.module.scss"
 import logo from '../../../../assets/svg/logo.svg'
 import star from '../../../../assets/png/star.png'
