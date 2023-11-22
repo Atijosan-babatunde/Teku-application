@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../../../../shared/Hooks/useOnClickOutside";
 import cancel from "../../../../assets/png/cancel.png";

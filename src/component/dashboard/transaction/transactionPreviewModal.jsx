@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styles from "../transaction/css/transactionpreview.module.scss";
 import completed from "../transaction/css/completepreviewmodal.module.scss";
 import declined from "../transaction/css/cancelledpreviewmodal.module.scss";

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styles from "../transaction/css/askforrefund.module.scss";
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../../../shared/Hooks/useOnClickOutside";
