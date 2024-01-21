@@ -4,12 +4,9 @@ import put from "../../../assets/svg/put.svg";
 import blank from "../../../assets/svg/blank.svg";
 import globe from "../../../assets/svg/globe.svg";
 import holder from "../../../assets/svg/holder.svg";
-// import Nigeria from "../../../assets/svg/nigeria.svg";
-// import Unitedkingdom from "../../../assets/svg/unitedkingdom.svg";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState, useEffect } from "react";
 import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
-// import RequestModal from "../currency-rate/RequestModal/requestModal";
 import eye from "../../../assets/svg/eye.svg";
 import makeappeal from "../../../assets/svg/makeappeal.svg";
 import download from "../../../assets/svg/download.svg";
@@ -30,15 +27,16 @@ import { GetUsersDatas } from "../../../shared/redux/slices/users.slices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
+import customAxios from "../../../shared/utils/axios";
+import { formatDate } from "../../../shared/utils/formatDate";
+import { formatMoney } from "../../../shared/utils/moneyFormat";
 
 const Dashboard = () => {
   const [saveItemModal, setSaveItemModal] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const transactionData = useAppSelector(
-    (state) => state.transaction.getTransactionUsers
-  );
+  const [searchValue, setSearchValue] = useState("");
+  const [transactionsData, setTransactionsData] = useState();
   const userData = useAppSelector((state) => state.users.getUsersData);
-  const [transactions] = useState(transactionData);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -56,6 +54,29 @@ const Dashboard = () => {
     getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
+  useEffect(() => {
+    getTransactionUser(); // Pass the searchValue to fetch transactions
+  }, [searchValue]);
+
+  const getTransactionUser = async () => {
+    setLoading(true);
+
+    try {
+      setLoading(true);
+      const response = await customAxios.get(
+        `/transaction/users/personal?search=${searchValue}`
+      );
+      console.log(response);
+      setTransactionsData(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.log("Error:", error);
+      toast.error(error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
 
   const getUser = () => {
     setLoading(true);
@@ -150,24 +171,6 @@ const Dashboard = () => {
     navigate("/transactions");
   };
 
-  // const [product] = useState([
-  //   {
-  //     id: 1,
-  //     flagone: <img src={Nigeria} className={styles.flagicon} alt="flag" />,
-  //     flagnameone: "NGN",
-  //     flagtwo: (
-  //       <img src={Unitedkingdom} className={styles.flagicon} alt="flag" />
-  //     ),
-  //     flagnametwo: "GBP",
-  //     amount: "1,000.00",
-  //     purpose: "Tuition fees",
-  //     datetime: "21-12-2021, 10:38am",
-  //     process: "Processing Time: Within 24hrs",
-  //     action: "",
-  //   },
-  // ]);
-
-  // MODAL STATE
 
   const [showModalKyc, setShowModalKyc] = useState(false);
 
@@ -340,8 +343,8 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {transactions &&
-                  transactions.map((prod, first) => (
+                {transactionsData &&
+                  transactionsData.map((prod, first) => (
                     <tr style={{}} key={first}>
                       <td
                         className={styles.tabledata}
@@ -363,7 +366,7 @@ const Dashboard = () => {
                         className={styles.tabledata}
                         style={{ paddingLeft: "2em", paddingTop: "1.5000em" }}
                       >
-                        {prod.amount}
+                        {formatMoney(prod.amount, prod.pairCurrency.code)}
                         <span
                           className={styles.insidebtn}
                           style={{
@@ -402,8 +405,7 @@ const Dashboard = () => {
                         className={styles.tabledata}
                         style={{ paddingTop: "1.5000em" }}
                       >
-                        {prod.createdAt}
-                        {/* <div className={styles.tableparagraph}>{prod.sendingMethod}</div> */}
+                         {formatDate(prod.createdAt)}
                       </td>
                       <td
                         className={styles.tabledataa}
@@ -468,7 +470,7 @@ const Dashboard = () => {
             </table>
           </div>
           <div className={styles.inner}>
-            {!transactions && (
+            {!transactionsData && (
               <div>
                 <img src={holder} alt="middleimage" />
                 <div className={styles.nocurrency}>
