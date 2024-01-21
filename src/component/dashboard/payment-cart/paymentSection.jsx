@@ -151,7 +151,7 @@ const PaymentSection = () => {
         <div className={styles.parent}>
           <div className={styles.content}>
             <div className={styles.contentinner}>
-              <h1>Recent transactions</h1>
+              <h1>Saved transactions</h1>
               <div className={styles.search}>
                 <input
                   type="text"
