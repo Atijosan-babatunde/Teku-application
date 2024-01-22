@@ -29,6 +29,7 @@ import TransferModal from "../currency-rate/TransferMoneyModal/transferModal";
 import customAxios from "../../../shared/utils/axios";
 import { formatMoney } from "../../../shared/utils/moneyFormat";
 import { formatDate } from "../../../shared/utils/formatDate";
+import { DateRangePicker, DateRange } from "date-range-picker-mui";
 
 const TransactionSection = () => {
   const [days, setDays] = useState(false);
@@ -47,7 +48,12 @@ const TransactionSection = () => {
   const [selectedSubmenu, setSelectedSubmenu] = useState("");
   const [selectedTransaction, setSelectedTransaction] = useState();
 
-  const [periods] = useState([
+  const [openDatePicker, setOpendatePicker] = useState(false);
+  const [dateRange, setDateRange] = useState();
+
+  const toggle = () => setOpendatePicker(!openDatePicker);
+
+  const periods = useState([
     { id: 1, period: "Past 24 hours" },
     { id: 2, period: "Last 7 days" },
     { id: 3, period: "past month" },
@@ -55,7 +61,20 @@ const TransactionSection = () => {
   ]);
 
   const changeValue = async (e) => {
-    setDropDownValue(e.period);
+    const changeValue = async (e) => {
+      setDropDownValue(e.period);
+
+      if (e.period === "Custom date") {
+        // Open the date range picker when "Custom date" is selected
+        setOpendatePicker(true);
+      } else {
+        // Close the date range picker for other options
+        setOpendatePicker(false);
+        // Perform any other actions based on the selected period
+      }
+    };
+
+    // setDropDownValue(e.period);
     // updateQueryParams({ days: e.id });
   };
 
@@ -208,6 +227,13 @@ const TransactionSection = () => {
   if (transactionsData) {
     return (
       <>
+        {openDatePicker && (
+          <DateRangePicker
+            open={openDatePicker}
+            onClose={() => setOpendatePicker(false)}
+            onChange={(value) => setDateRange(value)}
+          />
+        )}
         {makeAppealModal && saveItemModal === "Make an appeal" && (
           <MakeAnAppeal {...{ handleMakeAnAppeal }} />
         )}
