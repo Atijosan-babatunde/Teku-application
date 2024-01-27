@@ -8,13 +8,15 @@ import {
 } from "reactstrap";
 import { MdArrowDropDown } from "react-icons/md";
 import steponeimg from "../../../../../assets/png/steponeimg.png";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getBase64 } from "../../../../../shared/utils/base64";
+import customAxios from "../../../../../shared/utils/axios";
 
 const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
   const [menu, setMenu] = useState(false);
+  const [loadingBvn, setLoadingBvn] = useState(false);
 
   const validate = () => {
     return (
@@ -41,6 +43,35 @@ const StepOnePersonal = ({ setStep, formData, setFormData, handleChange }) => {
     "Only Government Issued Documents are acceptable.",
     "Uploaded document must have your photo.",
   ];
+
+  // useEffect(() => {
+  //   verifyIdentity();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [searchValue]);
+
+  const verifyIdentity = async () => {
+    setLoadingBvn(true);
+    try {
+      const response = await customAxios.post(`/kyc/verify.identity`, {
+        country: "NG",
+        id_type: "BVN",
+        id_number: "22432917741",
+        first_name: "Quadri",
+        last_name: "Sikiru",
+      });
+      console.log(response);
+
+      if (response.data.data.ResultCode === 1020) {
+        setLoadingBvn(false);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setLoadingBvn(false);
+    }
+  };
 
   const base64ToOriginal = (base64Data, type) => {
     switch (type) {
